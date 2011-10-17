@@ -1,4 +1,7 @@
 @echo off
-D:
-cd "D:\PA2011\C++\VideoPlayer2\Build\Windows"
-bin\Release\VideoPlayer2.exe "D:\MPlayer\mplayer.exe" "D:\Videos\video2.mov"
+
+set MPLAYER_PATH="D:\MPlayer\mplayer.exe"
+set VIDEO_PATH="D:\Videos\video2.mov"
+
+cd %0\..\
+VideoPlayer2.bat %MPLAYER_PATH% %VIDEO_PATH%
