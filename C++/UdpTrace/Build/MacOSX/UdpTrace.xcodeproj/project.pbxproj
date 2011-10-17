@@ -1,0 +1,205 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AAC26726144430740092F2D0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AAC26723144430740092F2D0 /* main.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AAB450CF1441E34C00EC8D92 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		AAB450D11441E34C00EC8D92 /* UdpTrace */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = UdpTrace; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAC26723144430740092F2D0 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		AAC26725144430740092F2D0 /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AAB450CE1441E34C00EC8D92 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AAB450C61441E34C00EC8D92 = {
+			isa = PBXGroup;
+			children = (
+				AAC26722144430740092F2D0 /* Source */,
+				AAB450D21441E34C00EC8D92 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AAB450D21441E34C00EC8D92 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AAB450D11441E34C00EC8D92 /* UdpTrace */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AAC26722144430740092F2D0 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				AAC26723144430740092F2D0 /* main.cpp */,
+				AAC26725144430740092F2D0 /* util.h */,
+			);
+			name = Source;
+			path = ../../Source;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AAB450D01441E34C00EC8D92 /* UdpTrace */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AAB450DB1441E34C00EC8D92 /* Build configuration list for PBXNativeTarget "UdpTrace" */;
+			buildPhases = (
+				AAB450CD1441E34C00EC8D92 /* Sources */,
+				AAB450CE1441E34C00EC8D92 /* Frameworks */,
+				AAB450CF1441E34C00EC8D92 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UdpTrace;
+			productName = UdpTrace;
+			productReference = AAB450D11441E34C00EC8D92 /* UdpTrace */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AAB450C81441E34C00EC8D92 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = AAB450CB1441E34C00EC8D92 /* Build configuration list for PBXProject "UdpTrace" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = AAB450C61441E34C00EC8D92;
+			productRefGroup = AAB450D21441E34C00EC8D92 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AAB450D01441E34C00EC8D92 /* UdpTrace */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AAB450CD1441E34C00EC8D92 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAC26726144430740092F2D0 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		AAB450D91441E34C00EC8D92 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		AAB450DA1441E34C00EC8D92 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		AAB450DC1441E34C00EC8D92 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		AAB450DD1441E34C00EC8D92 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AAB450CB1441E34C00EC8D92 /* Build configuration list for PBXProject "UdpTrace" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AAB450D91441E34C00EC8D92 /* Debug */,
+				AAB450DA1441E34C00EC8D92 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AAB450DB1441E34C00EC8D92 /* Build configuration list for PBXNativeTarget "UdpTrace" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AAB450DC1441E34C00EC8D92 /* Debug */,
+				AAB450DD1441E34C00EC8D92 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AAB450C81441E34C00EC8D92 /* Project object */;
+}

@@ -1,0 +1,7 @@
+\chapter{Vorgehen / Methoden} 
+
+\input{kapitel/vorgehen/gesamtkonzept}
+
+\input{kapitel/vorgehen/modell}
+
+\input{kapitel/vorgehen/testing}

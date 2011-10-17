@@ -1,0 +1,39 @@
+#ifndef UdpTrace_util_h
+#define UdpTrace_util_h
+
+#if defined(_WIN32) || defined(WIN32) || defined(__CYGWIN__) || defined(__MINGW32__) || defined(__BORLANDC__)
+	#define OS_WINDOWS
+#endif
+
+#include <sys/types.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+
+#ifdef OS_WINDOWS
+	#include <winsock2.h>
+	#include <stdio.h>
+	#include <stdlib.h>
+	#include <Windows.h>
+#else
+	#include <unistd.h>
+	#include <sys/socket.h>
+	#include <netinet/in.h>
+	#include <netdb.h>
+#endif
+
+#define true 1
+#define false 0
+
+#define LOCALHOST "127.0.0.1"
+#define DEFAULT_UDP_PORT 52284
+
+int startMPlayer(const char* mPlayerPath, const char* videoPath);
+int isPlaying();
+int setSpeed(float speed);
+int playVideo(float speed);
+int pauseVideo();
+int sendMessage(const char* message);
+void execProcess(const char* szExe, const char* szArgs, HANDLE hStdIn, HANDLE hStdOut, HANDLE hStdErr);
+
+#endif

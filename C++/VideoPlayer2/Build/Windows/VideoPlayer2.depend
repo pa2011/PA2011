@@ -1,0 +1,94 @@
+# depslib dependency file v1.0
+1318809622 source:c:\users\sandro ropelato\pa2011\c++\videoplayer2\source\main.cpp
+	"util.h"
+	<sys/types.h>
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+	<winsock2.h>
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<netdb.h>
+
+1318809636 c:\users\sandro ropelato\pa2011\c++\videoplayer2\source\util.h
+	<sys/types.h>
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+	<winsock2.h>
+	<stdio.h>
+	<stdlib.h>
+	<Windows.h>
+	<unistd.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<netdb.h>
+
+1318809820 source:c:\users\sandro ropelato\pa2011\c++\videoplayer2\source\util.cpp
+	"util.h"
+
+1318875886 source:z:\sandro\zhaw\pa2011\c++\videoplayer2\source\util.cpp
+	"util.h"
+
+1318875897 z:\sandro\zhaw\pa2011\c++\videoplayer2\source\util.h
+	<sys/types.h>
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+	<winsock2.h>
+	<stdio.h>
+	<stdlib.h>
+	<Windows.h>
+	<unistd.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<netdb.h>
+
+1318875740 source:z:\sandro\zhaw\pa2011\c++\videoplayer2\source\main.cpp
+	"util.h"
+	<sys/types.h>
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+	<winsock2.h>
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<netdb.h>
+
+1318876491 source:d:\pa2011\c++\videoplayer2\source\util.cpp
+	"util.h"
+
+1318876491 d:\pa2011\c++\videoplayer2\source\util.h
+	<sys/types.h>
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+	<winsock2.h>
+	<stdio.h>
+	<stdlib.h>
+	<Windows.h>
+	<unistd.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<netdb.h>
+
+1318876491 source:d:\pa2011\c++\videoplayer2\source\main.cpp
+	"util.h"
+	<sys/types.h>
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+	<winsock2.h>
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<netdb.h>
+

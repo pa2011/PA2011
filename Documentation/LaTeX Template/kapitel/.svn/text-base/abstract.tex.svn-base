@@ -1,0 +1,9 @@
+\addcontentsline{toc}{chapter}{Abstract (english)}
+\chapter*{Abstract (english)} 
+
+...
+
+\addcontentsline{toc}{chapter}{Abstract (deutsch)}
+\chapter*{Abstract (deutsch)} 
+
+...

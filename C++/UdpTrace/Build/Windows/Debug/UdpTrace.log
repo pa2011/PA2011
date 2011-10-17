@@ -1,0 +1,25 @@
+﻿Der Buildvorgang wurde am 11.10.2011 14:38:07 gestartet.
+Projekt "Z:\sandro\ZHAW\PA2011\C++\UdpTrace\Build\Windows\UdpTrace.vcxproj" auf Knoten "2", build Ziel(e).
+InitializeBuildStatus:
+  Aktualisieren des Timestamps von "Debug\UdpTrace.unsuccessfulbuild".
+ClCompile:
+  Alle Ausgaben sind aktuell.
+ManifestResourceCompile:
+  C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\UdpTrace.exe.embed.manifest.res" Debug\UdpTrace_manifest.rc 
+Link:
+  C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"Z:\sandro\ZHAW\PA2011\C++\UdpTrace\Build\Windows\Debug\UdpTrace.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib Ws2_32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\UdpTrace.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"Z:\sandro\ZHAW\PA2011\C++\UdpTrace\Build\Windows\Debug\UdpTrace.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"Z:\sandro\ZHAW\PA2011\C++\UdpTrace\Build\Windows\Debug\UdpTrace.lib" /MACHINE:X86 Debug\UdpTrace.exe.embed.manifest.res
+  Debug\main.obj
+Manifest:
+  C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\UdpTrace.exe.embed.manifest" /manifest Debug\UdpTrace.exe.intermediate.manifest
+  C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\UdpTrace.exe.embed.manifest.res" Debug\UdpTrace_manifest.rc 
+LinkEmbedManifest:
+  Alle Ausgaben sind aktuell.
+  UdpTrace.vcxproj -> Z:\sandro\ZHAW\PA2011\C++\UdpTrace\Build\Windows\Debug\UdpTrace.exe
+FinalizeBuildStatus:
+  Die Datei "Debug\UdpTrace.unsuccessfulbuild" wird gelöscht.
+  Aktualisieren des Timestamps von "Debug\UdpTrace.lastbuildstate".
+Die Erstellung des Projekts "Z:\sandro\ZHAW\PA2011\C++\UdpTrace\Build\Windows\UdpTrace.vcxproj" ist abgeschlossen, build Ziel(e).
+
+Das Erstellen war erfolgreich.
+
+Verstrichene Zeit 00:00:02.59

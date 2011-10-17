@@ -1,0 +1,75 @@
+TUdpTrace
+v3
+r1
+cCheck dependencies
+cCompileC build/UdpTrace.build/Debug/UdpTrace.build/Objects-normal/x86_64/main.o /Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX/../../Source/main.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+cLd /Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX/build/Debug/UdpTrace normal x86_64
+
+N/Developer/SDKs/MacOSX10.7.sdk
+c000000004E1106D400000000000000EE
+t1309738708
+s238
+
+N/Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX/../../Source/main.cpp
+c000000004E9437B30000000000000556
+t1318336435
+s1366
+
+N/Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX/../../Source/main.h
+c000000004E8F19870000000000000106
+t1318001031
+s262
+
+N/Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX/../../Source/util.h
+c000000004E93F96700000000000000E2
+t1318320487
+s226
+
+N/Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX/build/Debug/UdpTrace
+t1318320696
+s9720
+
+N/Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX/build/UdpTrace.build/Debug/UdpTrace.build/Objects-normal/x86_64/UdpTrace.LinkFileList
+c000000004E91AC33000000000000007B
+t1318169651
+s123
+
+N/Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX/build/UdpTrace.build/Debug/UdpTrace.build/Objects-normal/x86_64/main.o
+t1318320696
+s4872
+
+N/Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX/util.h
+c00000000000000000000000000000000
+t2
+s0
+
+CBuild AST from /Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX/../../Source/main.cpp
+r0
+
+CCheck dependencies
+r0
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependenciesadf654346f44b441^c5c660346f44b441^---0#1#0#--18"Check dependencies
+
+CCompileC build/UdpTrace.build/Debug/UdpTrace.build/Objects-normal/x86_64/main.o /Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX/../../Source/main.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler
+s340029236.379839
+e340029236.446005
+r1
+xCompileC
+xbuild/UdpTrace.build/Debug/UdpTrace.build/Objects-normal/x86_64/main.o
+x/Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX/../../Source/main.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.llvm.clang.1_0.compiler
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection81"Compile /Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX/../../Source/main.cpp2c6161346f44b441^bf2b72346f44b441^---0#0#0#-19%DVTDocumentLocation2@89"file://localhost/Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX/../../Source/main.cpp0000000000000000^1961"CompileC build/UdpTrace.build/Debug/UdpTrace.build/Objects-normal/x86_64/main.o ../../Source/main.cpp normal x86_64 c++ com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX    setenv LANG en_US.US-ASCII    /Developer/usr/bin/clang -x c++ -arch x86_64 -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -Wno-trigraphs -fpascal-strings -O0 -Wmissing-prototypes -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wshorten-64-to-32 -DDEBUG=1 -isysroot /Developer/SDKs/MacOSX10.7.sdk -fasm-blocks -mmacosx-version-min=10.7 -gdwarf-2 -fvisibility-inlines-hidden -iquote /Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX/build/UdpTrace.build/Debug/UdpTrace.build/UdpTrace-generated-files.hmap -I/Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX/build/UdpTrace.build/Debug/UdpTrace.build/UdpTrace-own-target-headers.hmap -I/Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX/build/UdpTrace.build/Debug/UdpTrace.build/UdpTrace-all-target-headers.hmap -iquote /Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX/build/UdpTrace.build/Debug/UdpTrace.build/UdpTrace-project-headers.hmap -I/Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX/build/Debug/include -I/Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX/build/UdpTrace.build/Debug/UdpTrace.build/DerivedSources/x86_64 -I/Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX/build/UdpTrace.build/Debug/UdpTrace.build/DerivedSources -F/Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX/build/Debug -MMD -MT dependencies -MF /Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX/build/UdpTrace.build/Debug/UdpTrace.build/Objects-normal/x86_64/main.d -c /Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX/../../Source/main.cpp -o /Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX/build/UdpTrace.build/Debug/UdpTrace.build/Objects-normal/x86_64/main.o
+
+CLd /Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX/build/Debug/UdpTrace normal x86_64
+s340029236.453636
+e340029236.476066
+r1
+xLd
+x/Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX/build/Debug/UdpTrace
+xnormal
+xx86_64
+lSLF03#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection77"Link /Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX/build/Debug/UdpTracec23074346f44b441^9cde79346f44b441^---0#0#0#--605"Ld build/Debug/UdpTrace normal x86_64    cd /Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX    setenv MACOSX_DEPLOYMENT_TARGET 10.7    /Developer/usr/bin/clang++ -arch x86_64 -isysroot /Developer/SDKs/MacOSX10.7.sdk -L/Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX/build/Debug -F/Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX/build/Debug -filelist /Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX/build/UdpTrace.build/Debug/UdpTrace.build/Objects-normal/x86_64/UdpTrace.LinkFileList -mmacosx-version-min=10.7 -o /Users/sandro/ZHAW/PA2011/C++/UdpTrace/Build/MacOSX/build/Debug/UdpTrace
+
