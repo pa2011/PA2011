@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="DrivingSimulator" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Test1 - Debug">
+				<Option output="bin\Test1\Debug\Test1" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin\Test1\Debug\" />
+				<Option object_output="obj\Test1\Debug\" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-D_DEBUG" />
+				</Compiler>
+				<Linker>
+					<Add library="OgreMain_d" />
+					<Add library="OIS_d" />
+					<Add directory="$(OGRE_HOME)\bin\debug" />
+				</Linker>
+				<ExtraCommands>
+					<Add before='make -f Makefiles/CopyFiles.make CONTENT_PATH=&quot;bin/Test1/Debug&quot; CONFIGURATION=&quot;Debug&quot; RUNTIME_DLL_PATH=$(TARGET_COMPILER_DIR) clean' />
+					<Add after='make -f Makefiles/CopyFiles.make CONTENT_PATH=&quot;bin/Test1/Debug&quot; CONFIGURATION=&quot;Debug&quot; RUNTIME_DLL_PATH=$(TARGET_COMPILER_DIR) all' />
+				</ExtraCommands>
+			</Target>
+			<Target title="Test1 - Release">
+				<Option output="bin\Test1\Release\Test1" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin\Test1\Release\" />
+				<Option object_output="obj\Test1\Release\" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-DNDEBUG" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="OgreMain" />
+					<Add library="OIS" />
+					<Add directory="$(OGRE_HOME)\bin\release" />
+				</Linker>
+				<ExtraCommands>
+					<Add before='make -f Makefiles/CopyFiles.make CONTENT_PATH=&quot;bin/Test1/Release&quot; CONFIGURATION=&quot;Debug&quot; RUNTIME_DLL_PATH=$(TARGET_COMPILER_DIR) clean' />
+					<Add after='make -f Makefiles/CopyFiles.make CONTENT_PATH=&quot;bin/Test1/Release&quot; CONFIGURATION=&quot;Debug&quot; RUNTIME_DLL_PATH=$(TARGET_COMPILER_DIR) all' />
+				</ExtraCommands>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-mthreads" />
+			<Add option="-fmessage-length=0" />
+			<Add option="-fexceptions" />
+			<Add option="-fident" />
+			<Add option="-DWIN32" />
+			<Add option="-D_WINDOWS" />
+			<Add directory="$(OGRE_HOME)\include" />
+			<Add directory="$(OGRE_HOME)\include\OGRE" />
+			<Add directory="$(OGRE_HOME)\include\OIS" />
+			<Add directory="$(OGRE_HOME)\boost_1_44" />
+		</Compiler>
+		<Linker>
+			<Add option="-Wl,--enable-auto-image-base" />
+			<Add option="-Wl,--add-stdcall-alias" />
+			<Add option="-Wl,--enable-auto-import" />
+		</Linker>
+		<Unit filename="..\..\Source\Test1\BaseApplication.cpp" />
+		<Unit filename="..\..\Source\Test1\BaseApplication.h" />
+		<Unit filename="..\..\Source\Test1\TutorialApplication.cpp" />
+		<Unit filename="..\..\Source\Test1\TutorialApplication.h" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

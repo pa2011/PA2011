@@ -1,4 +1,4 @@
-@echo off
+@echo on
 
 set MPLAYER_PATH="C:\Program Files (x86)\MPlayer\mplayer.exe"
 set VIDEO_PATH="C:\Users\Sandro Ropelato\Videos\Autofahrt\tunnel.mov"
