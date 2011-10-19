@@ -22,7 +22,6 @@
 					<Add directory="$(OGRE_HOME)\bin\debug" />
 				</Linker>
 				<ExtraCommands>
-					<Add before='make -f Makefiles/CopyFiles.make CONTENT_PATH=&quot;bin/Test1/Debug&quot; CONFIGURATION=&quot;Debug&quot; RUNTIME_DLL_PATH=$(TARGET_COMPILER_DIR) clean' />
 					<Add after='make -f Makefiles/CopyFiles.make CONTENT_PATH=&quot;bin/Test1/Debug&quot; CONFIGURATION=&quot;Debug&quot; RUNTIME_DLL_PATH=$(TARGET_COMPILER_DIR) all' />
 				</ExtraCommands>
 			</Target>
@@ -43,8 +42,8 @@
 					<Add directory="$(OGRE_HOME)\bin\release" />
 				</Linker>
 				<ExtraCommands>
-					<Add before='make -f Makefiles/CopyFiles.make CONTENT_PATH=&quot;bin/Test1/Release&quot; CONFIGURATION=&quot;Debug&quot; RUNTIME_DLL_PATH=$(TARGET_COMPILER_DIR) clean' />
-					<Add after='make -f Makefiles/CopyFiles.make CONTENT_PATH=&quot;bin/Test1/Release&quot; CONFIGURATION=&quot;Debug&quot; RUNTIME_DLL_PATH=$(TARGET_COMPILER_DIR) all' />
+					<Add before='make -f Makefiles/CopyFiles.make CONTENT_PATH=&quot;bin/Test1/Release&quot; CONFIGURATION=&quot;Release&quot; RUNTIME_DLL_PATH=$(TARGET_COMPILER_DIR) clean' />
+					<Add after='make -f Makefiles/CopyFiles.make CONTENT_PATH=&quot;bin/Test1/Release&quot; CONFIGURATION=&quot;Release&quot; RUNTIME_DLL_PATH=$(TARGET_COMPILER_DIR) all' />
 				</ExtraCommands>
 			</Target>
 		</Build>
@@ -66,10 +65,8 @@
 			<Add option="-Wl,--add-stdcall-alias" />
 			<Add option="-Wl,--enable-auto-import" />
 		</Linker>
-		<Unit filename="..\..\Source\Test1\BaseApplication.cpp" />
-		<Unit filename="..\..\Source\Test1\BaseApplication.h" />
-		<Unit filename="..\..\Source\Test1\TutorialApplication.cpp" />
-		<Unit filename="..\..\Source\Test1\TutorialApplication.h" />
+		<Unit filename="..\..\Source\Test1\MainApplication.cpp" />
+		<Unit filename="..\..\Source\Test1\MainApplication.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />
