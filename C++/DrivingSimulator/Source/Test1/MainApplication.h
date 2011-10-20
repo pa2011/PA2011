@@ -6,12 +6,19 @@
 #include "windows.h"
 #endif
 
+#include <OgreRoot.h>
+#include <OgreConfigFile.h>
+
 class MainApplication
 {
 	public:
 	MainApplication();
 	virtual ~MainApplication();
 	bool go();
+
+	private:
+	Ogre::Root* rootNode;
+	Ogre::RenderWindow* window;
 };
 
 #endif // MAINAPPLICATION_H

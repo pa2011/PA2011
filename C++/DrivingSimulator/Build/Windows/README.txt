@@ -13,6 +13,7 @@ The following environment variables need to be set:
 
 OGRE_HOME: pointing to your OgreSDK folder (use forward instead of back slashes) (e.g. "C:/SDKs/OgreSDK")
 MINGW_HOME: pointing to your MinGW folder (e.g. "C:/MinGW")
+MSYS_HOME: pointing to your MSYS folder (e.g. "C:/MinGW/msys/1.0")
 
 
 Downloads

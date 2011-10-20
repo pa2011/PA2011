@@ -8,11 +8,11 @@ create_directories:
 	mkdir -p $(DEP)
 	mkdir -p $(CONTENT_PATH)/Resources
 
-$(DEP)/copy_general_resources : $(shell find ../../Resources)
+$(DEP)/copy_general_resources : $(shell $(MSYS_HOME)/bin/find ../../Resources)
 	cp -R ../../Resources/* $(CONTENT_PATH)/Resources/
 	touch $@
 
-$(DEP)/copy_specific_resources : $(shell find Resources)
+$(DEP)/copy_specific_resources : $(shell $(MSYS_HOME)/bin/find Resources)
 	cp -R Resources/* $(CONTENT_PATH)/Resources/
 	touch $@
 
