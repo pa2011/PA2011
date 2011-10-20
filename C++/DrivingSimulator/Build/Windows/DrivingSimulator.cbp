@@ -22,7 +22,7 @@
 					<Add directory="$(OGRE_HOME)\bin\debug" />
 				</Linker>
 				<ExtraCommands>
-					<Add after='make -f Makefiles/CopyFiles.make PRODUCT=&quot;Test1&quot; CONFIGURATION=&quot;Debug&quot; all' />
+					<Add after='make -f Makefiles/CopyFiles.make PRODUCT=&quot;Test1&quot; CONFIGURATION=&quot;Debug&quot; nothing' />
 					<Mode after="always" />
 				</ExtraCommands>
 			</Target>

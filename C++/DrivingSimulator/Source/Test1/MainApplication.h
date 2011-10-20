@@ -8,17 +8,27 @@
 
 #include <OgreRoot.h>
 #include <OgreConfigFile.h>
+#include <OgreCamera.h>
+#include <OgreViewport.h>
+#include <OgreSceneManager.h>
+#include <OgreRenderWindow.h>
+#include <OgreEntity.h>
+#include <OgreWindowEventUtilities.h>
 
 class MainApplication
 {
 	public:
 	MainApplication();
 	virtual ~MainApplication();
-	bool go();
+	void init();
+	void createScene();
+	void run();
 
 	private:
 	Ogre::Root* rootNode;
 	Ogre::RenderWindow* renderWindow;
+	Ogre::SceneManager* sceneManager;
+	Ogre::Camera* camera;
 };
 
 #endif // MAINAPPLICATION_H
