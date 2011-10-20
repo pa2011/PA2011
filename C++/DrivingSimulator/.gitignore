@@ -1,3 +1,4 @@
 *.log
 Build/Windows/bin
 Build/Windows/obj
+Build/Windows/.makedep
