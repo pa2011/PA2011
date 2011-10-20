@@ -3,3 +3,4 @@ Build/Windows/bin
 Build/Windows/obj
 Build/Windows/.makedep
 Build/Windows/*.cbTemp
+Build/Windows/*.layout
