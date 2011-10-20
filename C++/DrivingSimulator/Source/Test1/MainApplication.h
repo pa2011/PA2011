@@ -18,7 +18,7 @@ class MainApplication
 
 	private:
 	Ogre::Root* rootNode;
-	Ogre::RenderWindow* window;
+	Ogre::RenderWindow* renderWindow;
 };
 
 #endif // MAINAPPLICATION_H

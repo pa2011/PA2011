@@ -26,7 +26,7 @@ bool MainApplication::go()
     #ifdef _DEBUG
     configFile.load("Resources/resources_d.cfg");
     #else
-    configFile.load("Resources/resources_d.cfg");
+    configFile.load("Resources/resources.cfg");
     #endif
 
     // load resource files
@@ -45,10 +45,11 @@ bool MainApplication::go()
     // initialize window
     if(!(rootNode->restoreConfig()))
     {
+    	std::cerr << "Could not restore config.\n";
         return false;
     }
 
-
+	renderWindow = rootNode->initialise(true, "Driving Simulator - Test 1");
 
 	return true;
 }

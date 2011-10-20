@@ -22,7 +22,7 @@
 					<Add directory="$(OGRE_HOME)\bin\debug" />
 				</Linker>
 				<ExtraCommands>
-					<Add after='make -f Makefiles/CopyFiles.make PRODUCT_NAME=&quot;Test1&quot; CONFIGURATION=&quot;Debug&quot; all' />
+					<Add after='make -f Makefiles/CopyFiles.make PRODUCT=&quot;Test1&quot; CONFIGURATION=&quot;Debug&quot; all' />
 					<Mode after="always" />
 				</ExtraCommands>
 			</Target>
@@ -43,8 +43,8 @@
 					<Add directory="$(OGRE_HOME)\bin\release" />
 				</Linker>
 				<ExtraCommands>
-					<Add before='make -f Makefiles/CopyFiles.make PRODUCT_NAME=&quot;Test1&quot; CONFIGURATION=&quot;Release&quot; clean' />
-					<Add after='make -f Makefiles/CopyFiles.make PRODUCT_NAME=&quot;Test1&quot; CONFIGURATION=&quot;Release&quot; all' />
+					<Add before='make -f Makefiles/CopyFiles.make PRODUCT=&quot;Test1&quot; CONFIGURATION=&quot;Release&quot; clean' />
+					<Add after='make -f Makefiles/CopyFiles.make PRODUCT=&quot;Test1&quot; CONFIGURATION=&quot;Release&quot; all' />
 					<Mode after="always" />
 				</ExtraCommands>
 			</Target>
