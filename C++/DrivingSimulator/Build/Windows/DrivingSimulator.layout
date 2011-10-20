@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
-	<ActiveTarget name="Test1 - Release" />
+	<ActiveTarget name="Test1 - Debug" />
 	<File name="..\..\Source\Test1\MainApplication.cpp" open="1" top="1" tabpos="2">
-		<Cursor position="259" topLine="0" />
+		<Cursor position="710" topLine="0" />
 	</File>
 	<File name="..\..\Source\Test1\MainApplication.h" open="1" top="0" tabpos="1">
-		<Cursor position="294" topLine="0" />
+		<Cursor position="371" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>

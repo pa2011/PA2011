@@ -5,8 +5,8 @@ CONTENT_PATH=bin/$(PRODUCT_NAME)/$(CONFIGURATION)
 DEP=.makedep/$(PRODUCT_NAME)/$(CONFIGURATION)
 
 create_directories:
-	mkdir -p $(DEP)
-	mkdir -p $(CONTENT_PATH)/Resources
+	$(MSYS_HOME)/bin/mkdir -p $(DEP)
+	$(MSYS_HOME)/bin/mkdir -p $(CONTENT_PATH)/Resources
 
 $(DEP)/copy_general_resources : $(shell $(MSYS_HOME)/bin/find ../../Resources)
 	cp -R ../../Resources/* $(CONTENT_PATH)/Resources/
@@ -21,7 +21,7 @@ $(DEP)/copy_runtime_dlls : $(RUNTIME_DLL_PATH)/libgcc_s_dw2-1.dll $(RUNTIME_DLL_
 	cp $(RUNTIME_DLL_PATH)/libstdc++-6.dll $(CONTENT_PATH)
 	touch $@
 
-$(DEP)/copy_ogre_dlls : $(shell find $(OGRE_SDK)/bin/$(CONFIGURATION))
+$(DEP)/copy_ogre_dlls : $(shell $(MSYS_HOME)/bin/find $(OGRE_SDK)/bin/$(CONFIGURATION))
 	cp -R $(OGRE_SDK)/bin/$(CONFIGURATION)/* $(CONTENT_PATH)
 	touch $@
 
