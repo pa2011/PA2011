@@ -1,0 +1,205 @@
+material 1319201593_1_<Glass_Sky_Reflection>1
+{
+  technique
+  {
+    pass
+    {
+      ambient 0.0 0.0 0.0
+      diffuse 0.807843137254902 0.807843137254902 0.807843137254902
+      specular 0.0 0.0 0.0 0.0
+      emissive 0.0 0.0 0.0
+      // texture size: 196.850393700787, 202.243555172042
+      texture_unit
+      {
+        texture 1319201593_2_Glass-Sky.jpg
+      }
+    }
+  }
+}
+material 1319201593_2_Material10
+{
+  technique
+  {
+    pass
+    {
+      ambient 0.0 0.0 0.0
+      diffuse 0.694117647058824 0.101960784313725 0.101960784313725
+      specular 0.0 0.0 0.0 0.0
+      emissive 0.0 0.0 0.0
+    }
+  }
+}
+material 1319201593_3_Material12
+{
+  technique
+  {
+    pass
+    {
+      ambient 0.0 0.0 0.0
+      diffuse 0.752941176470588 0.705882352941177 0.580392156862745
+      specular 0.0 0.0 0.0 0.0
+      emissive 0.0 0.0 0.0
+    }
+  }
+}
+material 1319201593_4_Material14
+{
+  technique
+  {
+    pass
+    {
+      ambient 0.0 0.0 0.0
+      diffuse 0.0 0.0 0.0
+      specular 0.0 0.0 0.0 0.0
+      emissive 0.0 0.0 0.0
+    }
+  }
+}
+material 1319201593_5_Black
+{
+  technique
+  {
+    pass
+    {
+      ambient 0.0 0.0 0.0
+      diffuse 0.156862745098039 0.156862745098039 0.156862745098039
+      specular 0.0 0.0 0.0 0.0
+      emissive 0.0 0.0 0.0
+    }
+  }
+}
+material 1319201593_6_<Glass_Sky_Reflection>3
+{
+  technique
+  {
+    pass
+    {
+      ambient 0.0 0.0 0.0
+      diffuse 1.0 0.690196078431373 0.0784313725490196
+      specular 0.0 0.0 0.0 0.0
+      emissive 0.0 0.0 0.0
+      // texture size: 118.110236220472, 121.346133103225
+      texture_unit
+      {
+        texture 1319201593_4_Glass-Sky.jpg
+      }
+    }
+  }
+}
+material 1319201593_7_Material9
+{
+  technique
+  {
+    pass
+    {
+      ambient 0.0 0.0 0.0
+      diffuse 0.580392156862745 0.694117647058824 0.101960784313725
+      specular 0.0 0.0 0.0 0.0
+      emissive 0.0 0.0 0.0
+    }
+  }
+}
+material 1319201593_8_Material13
+{
+  technique
+  {
+    pass
+    {
+      ambient 0.0 0.0 0.0
+      diffuse 0.27843137254902 0.27843137254902 0.27843137254902
+      specular 0.0 0.0 0.0 0.0
+      emissive 0.0 0.0 0.0
+    }
+  }
+}
+material 1319201593_9_Material4
+{
+  technique
+  {
+    pass
+    {
+      scene_blend alpha_blend
+      depth_check on
+      depth_write off
+      ambient 0.0 0.0 0.0 0.71
+      diffuse 0.8 0.905882352941176 0.996078431372549 0.71
+      specular 0.0 0.0 0.0 0.71 0.0
+      emissive 0.0 0.0 0.0 1.0
+    }
+  }
+}
+material 1319201593_10_Material8
+{
+  technique
+  {
+    pass
+    {
+      ambient 0.0 0.0 0.0
+      diffuse 0.752941176470588 0.752941176470588 0.752941176470588
+      specular 0.0 0.0 0.0 0.0
+      emissive 0.0 0.0 0.0
+    }
+  }
+}
+material 1319201593_11_TV_diffusori
+{
+  technique
+  {
+    pass
+    {
+      ambient 0.0 0.0 0.0
+      diffuse 0.129411764705882 0.129411764705882 0.129411764705882
+      specular 0.0 0.0 0.0 0.0
+      emissive 0.0 0.0 0.0
+      // texture size: 275.590551181102, 275.590551181102
+      texture_unit
+      {
+        texture 1319201593_3_Lamiera_forata_2.jpg
+      }
+    }
+  }
+}
+material 1319201593_12_Material7
+{
+  technique
+  {
+    pass
+    {
+      ambient 0.0 0.0 0.0
+      diffuse 0.501960784313725 0.501960784313725 0.501960784313725
+      specular 0.0 0.0 0.0 0.0
+      emissive 0.0 0.0 0.0
+    }
+  }
+}
+material 1319201593_13_<Glass_Sky_Reflection>2
+{
+  technique
+  {
+    pass
+    {
+      ambient 0.0 0.0 0.0
+      diffuse 0.725490196078431 0.129411764705882 0.129411764705882
+      specular 0.0 0.0 0.0 0.0
+      emissive 0.0 0.0 0.0
+      // texture size: 118.110236220472, 121.346133103225
+      texture_unit
+      {
+        texture 1319201593_1_Glass-Sky.jpg
+      }
+    }
+  }
+}
+material 1319201593_SketchupDefault
+{
+  technique
+  {
+    pass
+    {
+      ambient 0.0 0.0 0.0
+      diffuse 1.0 1.0 1.0
+      specular 0.0 0.0 0.0 0.0
+      emissive 0.0 0.0 0.0
+    }
+  }
+}

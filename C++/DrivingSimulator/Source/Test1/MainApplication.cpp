@@ -62,26 +62,28 @@ void MainApplication::init()
 
 	// add viewport
 	Ogre::Viewport* viewPort = renderWindow->addViewport(camera);
-	viewPort->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
+	viewPort->setBackgroundColour(Ogre::ColourValue(1, 1, 1));
 }
 
 void MainApplication::createScene()
 {
 	// load ogre head
-	Ogre::Entity* ogreHead = sceneManager->createEntity("OgreHead", "ogrehead.mesh");
-	Ogre::SceneNode* ogreHeadNode = sceneManager->getRootSceneNode()->createChildSceneNode();
-	ogreHeadNode->attachObject(ogreHead);
+	Ogre::Entity* car = sceneManager->createEntity("ShelbyCobra.mesh");
+	Ogre::SceneNode* carNode = sceneManager->getRootSceneNode()->createChildSceneNode();
+	carNode->attachObject(car);
+	carNode->scale(0.5, 0.5, 0.5);
+	carNode->yaw(Ogre::Degree(225));
 
 	// position camera
-	camera->setPosition(Ogre::Vector3(0, 0, 80));
-	camera->lookAt(Ogre::Vector3(0, 0, -300));
+	camera->setPosition(Ogre::Vector3(-20, 30, 100));
+	camera->lookAt(Ogre::Vector3(0, 10, 0));
 
 	// create ambient light
 	sceneManager->setAmbientLight(Ogre::ColourValue(0.5, 0.5, 0.5));
 
 	// create point light
 	Ogre::Light* pointLight1 = sceneManager->createLight("PointLight1");
-	pointLight1->setPosition(20, 80, 50);
+	pointLight1->setPosition(-100, 100, 100);
 }
 
 void MainApplication::run()
