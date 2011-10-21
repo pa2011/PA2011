@@ -15,20 +15,24 @@
 #include <OgreEntity.h>
 #include <OgreWindowEventUtilities.h>
 
-class MainApplication
+class MainApplication : public Ogre::WindowEventListener, public Ogre::FrameListener
 {
 	public:
 	MainApplication();
 	virtual ~MainApplication();
 	void init();
 	void createScene();
-	void run();
+	void start();
+
+	protected:
+	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
 
 	private:
 	Ogre::Root* rootNode;
 	Ogre::RenderWindow* renderWindow;
 	Ogre::SceneManager* sceneManager;
 	Ogre::Camera* camera;
+	Ogre::SceneNode* carNode;
 };
 
 #endif // MAINAPPLICATION_H

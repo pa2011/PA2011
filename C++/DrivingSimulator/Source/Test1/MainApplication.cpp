@@ -58,6 +58,7 @@ void MainApplication::init()
 
 	// create camera
 	camera = sceneManager->createCamera("PlayerCam");
+	camera->setAutoAspectRatio(true);
 	camera->setNearClipDistance(5);
 
 	// add viewport
@@ -69,7 +70,7 @@ void MainApplication::createScene()
 {
 	// load ogre head
 	Ogre::Entity* car = sceneManager->createEntity("MiniCooper.mesh");
-	Ogre::SceneNode* carNode = sceneManager->getRootSceneNode()->createChildSceneNode();
+	carNode = sceneManager->getRootSceneNode()->createChildSceneNode();
 	carNode->attachObject(car);
 	carNode->scale(10, 10, 10);
 	carNode->yaw(Ogre::Degree(-30));
@@ -86,20 +87,21 @@ void MainApplication::createScene()
 	pointLight1->setPosition(-100, 500, 1000);
 }
 
-void MainApplication::run()
+void MainApplication::start()
 {
-	while(true)
-	{
-		// pump window message
-		Ogre::WindowEventUtilities::messagePump();
-		if(renderWindow->isClosed())
-		{
-			return;
-		}
+	// add frame listener and start render loop
+	rootNode->addFrameListener(this);
+	rootNode->startRendering();
+}
 
-		// render the frame
-		rootNode->renderOneFrame();
-	}
+bool MainApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
+{
+	if(renderWindow->isClosed())
+		return false;
+
+	carNode->yaw(Ogre::Degree(30 * evt.timeSinceLastFrame));
+
+	return true;
 }
 
 #ifdef __cplusplus
@@ -120,7 +122,7 @@ extern "C"
 			// start application
 			app.init();
 			app.createScene();
-			app.run();
+			app.start();
 		}
 		catch(Ogre::Exception e)
 		{
