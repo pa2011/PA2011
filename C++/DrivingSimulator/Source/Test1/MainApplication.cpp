@@ -68,22 +68,22 @@ void MainApplication::init()
 void MainApplication::createScene()
 {
 	// load ogre head
-	Ogre::Entity* car = sceneManager->createEntity("ShelbyCobra.mesh");
+	Ogre::Entity* car = sceneManager->createEntity("MiniCooper.mesh");
 	Ogre::SceneNode* carNode = sceneManager->getRootSceneNode()->createChildSceneNode();
 	carNode->attachObject(car);
-	carNode->scale(0.5, 0.5, 0.5);
-	carNode->yaw(Ogre::Degree(225));
+	carNode->scale(10, 10, 10);
+	carNode->yaw(Ogre::Degree(-30));
 
 	// position camera
-	camera->setPosition(Ogre::Vector3(-20, 30, 100));
-	camera->lookAt(Ogre::Vector3(0, 10, 0));
+	camera->setPosition(Ogre::Vector3(0, 10, 50));
+	camera->lookAt(Ogre::Vector3(0, 5, 0));
 
 	// create ambient light
 	sceneManager->setAmbientLight(Ogre::ColourValue(0.5, 0.5, 0.5));
 
 	// create point light
 	Ogre::Light* pointLight1 = sceneManager->createLight("PointLight1");
-	pointLight1->setPosition(-100, 100, 100);
+	pointLight1->setPosition(-100, 500, 1000);
 }
 
 void MainApplication::run()
