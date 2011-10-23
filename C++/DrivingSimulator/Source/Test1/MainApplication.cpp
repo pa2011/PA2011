@@ -4,16 +4,6 @@
 
 MainApplication::MainApplication()
 {
-    // constructor
-}
-
-MainApplication::~MainApplication()
-{
-    delete rootNode;
-}
-
-void MainApplication::init()
-{
     // create root node
     #ifdef _DEBUG
     rootNode = new Ogre::Root("Resources/plugins_d.cfg", "Resources/graphics_d.cfg", "log_d.txt");
@@ -64,27 +54,39 @@ void MainApplication::init()
 	// add viewport
 	Ogre::Viewport* viewPort = renderWindow->addViewport(camera);
 	viewPort->setBackgroundColour(Ogre::ColourValue(1, 1, 1));
+
+	// initialize OIS
+	OIS::ParamList pList;
+	size_t windowHandler = 0;
+	std::ostringstream windowHandlerStr;
+	renderWindow->getCustomAttribute("WINDOW", &windowHandler);
+	windowHandlerStr << windowHandler;
+	pList.insert(std::make_pair(std::string("WINDOW"), windowHandlerStr.str()));
+
+	// prevent mouse pointer from disappearing under windows
+	#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	pList.insert(std::make_pair(std::string("w32_mouse"), std::string("DISCL_FOREGROUND" )));
+	pList.insert(std::make_pair(std::string("w32_mouse"), std::string("DISCL_NONEXCLUSIVE")));
+	pList.insert(std::make_pair(std::string("w32_keyboard"), std::string("DISCL_FOREGROUND")));
+	pList.insert(std::make_pair(std::string("w32_keyboard"), std::string("DISCL_NONEXCLUSIVE")));
+	#endif
+
+	inputManager = OIS::InputManager::createInputSystem(pList);
+
+	// create keyboard and mouse objects
+	keyboard = static_cast<OIS::Keyboard*>(inputManager->createInputObject(OIS::OISKeyboard, false));
+	mouse = static_cast<OIS::Mouse*>(inputManager->createInputObject(OIS::OISMouse, false));
+
+	// initialize mouse clipping area by calling windowResized
+	windowResized(renderWindow);
+
+	// register as window event listener
+	Ogre::WindowEventUtilities::addWindowEventListener(renderWindow, this);
 }
 
-void MainApplication::createScene()
+MainApplication::~MainApplication()
 {
-	// load ogre head
-	Ogre::Entity* car = sceneManager->createEntity("MiniCooper.mesh");
-	carNode = sceneManager->getRootSceneNode()->createChildSceneNode();
-	carNode->attachObject(car);
-	carNode->scale(10, 10, 10);
-	carNode->yaw(Ogre::Degree(-30));
-
-	// position camera
-	camera->setPosition(Ogre::Vector3(0, 10, 50));
-	camera->lookAt(Ogre::Vector3(0, 5, 0));
-
-	// create ambient light
-	sceneManager->setAmbientLight(Ogre::ColourValue(0.5, 0.5, 0.5));
-
-	// create point light
-	Ogre::Light* pointLight1 = sceneManager->createLight("PointLight1");
-	pointLight1->setPosition(-100, 500, 1000);
+    delete rootNode;
 }
 
 void MainApplication::start()
@@ -94,49 +96,31 @@ void MainApplication::start()
 	rootNode->startRendering();
 }
 
-bool MainApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
+// update mouse clipping area when window has been resized
+void MainApplication::windowResized(Ogre::RenderWindow* window)
 {
-	if(renderWindow->isClosed())
-		return false;
+	unsigned int width, height, depth;
+	int left, top;
+	window->getMetrics(width, height, depth, left, top);
 
-	carNode->yaw(Ogre::Degree(30 * evt.timeSinceLastFrame));
-
-	return true;
+	const OIS::MouseState& mouseState = mouse->getMouseState();
+	mouseState.width = width;
+	mouseState.height = height;
 }
 
-#ifdef __cplusplus
-extern "C"
+// destroy input objects and input system when window is closed
+void MainApplication::windowClosed(Ogre::RenderWindow* window)
 {
-#endif
-
-	#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT)
-	#else
-	int main(int argc, char** argv)
-	#endif
+	if(window == renderWindow)
 	{
-		// create application object
-		MainApplication app;
-		try
+		if(inputManager)
 		{
-			// start application
-			app.init();
-			app.createScene();
-			app.start();
+			inputManager->destroyInputObject(keyboard);
+			inputManager->destroyInputObject(mouse);
+			OIS::InputManager::destroyInputSystem(inputManager);
+			inputManager = NULL;
 		}
-		catch(Ogre::Exception e)
-		{
-			#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-			MessageBox(NULL, e.getFullDescription().c_str(), "An exception has occured!", MB_OK | MB_ICONERROR | MB_TASKMODAL);
-			#else
-			std::cerr << "An exception has occured: " << e.getFullDescription().c_str() << std::endl;
-			#endif
-		}
-
-		return 0;
 	}
-
-#ifdef __cplusplus
 }
-#endif
+
 

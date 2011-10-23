@@ -69,6 +69,8 @@
 		</Linker>
 		<Unit filename="..\..\Source\Test1\MainApplication.cpp" />
 		<Unit filename="..\..\Source\Test1\MainApplication.h" />
+		<Unit filename="..\..\Source\Test1\Scene1.cpp" />
+		<Unit filename="..\..\Source\Test1\Scene1.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

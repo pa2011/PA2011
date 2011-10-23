@@ -14,25 +14,32 @@
 #include <OgreRenderWindow.h>
 #include <OgreEntity.h>
 #include <OgreWindowEventUtilities.h>
+#include <OISEvents.h>
+#include <OISInputManager.h>
+#include <OISKeyboard.h>
+#include <OISMouse.h>
 
 class MainApplication : public Ogre::WindowEventListener, public Ogre::FrameListener
 {
 	public:
 	MainApplication();
 	virtual ~MainApplication();
-	void init();
-	void createScene();
-	void start();
+	virtual void createScene() = 0;
+	virtual void start();
 
 	protected:
-	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
-
-	private:
 	Ogre::Root* rootNode;
 	Ogre::RenderWindow* renderWindow;
 	Ogre::SceneManager* sceneManager;
 	Ogre::Camera* camera;
-	Ogre::SceneNode* carNode;
+	OIS::InputManager* inputManager;
+	OIS::Mouse* mouse;
+	OIS::Keyboard* keyboard;
+
+	virtual void windowResized(Ogre::RenderWindow* window);
+	virtual void windowClosed(Ogre::RenderWindow* window);
+	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt) = 0;
+
 };
 
 #endif // MAINAPPLICATION_H
