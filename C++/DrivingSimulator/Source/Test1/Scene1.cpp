@@ -12,7 +12,7 @@ Scene1::~Scene1()
 
 void Scene1::createScene()
 {
-	// load ogre head
+	// load mini cooper
 	Ogre::Entity* car = sceneManager->createEntity("MiniCooper.mesh");
 	carNode = sceneManager->getRootSceneNode()->createChildSceneNode();
 	carNode->attachObject(car);
@@ -24,11 +24,17 @@ void Scene1::createScene()
 	camera->lookAt(Ogre::Vector3(0, 5, 0));
 
 	// create ambient light
-	sceneManager->setAmbientLight(Ogre::ColourValue(0.5, 0.5, 0.5));
+	sceneManager->setAmbientLight(Ogre::ColourValue(0.3, 0.3, 0.3));
 
 	// create point light
-	Ogre::Light* pointLight1 = sceneManager->createLight("PointLight1");
-	pointLight1->setPosition(-100, 500, 1000);
+	Ogre::Light* sunLight = sceneManager->createLight("SunLight");
+	sunLight->setType(Ogre::Light::LT_DIRECTIONAL);
+	sunLight->setDirection(Ogre::Vector3(1, -1, -3));
+	sunLight->setDiffuseColour(Ogre::ColourValue(0.9, 0.9, 0.9));
+	sunLight->setSpecularColour(Ogre::ColourValue(0.9, 0.9, 0.9));
+
+	// enable shadow
+	sceneManager->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
 	// initialize variables
 	rotationSpeed = 0;
@@ -49,18 +55,17 @@ bool Scene1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 
 	// increase rotation speed (according to keyboard interaction)
 	if(keyboard->isKeyDown(OIS::KC_LEFT))
-		rotationSpeed += 3;
+		rotationSpeed += 300 * evt.timeSinceLastFrame;
 	if(keyboard->isKeyDown(OIS::KC_RIGHT))
-		rotationSpeed -= 3;
+		rotationSpeed -= 300 * evt.timeSinceLastFrame;
 
 	// decrease rotation speed
-	rotationSpeed *= 0.98;
-	if(Ogre::Math::Abs(rotationSpeed) < 1)
-		rotationSpeed = 0;
+	rotationSpeed *= Ogre::Math::Pow(0.4, evt.timeSinceLastFrame);
 
 	// rotate car
 	carNode->yaw(Ogre::Degree(rotationSpeed * evt.timeSinceLastFrame));
 
+	// if we reach this position of the code, there's no need to abort
 	return true;
 }
 
