@@ -4,6 +4,7 @@ Build/Windows/obj
 Build/Windows/.makedep
 Build/Windows/*.cbTemp
 Build/Windows/*.layout
+Build/Windows/*.depend
 Build/Windows/UserResources/*
 !Build/Windows/UserResources/README.txt
 *.skb

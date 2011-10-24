@@ -26,7 +26,7 @@ void Scene1::createScene()
 	carNode->yaw(Ogre::Degree(-30));
 
 	// position camera
-	camera->setPosition(Ogre::Vector3(0, 10, 50));
+	//camera->setPosition(Ogre::Vector3(0, 10, 50));
 	//camera->lookAt(Ogre::Vector3(0, 5, 0));
 	//camera->setNearClipDistance(0.1);
 
