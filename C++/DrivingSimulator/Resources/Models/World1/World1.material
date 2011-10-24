@@ -11,7 +11,7 @@ material Mat
 			texture_unit
 			{
 				texture Map1.png
-				filtering trilinear
+				filtering none
 			}
 		}
 	}
