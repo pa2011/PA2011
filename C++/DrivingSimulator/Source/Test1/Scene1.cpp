@@ -26,7 +26,7 @@ void Scene1::createScene()
 	carNode->yaw(Ogre::Degree(-30));
 
 	// position camera
-	//camera->setPosition(Ogre::Vector3(0, 10, 50));
+	//pcamera->setPosition(Ogre::Vector3(0, 10, 50));
 	//camera->lookAt(Ogre::Vector3(0, 5, 0));
 	//camera->setNearClipDistance(0.1);
 
@@ -41,7 +41,7 @@ void Scene1::createScene()
 	sunLight->setSpecularColour(Ogre::ColourValue(0.9, 0.9, 0.9));
 
 	// enable shadow
-	//sceneManager->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+	sceneManager->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 }
 
 bool Scene1::frameRenderingQueued(const Ogre::FrameEvent& evt)
