@@ -85,6 +85,8 @@ bool Scene1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	//camera->setDirection(carNode->getPosition()-camera->getPosition());
 	//camera->moveRelative(Ogre::Vector3(0, 0, (20-d)*0.1));
 
+	std::cout<<1/evt.timeSinceLastFrame<<std::endl;
+
 	// if we reach this position of the code, there's no need to abort
 	return true;
 }
