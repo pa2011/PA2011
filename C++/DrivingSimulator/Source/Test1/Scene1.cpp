@@ -12,36 +12,40 @@ Scene1::~Scene1()
 
 void Scene1::createScene()
 {
-	// load world
-	Ogre::Entity* world = sceneManager->createEntity("World1.mesh");
+	// create world node
 	worldNode = sceneManager->getRootSceneNode()->createChildSceneNode();
-	worldNode->attachObject(world);
 	worldNode->scale(1, 1, 1);
 
-	// load mini cooper
+	// load map
+	Ogre::Entity* map = sceneManager->createEntity("Map1.mesh");
+	map->setCastShadows(false);
+	worldNode->attachObject(map);
+
+	// load building
+	Ogre::Entity* building = sceneManager->createEntity("Building1.mesh");
+	building->setCastShadows(true);
+	worldNode->attachObject(building);
+
+	// load car
 	Ogre::Entity* car = sceneManager->createEntity("MiniCooper.mesh");
 	carNode = sceneManager->getRootSceneNode()->createChildSceneNode();
 	carNode->attachObject(car);
-	carNode->scale(5, 5, 5);
+	carNode->scale(4, 4, 4);
 	carNode->yaw(Ogre::Degree(-30));
 
-	// position camera
-	//pcamera->setPosition(Ogre::Vector3(0, 10, 50));
-	//camera->lookAt(Ogre::Vector3(0, 5, 0));
-	//camera->setNearClipDistance(0.1);
-
 	// create ambient light
-	sceneManager->setAmbientLight(Ogre::ColourValue(0.8, 0.8, 0.8));
+	sceneManager->setAmbientLight(Ogre::ColourValue(0.7, 0.7, 0.7));
 
-	// create point light
-	Ogre::Light* sunLight = sceneManager->createLight("SunLight");
+	// create sun light
+	Ogre::Light* sunLight = sceneManager->createLight();
 	sunLight->setType(Ogre::Light::LT_DIRECTIONAL);
-	sunLight->setDirection(Ogre::Vector3(1, -1, -3));
-	sunLight->setDiffuseColour(Ogre::ColourValue(0.9, 0.9, 0.9));
-	sunLight->setSpecularColour(Ogre::ColourValue(0.9, 0.9, 0.9));
+	sunLight->setDirection(Ogre::Vector3(-1, -3, 2));
+	sunLight->setDiffuseColour(Ogre::ColourValue(1, 1, 1));
+	sunLight->setSpecularColour(Ogre::ColourValue(0.3, 0.3, 0.3));
 
 	// enable shadow
 	sceneManager->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+	sceneManager->setShadowFarDistance(500);
 }
 
 bool Scene1::frameRenderingQueued(const Ogre::FrameEvent& evt)

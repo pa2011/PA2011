@@ -6,7 +6,7 @@ material 1319227163_1_<DarkRed>
     {
       ambient 0.376470588235294 0.12156862745098 0.0470588235294118
       diffuse 0.376470588235294 0.12156862745098 0.0470588235294118
-      specular 0.0 0.0 0.0 0.0
+      specular 1.0 1.0 1.0 1.0
       emissive 0.0 0.0 0.0
     }
   }
@@ -95,9 +95,13 @@ material 1319227163_8_<DarkSeaGreen>
   {
     pass
     {
-      ambient 0.0 0.0 0.0 0.5
-      diffuse 0.1 0.309803921568627 0.4
-      specular 0.0 0.0 0.0 0.5 0.0
+	  scene_blend alpha_blend
+      depth_check on
+      depth_write off
+	
+      ambient 0.1 0.309803921568627 0.4 0.5
+      diffuse 0.1 0.309803921568627 0.4 0.5
+      specular 0.5 0.8 0.9 0.5
       emissive 0.0 0.0 0.0 1.0
     }
   }

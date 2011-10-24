@@ -1,6 +1,6 @@
-// Materials for World1
+// Materials for Map1
 
-material Mat
+material Map1
 {
 	technique
 	{
@@ -10,9 +10,21 @@ material Mat
 			
 			texture_unit
 			{
-				texture Map1.png
-				filtering anisotropic
+				texture Map1.png 2d 5
+				filtering trilinear
 			}
+		}
+	}
+}
+
+material Building1
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.2 0.2 0.2 1.00
+			diffuse 0.2 0.2 0.2 1.00
 		}
 	}
 }
