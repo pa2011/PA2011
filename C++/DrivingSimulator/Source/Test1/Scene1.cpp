@@ -28,9 +28,10 @@ void Scene1::createScene()
 	// position camera
 	camera->setPosition(Ogre::Vector3(0, 10, 50));
 	camera->lookAt(Ogre::Vector3(0, 5, 0));
+	camera->setNearClipDistance(0.1);
 
 	// create ambient light
-	sceneManager->setAmbientLight(Ogre::ColourValue(0.3, 0.3, 0.3));
+	sceneManager->setAmbientLight(Ogre::ColourValue(0.8, 0.8, 0.8));
 
 	// create point light
 	Ogre::Light* sunLight = sceneManager->createLight("SunLight");
@@ -40,7 +41,7 @@ void Scene1::createScene()
 	sunLight->setSpecularColour(Ogre::ColourValue(0.9, 0.9, 0.9));
 
 	// enable shadow
-	sceneManager->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+	//sceneManager->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 }
 
 bool Scene1::frameRenderingQueued(const Ogre::FrameEvent& evt)
@@ -78,10 +79,11 @@ bool Scene1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	carNode->translate(xMove, 0, zMove);
 
 	// update camera
-	Ogre::Real d = camera->getPosition().distance(carNode->getPosition());
-	camera->setPosition(Ogre::Vector3(0, 10, 50));
-	camera->setDirection(carNode->getPosition()-camera->getPosition());
-	camera->moveRelative(Ogre::Vector3(0, 0, (20-d)*0.1));
+	camera->lookAt(carNode->getPosition());
+	//Ogre::Real d = camera->getPosition().distance(carNode->getPosition());
+	//camera->setPosition(Ogre::Vector3(0, 10, 50));
+	//camera->setDirection(carNode->getPosition()-camera->getPosition());
+	//camera->moveRelative(Ogre::Vector3(0, 0, (20-d)*0.1));
 
 	// if we reach this position of the code, there's no need to abort
 	return true;
