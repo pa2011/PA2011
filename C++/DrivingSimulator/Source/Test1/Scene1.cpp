@@ -27,8 +27,8 @@ void Scene1::createScene()
 
 	// position camera
 	camera->setPosition(Ogre::Vector3(0, 10, 50));
-	camera->lookAt(Ogre::Vector3(0, 5, 0));
-	camera->setNearClipDistance(0.1);
+	//camera->lookAt(Ogre::Vector3(0, 5, 0));
+	//camera->setNearClipDistance(0.1);
 
 	// create ambient light
 	sceneManager->setAmbientLight(Ogre::ColourValue(0.8, 0.8, 0.8));
@@ -46,6 +46,9 @@ void Scene1::createScene()
 
 bool Scene1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
+    // display fps
+    //std::cout << 1/evt.timeSinceLastFrame << std::endl;
+
 	// capture input devices
 	if(inputManager)
 	{
@@ -69,9 +72,17 @@ bool Scene1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 
 	// rotate car
 	if(keyboard->isKeyDown(OIS::KC_LEFT))
+	{
 		carNode->yaw(Ogre::Degree(2 * evt.timeSinceLastFrame * speed));
+		cameraRotationOffset -= 35 * evt.timeSinceLastFrame;
+	}
 	if(keyboard->isKeyDown(OIS::KC_RIGHT))
+	{
 		carNode->yaw(Ogre::Degree(-2 * evt.timeSinceLastFrame * speed));
+		cameraRotationOffset += 35 * evt.timeSinceLastFrame;
+	}
+
+	cameraRotationOffset *= Ogre::Math::Pow(0.2, evt.timeSinceLastFrame);
 
 	// update car position
 	Ogre::Real xMove = Ogre::Math::Sin(carNode->getOrientation().getYaw()) * speed * evt.timeSinceLastFrame;
@@ -79,13 +90,13 @@ bool Scene1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	carNode->translate(xMove, 0, zMove);
 
 	// update camera
-	camera->lookAt(carNode->getPosition());
-	//Ogre::Real d = camera->getPosition().distance(carNode->getPosition());
-	//camera->setPosition(Ogre::Vector3(0, 10, 50));
-	//camera->setDirection(carNode->getPosition()-camera->getPosition());
-	//camera->moveRelative(Ogre::Vector3(0, 0, (20-d)*0.1));
+	Ogre::Radian camAngle = carNode->getOrientation().getYaw() + Ogre::Degree(cameraRotationOffset);
+    Ogre::Real camXOffset = -Ogre::Math::Sin(camAngle) * 35;
+    Ogre::Real camYOffset = 12;
+	Ogre::Real camZOffset = -Ogre::Math::Cos(camAngle) * 35;
 
-	std::cout<<1/evt.timeSinceLastFrame<<std::endl;
+	camera->setPosition(carNode->getPosition() + Ogre::Vector3(camXOffset, camYOffset, camZOffset));
+    camera->lookAt(carNode->getPosition());
 
 	// if we reach this position of the code, there's no need to abort
 	return true;
