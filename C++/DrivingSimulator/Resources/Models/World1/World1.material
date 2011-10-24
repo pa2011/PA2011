@@ -1,0 +1,19 @@
+// Materials for World1
+
+material Mat
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.80 0.80 0.80 1.00
+			
+			texture_unit
+			{
+				texture Map1.png
+				filtering trilinear
+			}
+		}
+	}
+}
+

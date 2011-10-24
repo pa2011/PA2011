@@ -11,8 +11,9 @@ class Scene1 : public MainApplication
 	virtual void createScene();
 
 	protected:
-	Ogre::Real rotationSpeed;
+	Ogre::SceneNode* worldNode;
 	Ogre::SceneNode* carNode;
+	Ogre::Real speed;
 
 	private:
 	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
