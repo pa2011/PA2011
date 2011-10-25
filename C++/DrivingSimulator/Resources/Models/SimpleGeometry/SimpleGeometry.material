@@ -1,0 +1,44 @@
+material SimpleRed
+{
+  technique
+  {
+    pass
+    {
+      ambient 1 0 0
+      diffuse 1 0 0
+    }
+  }
+}
+material SimpleGreen
+{
+  technique
+  {
+    pass
+    {
+      ambient 0 1 0
+      diffuse 0 1 0
+    }
+  }
+}
+material SimpleBlue
+{
+  technique
+  {
+    pass
+    {
+      ambient 0 0 1
+      diffuse 0 0 1
+    }
+  }
+}
+material SimpleYellow
+{
+  technique
+  {
+    pass
+    {
+      ambient 1 1 0
+      diffuse 1 1 0
+    }
+  }
+}

@@ -48,6 +48,48 @@
 					<Mode after="always" />
 				</ExtraCommands>
 			</Target>
+			<Target title="Test2 - Debug">
+				<Option output="bin\Test2\Debug\Test2" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin\Test2\Debug\" />
+				<Option object_output="obj\Test2\Debug\" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-D_DEBUG" />
+				</Compiler>
+				<Linker>
+					<Add library="OgreMain_d" />
+					<Add library="OIS_d" />
+					<Add directory="$(OGRE_HOME)\bin\debug" />
+				</Linker>
+				<ExtraCommands>
+					<Add after='make -f Makefiles/CopyFiles.make PRODUCT=&quot;Test2&quot; CONFIGURATION=&quot;Debug&quot; all' />
+					<Mode after="always" />
+				</ExtraCommands>
+			</Target>
+			<Target title="Test2 - Release">
+				<Option output="bin\Test2\Release\Test2" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin\Test2\Release\" />
+				<Option object_output="obj\Test2\Release\" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-DNDEBUG" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="OgreMain" />
+					<Add library="OIS" />
+					<Add directory="$(OGRE_HOME)\bin\release" />
+				</Linker>
+				<ExtraCommands>
+					<Add before='make -f Makefiles/CopyFiles.make PRODUCT=&quot;Test1&quot; CONFIGURATION=&quot;Release&quot; clean' />
+					<Add after='make -f Makefiles/CopyFiles.make PRODUCT=&quot;Test2&quot; CONFIGURATION=&quot;Release&quot; all' />
+					<Mode after="always" />
+				</ExtraCommands>
+			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
@@ -67,10 +109,38 @@
 			<Add option="-Wl,--add-stdcall-alias" />
 			<Add option="-Wl,--enable-auto-import" />
 		</Linker>
-		<Unit filename="..\..\Source\Test1\MainApplication.cpp" />
-		<Unit filename="..\..\Source\Test1\MainApplication.h" />
-		<Unit filename="..\..\Source\Test1\Scene1.cpp" />
-		<Unit filename="..\..\Source\Test1\Scene1.h" />
+		<Unit filename="..\..\Source\Test1\MainApplication.cpp">
+			<Option target="Test1 - Debug" />
+			<Option target="Test1 - Release" />
+		</Unit>
+		<Unit filename="..\..\Source\Test1\MainApplication.h">
+			<Option target="Test1 - Debug" />
+			<Option target="Test1 - Release" />
+		</Unit>
+		<Unit filename="..\..\Source\Test1\Scene1.cpp">
+			<Option target="Test1 - Debug" />
+			<Option target="Test1 - Release" />
+		</Unit>
+		<Unit filename="..\..\Source\Test1\Scene1.h">
+			<Option target="Test1 - Debug" />
+			<Option target="Test1 - Release" />
+		</Unit>
+		<Unit filename="..\..\Source\Test2\MainApplication.cpp">
+			<Option target="Test2 - Debug" />
+			<Option target="Test2 - Release" />
+		</Unit>
+		<Unit filename="..\..\Source\Test2\MainApplication.h">
+			<Option target="Test2 - Debug" />
+			<Option target="Test2 - Release" />
+		</Unit>
+		<Unit filename="..\..\Source\Test2\Scene2.cpp">
+			<Option target="Test2 - Debug" />
+			<Option target="Test2 - Release" />
+		</Unit>
+		<Unit filename="..\..\Source\Test2\Scene2.h">
+			<Option target="Test2 - Debug" />
+			<Option target="Test2 - Release" />
+		</Unit>
 		<Extensions>
 			<code_completion />
 			<debugger />
