@@ -29,7 +29,7 @@ void Scene2::createScene()
 	// create sun light
 	Ogre::Light* sunLight = sceneManager->createLight();
 	sunLight->setType(Ogre::Light::LT_DIRECTIONAL);
-	sunLight->setDirection(Ogre::Vector3(2, -3, 4));
+	sunLight->setDirection(Ogre::Vector3(1, -0.8, 1));
 	sunLight->setDiffuseColour(Ogre::ColourValue(1, 1, 1));
 	sunLight->setSpecularColour(Ogre::ColourValue(0.3, 0.3, 0.3));
 
@@ -59,10 +59,10 @@ bool Scene2::frameRenderingQueued(const Ogre::FrameEvent& evt)
 		return false;
 
 	// update camera position
-	if(keyboard->isKeyDown(OIS::KC_UP))
-		camera->move(Ogre::Vector3(0, 20*evt.timeSinceLastFrame, 0));
-	if(keyboard->isKeyDown(OIS::KC_DOWN))
-		camera->move(Ogre::Vector3(0, -20*evt.timeSinceLastFrame, 0));
+	if(keyboard->isKeyDown(OIS::KC_UP) && (camera->getPosition().y < 40))
+		camera->moveRelative(Ogre::Vector3(0, 50*evt.timeSinceLastFrame, 0));
+	if(keyboard->isKeyDown(OIS::KC_DOWN) && (camera->getPosition().y > 5))
+		camera->moveRelative(Ogre::Vector3(0, -50*evt.timeSinceLastFrame, 0));
 	if(keyboard->isKeyDown(OIS::KC_LEFT))
 		camera->moveRelative(Ogre::Vector3(-50*evt.timeSinceLastFrame, 0, 0));
 	if(keyboard->isKeyDown(OIS::KC_RIGHT))
