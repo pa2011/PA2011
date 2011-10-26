@@ -40,8 +40,6 @@ void Scene2::createScene()
 	// enable shadow
 	//sceneManager->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 	//sceneManager->setShadowFarDistance(500);
-
-
 }
 
 bool Scene2::frameRenderingQueued(const Ogre::FrameEvent& evt)

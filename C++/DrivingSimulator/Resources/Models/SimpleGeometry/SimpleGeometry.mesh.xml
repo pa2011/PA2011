@@ -1,6 +1,6 @@
 <mesh>
 	<submeshes>
-		<submesh material="SimpleRed" usesharedvertices="false" use32bitindexes="false" operationtype="triangle_list">
+		<submesh material="PlainTexture" usesharedvertices="false" use32bitindexes="false" operationtype="triangle_list">
 			<faces count="756">
 				<face v1="2" v2="1" v3="0" />
 				<face v1="4" v2="3" v3="1" />
@@ -3334,7 +3334,7 @@
 				</vertexbuffer>
 			</geometry>
 		</submesh>
-		<submesh material="SimpleBlue" usesharedvertices="false" use32bitindexes="false" operationtype="triangle_list">
+		<submesh material="PlainTexture" usesharedvertices="false" use32bitindexes="false" operationtype="triangle_list">
 			<faces count="12">
 				<face v1="2" v2="1" v3="0" />
 				<face v1="5" v2="4" v3="3" />
@@ -3354,7 +3354,7 @@
 					<vertex>
 						<position x="32.37557459" y="0.00000000" z="-70.95073646" />
 						<normal x="0.00000000" y="0.00000000" z="1.00000000" />
-						<texcoord u="0.00000000" v="1.00000000" />
+						<texcoord u="0.00000000" v="0.50000000" />
 					</vertex>
 					<vertex>
 						<position x="32.37557459" y="60.00000000" z="-70.95073646" />
@@ -3364,12 +3364,12 @@
 					<vertex>
 						<position x="92.37557459" y="60.00000000" z="-70.95073646" />
 						<normal x="0.00000000" y="0.00000000" z="1.00000000" />
-						<texcoord u="1.00000000" v="0.00000000" />
+						<texcoord u="0.50000000" v="0.00000000" />
 					</vertex>
 					<vertex>
 						<position x="92.37557459" y="0.00000000" z="-70.95073646" />
 						<normal x="1.00000000" y="0.00000000" z="-0.00000000" />
-						<texcoord u="0.00000000" v="1.00000000" />
+						<texcoord u="0.00000000" v="0.50000000" />
 					</vertex>
 					<vertex>
 						<position x="92.37557459" y="60.00000000" z="-70.95073646" />
@@ -3379,12 +3379,12 @@
 					<vertex>
 						<position x="92.37557459" y="60.00000000" z="-130.95073646" />
 						<normal x="1.00000000" y="0.00000000" z="-0.00000000" />
-						<texcoord u="1.00000000" v="0.00000000" />
+						<texcoord u="0.50000000" v="0.00000000" />
 					</vertex>
 					<vertex>
 						<position x="92.37557459" y="0.00000000" z="-130.95073646" />
 						<normal x="0.00000000" y="0.00000000" z="-1.00000000" />
-						<texcoord u="0.00000000" v="1.00000000" />
+						<texcoord u="0.00000000" v="0.50000000" />
 					</vertex>
 					<vertex>
 						<position x="92.37557459" y="60.00000000" z="-130.95073646" />
@@ -3394,12 +3394,12 @@
 					<vertex>
 						<position x="32.37557459" y="60.00000000" z="-130.95073646" />
 						<normal x="0.00000000" y="0.00000000" z="-1.00000000" />
-						<texcoord u="1.00000000" v="0.00000000" />
+						<texcoord u="0.50000000" v="0.00000000" />
 					</vertex>
 					<vertex>
 						<position x="32.37557459" y="0.00000000" z="-130.95073646" />
 						<normal x="-1.00000000" y="0.00000000" z="-0.00000000" />
-						<texcoord u="0.00000000" v="1.00000000" />
+						<texcoord u="0.00000000" v="0.50000000" />
 					</vertex>
 					<vertex>
 						<position x="32.37557459" y="60.00000000" z="-130.95073646" />
@@ -3409,12 +3409,12 @@
 					<vertex>
 						<position x="32.37557459" y="60.00000000" z="-70.95073646" />
 						<normal x="-1.00000000" y="0.00000000" z="-0.00000000" />
-						<texcoord u="1.00000000" v="0.00000000" />
+						<texcoord u="0.50000000" v="0.00000000" />
 					</vertex>
 					<vertex>
 						<position x="32.37557459" y="60.00000000" z="-70.95073646" />
 						<normal x="0.00000000" y="1.00000000" z="-0.00000000" />
-						<texcoord u="0.00000000" v="1.00000000" />
+						<texcoord u="0.00000000" v="0.50000000" />
 					</vertex>
 					<vertex>
 						<position x="32.37557459" y="60.00000000" z="-130.95073646" />
@@ -3424,12 +3424,12 @@
 					<vertex>
 						<position x="92.37557459" y="60.00000000" z="-130.95073646" />
 						<normal x="0.00000000" y="1.00000000" z="-0.00000000" />
-						<texcoord u="1.00000000" v="0.00000000" />
+						<texcoord u="0.50000000" v="0.00000000" />
 					</vertex>
 					<vertex>
 						<position x="32.37557459" y="0.00000000" z="-130.95073646" />
 						<normal x="0.00000000" y="-1.00000000" z="-0.00000000" />
-						<texcoord u="0.00000000" v="1.00000000" />
+						<texcoord u="0.00000000" v="0.50000000" />
 					</vertex>
 					<vertex>
 						<position x="32.37557459" y="0.00000000" z="-70.95073646" />
@@ -3439,42 +3439,42 @@
 					<vertex>
 						<position x="92.37557459" y="0.00000000" z="-70.95073646" />
 						<normal x="0.00000000" y="-1.00000000" z="-0.00000000" />
-						<texcoord u="1.00000000" v="0.00000000" />
+						<texcoord u="0.50000000" v="0.00000000" />
 					</vertex>
 					<vertex>
 						<position x="92.37557459" y="0.00000000" z="-70.95073646" />
 						<normal x="0.00000000" y="0.00000000" z="1.00000000" />
-						<texcoord u="1.00000000" v="1.00000000" />
+						<texcoord u="0.50000000" v="0.50000000" />
 					</vertex>
 					<vertex>
 						<position x="92.37557459" y="0.00000000" z="-130.95073646" />
 						<normal x="1.00000000" y="0.00000000" z="-0.00000000" />
-						<texcoord u="1.00000000" v="1.00000000" />
+						<texcoord u="0.50000000" v="0.50000000" />
 					</vertex>
 					<vertex>
 						<position x="32.37557459" y="0.00000000" z="-130.95073646" />
 						<normal x="0.00000000" y="0.00000000" z="-1.00000000" />
-						<texcoord u="1.00000000" v="1.00000000" />
+						<texcoord u="0.50000000" v="0.50000000" />
 					</vertex>
 					<vertex>
 						<position x="32.37557459" y="0.00000000" z="-70.95073646" />
 						<normal x="-1.00000000" y="0.00000000" z="-0.00000000" />
-						<texcoord u="1.00000000" v="1.00000000" />
+						<texcoord u="0.50000000" v="0.50000000" />
 					</vertex>
 					<vertex>
 						<position x="92.37557459" y="60.00000000" z="-70.95073646" />
 						<normal x="0.00000000" y="1.00000000" z="-0.00000000" />
-						<texcoord u="1.00000000" v="1.00000000" />
+						<texcoord u="0.50000000" v="0.50000000" />
 					</vertex>
 					<vertex>
 						<position x="92.37557459" y="0.00000000" z="-130.95073646" />
 						<normal x="0.00000000" y="-1.00000000" z="-0.00000000" />
-						<texcoord u="1.00000000" v="1.00000000" />
+						<texcoord u="0.50000000" v="0.50000000" />
 					</vertex>
 				</vertexbuffer>
 			</geometry>
 		</submesh>
-		<submesh material="SimpleYellow" usesharedvertices="false" use32bitindexes="false" operationtype="triangle_list">
+		<submesh material="PlainTexture" usesharedvertices="false" use32bitindexes="false" operationtype="triangle_list">
 			<faces count="528">
 				<face v1="2" v2="1" v3="0" />
 				<face v1="4" v2="2" v3="3" />
