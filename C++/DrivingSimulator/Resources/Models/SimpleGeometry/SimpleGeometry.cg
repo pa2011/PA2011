@@ -1,14 +1,28 @@
-void main_plain_texture_vp(float4 position:POSITION, float2 texCoord0:TEXCOORD0, out float4 oPosition:POSITION, out float2 uv0:TEXCOORD0, uniform float4x4 worldViewProj)
+struct ResVP
 {
-	// Calculate output position
-	oPosition = mul(worldViewProj, position);
+	float4 position:POSITION;
+	float2 texCoord:TEXCOORD0;
+};
 
-	// Simply copy the input vertex UV to the output
-	uv0 = texCoord0;
+ResVP main_plain_texture_vp(float4 position:POSITION, float2 texCoord0:TEXCOORD0, uniform float4x4 worldViewProj)
+{
+	ResVP result;
+
+	result.position = mul(worldViewProj, position);
+	result.texCoord = texCoord0;
+	
+	return result;
 }
 
-void main_plain_texture_fp(float2 uv0:TEXCOORD0, out float4 color:COLOR, uniform sampler2D texture)
+struct ResFP
 {
-	// Just sample texture using supplied UV
-	color = tex2D(texture, uv0);
+	float4 color:COLOR;
+};
+
+ResFP main_plain_texture_fp(float2 uv0:TEXCOORD0, uniform sampler2D texture)
+{
+	ResFP result;
+	result.color = tex2D(texture, uv0);
+	return result;
 }
+
