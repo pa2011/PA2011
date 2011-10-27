@@ -1,7 +1,7 @@
-vertex_program PlainTexture_VS cg
+vertex_program PlainTexture_VP cg
 {
 	source SimpleGeometry.cg
-	entry_point main_plain_texture_vp
+	entry_point mainVP
 	profiles vs_2_0 arbvp1
 
 	default_params
@@ -10,11 +10,11 @@ vertex_program PlainTexture_VS cg
 	}
 }
 
-fragment_program PlainTexture_PS cg
+fragment_program PlainTexture_FP cg
 {
 	source SimpleGeometry.cg
-	entry_point main_plain_texture_fp
-	profiles ps_2_0 arbfp1               
+	entry_point mainFP
+	profiles ps_2_0 arbfp1
 }
 
 material PlainTexture
@@ -23,11 +23,11 @@ material PlainTexture
 	{
 		pass                    
 		{
-			vertex_program_ref PlainTexture_VS    
+			vertex_program_ref PlainTexture_VP
 			{
 			}
 			
-			fragment_program_ref PlainTexture_PS    
+			fragment_program_ref PlainTexture_FP
 			{
 			}
 			

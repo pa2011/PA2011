@@ -4,7 +4,7 @@ struct ResVP
 	float2 texCoord:TEXCOORD0;
 };
 
-ResVP main_plain_texture_vp(float4 position:POSITION, float2 texCoord0:TEXCOORD0, uniform float4x4 worldViewProj)
+ResVP mainVP(float4 position:POSITION, float2 texCoord0:TEXCOORD0, uniform float4x4 worldViewProj)
 {
 	ResVP result;
 
@@ -19,7 +19,7 @@ struct ResFP
 	float4 color:COLOR;
 };
 
-ResFP main_plain_texture_fp(float2 uv0:TEXCOORD0, uniform sampler2D texture)
+ResFP mainFP(float2 uv0:TEXCOORD0, uniform sampler2D texture)
 {
 	ResFP result;
 	result.color = tex2D(texture, uv0);
