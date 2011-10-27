@@ -16,6 +16,10 @@ void Scene1::createScene()
 	worldNode = sceneManager->getRootSceneNode()->createChildSceneNode();
 	worldNode->scale(1, 1, 1);
 
+	// Speed initialisation
+    speed = 0;
+    cameraRotationOffset = 0;
+
 	// load map
 	Ogre::Entity* map = sceneManager->createEntity("Map1.mesh");
 	map->setCastShadows(false);
@@ -44,8 +48,8 @@ void Scene1::createScene()
 	sunLight->setSpecularColour(Ogre::ColourValue(0.3, 0.3, 0.3));
 
 	// enable shadow
-	sceneManager->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
-	sceneManager->setShadowFarDistance(500);
+	//sceneManager->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+	//sceneManager->setShadowFarDistance(500);
 }
 
 bool Scene1::frameRenderingQueued(const Ogre::FrameEvent& evt)
