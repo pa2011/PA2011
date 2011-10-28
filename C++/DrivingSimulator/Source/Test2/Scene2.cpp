@@ -24,14 +24,14 @@ void Scene2::createScene()
 	worldNode->attachObject(objects);
 
 	// create ambient light
-	sceneManager->setAmbientLight(Ogre::ColourValue(0.3, 0.3, 0.3));
+	sceneManager->setAmbientLight(Ogre::ColourValue(0.2, 0.2, 0.2));
 
 	// create sun light
 	Ogre::Light* sunLight = sceneManager->createLight();
 	sunLight->setType(Ogre::Light::LT_DIRECTIONAL);
 	sunLight->setDirection(Ogre::Vector3(1, -0.8, 1));
 	sunLight->setDiffuseColour(Ogre::ColourValue(1, 1, 1));
-	sunLight->setSpecularColour(Ogre::ColourValue(0.3, 0.3, 0.3));
+	sunLight->setSpecularColour(Ogre::ColourValue(0.7, 0.7, 0.7));
 
 	// position camera
 	camera->setPosition(-20, 20, 40);

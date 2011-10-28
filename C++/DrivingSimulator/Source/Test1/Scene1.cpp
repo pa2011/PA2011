@@ -2,7 +2,9 @@
 
 Scene1::Scene1()
 {
-
+    // initialize attributes
+    speed = 0;
+    cameraRotationOffset = 0;
 }
 
 Scene1::~Scene1()
@@ -15,10 +17,6 @@ void Scene1::createScene()
 	// create world node
 	worldNode = sceneManager->getRootSceneNode()->createChildSceneNode();
 	worldNode->scale(1, 1, 1);
-
-	// Speed initialisation
-    speed = 0;
-    cameraRotationOffset = 0;
 
 	// load map
 	Ogre::Entity* map = sceneManager->createEntity("Map1.mesh");
@@ -35,7 +33,7 @@ void Scene1::createScene()
 	carNode = sceneManager->getRootSceneNode()->createChildSceneNode();
 	carNode->attachObject(car);
 	carNode->scale(4, 4, 4);
-	carNode->yaw(Ogre::Degree(-30));
+	carNode->setPosition(-5, 0, 0);
 
 	// create ambient light
 	sceneManager->setAmbientLight(Ogre::ColourValue(0.7, 0.7, 0.7));
@@ -81,16 +79,16 @@ bool Scene1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	// rotate car
 	if(keyboard->isKeyDown(OIS::KC_LEFT))
 	{
-		carNode->yaw(Ogre::Degree(2 * evt.timeSinceLastFrame * speed));
-		cameraRotationOffset -= 35 * evt.timeSinceLastFrame;
+		carNode->yaw(Ogre::Degree(2.5 * evt.timeSinceLastFrame * speed));
+		cameraRotationOffset -= 45 * evt.timeSinceLastFrame;
 	}
 	if(keyboard->isKeyDown(OIS::KC_RIGHT))
 	{
-		carNode->yaw(Ogre::Degree(-2 * evt.timeSinceLastFrame * speed));
-		cameraRotationOffset += 35 * evt.timeSinceLastFrame;
+		carNode->yaw(Ogre::Degree(-2.5 * evt.timeSinceLastFrame * speed));
+		cameraRotationOffset += 45 * evt.timeSinceLastFrame;
 	}
 
-	cameraRotationOffset *= Ogre::Math::Pow(0.2, evt.timeSinceLastFrame);
+	cameraRotationOffset *= Ogre::Math::Pow(0.1, evt.timeSinceLastFrame);
 
 	// update car position
 	Ogre::Real xMove = Ogre::Math::Sin(carNode->getOrientation().getYaw()) * speed * evt.timeSinceLastFrame;

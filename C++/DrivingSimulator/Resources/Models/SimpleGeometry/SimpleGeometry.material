@@ -15,6 +15,16 @@ fragment_program PlainTexture_FP cg
 	source SimpleGeometry.cg
 	entry_point mainFP
 	profiles ps_2_0 arbfp1
+	
+	default_params
+	{
+		param_named_auto ambientLight ambient_light_colour
+		param_named_auto diffuseLight light_diffuse_colour 0
+		param_named_auto specularLight light_specular_colour 0
+		param_named specularExponent float 100
+		param_named_auto lightPosition light_position_object_space 0
+		param_named_auto cameraPosition camera_position_object_space		
+	}
 }
 
 material PlainTexture
@@ -22,7 +32,7 @@ material PlainTexture
 	technique                    
 	{
 		pass                    
-		{
+		{		
 			vertex_program_ref PlainTexture_VP
 			{
 			}
