@@ -26,12 +26,27 @@ void Scene2::createScene()
 	// create ambient light
 	sceneManager->setAmbientLight(Ogre::ColourValue(0.2, 0.2, 0.2));
 
-	// create sun light
+	// create sun light 1
 	Ogre::Light* sunLight = sceneManager->createLight();
 	sunLight->setType(Ogre::Light::LT_DIRECTIONAL);
 	sunLight->setDirection(Ogre::Vector3(1, -0.8, 1));
 	sunLight->setDiffuseColour(Ogre::ColourValue(1, 1, 1));
-	sunLight->setSpecularColour(Ogre::ColourValue(0.7, 0.7, 0.7));
+	sunLight->setSpecularColour(Ogre::ColourValue(0.5, 0.5, 0.5));
+
+	// create sun light 2
+	Ogre::Light* sunLight2 = sceneManager->createLight();
+	sunLight2->setType(Ogre::Light::LT_DIRECTIONAL);
+	sunLight2->setDirection(Ogre::Vector3(-1, -0.8, 1));
+	sunLight2->setDiffuseColour(Ogre::ColourValue(1, 1, 1));
+	sunLight2->setSpecularColour(Ogre::ColourValue(0.5, 0.5, 0.5));
+
+	// create sun light 3
+	Ogre::Light* sunLight3 = sceneManager->createLight();
+	sunLight3->setType(Ogre::Light::LT_DIRECTIONAL);
+	sunLight3->setDirection(Ogre::Vector3(0, -0.8, -1));
+	sunLight3->setDiffuseColour(Ogre::ColourValue(1, 1, 1));
+	sunLight3->setSpecularColour(Ogre::ColourValue(0.5, 0.5, 0.5));
+
 
 	// position camera
 	camera->setPosition(-20, 20, 40);
