@@ -49,7 +49,7 @@ MainApplication::MainApplication()
 	// create camera
 	camera = sceneManager->createCamera("PlayerCam");
 	camera->setAutoAspectRatio(true);
-	camera->setNearClipDistance(5);
+	camera->setNearClipDistance(1);
 
 	// add viewport
 	Ogre::Viewport* viewPort = renderWindow->addViewport(camera);

@@ -1,10 +1,15 @@
 #include "Scene1.h"
 
+#define THIRD_PERSON 0
+#define COCKPIT 1
+
 Scene1::Scene1()
 {
     // initialize attributes
     speed = 0;
     cameraRotationOffset = 0;
+    cameraMode = THIRD_PERSON;
+    keyState[256] = {0};
 }
 
 Scene1::~Scene1()
@@ -44,6 +49,9 @@ void Scene1::createScene()
 	sunLight->setDirection(Ogre::Vector3(-1, -3, 2));
 	sunLight->setDiffuseColour(Ogre::ColourValue(1, 1, 1));
 	sunLight->setSpecularColour(Ogre::ColourValue(0.3, 0.3, 0.3));
+
+	// setup camera
+	camera->setFOVy(Ogre::Degree(70));
 
 	// enable shadow
 	//sceneManager->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
@@ -88,7 +96,19 @@ bool Scene1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 		cameraRotationOffset += 45 * evt.timeSinceLastFrame;
 	}
 
-	cameraRotationOffset *= Ogre::Math::Pow(0.1, evt.timeSinceLastFrame);
+	// change camera mode
+	if(keyboard->isKeyDown(OIS::KC_V))
+	{
+		if(!keyState[OIS::KC_V])
+		{
+			cameraMode = 1 - cameraMode;
+		}
+		keyState[OIS::KC_V] = true;
+	}
+	else
+	{
+		keyState[OIS::KC_V] = false;
+	}
 
 	// update car position
 	Ogre::Real xMove = Ogre::Math::Sin(carNode->getOrientation().getYaw()) * speed * evt.timeSinceLastFrame;
@@ -96,13 +116,29 @@ bool Scene1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	carNode->translate(xMove, 0, zMove);
 
 	// update camera
-	Ogre::Radian camAngle = carNode->getOrientation().getYaw() + Ogre::Degree(cameraRotationOffset);
-    Ogre::Real camXOffset = -Ogre::Math::Sin(camAngle) * 35;
-    Ogre::Real camYOffset = 12;
-	Ogre::Real camZOffset = -Ogre::Math::Cos(camAngle) * 35;
+	if(cameraMode == COCKPIT)
+	{
+		Ogre::Radian camAngle = carNode->getOrientation().getYaw() - Ogre::Degree(20);
+		Ogre::Real camXOffset = Ogre::Math::Cos(camAngle) * 1.3;
+		Ogre::Real camYOffset = 4;
+		Ogre::Real camZOffset = -Ogre::Math::Sin(camAngle) * 1.3;
 
-	camera->setPosition(carNode->getPosition() + Ogre::Vector3(camXOffset, camYOffset, camZOffset));
-    camera->lookAt(carNode->getPosition());
+		camera->setPosition(carNode->getPosition() + Ogre::Vector3(camXOffset, camYOffset, camZOffset));
+		camera->setOrientation(carNode->getOrientation());
+		camera->yaw(Ogre::Degree(180));
+	}
+	else if(cameraMode == THIRD_PERSON)
+	{
+		cameraRotationOffset *= Ogre::Math::Pow(0.1, evt.timeSinceLastFrame);
+
+		Ogre::Radian camAngle = carNode->getOrientation().getYaw() + Ogre::Degree(cameraRotationOffset);
+		Ogre::Real camXOffset = -Ogre::Math::Sin(camAngle) * 35;
+		Ogre::Real camYOffset = 12;
+		Ogre::Real camZOffset = -Ogre::Math::Cos(camAngle) * 35;
+
+		camera->setPosition(carNode->getPosition() + Ogre::Vector3(camXOffset, camYOffset, camZOffset));
+		camera->lookAt(carNode->getPosition());
+	}
 
 	// if we reach this position of the code, there's no need to abort
 	return true;
