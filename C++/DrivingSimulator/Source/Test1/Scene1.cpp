@@ -70,32 +70,48 @@ bool Scene1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 		mouse->capture();
 	}
 
-
 	// abort scene if window has been closed or escape button has been hit
 	if(renderWindow->isClosed() || keyboard->isKeyDown(OIS::KC_ESCAPE))
 		return false;
 
-	// increase speed (according to keyboard interaction)
-	if(keyboard->isKeyDown(OIS::KC_UP))
-		speed += 60 * evt.timeSinceLastFrame;
-	if(keyboard->isKeyDown(OIS::KC_DOWN))
-		speed -= 70 * evt.timeSinceLastFrame;
-
-
-	// decrease speed
+	// decrease speed (air resistance, etc...)
 	speed *= Ogre::Math::Pow(0.5, evt.timeSinceLastFrame);
 
-	// rotate car
-	if(keyboard->isKeyDown(OIS::KC_LEFT))
+    // accelerate / brake car by keyboard input
+	if(keyboard->isKeyDown(OIS::KC_UP))
 	{
-		carNode->yaw(Ogre::Degree(2.5 * evt.timeSinceLastFrame * speed));
-		cameraRotationOffset -= 45 * evt.timeSinceLastFrame;
+	    speed += 60 * evt.timeSinceLastFrame;
 	}
-	if(keyboard->isKeyDown(OIS::KC_RIGHT))
+	if(keyboard->isKeyDown(OIS::KC_DOWN))
 	{
-		carNode->yaw(Ogre::Degree(-2.5 * evt.timeSinceLastFrame * speed));
-		cameraRotationOffset += 45 * evt.timeSinceLastFrame;
+	    speed -= 90 * evt.timeSinceLastFrame;
 	}
+
+	// accelerate / brake car by udp input
+	if(UdpListener::throttle >= 0)
+	{
+	    speed += UdpListener::throttle * 60 * evt.timeSinceLastFrame;
+	}
+	else
+	{
+	    speed += UdpListener::throttle * 90 * evt.timeSinceLastFrame;
+	}
+
+	// rotate car by udp input
+	carNode->yaw(Ogre::Degree(UdpListener::steer * -2.5 * evt.timeSinceLastFrame * speed));
+    cameraRotationOffset += UdpListener::steer * 45 * evt.timeSinceLastFrame;
+
+    // rotate car by keyboard input
+    if(keyboard->isKeyDown(OIS::KC_LEFT))
+    {
+        carNode->yaw(Ogre::Degree(2.5 * evt.timeSinceLastFrame * speed));
+        cameraRotationOffset -= 45 * evt.timeSinceLastFrame;
+    }
+    if(keyboard->isKeyDown(OIS::KC_RIGHT))
+    {
+        carNode->yaw(Ogre::Degree(-2.5 * evt.timeSinceLastFrame * speed));
+        cameraRotationOffset += 45 * evt.timeSinceLastFrame;
+    }
 
 	// change camera mode
 	if(keyboard->isKeyDown(OIS::KC_V))
@@ -138,9 +154,9 @@ bool Scene1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 		cameraRotationOffset *= Ogre::Math::Pow(0.1, evt.timeSinceLastFrame);
 
 		Ogre::Radian camAngle = carNode->getOrientation().getYaw() + Ogre::Degree(cameraRotationOffset);
-		Ogre::Real camXOffset = -Ogre::Math::Sin(camAngle) * 35;
-		Ogre::Real camYOffset = 12;
-		Ogre::Real camZOffset = -Ogre::Math::Cos(camAngle) * 35;
+		Ogre::Real camXOffset = -Ogre::Math::Sin(camAngle) * 25;
+		Ogre::Real camYOffset = 8;
+		Ogre::Real camZOffset = -Ogre::Math::Cos(camAngle) * 25;
 
 		camera->setPosition(carNode->getPosition() + Ogre::Vector3(camXOffset, camYOffset, camZOffset));
 		camera->lookAt(carNode->getPosition());

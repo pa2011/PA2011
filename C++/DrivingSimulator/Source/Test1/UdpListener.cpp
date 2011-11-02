@@ -1,6 +1,9 @@
 #include "UdpListener.h"
 
-void listenToUdpPort(void* nothing)
+Ogre::Real UdpListener::steer = 0;
+Ogre::Real UdpListener::throttle = 0;
+
+void UdpListener::listenToUdpPort(void* nothing)
 {
 	int udpPort = DEFAULT_UDP_PORT;
 	int socketId;
@@ -59,18 +62,12 @@ void listenToUdpPort(void* nothing)
 		int steerValue = atoi(str);
 		int throttleValue = atoi(thr);
 
-		Ogre::Real steer = (Ogre::Real)steerValue / 32768;
-		Ogre::Real throttle = (Ogre::Real)throttleValue / -32768;
-
-		std::cout << throttle << std::endl;
+		steer = (Ogre::Real)steerValue / 32768;
+		throttle = (Ogre::Real)throttleValue / -32768;
 	}
-
 }
 
-void startUdpListener()
+void UdpListener::startUdpListener()
 {
-	_beginthread(listenToUdpPort, 0, NULL);
+	_beginthread(UdpListener::listenToUdpPort, 0, NULL);
 }
-
-
-

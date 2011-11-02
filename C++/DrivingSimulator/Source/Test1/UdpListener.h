@@ -30,7 +30,15 @@
 #define DEFAULT_UDP_PORT 52284
 #define BUFFER_LENGTH 1024
 
-void startUdpListener();
-void listenToUdpPort(int port);
+class UdpListener
+{
+	public:
+	static Ogre::Real steer;
+	static Ogre::Real throttle;
+	static void startUdpListener();
+
+	protected:
+    static void listenToUdpPort(void* nothing);
+};
 
 #endif // UDPLISTENER_H
