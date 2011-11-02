@@ -1,7 +1,5 @@
 #include "MainApplication.h"
 
-#include <OgreException.h>
-
 MainApplication::MainApplication()
 {
     // create root node
@@ -76,6 +74,9 @@ MainApplication::MainApplication()
 	// create keyboard and mouse objects
 	keyboard = static_cast<OIS::Keyboard*>(inputManager->createInputObject(OIS::OISKeyboard, false));
 	mouse = static_cast<OIS::Mouse*>(inputManager->createInputObject(OIS::OISMouse, false));
+
+	// create udp listener
+	startUdpListener();
 
 	// initialize mouse clipping area by calling windowResized
 	windowResized(renderWindow);

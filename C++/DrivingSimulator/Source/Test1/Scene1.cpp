@@ -70,6 +70,7 @@ bool Scene1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 		mouse->capture();
 	}
 
+
 	// abort scene if window has been closed or escape button has been hit
 	if(renderWindow->isClosed() || keyboard->isKeyDown(OIS::KC_ESCAPE))
 		return false;
@@ -102,6 +103,11 @@ bool Scene1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 		if(!keyState[OIS::KC_V])
 		{
 			cameraMode = 1 - cameraMode;
+			if(cameraMode == THIRD_PERSON)
+			{
+				cameraRotationOffset = 0;
+			}
+
 		}
 		keyState[OIS::KC_V] = true;
 	}
