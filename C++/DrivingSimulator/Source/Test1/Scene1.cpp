@@ -98,19 +98,19 @@ bool Scene1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	}
 
 	// rotate car by udp input
-	carNode->yaw(Ogre::Degree(UdpListener::steer * -2.5 * evt.timeSinceLastFrame * speed));
-    cameraRotationOffset += UdpListener::steer * 45 * evt.timeSinceLastFrame;
+	carNode->yaw(Ogre::Degree(UdpListener::steer * -5 * evt.timeSinceLastFrame * speed));
+    cameraRotationOffset += UdpListener::steer * 90 * evt.timeSinceLastFrame;
 
     // rotate car by keyboard input
     if(keyboard->isKeyDown(OIS::KC_LEFT))
     {
         carNode->yaw(Ogre::Degree(2.5 * evt.timeSinceLastFrame * speed));
-        cameraRotationOffset -= 45 * evt.timeSinceLastFrame;
+        cameraRotationOffset -= 45 * evt.timeSinceLastFrame * Ogre::Math::Abs(speed) / speed;
     }
     if(keyboard->isKeyDown(OIS::KC_RIGHT))
     {
         carNode->yaw(Ogre::Degree(-2.5 * evt.timeSinceLastFrame * speed));
-        cameraRotationOffset += 45 * evt.timeSinceLastFrame;
+        cameraRotationOffset += 45 * evt.timeSinceLastFrame * Ogre::Math::Abs(speed) / speed;
     }
 
 	// change camera mode
@@ -151,7 +151,14 @@ bool Scene1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	}
 	else if(cameraMode == THIRD_PERSON)
 	{
-		cameraRotationOffset *= Ogre::Math::Pow(0.1, evt.timeSinceLastFrame);
+		if(speed >= 0)
+		{
+			cameraRotationOffset *= Ogre::Math::Pow(0.1, evt.timeSinceLastFrame);
+		}
+		else
+		{
+			cameraRotationOffset = cameraRotationOffset * Ogre::Math::Pow(0.1, evt.timeSinceLastFrame) + 180 * (1 - Ogre::Math::Pow(0.1, evt.timeSinceLastFrame));
+		}
 
 		Ogre::Radian camAngle = carNode->getOrientation().getYaw() + Ogre::Degree(cameraRotationOffset);
 		Ogre::Real camXOffset = -Ogre::Math::Sin(camAngle) * 25;

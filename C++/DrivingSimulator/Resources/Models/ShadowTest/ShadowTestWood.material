@@ -1,4 +1,4 @@
-vertex_program PlainTexture_VP cg
+vertex_program Wood_VP cg
 {
 	source SimpleGeometry.cg
 	entry_point mainVP
