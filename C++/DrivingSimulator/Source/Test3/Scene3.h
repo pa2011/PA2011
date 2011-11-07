@@ -12,6 +12,11 @@ class Scene3 : public MainApplication
 
 	protected:
 	Ogre::SceneNode* worldNode;
+	Ogre::SceneNode* carNode;
+	Ogre::Real speed;
+	Ogre::Real cameraRotationOffset;
+	Ogre::uint8 cameraMode;
+	Ogre::uint8 keyState[256];
 
 	private:
 	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);

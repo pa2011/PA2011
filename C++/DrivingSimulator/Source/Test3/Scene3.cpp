@@ -2,7 +2,10 @@
 
 Scene3::Scene3()
 {
-
+    // initialize attributes
+    speed = 0;
+    cameraRotationOffset = 0;
+    keyState[256] = {0};
 }
 
 Scene3::~Scene3()
@@ -16,10 +19,17 @@ void Scene3::createScene()
 	worldNode = sceneManager->getRootSceneNode()->createChildSceneNode();
 	worldNode->scale(0.1, 0.1, 0.1);
 
-	// load simple geometry
-	Ogre::Entity* plane = sceneManager->createEntity("World2.mesh");
+	// Scene 3
+	Ogre::Entity* plane = sceneManager->createEntity("World2b.mesh");
 	plane->setCastShadows(false);
 	worldNode->attachObject(plane);
+
+	// load car
+	Ogre::Entity* car = sceneManager->createEntity("MiniCooper.mesh");
+	carNode = sceneManager->getRootSceneNode()->createChildSceneNode();
+	carNode->attachObject(car);
+	carNode->scale(4, 4, 4);
+	carNode->setPosition(-5, 0, 0);
 
 	// create ambient light
 	sceneManager->setAmbientLight(Ogre::ColourValue(0.2, 0.2, 0.2));
@@ -32,8 +42,8 @@ void Scene3::createScene()
 	sunLight->setSpecularColour(Ogre::ColourValue(0.7, 0.7, 0.7));
 
 	// position camera
-	camera->setPosition(-20, 20, 40);
-	camera->lookAt(0, 0, 0);
+	//camera->setPosition(-20, 20, 40);
+	//camera->lookAt(0, 0, 0);
 
 	// enable shadow
 	//sceneManager->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
@@ -52,11 +62,66 @@ bool Scene3::frameRenderingQueued(const Ogre::FrameEvent& evt)
 		mouse->capture();
 	}
 
+
+    // decrease speed (air resistance, etc...)
+	speed *= Ogre::Math::Pow(0.5, evt.timeSinceLastFrame);
+
+	// accelerate / brake car by keyboard input
+	if(keyboard->isKeyDown(OIS::KC_UP))
+	{
+	    speed += 60 * evt.timeSinceLastFrame;
+	}
+	if(keyboard->isKeyDown(OIS::KC_DOWN))
+	{
+	    speed -= 90 * evt.timeSinceLastFrame;
+	}
+
+    // rotate car by keyboard input
+    if(keyboard->isKeyDown(OIS::KC_LEFT))
+    {
+        carNode->yaw(Ogre::Degree(2.5 * evt.timeSinceLastFrame * speed));
+        cameraRotationOffset -= 45 * evt.timeSinceLastFrame * Ogre::Math::Abs(speed) / speed;
+    }
+    if(keyboard->isKeyDown(OIS::KC_RIGHT))
+    {
+        carNode->yaw(Ogre::Degree(-2.5 * evt.timeSinceLastFrame * speed));
+        cameraRotationOffset += 45 * evt.timeSinceLastFrame * Ogre::Math::Abs(speed) / speed;
+    }
+
+
+    // update car position
+	Ogre::Real xMove = Ogre::Math::Sin(carNode->getOrientation().getYaw()) * speed * evt.timeSinceLastFrame;
+	Ogre::Real zMove = Ogre::Math::Cos(carNode->getOrientation().getYaw()) * speed * evt.timeSinceLastFrame;
+	carNode->translate(xMove, 0, zMove);
+
+
 	// abort scene if window has been closed or escape button has been hit
 	if(renderWindow->isClosed() || keyboard->isKeyDown(OIS::KC_ESCAPE))
 		return false;
+    if(speed >= 0)
+    {
+        cameraRotationOffset *= Ogre::Math::Pow(0.1, evt.timeSinceLastFrame);
+    }
+    else
+    {
+        cameraRotationOffset = cameraRotationOffset * Ogre::Math::Pow(0.1, evt.timeSinceLastFrame) + 180 * (1 - Ogre::Math::Pow(0.1, evt.timeSinceLastFrame));
+    }
 
-	// update camera position
+
+    Ogre::Radian camAngle = carNode->getOrientation().getYaw() + Ogre::Degree(cameraRotationOffset);
+    Ogre::Real camXOffset = -Ogre::Math::Sin(camAngle) * 25;
+    Ogre::Real camYOffset = 8;
+    Ogre::Real camZOffset = -Ogre::Math::Cos(camAngle) * 25;
+
+    /*if(speed < 0)
+    {
+        camXOffset = camXOffset * -1;
+        camZOffset = camZOffset * -1;
+    }*/
+    camera->setPosition(carNode->getPosition() + Ogre::Vector3(camXOffset, camYOffset, camZOffset));
+    camera->lookAt(carNode->getPosition());
+
+	/*// update camera position
 	if(keyboard->isKeyDown(OIS::KC_UP) && (camera->getPosition().y < 40))
 		camera->moveRelative(Ogre::Vector3(0, 50*evt.timeSinceLastFrame, 0));
 	if(keyboard->isKeyDown(OIS::KC_DOWN) && (camera->getPosition().y > 5))
@@ -66,7 +131,7 @@ bool Scene3::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	if(keyboard->isKeyDown(OIS::KC_RIGHT))
 		camera->moveRelative(Ogre::Vector3(50*evt.timeSinceLastFrame, 0, 0));
 
-    camera->lookAt(Ogre::Vector3(0, 0, 0));
+    camera->lookAt(Ogre::Vector3(0, 0, 0));*/
 
 	// if we reach this position of the code, there's no need to abort
 	return true;
