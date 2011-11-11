@@ -45,3 +45,35 @@ material Street1
 		}
 	}
 }
+
+material Rock1
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.80 0.80 0.80 1.00
+			
+			texture_unit
+			{
+				texture Rock1.png 2d 5
+				filtering trilinear
+			}
+		}
+	}
+}
+
+material Tunnel1
+{
+	technique
+	{
+		pass
+		{			
+			texture_unit
+			{
+				texture Tunnel1.png 2d 5
+				filtering trilinear
+			}
+		}
+	}
+}

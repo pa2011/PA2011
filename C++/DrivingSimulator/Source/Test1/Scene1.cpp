@@ -24,21 +24,17 @@ void Scene1::createScene()
 	worldNode->scale(1, 1, 1);
 
 	// load map
-	Ogre::Entity* map = sceneManager->createEntity("Map1.mesh");
+	Ogre::Entity* map = sceneManager->createEntity("Map1b.mesh");
 	map->setCastShadows(false);
 	worldNode->attachObject(map);
-
-	// load buildings
-	Ogre::Entity* building = sceneManager->createEntity("Buildings.mesh");
-	building->setCastShadows(true);
-	worldNode->attachObject(building);
 
 	// load car
 	Ogre::Entity* car = sceneManager->createEntity("MiniCooper.mesh");
 	carNode = sceneManager->getRootSceneNode()->createChildSceneNode();
 	carNode->attachObject(car);
 	carNode->scale(4, 4, 4);
-	carNode->setPosition(-5, 0, 0);
+	carNode->setPosition(978, 0, 917);
+	carNode->yaw(Ogre::Degree(-27));
 
 	// create ambient light
 	sceneManager->setAmbientLight(Ogre::ColourValue(0.7, 0.7, 0.7));
@@ -75,7 +71,7 @@ bool Scene1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 		return false;
 
 	// decrease speed (air resistance, etc...)
-	speed *= Ogre::Math::Pow(0.5, evt.timeSinceLastFrame);
+	speed *= Ogre::Math::Pow(0.7, evt.timeSinceLastFrame);
 
     // accelerate / brake car by keyboard input
 	if(keyboard->isKeyDown(OIS::KC_UP))
@@ -97,17 +93,20 @@ bool Scene1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	    speed += UdpListener::throttle * 90 * evt.timeSinceLastFrame;
 	}
 
+	if(speed < 0)
+		speed = 0;
+
 	// rotate car by udp input
 	carNode->yaw(Ogre::Degree(UdpListener::steer * -5 * evt.timeSinceLastFrame * speed));
     cameraRotationOffset += UdpListener::steer * 90 * evt.timeSinceLastFrame;
 
     // rotate car by keyboard input
-    if(keyboard->isKeyDown(OIS::KC_LEFT))
+    if(keyboard->isKeyDown(OIS::KC_LEFT) && speed != 0)
     {
         carNode->yaw(Ogre::Degree(2.5 * evt.timeSinceLastFrame * speed));
         cameraRotationOffset -= 45 * evt.timeSinceLastFrame * Ogre::Math::Abs(speed) / speed;
     }
-    if(keyboard->isKeyDown(OIS::KC_RIGHT))
+    if(keyboard->isKeyDown(OIS::KC_RIGHT) && speed != 0)
     {
         carNode->yaw(Ogre::Degree(-2.5 * evt.timeSinceLastFrame * speed));
         cameraRotationOffset += 45 * evt.timeSinceLastFrame * Ogre::Math::Abs(speed) / speed;
@@ -168,6 +167,9 @@ bool Scene1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 		camera->setPosition(carNode->getPosition() + Ogre::Vector3(camXOffset, camYOffset, camZOffset));
 		camera->lookAt(carNode->getPosition());
 	}
+
+	// debug information
+	//std::cout << "Position: " << carNode->getPosition() << " Rotation: " << carNode->getOrientation().getYaw().valueDegrees() << std::endl;
 
 	// if we reach this position of the code, there's no need to abort
 	return true;
