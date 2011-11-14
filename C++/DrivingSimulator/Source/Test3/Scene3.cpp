@@ -20,7 +20,7 @@ void Scene3::createScene()
 	worldNode->scale(0.1, 0.1, 0.1);
 
 	// Scene 3
-	Ogre::Entity* plane = sceneManager->createEntity("World2b.mesh");
+	Ogre::Entity* plane = sceneManager->createEntity("World2c.mesh");
 	plane->setCastShadows(false);
 	worldNode->attachObject(plane);
 
@@ -37,7 +37,7 @@ void Scene3::createScene()
 	// create sun light
 	Ogre::Light* sunLight = sceneManager->createLight();
 	sunLight->setType(Ogre::Light::LT_DIRECTIONAL);
-	sunLight->setDirection(Ogre::Vector3(1, -0.8, 1));
+	sunLight->setDirection(Ogre::Vector3(-0.2, -0.5, 0.5));
 	sunLight->setDiffuseColour(Ogre::ColourValue(1, 1, 1));
 	sunLight->setSpecularColour(Ogre::ColourValue(0.7, 0.7, 0.7));
 
