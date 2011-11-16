@@ -1,49 +1,41 @@
-#include "Scene4.h"
+#include "Scene5.h"
 
-Scene4::Scene4()
+Scene5::Scene5()
 {
 
 }
 
-Scene4::~Scene4()
+Scene5::~Scene5()
 {
 
 }
 
-void Scene4::createScene()
+void Scene5::createScene()
 {
-	// create world node
-	worldNode = sceneManager->getRootSceneNode()->createChildSceneNode();
-	worldNode->scale(0.02, 0.02, 0.02);
+	// create scene nodes
+	planeNode = sceneManager->getRootSceneNode()->createChildSceneNode();
+	planeNode->scale(0.02, 0.02, 0.02);
 
-	// load simple geometry
-	Ogre::Entity* objects = sceneManager->createEntity("ShadowTest1.mesh");
-	worldNode->attachObject(objects);
+	cubeNode = sceneManager->getRootSceneNode()->createChildSceneNode();
+	cubeNode->scale(0.02, 0.02, 0.02);
+	cubeNode->setPosition(0, 12, 0);
+
+	// load simple objects
+	Ogre::Entity* plane = sceneManager->createEntity("Plane.mesh");
+	planeNode->attachObject(plane);
+
+	Ogre::Entity* cube = sceneManager->createEntity("Cube.mesh");
+	cubeNode->attachObject(cube);
 
 	// create ambient light
 	sceneManager->setAmbientLight(Ogre::ColourValue(0.2, 0.2, 0.2));
 
-	// create sun light 1
+	// create sun light
 	Ogre::Light* sunLight = sceneManager->createLight();
 	sunLight->setType(Ogre::Light::LT_DIRECTIONAL);
-	sunLight->setDirection(Ogre::Vector3(1, -0.8, 1));
+	sunLight->setDirection(Ogre::Vector3(1, -0.8, 1.2));
 	sunLight->setDiffuseColour(Ogre::ColourValue(1, 1, 1));
 	sunLight->setSpecularColour(Ogre::ColourValue(0.5, 0.5, 0.5));
-
-	// create sun light 2
-	Ogre::Light* sunLight2 = sceneManager->createLight();
-	sunLight2->setType(Ogre::Light::LT_DIRECTIONAL);
-	sunLight2->setDirection(Ogre::Vector3(-1, -0.8, 1));
-	sunLight2->setDiffuseColour(Ogre::ColourValue(1, 1, 1));
-	sunLight2->setSpecularColour(Ogre::ColourValue(0.5, 0.5, 0.5));
-
-	// create sun light 3
-	Ogre::Light* sunLight3 = sceneManager->createLight();
-	sunLight3->setType(Ogre::Light::LT_DIRECTIONAL);
-	sunLight3->setDirection(Ogre::Vector3(0, -0.8, -1));
-	sunLight3->setDiffuseColour(Ogre::ColourValue(1, 1, 1));
-	sunLight3->setSpecularColour(Ogre::ColourValue(0.5, 0.5, 0.5));
-
 
 	// position camera
 	camera->setPosition(-20, 20, 40);
@@ -54,7 +46,7 @@ void Scene4::createScene()
 	//sceneManager->setShadowFarDistance(500);
 }
 
-bool Scene4::frameRenderingQueued(const Ogre::FrameEvent& evt)
+bool Scene5::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
     // display fps
     //std::cout << 1/evt.timeSinceLastFrame << std::endl;
@@ -93,7 +85,7 @@ int main(int argc, char** argv)
 #endif
 {
 	// create application object
-	Scene4 app;
+	Scene5 app;
 	try
 	{
 		// start application

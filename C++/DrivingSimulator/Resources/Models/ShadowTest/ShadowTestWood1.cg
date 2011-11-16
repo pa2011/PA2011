@@ -1,0 +1,46 @@
+struct VPOut
+{
+	float4 clipPosition:POSITION;
+	float2 uv:TEXCOORD0;
+	float3 normal:TEXCOORD1;
+	float3 lightDirection0:TEXCOORD2;
+};
+
+VPOut mainVP(float4 position:POSITION, float3 normal:NORMAL, float2 uv:TEXCOORD0, uniform float4x4 worldViewProj, uniform float4 lightPosition0)
+{
+	VPOut res;
+
+	// calculate clip position
+	res.clipPosition = mul(worldViewProj, position);
+	
+	// copy values needed for fragment program
+	res.uv = uv;
+	res.normal = normal;
+	
+	// calculate light direction
+	res.lightDirection0 = normalize(lightPosition0.xyz - (position * lightPosition0.w).xyz);
+			
+	return res;
+}
+
+struct FPOut
+{
+	float4 color:COLOR;
+};
+
+FPOut mainFP(float2 uv:TEXCOORD0, float3 normal:TEXCOORD1, float3 lightDirection0:TEXCOORD2, uniform sampler2D texture, uniform float4 ambientLight, uniform float4 diffuseLight0)
+{
+	FPOut res;
+	
+	// get color from texture
+	float3 textureColor = tex2D(texture, uv).rgb;
+	
+	// calculate light intensity
+	float4 diffuseLight = max(0, dot(normalize(lightDirection0), normal)) * diffuseLight0;
+
+	// add colors
+	res.color = (ambientLight + diffuseLight) * float4(textureColor, 1);
+	
+	return res;
+}
+

@@ -1,0 +1,19 @@
+// Materials for Map1
+
+material Physics_Wood1
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.80 0.80 0.80 1.00
+			
+			texture_unit
+			{
+				texture wood1.png 2d 5
+				filtering trilinear
+			}
+		}
+	}
+}
+
