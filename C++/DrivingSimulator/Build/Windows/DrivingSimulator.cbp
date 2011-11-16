@@ -176,6 +176,48 @@
 					<Mode after="always" />
 				</ExtraCommands>
 			</Target>
+			<Target title="Test5 - Debug">
+				<Option output="bin\Test5\Debug\Test5" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin\Test5\Debug\" />
+				<Option object_output="obj\Test5\Debug\" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-D_DEBUG" />
+				</Compiler>
+				<Linker>
+					<Add library="OgreMain_d" />
+					<Add library="OIS_d" />
+					<Add directory="$(OGRE_HOME)\bin\debug" />
+				</Linker>
+				<ExtraCommands>
+					<Add after='make -f Makefiles/CopyFiles.make PRODUCT=&quot;Test5&quot; CONFIGURATION=&quot;Debug&quot; all' />
+					<Mode after="always" />
+				</ExtraCommands>
+			</Target>
+			<Target title="Test5 - Release">
+				<Option output="bin\Test5\Release\Test5" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin\Test5\Release\" />
+				<Option object_output="obj\Test5\Release\" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-DNDEBUG" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="OgreMain" />
+					<Add library="OIS" />
+					<Add directory="$(OGRE_HOME)\bin\release" />
+				</Linker>
+				<ExtraCommands>
+					<Add before='make -f Makefiles/CopyFiles.make PRODUCT=&quot;Test5&quot; CONFIGURATION=&quot;Release&quot; clean' />
+					<Add after='make -f Makefiles/CopyFiles.make PRODUCT=&quot;Test5&quot; CONFIGURATION=&quot;Release&quot; all' />
+					<Mode after="always" />
+				</ExtraCommands>
+			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
@@ -266,6 +308,22 @@
 		<Unit filename="..\..\Source\Test4\Scene4.h">
 			<Option target="Test4 - Debug" />
 			<Option target="Test4 - Release" />
+		</Unit>
+		<Unit filename="..\..\Source\Test5\MainApplication.cpp">
+			<Option target="Test5 - Debug" />
+			<Option target="Test5 - Release" />
+		</Unit>
+		<Unit filename="..\..\Source\Test5\MainApplication.h">
+			<Option target="Test5 - Debug" />
+			<Option target="Test5 - Release" />
+		</Unit>
+		<Unit filename="..\..\Source\Test5\Scene5.cpp">
+			<Option target="Test5 - Debug" />
+			<Option target="Test5 - Release" />
+		</Unit>
+		<Unit filename="..\..\Source\Test5\Scene5.h">
+			<Option target="Test5 - Debug" />
+			<Option target="Test5 - Release" />
 		</Unit>
 		<Extensions>
 			<code_completion />
