@@ -39,8 +39,8 @@ material Street1
 			
 			texture_unit
 			{
-				texture Street1.png 2d 5
-				filtering trilinear
+				texture Street1.png 2d 4
+				filtering anisotropic
 			}
 		}
 	}

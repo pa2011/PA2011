@@ -2,6 +2,7 @@
 
 #define THIRD_PERSON 0
 #define COCKPIT 1
+#define ALLOW_REVERSE false
 
 Scene1::Scene1()
 {
@@ -93,8 +94,15 @@ bool Scene1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	    speed += UdpListener::throttle * 90 * evt.timeSinceLastFrame;
 	}
 
-	if(speed < 0)
-		speed = 0;
+	if(!ALLOW_REVERSE)
+	{
+		if(speed < 0)
+			speed = 0;
+	}
+
+	// calculate steer intensity
+	Ogre::Real normalizedSpeed = Ogre::Math::Abs(speed / 180);
+	Ogre::Real steerIntensity = 100 / (100 * (Ogre::Math::Pow(normalizedSpeed, 2)) + 1) * Ogre::Math::Pow(normalizedSpeed, 1.5);
 
 	// rotate car by udp input
 	carNode->yaw(Ogre::Degree(UdpListener::steer * -5 * evt.timeSinceLastFrame * speed));
@@ -103,13 +111,13 @@ bool Scene1::frameRenderingQueued(const Ogre::FrameEvent& evt)
     // rotate car by keyboard input
     if(keyboard->isKeyDown(OIS::KC_LEFT) && speed != 0)
     {
-        carNode->yaw(Ogre::Degree(2.5 * evt.timeSinceLastFrame * speed));
-        cameraRotationOffset -= 45 * evt.timeSinceLastFrame * Ogre::Math::Abs(speed) / speed;
+        carNode->yaw(Ogre::Degree(steerIntensity * 90 * evt.timeSinceLastFrame * Ogre::Math::Abs(speed) / speed));
+        cameraRotationOffset -= 45 * evt.timeSinceLastFrame * steerIntensity * Ogre::Math::Abs(speed) / speed;
     }
     if(keyboard->isKeyDown(OIS::KC_RIGHT) && speed != 0)
     {
-        carNode->yaw(Ogre::Degree(-2.5 * evt.timeSinceLastFrame * speed));
-        cameraRotationOffset += 45 * evt.timeSinceLastFrame * Ogre::Math::Abs(speed) / speed;
+        carNode->yaw(Ogre::Degree(steerIntensity * -90 * evt.timeSinceLastFrame * Ogre::Math::Abs(speed) / speed));
+        cameraRotationOffset += 45 * evt.timeSinceLastFrame * steerIntensity * Ogre::Math::Abs(speed) / speed;
     }
 
 	// change camera mode
@@ -170,6 +178,8 @@ bool Scene1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 
 	// debug information
 	//std::cout << "Position: " << carNode->getPosition() << " Rotation: " << carNode->getOrientation().getYaw().valueDegrees() << std::endl;
+	//std::cout << "Speed: " << speed;
+	//std::cout << " Steer Intensity: " << steerIntensity << std::endl;
 
 	// if we reach this position of the code, there's no need to abort
 	return true;

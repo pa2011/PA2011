@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1319133773 source:c:\users\sandro ropelato\pa2011\c++\videoplayer2\source\main.cpp
+1321818255 source:c:\users\sandro ropelato\pa2011\c++\videoplayer2\source\main.cpp
 	"util.h"
 	<sys/types.h>
 	<stdlib.h>
@@ -27,7 +27,7 @@
 	<netinet/in.h>
 	<netdb.h>
 
-1319133773 source:c:\users\sandro ropelato\pa2011\c++\videoplayer2\source\util.cpp
+1321818578 source:c:\users\sandro ropelato\pa2011\c++\videoplayer2\source\util.cpp
 	"util.h"
 
 1318875886 source:z:\sandro\zhaw\pa2011\c++\videoplayer2\source\util.cpp

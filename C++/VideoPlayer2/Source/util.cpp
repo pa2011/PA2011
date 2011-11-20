@@ -10,7 +10,7 @@ int startMPlayer(const char* mPlayerPath, const char* videoPath)
 {
     char arguments[1024];
 	memset(&arguments, 0, sizeof(arguments));
-	sprintf(arguments, " -slave -really-quiet -hardframedrop -osdlevel 0 -loop 0 %s", videoPath);
+	sprintf(arguments, " -slave -really-quiet -hardframedrop -osdlevel 0 -loop 0 \"%s\"", videoPath);
 
     SECURITY_ATTRIBUTES saAttr;
 
