@@ -24,22 +24,27 @@ int main(int argc, char** argv)
 	int socketId;
 	struct sockaddr_in server;
 	char buf[BUFFER_LENGTH];
+	float videoStart;
+	float videoEnd;
 
-    if(argc < 3)
+    if(argc < 5)
     {
-        fprintf(stderr, "Usage: %s mplayer-path video-path [ udp-port ]\n", argv[0]);
+        fprintf(stderr, "Usage: %s mplayer-path video-path video-start video-end [ udp-port ]\n", argv[0]);
         return 1;
     }
 
-	if(argc < 4)
+	if(argc < 6)
 	{
 		printf("No port specified, using default port %d\n", DEFAULT_UDP_PORT);
 		udpPort = DEFAULT_UDP_PORT;
 	}
 	else
 	{
-	    udpPort = atoi(argv[3]);
+	    udpPort = atoi(argv[5]);
 	}
+
+	videoStart = atof(argv[3]);
+	videoEnd = atof(argv[4]);
 
     #ifdef OS_WINDOWS
 		WSADATA wsa;
@@ -50,7 +55,7 @@ int main(int argc, char** argv)
 		}
 	#endif
 
-	if(startMPlayer(argv[1], argv[2]) != 0)
+	if(startMPlayer(argv[1], argv[2], videoStart) != 0)
 	{
         fprintf(stderr, "Could not start MPlayer.");
 		return 1;
@@ -105,24 +110,32 @@ int main(int argc, char** argv)
 		int steerValue = atoi(str);
 		int throttleValue = atoi(thr);
 
-		printf("Steer:%d Throttle:%d\n", steerValue, throttleValue);
-
 		float acceleration = (float)throttleValue / -32768;
-		speed = speed*0.99;
-		speed += acceleration/20.0;
+		speed = speed*0.997;
+		if(acceleration > 0)
+			speed += acceleration/150.0;
+		else
+			speed += acceleration/50.0;
 
-		if(speed > 4.0)
-            speed = 4.0;
-
-		if(speed <= 0.2)
+		if(speed < 0.15)
 		{
-		    speed = 0.2;
+		    speed = 0.15;
 		    if(isPlaying())
                 pauseVideo();
+
+			printf("Speed: %.2lf km/h\n", 0);
 		}
 		else
 		{
+			printf("Speed: %.2lf km/h\n", speed*100);
             playVideo(speed);
+		}
+
+		refreshTimePos();
+		if(getTimePos() > videoEnd)
+		{
+			seek(videoStart);
+			//speed = 0.0;
 		}
 	}
 

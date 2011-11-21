@@ -2,15 +2,20 @@
 
 int socketId;
 int playing = FALSE;
+float position;
 
-HANDLE g_hChildStd_IN_Rd = NULL;
-HANDLE g_hChildStd_IN_Wr = NULL;
+HANDLE stdInRd = NULL;
+HANDLE stdInWr = NULL;
 
-int startMPlayer(const char* mPlayerPath, const char* videoPath)
+HANDLE stdOutRd = NULL;
+HANDLE stdOutWr = NULL;
+
+
+int startMPlayer(const char* mPlayerPath, const char* videoPath, float initialPosition)
 {
     char arguments[1024];
 	memset(&arguments, 0, sizeof(arguments));
-	sprintf(arguments, " -slave -really-quiet -hardframedrop -osdlevel 0 -loop 0 \"%s\"", videoPath);
+	sprintf(arguments, " -slave -hardframedrop -osdlevel 0 \"%s\"", videoPath);
 
     SECURITY_ATTRIBUTES saAttr;
 
@@ -19,24 +24,26 @@ int startMPlayer(const char* mPlayerPath, const char* videoPath)
     saAttr.bInheritHandle = TRUE;
     saAttr.lpSecurityDescriptor = NULL;
 
-    // Create a pipe for the child process's STDIN.
-    // Create a pipe for the child process's STDIN.
-
-    if (!CreatePipe(&g_hChildStd_IN_Rd, &g_hChildStd_IN_Wr, &saAttr, 0))
+    // create a pipe for the child's stdin
+    if (!CreatePipe(&stdInRd, &stdInWr, &saAttr, 0) || !SetHandleInformation(stdInWr, HANDLE_FLAG_INHERIT, 0))
     {
-        fprintf(stderr, "Stdin CreatePipe\n");
+        fprintf(stderr, "Could not create pipe for stdin.\n");
         return 1;
     }
 
-    // Ensure the write handle to the pipe for STDIN is not inherited.
-    if ( ! SetHandleInformation(g_hChildStd_IN_Wr, HANDLE_FLAG_INHERIT, 0) )
+    // create a pipe for the child's stdout
+    if (!CreatePipe(&stdOutRd, &stdOutWr, &saAttr, 0) || !SetHandleInformation(stdOutRd, HANDLE_FLAG_INHERIT, 0))
     {
-        fprintf(stderr, "Inherit CreatePipe\n");
+        fprintf(stderr, "Could not create pipe for stdout.\n");
         return 1;
     }
 
-	execProcess(mPlayerPath, arguments, g_hChildStd_IN_Rd, NULL, NULL);
-	pauseVideo();
+	execProcess(mPlayerPath, arguments, stdInRd, stdOutWr, NULL);
+	seek(initialPosition);
+
+	Sleep(2000);
+	char buffer[99999];
+	readMessage(buffer, true);
 
 	return 0;
 }
@@ -95,14 +102,62 @@ int setSpeed(float speed)
     return sendMessage(message);
 }
 
+int seek(float position)
+{
+    char message[1024];
+    sprintf(message, "pausing seek %5.2lf 2\n",  position);
+    return sendMessage(message);
+}
+
+void refreshTimePos()
+{
+	char buffer[1024];
+	memset(buffer, 0, sizeof(buffer));
+	readMessage(buffer, false);
+
+	char buffer2[16];
+	memset(buffer2, 0, sizeof(buffer2));
+	strncpy(buffer2, buffer+2, 6);
+
+	position = atof(buffer2);
+}
+
+float getTimePos()
+{
+	return position;
+}
+
 int sendMessage(const char* message)
 {
     DWORD dwWritten;
-    if(!WriteFile(g_hChildStd_IN_Wr, message, strlen(message), &dwWritten, NULL))
+    if(!WriteFile(stdInWr, message, strlen(message), &dwWritten, NULL))
     {
         fprintf(stderr, "Could not write to pipe.\n");
         return 1;
     }
+    return 0;
+}
+
+int readMessage(char* buffer, int wait)
+{
+    DWORD dwRead;
+    DWORD dwAvailable;
+
+	if(!PeekNamedPipe(stdOutRd, NULL, NULL, NULL, &dwAvailable, NULL))
+	{
+		fprintf(stderr, "Could not read from pipe.\n");
+		return 1;
+	}
+
+	if(wait || dwAvailable > 0)
+	{
+		if(!ReadFile(stdOutRd, buffer, dwAvailable, &dwRead, NULL))
+		{
+			fprintf(stderr, "Could not read from pipe.\n");
+			return 1;
+		}
+	}
+
     return 0;
 }
 

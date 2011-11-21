@@ -4,4 +4,4 @@ set MPLAYER_PATH="C:\Program Files (x86)\MPlayer\mplayer.exe"
 set VIDEO_PATH="Z:\sandro\Movies\Autofahrt\tunnel.mov"
 
 cd %0\..\
-VideoPlayer2.bat %MPLAYER_PATH% %VIDEO_PATH%
+VideoPlayer2.bat %MPLAYER_PATH% %VIDEO_PATH% 5 150

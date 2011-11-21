@@ -13,7 +13,7 @@
 				<Option object_output="obj\Debug\" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters='&quot;C:\\Program Files (x86)\\MPlayer\\mplayer.exe&quot; &quot;../../../VideoPlayer/Resources/video2.mov&quot;' />
+				<Option parameters='&quot;C:/Program Files (x86)/MPlayer/mplayer.exe&quot; &quot;C:/Users/Sandro Ropelato/Videos/Autofahrt/tunnel.mov&quot; 5 150' />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
@@ -23,7 +23,7 @@
 				<Option object_output="obj\Release\" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters='&quot;C:\\Program Files (x86)\\MPlayer\\mplayer.exe&quot; &quot;../../../VideoPlayer/Resources/video2.mov&quot;' />
+				<Option parameters='&quot;C:/Program Files (x86)/MPlayer/mplayer.exe&quot; &quot;C:/Users/Sandro Ropelato/Videos/Autofahrt/tunnel.mov&quot; 5 150' />
 				<Compiler>
 					<Add option="-O2" />
 				</Compiler>

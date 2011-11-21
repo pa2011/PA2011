@@ -28,12 +28,16 @@
 #define LOCALHOST "127.0.0.1"
 #define DEFAULT_UDP_PORT 52284
 
-int startMPlayer(const char* mPlayerPath, const char* videoPath);
+int startMPlayer(const char* mPlayerPath, const char* videoPath, float initialPosition);
 int isPlaying();
 int setSpeed(float speed);
 int playVideo(float speed);
 int pauseVideo();
+void refreshTimePos();
+float getTimePos();
+int seek(float position);
 int sendMessage(const char* message);
+int readMessage(char* buffer, int wait);
 void execProcess(const char* szExe, const char* szArgs, HANDLE hStdIn, HANDLE hStdOut, HANDLE hStdErr);
 
 #endif
