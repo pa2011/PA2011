@@ -1,0 +1,165 @@
+// Materials for World2b
+
+material Mat
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.46 0.22 0.03 1.00
+			
+		}
+	}
+}
+
+material Mat
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.46 0.22 0.03 1.00
+			
+		}
+	}
+}
+
+material street_h
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.80 0.80 0.80 1.00
+			
+			texture_unit
+			{
+				texture street_h.png
+			}
+		}
+	}
+}
+
+material street_v
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.80 0.80 0.80 1.00
+			
+			texture_unit
+			{
+				texture street_v.png
+			}
+		}
+	}
+}
+
+material onewaystreet_with_parkingslot
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.80 0.80 0.80 1.00
+			
+			texture_unit
+			{
+				texture onewaystreet_with_parkingslot.png
+			}
+		}
+	}
+}
+
+material single_kein_vortritt
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.80 0.80 0.80 1.00
+			
+			texture_unit
+			{
+				texture single_kein_vortritt.png
+			}
+		}
+	}
+}
+
+material street_only_in
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.80 0.80 0.80 1.00
+			
+			texture_unit
+			{
+				texture street_only_in.png
+			}
+		}
+	}
+}
+
+material oneway_street
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.80 0.80 0.80 1.00
+			
+			texture_unit
+			{
+				texture oneway_street.png
+			}
+		}
+	}
+}
+
+material street_kein_vortritt
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.80 0.80 0.80 1.00
+			
+			texture_unit
+			{
+				texture street_kein_vortritt.png
+			}
+		}
+	}
+}
+
+material street_stop
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.80 0.80 0.80 1.00
+			
+			texture_unit
+			{
+				texture street_stop.png
+			}
+		}
+	}
+}
+
+material erde
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.6745 0.41170 0.1176 1.00			
+		}
+	}
+}
+

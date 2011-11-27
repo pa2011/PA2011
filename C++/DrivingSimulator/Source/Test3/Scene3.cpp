@@ -17,12 +17,20 @@ void Scene3::createScene()
 {
 	// create world node
 	worldNode = sceneManager->getRootSceneNode()->createChildSceneNode();
-	worldNode->scale(0.1, 0.1, 0.1);
+	worldNode->scale(0.15, 0.15, 0.15);
+
+	// create ETH Node
+	Ogre::Entity* eth = sceneManager->createEntity("ETH.mesh");
+	ethNode = sceneManager->getRootSceneNode()->createChildSceneNode();
+	ethNode->attachObject(eth);
+	ethNode->scale(1.0, 1.0, 1.0);
+	ethNode->setPosition(0, 0, 0);
 
 	// Scene 3
-	Ogre::Entity* plane = sceneManager->createEntity("World2c.mesh");
+	Ogre::Entity* plane = sceneManager->createEntity("CityWorld.mesh");
 	plane->setCastShadows(false);
 	worldNode->attachObject(plane);
+	//worldNode->setPosition(0, 20, 0);
 
 	// load car
 	Ogre::Entity* car = sceneManager->createEntity("MiniCooper.mesh");
