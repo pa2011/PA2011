@@ -37,6 +37,15 @@ void Scene1::createScene()
 	carNode->setPosition(978, 0, 917);
 	carNode->yaw(Ogre::Degree(-27));
 
+	// load Cockpit
+	Ogre::Entity* pointer = sceneManager->createEntity("pointer.mesh");
+	pointerNode = sceneManager->getRootSceneNode()->createChildSceneNode();
+	pointerNode->attachObject(pointer);
+	pointerNode->setPosition(0.00, 0.00, 0.00);
+	pointerNode->scale(0.1, 0.1, 0.1);
+
+
+
 	// create ambient light
 	sceneManager->setAmbientLight(Ogre::ColourValue(0.7, 0.7, 0.7));
 
@@ -155,6 +164,16 @@ bool Scene1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 		camera->setPosition(carNode->getPosition() + Ogre::Vector3(camXOffset, camYOffset, camZOffset));
 		camera->setOrientation(carNode->getOrientation());
 		camera->yaw(Ogre::Degree(180));
+
+        pointerNode->setVisible(true);
+		Ogre::Radian pointerAngle = carNode->getOrientation().getYaw() - Ogre::Degree(85);
+		Ogre::Real pointerXOffset = Ogre::Math::Cos(pointerAngle) * 2.0;
+		Ogre::Real pointerYOffset = 3;
+		Ogre::Real pointerZOffset = -Ogre::Math::Sin(pointerAngle) * 2.0;
+
+		pointerNode->setPosition(carNode->getPosition() + Ogre::Vector3(pointerXOffset, pointerYOffset, pointerZOffset));
+		pointerNode->setOrientation(carNode->getOrientation());
+		pointerNode->roll(Ogre::Degree(speed*0.8));
 	}
 	else if(cameraMode == THIRD_PERSON)
 	{
@@ -174,6 +193,8 @@ bool Scene1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 
 		camera->setPosition(carNode->getPosition() + Ogre::Vector3(camXOffset, camYOffset, camZOffset));
 		camera->lookAt(carNode->getPosition());
+
+		pointerNode->setVisible(false);
 	}
 
 	// debug information

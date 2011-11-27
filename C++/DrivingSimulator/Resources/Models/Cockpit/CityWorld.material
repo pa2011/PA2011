@@ -1,0 +1,25 @@
+// Materials for Cockpit
+
+material red_plastic
+{
+	technique
+	{
+		pass
+		{
+			diffuse 1.00 0.00 0.00 1.00	
+			ambient 1.00 0.00 0.00 1.00
+		}
+	}
+}
+
+material black_plastic
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.00 0.00 0.00 1.00
+			ambient 0.00 0.00 0.00 1.00
+		}
+	}
+}
