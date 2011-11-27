@@ -26,7 +26,8 @@
 #define false 0
 
 #define LOCALHOST "127.0.0.1"
-#define DEFAULT_UDP_PORT 52284
+#define DEFAULT_UDP_IN_PORT 52284
+#define DEFAULT_UDP_OUT_PORT 52285
 
 int startMPlayer(const char* mPlayerPath, const char* videoPath, float initialPosition);
 int isPlaying();

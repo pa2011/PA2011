@@ -13,7 +13,6 @@ class Scene3 : public MainApplication
 	protected:
 	Ogre::SceneNode* worldNode;
 	Ogre::SceneNode* carNode;
-	Ogre::SceneNode* ethNode;
 	Ogre::Real speed;
 	Ogre::Real cameraRotationOffset;
 	Ogre::uint8 cameraMode;

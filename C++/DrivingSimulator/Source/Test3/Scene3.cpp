@@ -2,7 +2,7 @@
 
 #define THIRD_PERSON 0
 #define COCKPIT 1
-#define ALLOW_REVERSE false
+#define ALLOW_REVERSE true
 
 Scene3::Scene3()
 {
@@ -22,14 +22,15 @@ void Scene3::createScene()
 {
 	// create world node
 	worldNode = sceneManager->getRootSceneNode()->createChildSceneNode();
-	worldNode->scale(0.15, 0.15, 0.15);
+	worldNode->scale(0.05, 0.05, 0.05);
 
 	// create ETH Node
 	Ogre::Entity* eth = sceneManager->createEntity("ETH.mesh");
-	ethNode = sceneManager->getRootSceneNode()->createChildSceneNode();
+	Ogre::SceneNode* ethNode = sceneManager->getRootSceneNode()->createChildSceneNode();
 	ethNode->attachObject(eth);
-	ethNode->scale(1.0, 1.0, 1.0);
-	ethNode->setPosition(0, 0, 0);
+	ethNode->scale(1.3, 1.3, 1.3);
+	ethNode->setPosition(428, 0, 235);
+	ethNode->yaw(Ogre::Degree(210));
 
 	// Scene 3
 	Ogre::Entity* plane = sceneManager->createEntity("CityWorld.mesh");
@@ -45,7 +46,7 @@ void Scene3::createScene()
 	carNode->setPosition(-5, 0, 0);
 
 	// create ambient light
-	sceneManager->setAmbientLight(Ogre::ColourValue(0.2, 0.2, 0.2));
+	sceneManager->setAmbientLight(Ogre::ColourValue(0.7, 0.7, 0.7));
 
 	// create sun light
 	Ogre::Light* sunLight = sceneManager->createLight();
@@ -57,6 +58,9 @@ void Scene3::createScene()
 	// position camera
 	//camera->setPosition(-20, 20, 40);
 	//camera->lookAt(0, 0, 0);
+
+	// setup camera
+	camera->setFOVy(Ogre::Degree(70));
 
 	// enable shadow
 	//sceneManager->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
@@ -186,7 +190,7 @@ bool Scene3::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	}
 
 	// debug information
-	//std::cout << "Position: " << carNode->getPosition() << " Rotation: " << carNode->getOrientation().getYaw().valueDegrees() << std::endl;
+	std::cout << "Position: " << carNode->getPosition() << " Rotation: " << carNode->getOrientation().getYaw().valueDegrees() << std::endl;
 	//std::cout << "Speed: " << speed;
 	//std::cout << " Steer Intensity: " << steerIntensity << std::endl;
 

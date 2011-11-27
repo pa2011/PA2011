@@ -64,16 +64,7 @@ void execProcess(const char* szExe, const char* szArgs, HANDLE hStdIn, HANDLE hS
     sprintf(cmdLine, "%s%s", szExe, szArgs);
     BOOL bSuccess = FALSE;
 
-    bSuccess = CreateProcess(NULL,
-        cmdLine,        // command line
-        NULL,           // process security attributes
-        NULL,           // primary thread security attributes
-        TRUE,           // handles are inherited
-        0,              // creation flags
-        NULL,           // use parent's environment
-        NULL,           // use parent's current directory
-        &si,            // STARTUPINFO pointer
-        &pi);           // receives PROCESS_INFORMATION
+    bSuccess = CreateProcess(NULL, cmdLine, NULL, NULL, TRUE, 0, NULL, NULL, &si, &pi);
 }
 
 int isPlaying()
@@ -119,7 +110,10 @@ void refreshTimePos()
 	memset(buffer2, 0, sizeof(buffer2));
 	strncpy(buffer2, buffer+2, 6);
 
-	position = atof(buffer2);
+	float newPosition = atof(buffer2);
+
+	if(newPosition > 0)
+		position = newPosition;
 }
 
 float getTimePos()
