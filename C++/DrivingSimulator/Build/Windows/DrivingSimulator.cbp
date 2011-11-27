@@ -103,6 +103,7 @@
 					<Add option="-D_DEBUG" />
 				</Compiler>
 				<Linker>
+					<Add option="-lwsock32 -lws2_32" />
 					<Add library="OgreMain_d" />
 					<Add library="OIS_d" />
 					<Add directory="$(OGRE_HOME)\bin\debug" />
@@ -124,6 +125,7 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add option="-lwsock32 -lws2_32" />
 					<Add library="OgreMain" />
 					<Add library="OIS" />
 					<Add directory="$(OGRE_HOME)\bin\release" />
@@ -290,6 +292,14 @@
 			<Option target="Test3 - Release" />
 		</Unit>
 		<Unit filename="..\..\Source\Test3\Scene3.h">
+			<Option target="Test3 - Debug" />
+			<Option target="Test3 - Release" />
+		</Unit>
+		<Unit filename="..\..\Source\Test3\UdpListener.cpp">
+			<Option target="Test3 - Debug" />
+			<Option target="Test3 - Release" />
+		</Unit>
+		<Unit filename="..\..\Source\Test3\UdpListener.h">
 			<Option target="Test3 - Debug" />
 			<Option target="Test3 - Release" />
 		</Unit>

@@ -1,10 +1,15 @@
 #include "Scene3.h"
 
+#define THIRD_PERSON 0
+#define COCKPIT 1
+#define ALLOW_REVERSE false
+
 Scene3::Scene3()
 {
     // initialize attributes
     speed = 0;
     cameraRotationOffset = 0;
+    cameraMode = THIRD_PERSON;
     keyState[256] = {0};
 }
 
@@ -71,10 +76,14 @@ bool Scene3::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	}
 
 
-    // decrease speed (air resistance, etc...)
-	speed *= Ogre::Math::Pow(0.5, evt.timeSinceLastFrame);
+    // abort scene if window has been closed or escape button has been hit
+	if(renderWindow->isClosed() || keyboard->isKeyDown(OIS::KC_ESCAPE))
+		return false;
 
-	// accelerate / brake car by keyboard input
+	// decrease speed (air resistance, etc...)
+	speed *= Ogre::Math::Pow(0.7, evt.timeSinceLastFrame);
+
+    // accelerate / brake car by keyboard input
 	if(keyboard->isKeyDown(OIS::KC_UP))
 	{
 	    speed += 60 * evt.timeSinceLastFrame;
@@ -84,62 +93,102 @@ bool Scene3::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	    speed -= 90 * evt.timeSinceLastFrame;
 	}
 
+	// accelerate / brake car by udp input
+	if(UdpListener::throttle >= 0)
+	{
+	    speed += UdpListener::throttle * 60 * evt.timeSinceLastFrame;
+	}
+	else
+	{
+	    speed += UdpListener::throttle * 90 * evt.timeSinceLastFrame;
+	}
+
+	if(!ALLOW_REVERSE)
+	{
+		if(speed < 0)
+			speed = 0;
+	}
+
+	// calculate steer intensity
+	Ogre::Real normalizedSpeed = Ogre::Math::Abs(speed / 180);
+	Ogre::Real steerIntensity = 100 / (100 * (Ogre::Math::Pow(normalizedSpeed, 2)) + 1) * Ogre::Math::Pow(normalizedSpeed, 1.5);
+
+	// rotate car by udp input
+	carNode->yaw(Ogre::Degree(UdpListener::steer * -5 * evt.timeSinceLastFrame * speed));
+    cameraRotationOffset += UdpListener::steer * 90 * evt.timeSinceLastFrame;
+
     // rotate car by keyboard input
-    if(keyboard->isKeyDown(OIS::KC_LEFT))
+    if(keyboard->isKeyDown(OIS::KC_LEFT) && speed != 0)
     {
-        carNode->yaw(Ogre::Degree(2.5 * evt.timeSinceLastFrame * speed));
-        cameraRotationOffset -= 45 * evt.timeSinceLastFrame * Ogre::Math::Abs(speed) / speed;
+        carNode->yaw(Ogre::Degree(steerIntensity * 90 * evt.timeSinceLastFrame * Ogre::Math::Abs(speed) / speed));
+        cameraRotationOffset -= 45 * evt.timeSinceLastFrame * steerIntensity * Ogre::Math::Abs(speed) / speed;
     }
-    if(keyboard->isKeyDown(OIS::KC_RIGHT))
+    if(keyboard->isKeyDown(OIS::KC_RIGHT) && speed != 0)
     {
-        carNode->yaw(Ogre::Degree(-2.5 * evt.timeSinceLastFrame * speed));
-        cameraRotationOffset += 45 * evt.timeSinceLastFrame * Ogre::Math::Abs(speed) / speed;
+        carNode->yaw(Ogre::Degree(steerIntensity * -90 * evt.timeSinceLastFrame * Ogre::Math::Abs(speed) / speed));
+        cameraRotationOffset += 45 * evt.timeSinceLastFrame * steerIntensity * Ogre::Math::Abs(speed) / speed;
     }
 
+	// change camera mode
+	if(keyboard->isKeyDown(OIS::KC_V))
+	{
+		if(!keyState[OIS::KC_V])
+		{
+			cameraMode = 1 - cameraMode;
+			if(cameraMode == THIRD_PERSON)
+			{
+				cameraRotationOffset = 0;
+			}
 
-    // update car position
+		}
+		keyState[OIS::KC_V] = true;
+	}
+	else
+	{
+		keyState[OIS::KC_V] = false;
+	}
+
+	// update car position
 	Ogre::Real xMove = Ogre::Math::Sin(carNode->getOrientation().getYaw()) * speed * evt.timeSinceLastFrame;
 	Ogre::Real zMove = Ogre::Math::Cos(carNode->getOrientation().getYaw()) * speed * evt.timeSinceLastFrame;
 	carNode->translate(xMove, 0, zMove);
 
+	// update camera
+	if(cameraMode == COCKPIT)
+	{
+		Ogre::Radian camAngle = carNode->getOrientation().getYaw() - Ogre::Degree(20);
+		Ogre::Real camXOffset = Ogre::Math::Cos(camAngle) * 1.3;
+		Ogre::Real camYOffset = 4;
+		Ogre::Real camZOffset = -Ogre::Math::Sin(camAngle) * 1.3;
 
-	// abort scene if window has been closed or escape button has been hit
-	if(renderWindow->isClosed() || keyboard->isKeyDown(OIS::KC_ESCAPE))
-		return false;
-    if(speed >= 0)
-    {
-        cameraRotationOffset *= Ogre::Math::Pow(0.1, evt.timeSinceLastFrame);
-    }
-    else
-    {
-        cameraRotationOffset = cameraRotationOffset * Ogre::Math::Pow(0.1, evt.timeSinceLastFrame) + 180 * (1 - Ogre::Math::Pow(0.1, evt.timeSinceLastFrame));
-    }
+		camera->setPosition(carNode->getPosition() + Ogre::Vector3(camXOffset, camYOffset, camZOffset));
+		camera->setOrientation(carNode->getOrientation());
+		camera->yaw(Ogre::Degree(180));
+	}
+	else if(cameraMode == THIRD_PERSON)
+	{
+		if(speed >= 0)
+		{
+			cameraRotationOffset *= Ogre::Math::Pow(0.1, evt.timeSinceLastFrame);
+		}
+		else
+		{
+			cameraRotationOffset = cameraRotationOffset * Ogre::Math::Pow(0.1, evt.timeSinceLastFrame) + 180 * (1 - Ogre::Math::Pow(0.1, evt.timeSinceLastFrame));
+		}
 
+		Ogre::Radian camAngle = carNode->getOrientation().getYaw() + Ogre::Degree(cameraRotationOffset);
+		Ogre::Real camXOffset = -Ogre::Math::Sin(camAngle) * 25;
+		Ogre::Real camYOffset = 8;
+		Ogre::Real camZOffset = -Ogre::Math::Cos(camAngle) * 25;
 
-    Ogre::Radian camAngle = carNode->getOrientation().getYaw() + Ogre::Degree(cameraRotationOffset);
-    Ogre::Real camXOffset = -Ogre::Math::Sin(camAngle) * 25;
-    Ogre::Real camYOffset = 8;
-    Ogre::Real camZOffset = -Ogre::Math::Cos(camAngle) * 25;
+		camera->setPosition(carNode->getPosition() + Ogre::Vector3(camXOffset, camYOffset, camZOffset));
+		camera->lookAt(carNode->getPosition());
+	}
 
-    /*if(speed < 0)
-    {
-        camXOffset = camXOffset * -1;
-        camZOffset = camZOffset * -1;
-    }*/
-    camera->setPosition(carNode->getPosition() + Ogre::Vector3(camXOffset, camYOffset, camZOffset));
-    camera->lookAt(carNode->getPosition());
-
-	/*// update camera position
-	if(keyboard->isKeyDown(OIS::KC_UP) && (camera->getPosition().y < 40))
-		camera->moveRelative(Ogre::Vector3(0, 50*evt.timeSinceLastFrame, 0));
-	if(keyboard->isKeyDown(OIS::KC_DOWN) && (camera->getPosition().y > 5))
-		camera->moveRelative(Ogre::Vector3(0, -50*evt.timeSinceLastFrame, 0));
-	if(keyboard->isKeyDown(OIS::KC_LEFT))
-		camera->moveRelative(Ogre::Vector3(-50*evt.timeSinceLastFrame, 0, 0));
-	if(keyboard->isKeyDown(OIS::KC_RIGHT))
-		camera->moveRelative(Ogre::Vector3(50*evt.timeSinceLastFrame, 0, 0));
-
-    camera->lookAt(Ogre::Vector3(0, 0, 0));*/
+	// debug information
+	//std::cout << "Position: " << carNode->getPosition() << " Rotation: " << carNode->getOrientation().getYaw().valueDegrees() << std::endl;
+	//std::cout << "Speed: " << speed;
+	//std::cout << " Steer Intensity: " << steerIntensity << std::endl;
 
 	// if we reach this position of the code, there's no need to abort
 	return true;

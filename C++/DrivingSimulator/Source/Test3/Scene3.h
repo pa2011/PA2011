@@ -1,5 +1,5 @@
-#ifndef Scene3_H
-#define Scene3_H
+#ifndef SCENE3_H
+#define SCENE3_H
 
 #include "MainApplication.h"
 
@@ -23,4 +23,4 @@ class Scene3 : public MainApplication
 	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
 };
 
-#endif // Scene3_H
+#endif // SCENE3_H

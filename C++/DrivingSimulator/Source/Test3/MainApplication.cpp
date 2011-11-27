@@ -49,7 +49,7 @@ MainApplication::MainApplication()
 	// create camera
 	camera = sceneManager->createCamera("PlayerCam");
 	camera->setAutoAspectRatio(true);
-	camera->setNearClipDistance(5);
+	camera->setNearClipDistance(1);
 
 	// add viewport
 	Ogre::Viewport* viewPort = renderWindow->addViewport(camera);
@@ -76,6 +76,9 @@ MainApplication::MainApplication()
 	// create keyboard and mouse objects
 	keyboard = static_cast<OIS::Keyboard*>(inputManager->createInputObject(OIS::OISKeyboard, false));
 	mouse = static_cast<OIS::Mouse*>(inputManager->createInputObject(OIS::OISMouse, false));
+
+	// create udp listener
+	UdpListener::startUdpListener();
 
 	// initialize mouse clipping area by calling windowResized
 	windowResized(renderWindow);
