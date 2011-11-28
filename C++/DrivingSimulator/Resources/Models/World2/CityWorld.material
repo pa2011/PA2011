@@ -273,3 +273,39 @@ material skyline
 	}
 }
 
+material tree_leaves
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.00 0.00 0.00 0.00
+			ambient 1.00 1.00 1.00 1.00
+			
+			texture_unit
+			{
+				texture tree_leaves.png 2d 4
+				filtering trilinear
+			}
+		}
+	}
+}
+
+material tree_log
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.00 0.00 0.00 0.00
+			ambient 1.00 1.00 1.00 1.00
+			
+			texture_unit
+			{
+				texture tree_log.png 2d 4
+				filtering trilinear
+			}
+		}
+	}
+}
+
