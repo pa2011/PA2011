@@ -10,7 +10,7 @@ material street_h
 			
 			texture_unit
 			{
-				texture street_h.png 2d 4
+				texture street_h.png 2d 3
 				filtering trilinear
 			}
 		}
@@ -27,7 +27,7 @@ material street_h_double
 			
 			texture_unit
 			{
-				texture street_h_double.png 2d 4
+				texture street_h_double.png 2d 3
 				filtering trilinear
 			}
 		}
@@ -44,7 +44,7 @@ material street_v
 			
 			texture_unit
 			{
-				texture street_v.png 2d 4
+				texture street_v.png 2d 3
 				filtering trilinear
 			}
 		}
@@ -61,7 +61,7 @@ material onewaystreet_with_parkingslot
 			
 			texture_unit
 			{
-				texture onewaystreet_with_parkingslot.png 2d 4
+				texture onewaystreet_with_parkingslot.png 2d 3
 				filtering trilinear
 			}
 		}
@@ -78,7 +78,7 @@ material single_kein_vortritt
 			
 			texture_unit
 			{
-				texture single_kein_vortritt.png 2d 4
+				texture single_kein_vortritt.png 2d 3
 				filtering trilinear
 			}
 		}
@@ -95,7 +95,7 @@ material street_only_in
 			
 			texture_unit
 			{
-				texture street_only_in.png 2d 4
+				texture street_only_in.png 2d 3
 				filtering trilinear
 			}
 		}
@@ -112,7 +112,7 @@ material oneway_street
 			
 			texture_unit
 			{
-				texture oneway_street.png 2d 4
+				texture oneway_street.png 2d 3
 				filtering trilinear
 			}
 		}
@@ -129,7 +129,7 @@ material street_kein_vortritt
 			
 			texture_unit
 			{
-				texture street_kein_vortritt.png 2d 4
+				texture street_kein_vortritt.png 2d 3
 				filtering trilinear
 			}
 		}
@@ -146,7 +146,7 @@ material street_stop
 			
 			texture_unit
 			{
-				texture street_stop.png 2d 4
+				texture street_stop.png 2d 3
 				filtering trilinear
 			}
 		}
@@ -176,7 +176,7 @@ material skyscraper1
 			
 			texture_unit
 			{
-				texture skyscraper1.png 2d 4
+				texture skyscraper1.png 2d 3
 				filtering trilinear
 			}
 		}
@@ -194,7 +194,7 @@ material skyscraper1_base
 			
 			texture_unit
 			{
-				texture skyscraper1_base.png 2d 4
+				texture skyscraper1_base.png 2d 3
 				filtering trilinear
 			}
 		}
@@ -212,7 +212,7 @@ material skyscraper2
 			
 			texture_unit
 			{
-				texture skyscraper2.png 2d 4
+				texture skyscraper2.png 2d 3
 				filtering trilinear
 			}
 		}
@@ -230,7 +230,7 @@ material skyscraper3
 			
 			texture_unit
 			{
-				texture skyscraper3.png 2d 4
+				texture skyscraper3.png 2d 3
 				filtering trilinear
 			}
 		}
@@ -248,7 +248,7 @@ material skyscraper3_base
 			
 			texture_unit
 			{
-				texture skyscraper3_base.png 2d 4
+				texture skyscraper3_base.png 2d 3
 				filtering trilinear
 			}
 		}
@@ -266,7 +266,7 @@ material skyline
 			
 			texture_unit
 			{
-				texture skyline.png 2d 4
+				texture skyline.png 2d 3
 				filtering trilinear
 			}
 		}

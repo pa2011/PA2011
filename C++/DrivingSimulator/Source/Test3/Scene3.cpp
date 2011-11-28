@@ -184,7 +184,7 @@ bool Scene3::frameRenderingQueued(const Ogre::FrameEvent& evt)
 
 		pointerNode->setPosition(carNode->getPosition() + Ogre::Vector3(pointerXOffset, pointerYOffset, pointerZOffset));
 		pointerNode->setOrientation(carNode->getOrientation());
-		pointerNode->roll(Ogre::Degree(speed*0.8));
+		pointerNode->roll(Ogre::Degree(Ogre::Math::Abs(speed)*0.8));
 	}
 	else if(cameraMode == THIRD_PERSON)
 	{
