@@ -97,11 +97,11 @@ int main(int argc, char** argv)
 	}
 	memset(&serverOut, 0, sizeof(serverOut));
 	serverOut.sin_family = AF_INET;
-	serverOut.sin_addr.s_addr = INADDR_ANY;
+	serverOut.sin_addr.s_addr = inet_addr("127.0.0.1");
 	serverOut.sin_port = htons(udpPortOut);
-	if(bind(socketIdOut, (sockaddr *)&serverOut, sizeof(serverOut)) < 0)
+	if(connect(socketIdOut, (sockaddr *)&serverOut, sizeof(serverOut)) < 0)
 	{
-		fprintf(stderr, "Could not bind to out socket.\n");
+		fprintf(stderr, "Could not connect to out socket.\n");
 		return 1;
 	}
 	printf("Writing to port %d.\n", udpPortOut);
@@ -113,16 +113,6 @@ int main(int argc, char** argv)
 		// read message
 		memset(&bufIn, 0, BUFFER_LENGTH);
 		int msgLength = (int)recv(socketIdIn, bufIn, BUFFER_LENGTH, 0);
-		if (msgLength < 0)
-		{
-			fprintf(stderr, "Error in call to recv.\n");
-			return 1;
-		}
-
-		// send message
-		memset(&bufOut, 0, BUFFER_LENGTH);
-
-		int msgLength = (int)sendto(socketIdOut, bufOut, BUFFER_LENGTH, NULL, 0);
 		if (msgLength < 0)
 		{
 			fprintf(stderr, "Error in call to recv.\n");
@@ -157,12 +147,9 @@ int main(int argc, char** argv)
 		    speed = 0.15;
 		    if(isPlaying())
                 pauseVideo();
-
-			printf("Speed: %.2lf km/h\n", 0);
 		}
 		else
 		{
-			printf("Speed: %.2lf km/h\n", speed*100);
             playVideo(speed);
 		}
 
@@ -171,6 +158,21 @@ int main(int argc, char** argv)
 		{
 			seek(videoStart);
 			//speed = 0.0;
+		}
+
+		// send message
+		memset(&bufOut, 0, BUFFER_LENGTH);
+
+		if(speed < 0.16)
+			sprintf(bufOut, "Speed: %5.2lf km/h\n", 0);
+		else
+			sprintf(bufOut, "Speed: %5.2lf km/h\n", speed * 100);
+
+		msgLength = (int)sendto(socketIdOut, bufOut, BUFFER_LENGTH, 0, (sockaddr *)&serverOut, sizeof(serverOut));
+		if (msgLength < 0)
+		{
+			fprintf(stderr, "Error in call to sendto.\n");
+			return 1;
 		}
 
 		//printf("Position: %.2lf sec.\n", getTimePos());

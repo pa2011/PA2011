@@ -19,6 +19,8 @@
 #include <OISKeyboard.h>
 #include <OISMouse.h>
 
+#include <OgreOde_Core.h>
+
 class MainApplication : public Ogre::WindowEventListener, public Ogre::FrameListener
 {
 	public:

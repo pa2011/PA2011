@@ -11,6 +11,12 @@ class Scene5 : public MainApplication
 	virtual void createScene();
 
 	protected:
+	OgreOde::World* world;
+	OgreOde::Space* space;
+	OgreOde::StepHandler* stepper;
+	OgreOde::InfinitePlaneGeometry* ground;
+	OgreOde::Geometry* geometry;
+
 	Ogre::SceneNode* planeNode;
 	Ogre::SceneNode* cubeNode;
 

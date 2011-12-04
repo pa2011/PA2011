@@ -187,14 +187,21 @@
 				<Compiler>
 					<Add option="-g" />
 					<Add option="-D_DEBUG" />
+					<Add directory="$(OGREODE_HOME)\Core\include" />
+					<Add directory="$(OGREODE_HOME)\ode\include" />
 				</Compiler>
 				<Linker>
 					<Add library="OgreMain_d" />
 					<Add library="OIS_d" />
+					<Add library="OgreOde_Core_d" />
+					<Add library="OgreOde_loader_d" />
+					<Add library="OgreOde_Prefab_d" />
 					<Add directory="$(OGRE_HOME)\bin\debug" />
+					<Add directory="$(OGREODE_HOME)\build\bin" />
+					<Add directory="$(OGREODE_HOME)\ode\lib\DebugSingleDLL" />
 				</Linker>
 				<ExtraCommands>
-					<Add after='make -f Makefiles/CopyFiles.make PRODUCT=&quot;Test5&quot; CONFIGURATION=&quot;Debug&quot; all' />
+					<Add after='make -f Makefiles/CopyFiles2.make PRODUCT=&quot;Test5&quot; CONFIGURATION=&quot;Debug&quot; all' />
 					<Mode after="always" />
 				</ExtraCommands>
 			</Target>

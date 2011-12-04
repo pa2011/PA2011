@@ -44,10 +44,48 @@ void Scene5::createScene()
 	// enable shadow
 	//sceneManager->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 	//sceneManager->setShadowFarDistance(500);
+
+	// setup physics
+	world = new OgreOde::World(sceneManager);
+	world->setGravity(Ogre::Vector3(0, -9.81, 0));
+	world->setCFM(10e-5);
+	world->setERP(0.8);
+	world->setAutoSleep(true);
+	world->setAutoSleepAverageSamplesCount(10);
+	world->setContactCorrectionVelocity(1.0);
+
+	space = world->getDefaultSpace();
+
+	Ogre::Real timeStep = 0.5;
+	Ogre::Real timeScale = 1.7;
+	Ogre::Real maxFrameTime = 0.25;
+	stepper = new OgreOde::StepHandler(world, OgreOde::StepHandler::QuickStep, timeStep, maxFrameTime, timeScale);
+
+
 }
 
 bool Scene5::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // display fps
     //std::cout << 1/evt.timeSinceLastFrame << std::endl;
 
