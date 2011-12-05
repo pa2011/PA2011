@@ -9,6 +9,15 @@
 \usepackage[ngerman]{babel}
 
 
+%------------------Anfang Nummerierung Anhang-----------------
+\renewcommand\appendix{\par
+\setcounter{section}{0}%
+\setcounter{subsection}{0}%
+\setcounter{figure}{0}%
+\renewcommand\thesection{\Alph{section}} %
+\renewcommand\thefigure{\Alph{section}.\arabic{figure}}}
+%------------------Ende Nummerierung Anhang-----------------
+
 %\input {deckblatt}
 
 
@@ -20,12 +29,13 @@
 
 \input{titelseite}
 \input{inhalt/01_einleitung}
-\input{inhalt/02_theoretische_grundlagen}
-\input{inhalt/03_vorgehen_methoden}
-\input{inhalt/04_resultate}
-\input{inhalt/05_disskusion_und_ausblick}
-\input{inhalt/06_verzeichnisse}
-\input{inhalt/07_anhang}
+\input{inhalt/02_aufbau_des_systems}
+\input{inhalt/03_realisierung}
+\input{inhalt/04_resultate_und_tests}
+\input{inhalt/05_naechste_schritte}
+\input{inhalt/06_nachwort}
+\input{inhalt/07_verzeichnisse}
+\input{inhalt/08_anhang}
 
 
 \end{document}

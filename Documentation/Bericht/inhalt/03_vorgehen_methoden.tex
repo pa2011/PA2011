@@ -1,7 +1,0 @@
-\section{Vorgehen und Methoden}
-Wie bereits in der Einleitung erwähnt wird unsere Arbeit in zwei seperate Teilprojekte unterteilt. In einem ersten Schritt wird das Ziel sein als Simulation ein Video abzuspielen, in dem man durch Benutzereingaben die Geschwindigkeit des Abspielens manipulieren kann. In einem zweiten Schritt wird dann ein Simulator entstehen der auf dieselben Benutzereingaben ausgelegt ist. 
-\subsection{Videoplayer}
-\subsubsection{Ziel}
-Das Ziel dieses Teilprojekts ist es, die bereits existierende LabView Schnittstelle kennenzulernen und zu verwenden. 
-\subsubsection{Vorgehen}
-Die LabView Schnittstelle registriert die Benutzereingaben des Cockpist über eine USB-Schnittstelle. Diese Schnittstelle kann nun so erweitert werden, dass sie die erhaltenen Daten als UDP-Packet auf das Netzwerk sendet. In C++ lässt sich nun ein UDP-Socket ziemlich einfach realisieren. Somit kann das Programm die Benutzereingaben die im Cockpit gemacht wurden empfangen und verarbeiten. Diesen UDP-Socket wird auch für das zweite Teilprojekt , den Simulator, verwendet. 
