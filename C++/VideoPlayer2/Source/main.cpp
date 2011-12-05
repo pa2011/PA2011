@@ -96,6 +96,7 @@ int main(int argc, char** argv)
 		}
 
 		writeToSocket(getReferenceString(), actualSpeed, getTimePos());
+		printf("one\n");
 	}
 
 	return 0;
