@@ -42,9 +42,7 @@ void Scene1::createScene()
 	pointerNode = sceneManager->getRootSceneNode()->createChildSceneNode();
 	pointerNode->attachObject(pointer);
 	pointerNode->setPosition(0.00, 0.00, 0.00);
-	pointerNode->scale(0.1, 0.1, 0.1);
-
-
+	pointerNode->scale(0.07, 0.07, 0.07);
 
 	// create ambient light
 	sceneManager->setAmbientLight(Ogre::ColourValue(0.7, 0.7, 0.7));

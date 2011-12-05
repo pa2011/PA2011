@@ -2,7 +2,7 @@
 
 #define THIRD_PERSON 0
 #define COCKPIT 1
-#define ALLOW_REVERSE true
+#define ALLOW_REVERSE false
 
 Scene3::Scene3()
 {
@@ -70,8 +70,8 @@ void Scene3::createScene()
 	camera->setFOVy(Ogre::Degree(70));
 
 	// enable shadow
-	sceneManager->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
-	sceneManager->setShadowFarDistance(500);
+	//sceneManager->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+	//sceneManager->setShadowFarDistance(500);
 }
 
 bool Scene3::frameRenderingQueued(const Ogre::FrameEvent& evt)
