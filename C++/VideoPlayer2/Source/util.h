@@ -39,7 +39,8 @@
 
 int setupSockets(int udpPortIn, int udpPortOut, const char* remoteAddress);
 int readFromSocket();
-int writeToSocket(float speed, float videoTimePos);
+int writeToSocket(const char* referenceString, float speed, float videoTimePos);
+char* getReferenceString();
 int getSteerValue();
 int getThrottleValue();
 int startMPlayer(const char* mPlayerPath, const char* videoPath, float initialPosition);

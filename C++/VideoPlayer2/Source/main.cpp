@@ -95,7 +95,7 @@ int main(int argc, char** argv)
 			//speed = 0.0;
 		}
 
-		writeToSocket(actualSpeed, getTimePos());
+		writeToSocket(getReferenceString(), actualSpeed, getTimePos());
 	}
 
 	return 0;
