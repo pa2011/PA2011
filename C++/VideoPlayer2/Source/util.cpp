@@ -19,8 +19,7 @@ struct sockaddr_in addressOus;
 char bufIn[BUFFER_LENGTH];
 char bufOut[BUFFER_LENGTH];
 
-
-char referenceString[255];
+int timeStamp = 0;
 int steerValue = 0;
 int throttleValue = 0;
 
@@ -86,17 +85,18 @@ int readFromSocket()
 		return 1;
 	}
 
+	char tms[32];
     char str[32];
     char thr[32];
 
-	memset(&referenceString, 0, sizeof(referenceString));
+	memset(&tms, 0, sizeof(tms));
 	memset(&str, 0, sizeof(str));
 	memset(&thr, 0, sizeof(thr));
 
 	char* p = strtok(bufIn, ",");
 	if(p != NULL)
 	{
-	    sprintf(referenceString, "%s", p);
+	    sprintf(tms, "%s", p);
 		p = strtok(NULL, ",");
 		if(p != NULL)
 		{
@@ -109,15 +109,16 @@ int readFromSocket()
 		}
 	}
 
+	timeStamp = atoi(tms);
 	steerValue = atoi(str);
 	throttleValue = atoi(thr);
 }
 
-int writeToSocket(const char* referenceString, float speed, float videoTimePos)
+int writeToSocket(int currentTimeStamp, float speed, float videoTimePos)
 {
 	// send message
 	memset(&bufOut, 0, BUFFER_LENGTH);
-	sprintf(bufOut, "%s%c%.2f%c%.1f\n", referenceString, SEPARATING_CHARACTER, speed, SEPARATING_CHARACTER, videoTimePos);
+	sprintf(bufOut, "%d%c%.2f%c%.1f\n", currentTimeStamp, SEPARATING_CHARACTER, speed, SEPARATING_CHARACTER, videoTimePos);
 	//sprintf(bufOut, "%.2f\n", speed);
 
 	int msgLength = (int)sendto(socketIdOut, bufOut, BUFFER_LENGTH, 0, (sockaddr *)&addressOus, sizeof(addressOus));
@@ -128,9 +129,9 @@ int writeToSocket(const char* referenceString, float speed, float videoTimePos)
 	}
 }
 
-char* getReferenceString()
+int getTimeStamp()
 {
-	return referenceString;
+	return timeStamp;
 }
 
 int getSteerValue()

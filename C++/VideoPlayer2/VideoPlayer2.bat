@@ -1,2 +1,2 @@
 @echo off
-%0\..\Build\Windows\bin\Release\VideoPlayer2.exe %1 %2 %3 %4 %5 %6 %7
+%0\..\Build\Windows\bin\Release\VideoPlayer2.exe %1 %2 %3 %4 %5 %6 %7 %8
