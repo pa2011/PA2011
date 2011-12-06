@@ -35,8 +35,6 @@
 #define DEFAULT_UDP_IN_PORT 52284
 #define DEFAULT_UDP_OUT_PORT 52285
 
-#define SEPARATING_CHARACTER ','
-
 int setupSockets(int udpPortIn, int udpPortOut, const char* remoteAddress);
 int readFromSocket();
 int writeToSocket(int currentTimeStamp, float speed, float videoTimePos);

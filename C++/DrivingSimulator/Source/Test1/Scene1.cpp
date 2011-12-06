@@ -107,6 +107,9 @@ bool Scene1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 			speed = 0;
 	}
 
+	// update speed information fot udp socket
+	UdpListener::speed = speed * 1.4;
+
 	// calculate steer intensity
 	Ogre::Real normalizedSpeed = Ogre::Math::Abs(speed / 180);
 	Ogre::Real steerIntensity = 100 / (100 * (Ogre::Math::Pow(normalizedSpeed, 2)) + 1) * Ogre::Math::Pow(normalizedSpeed, 1.5);

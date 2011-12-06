@@ -76,7 +76,7 @@ MainApplication::MainApplication()
 	mouse = static_cast<OIS::Mouse*>(inputManager->createInputObject(OIS::OISMouse, false));
 
 	// create udp listener
-	UdpListener::startUdpListener();
+	UdpListener::startUdpListener(DEFAULT_UDP_PORT_IN, DEFAULT_UDP_PORT_OUT, DEFAULT_REMOTE_ADDRESS);
 
 	// initialize mouse clipping area by calling windowResized
 	windowResized(renderWindow);

@@ -14,7 +14,7 @@ int socketIdIn;
 struct sockaddr_in addressIn;
 
 int socketIdOut;
-struct sockaddr_in addressOus;
+struct sockaddr_in addressOut;
 
 char bufIn[BUFFER_LENGTH];
 char bufOut[BUFFER_LENGTH];
@@ -51,7 +51,7 @@ int setupSockets(int udpPortIn, int udpPortOut, const char* remoteAddress)
 		fprintf(stderr, "Could not bind to in socket.\n");
 		return 1;
 	}
-	printf("Reading from *:%d\n", udpPortIn);
+	printf("Listening on port %d\n", udpPortIn);
 
 	// create out socket
 	socketIdOut = socket(AF_INET, SOCK_DGRAM, 0);
@@ -60,16 +60,16 @@ int setupSockets(int udpPortIn, int udpPortOut, const char* remoteAddress)
 		fprintf(stderr, "Could not open out socket.\n");
 		return 1;
 	}
-	memset(&addressOus, 0, sizeof(addressOus));
-	addressOus.sin_family = AF_INET;
-	addressOus.sin_addr.s_addr = inet_addr(remoteAddress);
-	addressOus.sin_port = htons(udpPortOut);
-	if(connect(socketIdOut, (sockaddr *)&addressOus, sizeof(addressOus)) < 0)
+	memset(&addressOut, 0, sizeof(addressOut));
+	addressOut.sin_family = AF_INET;
+	addressOut.sin_addr.s_addr = inet_addr(remoteAddress);
+	addressOut.sin_port = htons(udpPortOut);
+	if(connect(socketIdOut, (sockaddr *)&addressOut, sizeof(addressOut)) < 0)
 	{
 		fprintf(stderr, "Could not connect to out socket.\n");
 		return 1;
 	}
-	printf("Writing to %s:%d\n", remoteAddress, udpPortOut);
+	printf("Connected to %s:%d\n", remoteAddress, udpPortOut);
 
 	return 0;
 }
@@ -93,15 +93,15 @@ int readFromSocket()
 	memset(&str, 0, sizeof(str));
 	memset(&thr, 0, sizeof(thr));
 
-	char* p = strtok(bufIn, ",");
+	char* p = strtok(bufIn, ";");
 	if(p != NULL)
 	{
 	    sprintf(tms, "%s", p);
-		p = strtok(NULL, ",");
+		p = strtok(NULL, ";");
 		if(p != NULL)
 		{
             sprintf(str, "%s", p);
-			p = strtok(NULL, ",");
+			p = strtok(NULL, ";");
             if(p != NULL)
             {
                 sprintf(thr, "%s", p);
@@ -118,10 +118,10 @@ int writeToSocket(int currentTimeStamp, float speed, float videoTimePos)
 {
 	// send message
 	memset(&bufOut, 0, BUFFER_LENGTH);
-	sprintf(bufOut, "%d%c%.2f%c%.1f\n", currentTimeStamp, SEPARATING_CHARACTER, speed, SEPARATING_CHARACTER, videoTimePos);
+	sprintf(bufOut, "%d;%.2f;%.1f\n", currentTimeStamp, speed, videoTimePos);
 	//sprintf(bufOut, "%.2f\n", speed);
 
-	int msgLength = (int)sendto(socketIdOut, bufOut, BUFFER_LENGTH, 0, (sockaddr *)&addressOus, sizeof(addressOus));
+	int msgLength = (int)sendto(socketIdOut, bufOut, BUFFER_LENGTH, 0, (sockaddr *)&addressOut, sizeof(addressOut));
 	if (msgLength < 0)
 	{
 		fprintf(stderr, "Error in function sendto.\n");

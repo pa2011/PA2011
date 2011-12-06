@@ -120,6 +120,9 @@ bool Scene3::frameRenderingQueued(const Ogre::FrameEvent& evt)
 			speed = 0;
 	}
 
+	// update speed information fot udp socket
+	UdpListener::speed = speed * 1.4;
+
 	// calculate steer intensity
 	Ogre::Real normalizedSpeed = Ogre::Math::Abs(speed / 180);
 	Ogre::Real steerIntensity = 100 / (100 * (Ogre::Math::Pow(normalizedSpeed, 2)) + 1) * Ogre::Math::Pow(normalizedSpeed, 1.5);
@@ -209,7 +212,7 @@ bool Scene3::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	}
 
 	// debug information
-	std::cout << "Position: " << carNode->getPosition() << " Rotation: " << carNode->getOrientation().getYaw().valueDegrees() << std::endl;
+	//std::cout << "Position: " << carNode->getPosition() << " Rotation: " << carNode->getOrientation().getYaw().valueDegrees() << std::endl;
 	//std::cout << "Speed: " << speed;
 	//std::cout << " Steer Intensity: " << steerIntensity << std::endl;
 

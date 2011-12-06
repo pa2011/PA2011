@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Release" />
-	<File name="..\..\Source\main.cpp" open="1" top="1" tabpos="1">
-		<Cursor position="2016" topLine="69" />
+	<File name="..\..\Source\main.cpp" open="0" top="0" tabpos="1">
+		<Cursor position="1737" topLine="66" />
 	</File>
-	<File name="..\..\Source\util.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="3029" topLine="106" />
+	<File name="..\..\Source\util.cpp" open="0" top="0" tabpos="2">
+		<Cursor position="1410" topLine="48" />
 	</File>
-	<File name="..\..\Source\util.h" open="1" top="0" tabpos="3">
-		<Cursor position="845" topLine="20" />
+	<File name="..\..\Source\util.h" open="0" top="0" tabpos="3">
+		<Cursor position="500" topLine="33" />
 	</File>
 </CodeBlocks_layout_file>

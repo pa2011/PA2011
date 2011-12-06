@@ -27,18 +27,25 @@
 #include <OgreException.h>
 
 #define LOCALHOST "127.0.0.1"
-#define DEFAULT_UDP_PORT 52284
+#define DEFAULT_UDP_PORT_IN 52284
+#define DEFAULT_UDP_PORT_OUT 52285
+#define DEFAULT_REMOTE_ADDRESS LOCALHOST
 #define BUFFER_LENGTH 1024
 
 class UdpListener
 {
 	public:
+	static int timeStamp;
 	static Ogre::Real steer;
 	static Ogre::Real throttle;
-	static void startUdpListener();
+	static Ogre::Real speed;
+    static void startUdpListener(int portIn, int portOut, const char* address);
 
 	protected:
-    static void listenToUdpPort(void* nothing);
+    static int udpPortIn;
+    static int udpPortOut;
+    static char remoteAddress[255];
+    static void loop(void* nothing);
 };
 
 #endif // UDPLISTENER_H
