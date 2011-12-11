@@ -40,7 +40,7 @@ fragment_program PlainTexture_FP cg
 	}
 }
 
-material PlainTexture
+material SimpleGeometry_PlainTexture
 {
 	technique                    
 	{

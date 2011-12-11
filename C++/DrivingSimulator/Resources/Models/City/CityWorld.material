@@ -1,0 +1,311 @@
+// Materials for CityWorld
+
+material city_street_h
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.80 0.80 0.80 1.00
+			
+			texture_unit
+			{
+				texture street_h.png 2d 3
+				filtering trilinear
+			}
+		}
+	}
+}
+
+material city_street_h_double
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.80 0.80 0.80 1.00
+			
+			texture_unit
+			{
+				texture street_h_double.png 2d 3
+				filtering trilinear
+			}
+		}
+	}
+}
+
+material city_street_v
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.80 0.80 0.80 1.00
+			
+			texture_unit
+			{
+				texture street_v.png 2d 3
+				filtering trilinear
+			}
+		}
+	}
+}
+
+material city_onewaystreet_with_parkingslot
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.80 0.80 0.80 1.00
+			
+			texture_unit
+			{
+				texture onewaystreet_with_parkingslot.png 2d 3
+				filtering trilinear
+			}
+		}
+	}
+}
+
+material city_single_kein_vortritt
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.80 0.80 0.80 1.00
+			
+			texture_unit
+			{
+				texture single_kein_vortritt.png 2d 3
+				filtering trilinear
+			}
+		}
+	}
+}
+
+material city_street_only_in
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.80 0.80 0.80 1.00
+			
+			texture_unit
+			{
+				texture street_only_in.png 2d 3
+				filtering trilinear
+			}
+		}
+	}
+}
+
+material city_oneway_street
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.80 0.80 0.80 1.00
+			
+			texture_unit
+			{
+				texture oneway_street.png 2d 3
+				filtering trilinear
+			}
+		}
+	}
+}
+
+material city_street_kein_vortritt
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.80 0.80 0.80 1.00
+			
+			texture_unit
+			{
+				texture street_kein_vortritt.png 2d 3
+				filtering trilinear
+			}
+		}
+	}
+}
+
+material city_street_stop
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.80 0.80 0.80 1.00
+			
+			texture_unit
+			{
+				texture street_stop.png 2d 3
+				filtering trilinear
+			}
+		}
+	}
+}
+
+material city_ground
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.0 0.0 0.0 1.00
+			ambient 0.75 0.75 0.75 1.00	
+		}
+	}
+}
+
+material city_skyscraper1
+{
+	technique
+	{
+		pass
+		{
+			diffuse 1.00 1.00 1.00 1.00
+			ambient 1.00 1.00 1.00 1.00
+			
+			texture_unit
+			{
+				texture skyscraper1.png 2d 3
+				filtering trilinear
+			}
+		}
+	}
+}
+
+material city_skyscraper1_base
+{
+	technique
+	{
+		pass
+		{
+			diffuse 1.00 1.00 1.00 1.00
+			ambient 1.00 1.00 1.00 1.00
+			
+			texture_unit
+			{
+				texture skyscraper1_base.png 2d 3
+				filtering trilinear
+			}
+		}
+	}
+}
+
+material city_skyscraper2
+{
+	technique
+	{
+		pass
+		{
+			diffuse 1.00 1.00 1.00 1.00
+			ambient 1.00 1.00 1.00 1.00
+			
+			texture_unit
+			{
+				texture skyscraper2.png 2d 3
+				filtering trilinear
+			}
+		}
+	}
+}
+
+material city_skyscraper3
+{
+	technique
+	{
+		pass
+		{
+			diffuse 1.00 1.00 1.00 1.00
+			ambient 1.00 1.00 1.00 1.00
+			
+			texture_unit
+			{
+				texture skyscraper3.png 2d 3
+				filtering trilinear
+			}
+		}
+	}
+}
+
+material city_skyscraper3_base
+{
+	technique
+	{
+		pass
+		{
+			diffuse 1.00 1.00 1.00 1.00
+			ambient 1.00 1.00 1.00 1.00
+			
+			texture_unit
+			{
+				texture skyscraper3_base.png 2d 3
+				filtering trilinear
+			}
+		}
+	}
+}
+
+material city_skyline
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.00 0.00 0.00 0.00
+			ambient 1.00 1.00 1.00 1.00
+			
+			texture_unit
+			{
+				texture skyline.png 2d 3
+				filtering trilinear
+			}
+		}
+	}
+}
+
+material city_tree_leaves
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.00 0.00 0.00 0.00
+			ambient 1.00 1.00 1.00 1.00
+			
+			texture_unit
+			{
+				texture tree_leaves.png 2d 4
+				filtering trilinear
+			}
+		}
+	}
+}
+
+material city_tree_log
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.00 0.00 0.00 0.00
+			ambient 1.00 1.00 1.00 1.00
+			
+			texture_unit
+			{
+				texture tree_log.png 2d 4
+				filtering trilinear
+			}
+		}
+	}
+}
+

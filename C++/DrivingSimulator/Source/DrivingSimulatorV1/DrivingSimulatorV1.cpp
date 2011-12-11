@@ -83,7 +83,6 @@ bool DrivingSimulatorV1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 		mouse->capture();
 	}
 
-
     // abort scene if window has been closed or escape button has been hit
 	if(renderWindow->isClosed() || keyboard->isKeyDown(OIS::KC_ESCAPE))
 		return false;
@@ -94,21 +93,21 @@ bool DrivingSimulatorV1::frameRenderingQueued(const Ogre::FrameEvent& evt)
     // accelerate / brake car by keyboard input
 	if(keyboard->isKeyDown(OIS::KC_UP))
 	{
-	    speed += 60 * evt.timeSinceLastFrame;
+	    speed += 35 * evt.timeSinceLastFrame;
 	}
 	if(keyboard->isKeyDown(OIS::KC_DOWN))
 	{
-	    speed -= 90 * evt.timeSinceLastFrame;
+	    speed -= 45 * evt.timeSinceLastFrame;
 	}
 
 	// accelerate / brake car by udp input
 	if(UdpListener::throttle >= 0)
 	{
-	    speed += UdpListener::throttle * 60 * evt.timeSinceLastFrame;
+	    speed += UdpListener::throttle * 35 * evt.timeSinceLastFrame;
 	}
 	else
 	{
-	    speed += UdpListener::throttle * 90 * evt.timeSinceLastFrame;
+	    speed += UdpListener::throttle * 45 * evt.timeSinceLastFrame;
 	}
 
 	if(!ALLOW_REVERSE)
@@ -118,7 +117,7 @@ bool DrivingSimulatorV1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	}
 
 	// update speed information fot udp socket
-	UdpListener::speed = speed * 1.4;
+	UdpListener::speed = speed * 1.1;
 
 	// calculate steer intensity
 	Ogre::Real normalizedSpeed = Ogre::Math::Abs(speed / 180);

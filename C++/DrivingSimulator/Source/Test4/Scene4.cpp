@@ -14,7 +14,7 @@ void Scene4::createScene()
 {
 	// create world node
 	worldNode = sceneManager->getRootSceneNode()->createChildSceneNode();
-	worldNode->scale(0.02, 0.02, 0.02);
+	worldNode->scale(0.08, 0.08, 0.08);
 
 	// load simple geometry
 	Ogre::Entity* objects = sceneManager->createEntity("ShadowTest1.mesh");

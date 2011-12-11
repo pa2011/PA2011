@@ -24,7 +24,7 @@ fragment_program Wood1_FP cg
 	}
 }
 
-material Wood1
+material ShadowTest_Wood1
 {
 	technique                    
 	{

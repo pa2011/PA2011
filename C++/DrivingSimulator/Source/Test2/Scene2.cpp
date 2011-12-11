@@ -47,7 +47,6 @@ void Scene2::createScene()
 	sunLight3->setDiffuseColour(Ogre::ColourValue(1, 1, 1));
 	sunLight3->setSpecularColour(Ogre::ColourValue(0.5, 0.5, 0.5));
 
-
 	// position camera
 	camera->setPosition(-20, 20, 40);
 	camera->lookAt(0, 0, 0);
