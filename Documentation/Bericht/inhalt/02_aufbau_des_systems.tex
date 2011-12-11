@@ -17,14 +17,24 @@ Sind die Daten vom UDP-Listener empfangen und aufbereitet, werden sie im Hauptpr
 Die Szene selbst wird von einem Szenen-Manager geladen. Dieser benötig für die zu ladenden Objekte ein Meshfiles und mindestens ein Materialfile. Die Form jedes Objektes in der Szene wird durch ein separates Meshfile definiert. Texturen und Materialien werden durch ein oder mehrere Materialfiles beschrieben. Ein Materialfile kann zur Beschreibung unterschiedlicher Objekte verwendet werden. Die berechnete Szene wird schlussendlich in einem Fenster von Hauptprogramm angezeigt und über eine DVI-Schnittstelle an den Beamer übertragen. Der Beamer projeziert das Bild an die Wand, die sich direkt vor dem Cockpit befindet. 
 
 \subsection{Anforderungen}
-\subsubsection{Funktionelle Anforderungen}
-
+\subsubsection{Funktionale Anforderungen}
+Der Fahrsimulator soll eine vordefinierte Szene laden, in der man, durch manipulation am Steuerrad oder der Pedale im Cockpit, das Fahrzeug in der Szene bewegen kann. Die manipulationen des Benutzers solle aufgezeichnet werden um diese auszuwerten. 
 \subsubsection {Nicht Funktionale Anforderungen}
 \renewcommand{\labelenumi}{\alph{enumi})}
 \begin{enumerate}
-\item Zuverlässigkeit
-\item Benutzbarkeit
-\item Aussehen und Handhabung
-\item Wartbarkeit
-\item Zeitliche Anforderungen
+\item Zuverlässigkeit\\
+Die Fahrsimulation soll bei keiner Benutzereingabe die im Cockpit getätigt werden kann, abstürzen oder sich selbts beenden. Zudem sollen alle wichtigen Daten jederzeit in ein log-File geschrieben werden um später Auswertungen vornehmen zu können. 
+\item Benutzbarkeit\\
+Das Starten des Fahrsimulator sollte möglichst einfach gehalten werden. Das Steuer des Fahrzeuges soll möglichst intuitiev sein wie man es sich von einem richtigen Fahrzeug gewöhnt ist. 
+\item Aussehen und Handhabung\\
+Der Fahrsimulator soll dem Probanden eine möglichst realistische Fahrsimulation bieten in der sich Strassen und verschiedene Objekte befinden. Die Objekte sollen teilweise aus google-sketchup in das Programm importiert werden um die Simulation noch realistischer zu gestalten. 
+\item Zeitliche Anforderungen\\
+Die Verzögerungszeit mit der Benutzereingaben und andere Daten wie Geschwindigkeit in das Log-File gespeichert werden, muss kalkuliert werden. Da die Benutzereingaben zweimal über den UDP-Socket müssen (siehe Abbildung \ref{Systembeschreibung}) kann es durchaus zu Verzögerungen kommen. 
+
+
+Die Verzögerungszeiten die bei Übertragungen von Daten entsehen müssen kalkuliert werden, um spätere Messungen interpretieren zu können. Folgende Verfälschungen sind denkbar bei zu grossen Verögerungszeiten: 
+- Der Proband ist irritiert da das Fahrzeug nicht unmittelbar auf seine Eingaben reagiert
+- Bei der Auswertung der Daten entsteht der Eindruck der Proband habe zu spät reagiert
+
+
 \end{enumerate}
