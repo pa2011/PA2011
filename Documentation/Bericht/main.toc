@@ -4,12 +4,12 @@
 \contentsline {subsection}{\numberline {1.2}Aufgabenstellung}{4}
 \contentsline {subsubsection}{\numberline {1.2.1}Formulierung}{4}
 \contentsline {subsubsection}{\numberline {1.2.2}Aufteilung der Arbeit}{4}
-\contentsline {subsection}{\numberline {1.3}Zeitplan und Arbeitsteilung}{4}
-\contentsline {section}{\numberline {2}Aufbau des Systems}{4}
-\contentsline {subsection}{\numberline {2.1}Systembeschreibung}{4}
+\contentsline {subsection}{\numberline {1.3}Zeitplan und Arbeitsteilung}{5}
+\contentsline {section}{\numberline {2}Aufbau des Systems}{5}
+\contentsline {subsection}{\numberline {2.1}Systembeschreibung}{5}
 \contentsline {subsection}{\numberline {2.2}Anforderungen}{6}
 \contentsline {subsubsection}{\numberline {2.2.1}Funktionale Anforderungen}{6}
-\contentsline {subsubsection}{\numberline {2.2.2}Nicht Funktionale Anforderungen}{6}
+\contentsline {subsubsection}{\numberline {2.2.2}Nicht Funktionale Anforderungen}{7}
 \contentsline {section}{\numberline {3}Vorgehen und Methoden}{8}
 \contentsline {subsection}{\numberline {3.1}UDP-Socket}{8}
 \contentsline {subsection}{\numberline {3.2}Virtual Reality}{8}
