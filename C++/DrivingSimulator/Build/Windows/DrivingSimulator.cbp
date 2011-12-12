@@ -255,14 +255,15 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="-g" />
-					<Add option="-D_DEBUG" />
+					<Add option="-O2" />
+					<Add option="-DNDEBUG" />
 				</Compiler>
 				<Linker>
+					<Add option="-s" />
 					<Add option="-lwsock32 -lws2_32" />
-					<Add library="OgreMain_d" />
-					<Add library="OIS_d" />
-					<Add directory="$(OGRE_HOME)\bin\debug" />
+					<Add library="OgreMain" />
+					<Add library="OIS" />
+					<Add directory="$(OGRE_HOME)\bin\release" />
 				</Linker>
 				<ExtraCommands>
 					<Add before='make -f Makefiles/CopyFiles.make PRODUCT=&quot;DrivingSimulatorV1&quot; CONFIGURATION=&quot;Release&quot; clean' />

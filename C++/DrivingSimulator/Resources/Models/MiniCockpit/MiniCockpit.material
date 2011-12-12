@@ -12,6 +12,18 @@ material MiniRed
 	}
 }
 
+material MiniBlack
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.00 0.00 0.00 1.00
+			ambient 0.00 0.00 0.00 1.00
+		}
+	}
+}
+
 material MiniPointerRed
 {
 	technique

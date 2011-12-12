@@ -3,6 +3,7 @@
 #define THIRD_PERSON 0
 #define COCKPIT 1
 #define ALLOW_REVERSE false
+#define SHOW_STEERING_WHEEL true
 
 DrivingSimulatorV1::DrivingSimulatorV1()
 {
@@ -140,11 +141,11 @@ bool DrivingSimulatorV1::frameRenderingQueued(const Ogre::FrameEvent& evt)
     // rotate car by keyboard input
     if(keyboard->isKeyDown(OIS::KC_LEFT))
     {
-        keyboardSteer += 180 * evt.timeSinceLastFrame;
+        keyboardSteer += 270 * evt.timeSinceLastFrame;
     }
     if(keyboard->isKeyDown(OIS::KC_RIGHT))
     {
-        keyboardSteer -= 180 * evt.timeSinceLastFrame;
+        keyboardSteer -= 270 * evt.timeSinceLastFrame;
     }
 
     if(!keyboard->isKeyDown(OIS::KC_LEFT) && !keyboard->isKeyDown(OIS::KC_RIGHT))
@@ -220,12 +221,13 @@ bool DrivingSimulatorV1::frameRenderingQueued(const Ogre::FrameEvent& evt)
         steeringWheelNode->setOrientation(carNode->getOrientation());
         steeringWheelNode->setPosition(carNode->getPosition() + carNode->getOrientation() * steeringWheelOffset);
         steeringWheelNode->pitch(Ogre::Degree(15));
-        steeringWheelNode->roll(Ogre::Degree(keyboardSteer * -1.5));
+        steeringWheelNode->roll(Ogre::Degree(keyboardSteer * -1.5 + UdpListener::steer * 270));
 
 		carNode->setVisible(false);
 		cockpitNode->setVisible(true);
 		pointerNode->setVisible(true);
-		steeringWheelNode->setVisible(true);
+		if(SHOW_STEERING_WHEEL)
+			steeringWheelNode->setVisible(true);
 	}
 	else if(cameraMode == THIRD_PERSON)
 	{
