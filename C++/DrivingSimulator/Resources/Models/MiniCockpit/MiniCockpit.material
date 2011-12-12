@@ -17,6 +17,40 @@ material MiniBrushedMetal
 	}
 }
 
+material MiniBrushedMetal2
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.80 0.80 0.80 1.00
+			
+			texture_unit
+			{
+				texture MiniBrushedMetal2.png 2d 4
+				filtering anisotropic
+			}
+		}
+	}
+}
+
+material MiniBrushedMetal3
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.80 0.80 0.80 1.00
+			
+			texture_unit
+			{
+				texture MiniBrushedMetal3.png 2d 4
+				filtering anisotropic
+			}
+		}
+	}
+}
+
 material MiniLeather1
 {
 	technique
