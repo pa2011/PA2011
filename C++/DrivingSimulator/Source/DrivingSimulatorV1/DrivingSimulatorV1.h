@@ -14,6 +14,7 @@ class DrivingSimulatorV1 : public MainApplication
 	protected:
 	Ogre::SceneNode* worldNode;
 	Ogre::SceneNode* carNode;
+	Ogre::SceneNode* cockpitNode;
 	Ogre::SceneNode* pointerNode;
 	Ogre::Real speed;
 	Ogre::Real cameraRotationOffset;

@@ -46,6 +46,11 @@ void DrivingSimulatorV1::createScene1() // city
 	carNode->setPosition(-5, 0, 0);
 
 	// load Cockpit
+	Ogre::Entity* cockpit = sceneManager->createEntity("MiniCockpit.mesh");
+	cockpitNode = sceneManager->getRootSceneNode()->createChildSceneNode();
+	cockpitNode->attachObject(cockpit);
+	cockpitNode->scale(0.05, 0.05, 0.05);
+
 	Ogre::Entity* pointer = sceneManager->createEntity("MiniPointer.mesh");
 	pointerNode = sceneManager->getRootSceneNode()->createChildSceneNode();
 	pointerNode->attachObject(pointer);
@@ -180,6 +185,14 @@ bool DrivingSimulatorV1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 		camera->setOrientation(carNode->getOrientation());
 		camera->yaw(Ogre::Degree(180));
 
+		Ogre::Vector3 cockpitOffset(0, 2, 0.7);
+
+		cockpitNode->setPosition(carNode->getPosition() + carNode->getOrientation() * cockpitOffset);
+		cockpitNode->setOrientation(carNode->getOrientation());
+		cockpitNode->yaw(Ogre::Degree(180));
+
+		carNode->setVisible(false);
+		cockpitNode->setVisible(true);
 		pointerNode->setVisible(true);
 	}
 	else if(cameraMode == THIRD_PERSON)
@@ -201,7 +214,9 @@ bool DrivingSimulatorV1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 		camera->setPosition(carNode->getPosition() + Ogre::Vector3(camXOffset, camYOffset, camZOffset));
 		camera->lookAt(carNode->getPosition());
 
-		//pointerNode->setVisible(false);
+		carNode->setVisible(true);
+		cockpitNode->setVisible(false);
+		pointerNode->setVisible(false);
 	}
 
 	// if we reach this position of the code, no error has occurred
