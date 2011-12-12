@@ -16,6 +16,8 @@ class DrivingSimulatorV1 : public MainApplication
 	Ogre::SceneNode* carNode;
 	Ogre::SceneNode* cockpitNode;
 	Ogre::SceneNode* pointerNode;
+	Ogre::SceneNode* steeringWheelNode;
+	Ogre::Real keyboardSteer;
 	Ogre::Real speed;
 	Ogre::Real cameraRotationOffset;
 	Ogre::uint8 cameraMode;

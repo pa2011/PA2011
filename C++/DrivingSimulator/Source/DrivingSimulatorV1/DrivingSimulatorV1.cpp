@@ -11,6 +11,7 @@ DrivingSimulatorV1::DrivingSimulatorV1()
     cameraRotationOffset = 0;
     cameraMode = COCKPIT;
     keyState[256] = {0};
+    keyboardSteer = 0;
 }
 
 DrivingSimulatorV1::~DrivingSimulatorV1()
@@ -56,13 +57,18 @@ void DrivingSimulatorV1::createScene1() // city
 	pointerNode->attachObject(pointer);
 	pointerNode->scale(0.02, 0.02, 0.02);
 
+	Ogre::Entity* steeringWheel = sceneManager->createEntity("MiniCockpitSteeringWheel.mesh");
+	steeringWheelNode = sceneManager->getRootSceneNode()->createChildSceneNode();
+	steeringWheelNode->attachObject(steeringWheel);
+	steeringWheelNode->scale(0.03, 0.03, 0.03);
+
 	// create ambient light
 	sceneManager->setAmbientLight(Ogre::ColourValue(0.7, 0.7, 0.7));
 
 	// create sun light
 	Ogre::Light* sunLight = sceneManager->createLight();
 	sunLight->setType(Ogre::Light::LT_DIRECTIONAL);
-	sunLight->setDirection(Ogre::Vector3(-0.2, -0.5, 0.5));
+	sunLight->setDirection(Ogre::Vector3(-0.5, -0.5, 0.5));
 	sunLight->setDiffuseColour(Ogre::ColourValue(1, 1, 1));
 	sunLight->setSpecularColour(Ogre::ColourValue(0.7, 0.7, 0.7));
 
@@ -132,15 +138,32 @@ bool DrivingSimulatorV1::frameRenderingQueued(const Ogre::FrameEvent& evt)
     cameraRotationOffset += UdpListener::steer * 90 * evt.timeSinceLastFrame;
 
     // rotate car by keyboard input
-    if(keyboard->isKeyDown(OIS::KC_LEFT) && speed != 0)
+    if(keyboard->isKeyDown(OIS::KC_LEFT))
     {
-        carNode->yaw(Ogre::Degree(steerIntensity * 90 * evt.timeSinceLastFrame * Ogre::Math::Abs(speed) / speed));
-        cameraRotationOffset -= 45 * evt.timeSinceLastFrame * steerIntensity * Ogre::Math::Abs(speed) / speed;
+        keyboardSteer += 180 * evt.timeSinceLastFrame;
     }
-    if(keyboard->isKeyDown(OIS::KC_RIGHT) && speed != 0)
+    if(keyboard->isKeyDown(OIS::KC_RIGHT))
     {
-        carNode->yaw(Ogre::Degree(steerIntensity * -90 * evt.timeSinceLastFrame * Ogre::Math::Abs(speed) / speed));
-        cameraRotationOffset += 45 * evt.timeSinceLastFrame * steerIntensity * Ogre::Math::Abs(speed) / speed;
+        keyboardSteer -= 180 * evt.timeSinceLastFrame;
+    }
+
+    if(!keyboard->isKeyDown(OIS::KC_LEFT) && !keyboard->isKeyDown(OIS::KC_RIGHT))
+    {
+        if(keyboardSteer > 0)
+            keyboardSteer -= std::min(270 * evt.timeSinceLastFrame, keyboardSteer);
+        else if(keyboardSteer < 0)
+            keyboardSteer += std::min(270 * evt.timeSinceLastFrame, keyboardSteer * -1);
+    }
+
+    if(keyboardSteer < -90)
+        keyboardSteer = -90;
+    else if(keyboardSteer > 90)
+        keyboardSteer = 90;
+
+    if(speed != 0)
+    {
+        carNode->yaw(Ogre::Degree(steerIntensity * keyboardSteer * evt.timeSinceLastFrame * Ogre::Math::Abs(speed) / speed));
+        cameraRotationOffset -= keyboardSteer * 0.3 * evt.timeSinceLastFrame * steerIntensity * Ogre::Math::Abs(speed) / speed;
     }
 
 	// change camera mode
@@ -192,9 +215,17 @@ bool DrivingSimulatorV1::frameRenderingQueued(const Ogre::FrameEvent& evt)
         pointerNode->pitch(Ogre::Degree(15));
         pointerNode->roll(Ogre::Degree(45 + Ogre::Math::Abs(UdpListener::speed * 2.25)));
 
+        // position steering wheel
+        Ogre::Vector3 steeringWheelOffset(1.3, 2.7, 2.5);
+        steeringWheelNode->setOrientation(carNode->getOrientation());
+        steeringWheelNode->setPosition(carNode->getPosition() + carNode->getOrientation() * steeringWheelOffset);
+        steeringWheelNode->pitch(Ogre::Degree(15));
+        steeringWheelNode->roll(Ogre::Degree(keyboardSteer * -1.5));
+
 		carNode->setVisible(false);
 		cockpitNode->setVisible(true);
 		pointerNode->setVisible(true);
+		steeringWheelNode->setVisible(true);
 	}
 	else if(cameraMode == THIRD_PERSON)
 	{
@@ -218,6 +249,7 @@ bool DrivingSimulatorV1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 		carNode->setVisible(true);
 		cockpitNode->setVisible(false);
 		pointerNode->setVisible(false);
+		steeringWheelNode->setVisible(false);
 	}
 
 	// if we reach this position of the code, no error has occurred
