@@ -9,7 +9,7 @@ DrivingSimulatorV1::DrivingSimulatorV1()
     // initialize attributes
     speed = 0;
     cameraRotationOffset = 0;
-    cameraMode = THIRD_PERSON;
+    cameraMode = COCKPIT;
     keyState[256] = {0};
 }
 
@@ -51,7 +51,7 @@ void DrivingSimulatorV1::createScene1() // city
 	cockpitNode->attachObject(cockpit);
 	cockpitNode->scale(0.05, 0.05, 0.05);
 
-	Ogre::Entity* pointer = sceneManager->createEntity("MiniPointer.mesh");
+	Ogre::Entity* pointer = sceneManager->createEntity("MiniCockpitPointer.mesh");
 	pointerNode = sceneManager->getRootSceneNode()->createChildSceneNode();
 	pointerNode->attachObject(pointer);
 	pointerNode->scale(0.02, 0.02, 0.02);
@@ -167,12 +167,6 @@ bool DrivingSimulatorV1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	Ogre::Real zMove = Ogre::Math::Cos(carNode->getOrientation().getYaw()) * speed * evt.timeSinceLastFrame;
 	carNode->translate(xMove, 0, zMove);
 
-	// position speed pointer
-	Ogre::Vector3 pointerOffset(0.1, 2.95, 2.13);
-	pointerNode->setOrientation(carNode->getOrientation());
-	pointerNode->setPosition(carNode->getPosition() + carNode->getOrientation() * pointerOffset);
-	pointerNode->roll(Ogre::Degree(180+Ogre::Math::Abs(speed)*0.8));
-
 	// update camera
 	if(cameraMode == COCKPIT)
 	{
@@ -190,6 +184,13 @@ bool DrivingSimulatorV1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 		cockpitNode->setPosition(carNode->getPosition() + carNode->getOrientation() * cockpitOffset);
 		cockpitNode->setOrientation(carNode->getOrientation());
 		cockpitNode->yaw(Ogre::Degree(180));
+
+        // position speed pointer
+        Ogre::Vector3 pointerOffset(0.0, 2.7, 2.9);
+        pointerNode->setOrientation(carNode->getOrientation());
+        pointerNode->setPosition(carNode->getPosition() + carNode->getOrientation() * pointerOffset);
+        pointerNode->pitch(Ogre::Degree(15));
+        pointerNode->roll(Ogre::Degree(45 + Ogre::Math::Abs(UdpListener::speed * 2.25)));
 
 		carNode->setVisible(false);
 		cockpitNode->setVisible(true);
