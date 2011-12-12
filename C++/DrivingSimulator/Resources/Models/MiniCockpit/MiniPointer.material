@@ -1,6 +1,6 @@
 // Materials for Cockpit
 
-material red_plastic
+material MiniPointer_red_plastic
 {
 	technique
 	{
@@ -12,7 +12,7 @@ material red_plastic
 	}
 }
 
-material black_plastic
+material MiniPointer_black_plastic
 {
 	technique
 	{

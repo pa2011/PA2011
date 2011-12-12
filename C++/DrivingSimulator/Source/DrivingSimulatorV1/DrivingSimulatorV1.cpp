@@ -46,11 +46,10 @@ void DrivingSimulatorV1::createScene1() // city
 	carNode->setPosition(-5, 0, 0);
 
 	// load Cockpit
-	Ogre::Entity* pointer = sceneManager->createEntity("pointer.mesh");
+	Ogre::Entity* pointer = sceneManager->createEntity("MiniPointer.mesh");
 	pointerNode = sceneManager->getRootSceneNode()->createChildSceneNode();
 	pointerNode->attachObject(pointer);
-	pointerNode->setPosition(0.00, 0.00, 0.00);
-	pointerNode->scale(0.07, 0.07, 0.07);
+	pointerNode->scale(0.02, 0.02, 0.02);
 
 	// create ambient light
 	sceneManager->setAmbientLight(Ogre::ColourValue(0.7, 0.7, 0.7));
@@ -167,7 +166,7 @@ bool DrivingSimulatorV1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	Ogre::Vector3 pointerOffset(0.1, 2.95, 2.13);
 	pointerNode->setOrientation(carNode->getOrientation());
 	pointerNode->setPosition(carNode->getPosition() + carNode->getOrientation() * pointerOffset);
-	pointerNode->roll(Ogre::Degree(Ogre::Math::Abs(speed)*0.8));
+	pointerNode->roll(Ogre::Degree(180+Ogre::Math::Abs(speed)*0.8));
 
 	// update camera
 	if(cameraMode == COCKPIT)

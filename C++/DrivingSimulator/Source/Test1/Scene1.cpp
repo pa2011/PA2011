@@ -38,7 +38,7 @@ void Scene1::createScene()
 	carNode->yaw(Ogre::Degree(-27));
 
 	// load Cockpit
-	Ogre::Entity* pointer = sceneManager->createEntity("pointer.mesh");
+	Ogre::Entity* pointer = sceneManager->createEntity("MiniPointer.mesh");
 	pointerNode = sceneManager->getRootSceneNode()->createChildSceneNode();
 	pointerNode->attachObject(pointer);
 	pointerNode->setPosition(0.00, 0.00, 0.00);

@@ -46,11 +46,11 @@ void Scene3::createScene()
 	carNode->setPosition(-5, 0, 0);
 
 	// load Cockpit
-	Ogre::Entity* pointer = sceneManager->createEntity("pointer.mesh");
+	Ogre::Entity* pointer = sceneManager->createEntity("MiniPointer.mesh");
 	pointerNode = sceneManager->getRootSceneNode()->createChildSceneNode();
 	pointerNode->attachObject(pointer);
 	pointerNode->setPosition(0.00, 0.00, 0.00);
-	pointerNode->scale(0.07, 0.07, 0.07);
+	pointerNode->scale(0.02, 0.02, 0.02);
 
 	// create ambient light
 	sceneManager->setAmbientLight(Ogre::ColourValue(0.7, 0.7, 0.7));
