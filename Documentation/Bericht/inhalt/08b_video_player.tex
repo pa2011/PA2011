@@ -24,4 +24,15 @@ In einem bestehendem LabVIEW-Programm werden bereits alle Eingaben, die im Cockp
 \label{Koordinatensystem} % Labelname
 \end{figure}
 
-Diese beiden Werte werden im LabVIEW-Programm in ein UDP-Packet verpackt und über das Netzwerk gesendet. Der UDP-Listener empfängt diese Packete und speichert die x und y-Werte separat ab. Das Hauptprogramm greift auf diese Werte zu, und Steuert damit das Video. 
+Diese beiden Werte werden im LabVIEW-Programm in ein UDP-Packet verpackt und über das Netzwerk gesendet. Der UDP-Listener empfängt diese Packete und speichert die x und y-Werte separat ab. Das Hauptprogramm greift auf diese Werte zu, interpretiert diese und Steuert das Video.\\
+Der Video Player wird in einem eigenen Prozess gestartet. 
+% Code
+%sprintf(arguments, " --extraintf telnet --telnet-port %d --telnet-password %s", vlcPort, vlcPassword);
+%CreateProcessA(vlcExe, arguments, 0, 0, FALSE, 0, 0, 0, LPSTARTUPINFOA(&si), &pi);
+%Code ende
+Die erste Zeile speichert alle Argumente in der Variabel "arguments". Durch die mitgegebenen Argumente wird der Video Player mit einem extra Telnetinterface gestartet.  Das Telnetinterface hört auf den angegebenen Port. In der zweiten Zeile wird der Prozess erstellt und in diesem Prozess wird der Video Player ausgeführt. 
+Nun können Manipulationsbefehle über den "send" Befehl an den mPlayer geschickt werden. Hier ein Beispiel eines solchen Befehls.
+%Code
+%send(socketId, message, strlen(message)
+%CodeEnde
+Der send-Befehl verlangt eine Socket-Id, die Nachricht,  in unserem Fall den Befehl, und die Länge der Nachricht. Das Hauptprogramm liest nun aus dem UDP-Listener den y-Wert der empfangenen Packete aus. Liegt dieser Wert über 20000 ist das Gaspedal mindestens zu zwei drittel gedrückt. Dann sendet das Hauptprogramm über die Telnetverbindung den Befehl an den Video Player die Geschwindigketi des Videos zu erhöhen. Fall der Wert unter -20000 liegt, ist das Bremspedal mindestens zu zwei drittel gedrückt. Das Hauptprogramm veranlasst den Videoplayer die Geschwindigkeit des Videos u reduzieren. 
