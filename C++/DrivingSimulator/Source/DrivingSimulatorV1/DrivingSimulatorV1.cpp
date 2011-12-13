@@ -194,14 +194,10 @@ bool DrivingSimulatorV1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	// update camera
 	if(cameraMode == COCKPIT)
 	{
-		Ogre::Radian camAngle = carNode->getOrientation().getYaw() - Ogre::Degree(20);
-		Ogre::Real camXOffset = Ogre::Math::Cos(camAngle) * 1.3;
-		Ogre::Real camYOffset = 4;
-		Ogre::Real camZOffset = -Ogre::Math::Sin(camAngle) * 1.3;
-
-		camera->setPosition(carNode->getPosition() + Ogre::Vector3(camXOffset, camYOffset, camZOffset));
-		camera->setOrientation(carNode->getOrientation());
-		camera->yaw(Ogre::Degree(180));
+        Ogre::Vector3 cameraOffset(1.3, 4.0, 0.7);
+        camera->setOrientation(carNode->getOrientation());
+        camera->setPosition(carNode->getPosition() + carNode->getOrientation() * cameraOffset);
+        camera->yaw(Ogre::Degree(180));
 
 		Ogre::Vector3 cockpitOffset(0, 2, 0.7);
 
@@ -217,7 +213,7 @@ bool DrivingSimulatorV1::frameRenderingQueued(const Ogre::FrameEvent& evt)
         pointerNode->roll(Ogre::Degree(45 + Ogre::Math::Abs(UdpListener::speed * 2.25)));
 
         // position steering wheel
-        Ogre::Vector3 steeringWheelOffset(1.3, 2.7, 2.5);
+        Ogre::Vector3 steeringWheelOffset(1.3, 2.5, 2.5);
         steeringWheelNode->setOrientation(carNode->getOrientation());
         steeringWheelNode->setPosition(carNode->getPosition() + carNode->getOrientation() * steeringWheelOffset);
         steeringWheelNode->pitch(Ogre::Degree(15));
