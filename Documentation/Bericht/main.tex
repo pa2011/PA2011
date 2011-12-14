@@ -49,7 +49,7 @@
 	{ä}{{\"a}}1
 	{ö}{{\"o}}1
 	{ü}{{\"u}}1,
-	language=Java,						% the language of the code
+	language=C++,						% the language of the code
 	basicstyle=\small,					% the size of the fonts that are used for the code
 	commentstyle=\color{dark-blue-gray}\it,
 	numbers=none,						% where to put the line-numbers
@@ -75,22 +75,13 @@
 \begin{document}
 	\input{titelseite}
 	\tableofcontents
-	\newpage
-	\input{inhalt/01_einleitung}
-	\newpage
-	\input{inhalt/02_aufbau_des_systems}
-	\newpage
-	\input{inhalt/03_realisierung}
-	\newpage
-	\input{inhalt/04_resultate_und_tests}
-	\newpage
-	\input{inhalt/05_naechste_schritte}
-	\newpage
-	\input{inhalt/06_nachwort}
-	\newpage
-	\input{inhalt/07_verzeichnisse}
-	\newpage
-	\input{inhalt/08_anhang}
-	\newpage
-	\input{inhalt/09_glossar}
+	\include{inhalt/01_einleitung}
+	\include{inhalt/02_aufbau_des_systems}
+	\include{inhalt/03_realisierung}
+	\include{inhalt/04_resultate_und_tests}
+	\include{inhalt/05_naechste_schritte}
+	\include{inhalt/06_nachwort}
+	\include{inhalt/07_verzeichnisse}
+	\include{inhalt/08_anhang}
+	\include{inhalt/09_glossar}
 \end{document}
