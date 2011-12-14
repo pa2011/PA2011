@@ -1,5 +1,6 @@
 \section{Aufbau des Systems}
 \subsection{Systembeschreibung}
+
 % Bild für Systembeschreibung
 \begin{figure}[H]
 \centering 
@@ -26,19 +27,15 @@ Die Szene selbst wird von einem Szenen-Manager geladen. Dieser benötig für die
 \item Die manipulationen des Benutzers und wichtige Parameter wie z.B. Geschwindigkeit sollen in einer Datei aufgezeichnet werden um diese auszuwerten.
 \item Alle ein- und ausgehenden Parameter des System sollen in LabVIEW verfügbar sein um diese auswerten und kontrollieren zu können. 
 \end{itemize}
+
 \subsubsection {Nicht Funktionale Anforderungen}
 \renewcommand{\labelenumi}{\alph{enumi})}
-\begin{enumerate}
-\item Zuverlässigkeit\\
-Das System soll robust sein. 
-\item Benutzbarkeit\\
-Das Starten des Fahrsimulator sollte möglichst einfach gehalten werden. Das Steuer des Fahrzeuges soll möglichst intuitiev sein wie man es sich von einem richtigen Fahrzeug gewöhnt ist. 
-\item Aussehen und Handhabung\\
-Der Fahrsimulator soll dem Probanden eine möglichst realistische Fahrsimulation bieten in der sich Strassen und verschiedene Objekte befinden.
-\item Zeitliche Anforderungen\\
-Die Raktionszeit des Systems soll möglichst klein sein. Die Verzögerung des Systems soll mess-  und kalkulierbar sein.
-\item Erweiterbarkeit\\
-Das System soll möglichst Modular aufgebaut sein um später einfach erweitert werden zu können.
-\item Portierbarkeit\\
-Das System soll auf der existierender Hardware funktionieren, soll aber auch noch lauffähig sein wenn Teile des Fahrsimulators ausgetauscht werden. 
-\end{enumerate}
+
+\begin{itemize}
+\item Das System soll robust sein. 
+\item Das Starten des Fahrsimulator sollte möglichst einfach gehalten werden. Das Steuer des Fahrzeuges soll möglichst intuitiev sein wie man es sich von einem richtigen Fahrzeug gewöhnt ist. 
+\item Der Fahrsimulator soll dem Probanden eine möglichst realistische Fahrsimulation bieten in der sich Strassen und verschiedene Objekte befinden.
+\item Die Raktionszeit des Systems soll möglichst klein sein. Die Verzögerung des Systems soll mess-  und kalkulierbar sein.
+\item Das System soll möglichst Modular aufgebaut sein um später einfach erweitert werden zu können.
+\item Das System soll auf der existierender Hardware funktionieren, soll aber auch noch lauffähig sein wenn Teile des Fahrsimulators ausgetauscht werden. 
+\end{itemize}
