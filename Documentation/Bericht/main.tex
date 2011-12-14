@@ -2,7 +2,7 @@
 % Hauptdatei der Arbeit
 %
 
-\documentclass{scrartcl}
+\documentclass[a4paper,twoside,liststotocnumbered]{scrartcl}
 
 %Packages Definitionen
 \usepackage[utf8x]{inputenc}
@@ -10,27 +10,87 @@
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage{pdfpages}
+\usepackage[a4paper]{geometry}
+\usepackage{fancyhdr}
+\usepackage{listings}
 
 %\input {deckblatt}
-
 
 % Metadaten
 \author{Sandro Ropelato, Christof Würmli}
 \title{Fahrsimulator}
 
-\begin{document}
+% fancy einstellungen verwenden
+\pagestyle{fancy}
 
-\input{titelseite}
-\tableofcontents
-\newpage
-\input{inhalt/01_einleitung}
-\input{inhalt/02_aufbau_des_systems}
-\input{inhalt/03_realisierung}
-\input{inhalt/04_resultate_und_tests}
-\input{inhalt/05_naechste_schritte}
-\input{inhalt/06_nachwort}
-\input{inhalt/07_verzeichnisse}
-\newpage
-\input{inhalt/08_anhang}
-\input{inhalt/09_glossar}
+% default einstellungen von header und footer löschen
+\fancyhf{}
+
+% header und footer konfigurieren
+\renewcommand{\sectionmark}[1]{\markboth{\thesection{} #1}{}}
+\fancyhead[RE]{\leftmark}
+\fancyhead[LO]{Projektarbeit Fahrsimulator}
+\fancyfoot[RE]{\thepage}
+\fancyfoot[LO]{\thepage}
+\fancyfoot[RO]{Christof Würmli\\Sandro Ropelato}
+
+% selbst definierte farben
+\definecolor{light-gray}{rgb}{0.9, 0.9, 0.9}
+\definecolor{blue-gray}{rgb}{0.87, 0.89, 0.92}
+\definecolor{dark-blue-gray}{rgb}{0.43, 0.44, 0.46}
+\definecolor{dark-blue}{rgb}{0.2, 0.2, 0.7}
+
+% für syntax highlightings
+\lstset{
+	literate =
+	{Ä}{{\"A}}1
+	{Ö}{{\"O}}1
+	{Ü}{{\"U}}1
+	{ä}{{\"a}}1
+	{ö}{{\"o}}1
+	{ü}{{\"u}}1,
+	language=Java,						% the language of the code
+	basicstyle=\small,					% the size of the fonts that are used for the code
+	commentstyle=\color{dark-blue-gray}\it,
+	numbers=none,						% where to put the line-numbers
+	backgroundcolor=\color{blue-gray},	% choose the background color. You must add \usepackage{color}
+	frame=shadowbox,					% adds a frame around the code
+	xleftmargin=8pt,
+	framexleftmargin=5pt,
+	xrightmargin=8pt,
+	framexrightmargin=8pt,
+	framextopmargin=5pt,
+	framexbottommargin=5pt,
+	tabsize=4,							% sets default tabsize to 4 spaces
+	captionpos=b,						% sets the caption-position to bottom
+	breaklines=true,					% sets automatic line breaking
+	breakatwhitespace=true,
+	breakautoindent=true,
+	title=\lstname,						% show the filename of files included with \lstinputlisting; also try caption instead of title
+	inputencoding=utf8x,				% For extended Unicode Mode
+	extendedchars=\true					% For German Chars äöü
+}
+
+
+\begin{document}
+	\input{titelseite}
+	\tableofcontents
+	\newpage
+	\input{inhalt/01_einleitung}
+	\newpage
+	\input{inhalt/02_aufbau_des_systems}
+	\newpage
+	\input{inhalt/03_realisierung}
+	\newpage
+	\input{inhalt/04_resultate_und_tests}
+	\newpage
+	\input{inhalt/05_naechste_schritte}
+	\newpage
+	\input{inhalt/06_nachwort}
+	\newpage
+	\input{inhalt/07_verzeichnisse}
+	\newpage
+	\input{inhalt/08_anhang}
+	\newpage
+	\input{inhalt/09_glossar}
 \end{document}
