@@ -1,4 +1,7 @@
 \section{Vorgehen und Methoden}
+Wie bereits in der Systembeschreibung beschrieben, wird der Fahrsimulator in 3 Hauptkomponenten unterteilt. Zum Fahrsimulator gehört ein UDP-Listener, ein Szenen-Manager und das Hauptprogramm. Da die Verbindung zwischen dem Cockpit und dem Fahrsimulator mit einer Netzwerkschnittstelle realisiert wird, ist es möglich die Anbindung an das Cockpit und den Fahrsimulator phisikalisch auf zwei Rechnern zu betreiben. Eine weiter Lösung hätte mit dem Ogre-Framework (Siehe Anhang D?) realisiert werden können. Dieses Framework bietet umfassende Lösungen um Steuerradär und Pedalen, wie sie in userem Cockpit vorhanden sind, anzusteueren.
+Da die 3D-Umgebungen mit fortscheitendem Projekt zunimmt, könnte die Rechenleistung der momentan verwendeten Maschiene zu einem späteren Zeitpunkt nicht mehr ausreichen. Die Folgen von ungenügender Leistung können unregelmässige Bewegungen (Lags) in der virtuellen Umgebung sein oder es kann sogar bis zum Absturz des gesamten Programms führen. 
+Dieses Problem hat zur Folge, dass
 \subsection{UDP-Socket}
 permanenter Straem, warum UDP, wie die Variabeln vom Main geholt werden, Packete asynchron -> werte abholen Synchron
 \subsection{Virtual Reality}
