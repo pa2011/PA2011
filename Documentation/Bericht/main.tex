@@ -13,6 +13,7 @@
 \usepackage[a4paper]{geometry}
 \usepackage{fancyhdr}
 \usepackage{listings}
+\usepackage{wrapfig}
 
 %\input {deckblatt}
 
@@ -28,11 +29,23 @@
 
 % header und footer konfigurieren
 \renewcommand{\sectionmark}[1]{\markboth{\thesection{} #1}{}}
-\fancyhead[RE]{\leftmark}
 \fancyhead[LO]{Projektarbeit Fahrsimulator}
-\fancyfoot[RE]{\thepage}
-\fancyfoot[LO]{\thepage}
-\fancyfoot[RO]{Christof Würmli\\Sandro Ropelato}
+
+\newcommand{\enablefooter}
+{
+	\fancyfoot[RE]{\thepage}
+	\fancyfoot[LO]{\thepage}
+	\fancyfoot[RO]{Christof Würmli\\Sandro Ropelato}
+}
+
+\newcommand{\disablefooter}
+{
+	\fancyfoot{}
+}
+
+\enablefooter
+
+
 
 % selbst definierte farben
 \definecolor{light-gray}{rgb}{0.9, 0.9, 0.9}
@@ -75,6 +88,47 @@
 \begin{document}
 	\input{titelseite}
 	\tableofcontents
+<<<<<<< HEAD
+	\newpage
+	
+	\fancyhead[RE]{Kapitel \leftmark}
+	\input{inhalt/01_einleitung}
+	\newpage
+	\input{inhalt/02_aufbau_des_systems}
+	\newpage
+	\input{inhalt/03_realisierung}
+	\newpage
+	\input{inhalt/04_resultate_und_tests}
+	\newpage
+	\input{inhalt/05_naechste_schritte}
+	\newpage
+	\input{inhalt/06_nachwort}
+	\newpage
+	\input{inhalt/07_verzeichnisse}
+	\newpage
+	\input{inhalt/08_anhang}
+	\newpage
+	\input{inhalt/09_glossar}
+||||||| merged common ancestors
+	\newpage
+	\input{inhalt/01_einleitung}
+	\newpage
+	\input{inhalt/02_aufbau_des_systems}
+	\newpage
+	\input{inhalt/03_realisierung}
+	\newpage
+	\input{inhalt/04_resultate_und_tests}
+	\newpage
+	\input{inhalt/05_naechste_schritte}
+	\newpage
+	\input{inhalt/06_nachwort}
+	\newpage
+	\input{inhalt/07_verzeichnisse}
+	\newpage
+	\input{inhalt/08_anhang}
+	\newpage
+	\input{inhalt/09_glossar}
+=======
 	\include{inhalt/01_einleitung}
 	\include{inhalt/02_aufbau_des_systems}
 	\include{inhalt/03_realisierung}
@@ -84,4 +138,5 @@
 	\include{inhalt/07_verzeichnisse}
 	\include{inhalt/08_anhang}
 	\include{inhalt/09_glossar}
+>>>>>>> 1e9bdc46219dae2edd95f39f82ee41026b37641d
 \end{document}
