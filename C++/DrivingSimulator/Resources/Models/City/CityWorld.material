@@ -310,7 +310,7 @@ material city_tree_log
 }
 
 
-material city_signal_one_way
+material city_sign_one_way
 {
 	technique
 	{
@@ -320,14 +320,14 @@ material city_signal_one_way
 			
 			texture_unit
 			{
-				texture signal_one_way.png 2d 4
+				texture sign_one_way.png 2d 4
 				filtering anisotropic
 			}
 		}
 	}
 }
 
-material city_signal_give_way
+material city_sign_give_way
 {
 	technique
 	{
@@ -337,14 +337,14 @@ material city_signal_give_way
 			
 			texture_unit
 			{
-				texture signal_give_way.png 2d 4
+				texture sign_give_way.png 2d 4
 				filtering anisotropic
 			}
 		}
 	}
 }
 
-material city_signal_stop
+material city_sign_stop
 {
 	technique
 	{
@@ -354,14 +354,14 @@ material city_signal_stop
 			
 			texture_unit
 			{
-				texture signal_stop.png 2d 4
+				texture sign_stop.png 2d 4
 				filtering anisotropic
 			}
 		}
 	}
 }
 
-material city_signal_no_turn_right
+material city_sign_no_turn_right
 {
 	technique
 	{
@@ -371,7 +371,7 @@ material city_signal_no_turn_right
 			
 			texture_unit
 			{
-				texture signal_turn_right.png 2d 4
+				texture sign_turn_right.png 2d 4
 				filtering anisotropic
 			}
 		}
@@ -379,7 +379,7 @@ material city_signal_no_turn_right
 }
 
 
-material city_signal_turn_right
+material city_sign_turn_right
 {
 	technique
 	{
@@ -389,7 +389,7 @@ material city_signal_turn_right
 			
 			texture_unit
 			{
-				texture signal_turn_right.png 2d 4
+				texture sign_turn_right.png 2d 4
 				filtering anisotropic
 			}
 		}
@@ -397,7 +397,7 @@ material city_signal_turn_right
 }
 
 
-material city_signal_main_road
+material city_sign_main_road
 {
 	technique
 	{
@@ -407,14 +407,14 @@ material city_signal_main_road
 			
 			texture_unit
 			{
-				texture signal_main_road.png 2d 4
+				texture sign_main_road.png 2d 4
 				filtering anisotropic
 			}
 		}
 	}
 }
 
-material city_signal_50
+material city_sign_50
 {
 	technique
 	{
@@ -424,14 +424,14 @@ material city_signal_50
 			
 			texture_unit
 			{
-				texture signal_50.png 2d 4
+				texture sign_50.png 2d 4
 				filtering anisotropic
 			}
 		}
 	}
 }
 
-material city_signal_pillar
+material city_sign_pillar
 {
 	technique
 	{
