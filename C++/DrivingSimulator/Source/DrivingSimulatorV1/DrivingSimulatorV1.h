@@ -22,6 +22,7 @@ class DrivingSimulatorV1 : public MainApplication
 	Ogre::Real cameraRotationOffset;
 	Ogre::uint8 cameraMode;
 	Ogre::uint8 keyState[256];
+	Ogre::uint8 gear;
 
 	private:
 	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);

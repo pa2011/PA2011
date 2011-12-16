@@ -2,17 +2,22 @@
 
 #define THIRD_PERSON 0
 #define COCKPIT 1
-#define ALLOW_REVERSE false
+#define ALLOW_REVERSE true
 #define SHOW_STEERING_WHEEL true
+#define THROTTLE_THRESHOLD 0.05
+#define NEUTRAL 0
+#define DRIVE 1
+#define REVERSE 2
 
 DrivingSimulatorV1::DrivingSimulatorV1()
 {
     // initialize attributes
-    speed = 0;
     cameraRotationOffset = 0;
     cameraMode = COCKPIT;
     keyState[256] = {0};
     keyboardSteer = 0;
+    gear = NEUTRAL;
+    speed = 0;
 }
 
 DrivingSimulatorV1::~DrivingSimulatorV1()
@@ -116,36 +121,77 @@ bool DrivingSimulatorV1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 		return false;
 
 	// decrease speed (air resistance, etc...)
-	speed *= Ogre::Math::Pow(0.7, evt.timeSinceLastFrame);
+	if(speed > 0)
+        speed *= Ogre::Math::Pow(0.92, evt.timeSinceLastFrame);
+    else
+        speed *= Ogre::Math::Pow(0.7, evt.timeSinceLastFrame);
 
-    // accelerate / brake car by keyboard input
-	if(keyboard->isKeyDown(OIS::KC_UP))
-	{
-	    speed += 35 * evt.timeSinceLastFrame;
-	}
-	if(keyboard->isKeyDown(OIS::KC_DOWN))
-	{
-	    speed -= 45 * evt.timeSinceLastFrame;
-	}
+	// accelerate / brake car
+    if(gear == DRIVE)
+    {
+        // udp input
+        if(UdpListener::throttle >= 0)
+        {
+            speed += UdpListener::throttle * 9 * evt.timeSinceLastFrame;
+        }
+        else
+        {
+            speed += UdpListener::throttle * 30 * evt.timeSinceLastFrame;
+        }
 
-	// accelerate / brake car by udp input
-	if(UdpListener::throttle >= 0)
-	{
-	    speed += UdpListener::throttle * 35 * evt.timeSinceLastFrame;
-	}
-	else
-	{
-	    speed += UdpListener::throttle * 45 * evt.timeSinceLastFrame;
-	}
+        // keyboard input
+        if(keyboard->isKeyDown(OIS::KC_UP))
+        {
+            speed += 9 * evt.timeSinceLastFrame;
+        }
+        if(keyboard->isKeyDown(OIS::KC_DOWN))
+        {
+            speed -= 30 * evt.timeSinceLastFrame;
+        }
 
-	if(!ALLOW_REVERSE)
-	{
-		if(speed < 0)
-			speed = 0;
-	}
+        if(speed < 0)
+        {
+            speed = 0;
+        }
+    }
+    else if(gear == REVERSE)
+    {
+        // udp input
+        if(UdpListener::throttle <= 0)
+        {
+            speed += UdpListener::throttle * 9 * evt.timeSinceLastFrame;
+        }
+        else
+        {
+            speed += UdpListener::throttle * 30 * evt.timeSinceLastFrame;
+        }
 
-	// update speed information fot udp socket
-	UdpListener::speed = speed * 1.1;
+        // keyboard input
+        if(keyboard->isKeyDown(OIS::KC_UP))
+        {
+            speed += 30 * evt.timeSinceLastFrame;
+        }
+        if(keyboard->isKeyDown(OIS::KC_DOWN))
+        {
+            speed -= 9 * evt.timeSinceLastFrame;
+        }
+
+        if(speed > 0)
+            speed = 0;
+    }
+    else
+    {
+        if(UdpListener::throttle > THROTTLE_THRESHOLD || keyboard->isKeyDown(OIS::KC_UP))
+            gear = DRIVE;
+        else if(ALLOW_REVERSE && UdpListener::throttle < -THROTTLE_THRESHOLD || keyboard->isKeyDown(OIS::KC_DOWN))
+            gear = REVERSE;
+    }
+
+    if(speed == 0 && Ogre::Math::Abs(UdpListener::throttle) < THROTTLE_THRESHOLD && !keyboard->isKeyDown(OIS::KC_UP) && !keyboard->isKeyDown(OIS::KC_DOWN))
+        gear = NEUTRAL;
+
+	// update speed information for udp socket
+	UdpListener::speed = Ogre::Math::Abs(speed) * 1.1;
 
 	// calculate steer intensity
 	Ogre::Real normalizedSpeed = Ogre::Math::Abs(speed / 180);
@@ -288,7 +334,7 @@ int main(int argc, char** argv)
 	{
 		// start application
 		app.createCar();
-		app.createScene2();
+		app.createScene1();
 		app.start();
 	}
 	catch(Ogre::Exception e)
