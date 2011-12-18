@@ -6,10 +6,11 @@
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage{pdfpages}
-\usepackage[a4paper,foot=0cm]{geometry}
+\usepackage[a4paper,bottom=40mm]{geometry}
 \usepackage{fancyhdr}
 \usepackage{listings}
 \usepackage{wrapfig}
+\usepackage{tocloft}
 
 % Metadaten
 \author{Sandro Ropelato, Christof Würmli}
@@ -50,13 +51,6 @@
 
 % für syntax highlighting
 \lstset{
-	literate =
-	{Ä}{{\"A}}1
-	{Ö}{{\"O}}1
-	{Ü}{{\"U}}1
-	{ä}{{\"a}}1
-	{ö}{{\"o}}1
-	{ü}{{\"u}}1,
 	language=C++,
 	basicstyle=\small,
 	commentstyle=\color{dark-blue-gray}\it,
@@ -79,6 +73,9 @@
 	extendedchars=\true
 }
 
+% seitenzahlen mit arabischen ziffern
+\renewcommand{\thesection}{\arabic{section}}
+
 % aufbau des dokuments
 \begin{document}
 
@@ -99,6 +96,9 @@
 	\include{inhalt/kapitel_06_nachwort}
 	
 	% anhang
+	\setcounter{section}{0}
+	\renewcommand{\thesection}{\Alph{section}}
+	
 	\fancyhead[RE]{Anhang \leftmark}
 	\include{inhalt/anhang_a_aufgabenstellung}
 	\include{inhalt/anhang_b_video_player}
