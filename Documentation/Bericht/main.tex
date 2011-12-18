@@ -1,21 +1,15 @@
-%
-% Hauptdatei der Arbeit
-%
-
 \documentclass[a4paper,twoside,liststotocnumbered]{scrartcl}
 
-%Packages Definitionen
+% packages importieren
 \usepackage[utf8x]{inputenc}
 \usepackage[ngerman]{babel}
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage{pdfpages}
-\usepackage[a4paper]{geometry}
+\usepackage[a4paper,foot=0cm]{geometry}
 \usepackage{fancyhdr}
 \usepackage{listings}
 \usepackage{wrapfig}
-
-%\input {deckblatt}
 
 % Metadaten
 \author{Sandro Ropelato, Christof Würmli}
@@ -24,6 +18,8 @@
 % fancy einstellungen verwenden
 \pagestyle{fancy}
 
+% header und footer höhe verändern
+
 % default einstellungen von header und footer löschen
 \fancyhf{}
 
@@ -31,18 +27,19 @@
 \renewcommand{\sectionmark}[1]{\markboth{\thesection{} #1}{}}
 \fancyhead[LO]{Projektarbeit Fahrsimulator}
 
-\newcommand{\enablefooter}
-{
+% funktion zum aktivieren des footers
+\newcommand{\enablefooter}{
 	\fancyfoot[RE]{\thepage}
 	\fancyfoot[LO]{\thepage}
 	\fancyfoot[RO]{Christof Würmli\\Sandro Ropelato}
 }
 
-\newcommand{\disablefooter}
-{
+% funktion zum deaktivieren des footers
+\newcommand{\disablefooter}{
 	\fancyfoot{}
 }
 
+% footer aktivieren
 \enablefooter
 
 % selbst definierte farben
@@ -51,7 +48,7 @@
 \definecolor{dark-blue-gray}{rgb}{0.43, 0.44, 0.46}
 \definecolor{dark-blue}{rgb}{0.2, 0.2, 0.7}
 
-% für syntax highlightings
+% für syntax highlighting
 \lstset{
 	literate =
 	{Ä}{{\"A}}1
@@ -60,45 +57,63 @@
 	{ä}{{\"a}}1
 	{ö}{{\"o}}1
 	{ü}{{\"u}}1,
-	language=C++,						% the language of the code
-	basicstyle=\small,					% the size of the fonts that are used for the code
+	language=C++,
+	basicstyle=\small,
 	commentstyle=\color{dark-blue-gray}\it,
-	numbers=none,						% where to put the line-numbers
-	backgroundcolor=\color{blue-gray},	% choose the background color. You must add \usepackage{color}
-	frame=shadowbox,					% adds a frame around the code
+	numbers=none,
+	backgroundcolor=\color{blue-gray},
+	frame=shadowbox,
 	xleftmargin=8pt,
 	framexleftmargin=5pt,
 	xrightmargin=8pt,
 	framexrightmargin=8pt,
 	framextopmargin=5pt,
 	framexbottommargin=5pt,
-	tabsize=4,							% sets default tabsize to 4 spaces
-	captionpos=b,						% sets the caption-position to bottom
-	breaklines=true,					% sets automatic line breaking
+	tabsize=4,
+	captionpos=b,
+	breaklines=true,
 	breakatwhitespace=true,
 	breakautoindent=true,
-	title=\lstname,						% show the filename of files included with \lstinputlisting; also try caption instead of title
-	inputencoding=utf8x,				% For extended Unicode Mode
-	extendedchars=\true					% For German Chars äöü
+	title=\lstname,
+	inputencoding=utf8x,
+	extendedchars=\true
 }
 
-
+% aufbau des dokuments
 \begin{document}
-	\input{titelseite}
+
+	% titelseite
+	\input{inhalt/titelseite}
 	
+	% inhaltsverzeichnis
+	\fancyhead[RE]{\leftmark}
+	\include{inhalt/inhaltsverzeichnis}
+
+	% hauptteil
 	\fancyhead[RE]{Kapitel \leftmark}
+	\include{inhalt/kapitel_01_einleitung}
+	\include{inhalt/kapitel_02_aufbau_des_systems}
+	\include{inhalt/kapitel_03_realisierung}
+	\include{inhalt/kapitel_04_resultate_und_tests}
+	\include{inhalt/kapitel_05_naechste_schritte}
+	\include{inhalt/kapitel_06_nachwort}
 	
-	\tableofcontents
-	\include{inhalt/01_einleitung}
-	\include{inhalt/02_aufbau_des_systems}
-	\include{inhalt/03_realisierung}
-	\include{inhalt/04_resultate_und_tests}
-	\include{inhalt/05_naechste_schritte}
-	\include{inhalt/06_nachwort}
-	\include{inhalt/07_verzeichnisse}
-	
+	% anhang
 	\fancyhead[RE]{Anhang \leftmark}
+	\include{inhalt/anhang_a_aufgabenstellung}
+	\include{inhalt/anhang_b_video_player}
+	\include{inhalt/anhang_c_ogre_framework}
+	\include{inhalt/anhang_d_modeling_tools}
+	\include{inhalt/anhang_e_setup}
+	\include{inhalt/anhang_f_detailierter_zeitplan}
 	
-	\include{inhalt/08_anhang}
-	\include{inhalt/09_glossar}
+	% verzeichnisse
+	\fancyhead[RE]{\leftmark}
+	\include{inhalt/glossar}
+	\include{inhalt/abbildungsverzeichnis}
+	
 \end{document}
+
+
+
+
