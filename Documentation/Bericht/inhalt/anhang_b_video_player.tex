@@ -5,9 +5,9 @@ In einem ersten Schritt, noch vor der Realisierung des Fahrsimulator wird ein Vi
 \subsection{Systembeschreibung}
 
 % Bild für Systembeschreibung des Video Players
-\begin{figure}[h]
+\begin{figure}[H]
 \centering 
-\includegraphics{src/Systembeschreibung_VideoPlayer.png}
+\includegraphics{src/Systembeschreibung_VideoPlayer.pdf}
 \caption{Systembeschreibung Video-Player} % Titel der Grafik
 \label{Systembeschreibung Video-Player} % Labelname
 \end{figure}
@@ -23,7 +23,7 @@ Die Parameter werden vom vom UDP-Listener gespeichert und vom Hauptprogramm abge
 \subsection{Realisierung}
 In einem bestehendem LabVIEW-Programm werden bereits alle Eingaben, die im Cockpit gemacht werden können, eingelesen. Nun muss dieses Programm nur noch mit einem UDP-Port erweitert werden, damit es die Parameter, die unser Video-Player benötigt, senden kann. Diese Daten sind im Video-Player vor allem die betätigung von Gas- und Bremspedal. Diese beiden Pedalen werden in einem Koordinatensystem wie in Abbildung \ref{Koordinatensystem2} auf der y-Achse abgebildet. Die positive y-Richtung verifiziert das Gas und die negative y-Richtung das Bremspedal. Die intensität beider Pedalen wird durch 32767 bzw. 32768 ganzzahlige Werte identifiziert. Wenn also keins der beiden Pedalen gedrückt ist, wird dies durch den y-Wert 0 verifiziert. Ein voll gedrücktes Gaspedal entspricht dem y-Wert 32767 und dementsprechend ein voll gedrücktes Bremspedal dem Wert -32768. Der x-Wert im Koordinatensystem verifiziert den Einschlagswinkel des Steuerrades. Ist das Steuerrad in der neutralen Stellung, entspricht dies dem x-Wert null. Wenn das Steuerrad vollständig nach rechts eingeschlagen ist, wird dies durch den positiven x-Wert 32767 identifiziert. Dementsprchend wird ein vollständiger Einschlag nach links durch den negiativen x-Wert -32768 identifiziert. \\
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering 
 \includegraphics[scale=0.5]{src/koordinatensystem.png}
 \caption{Koordinatensystem} % Titel der Grafik
