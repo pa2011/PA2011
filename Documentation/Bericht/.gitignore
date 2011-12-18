@@ -2,5 +2,9 @@
 *.aux
 *.lof
 *.toc
+*.lot
+*.maf
+*.mtc*
+*.~*
 *.synctex.gz
 main.pdf
