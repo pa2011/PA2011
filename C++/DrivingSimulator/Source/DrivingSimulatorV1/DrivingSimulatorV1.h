@@ -8,11 +8,11 @@ class DrivingSimulatorV1 : public MainApplication
 	public:
 	DrivingSimulatorV1();
 	virtual ~DrivingSimulatorV1();
-	virtual void createScene1();
-	virtual void createScene2();
+	void createCar();
+	void createScene1();
+	void createScene2();
 
 	protected:
-	Ogre::SceneNode* worldNode;
 	Ogre::SceneNode* carNode;
 	Ogre::SceneNode* cockpitNode;
 	Ogre::SceneNode* pointerNode;
