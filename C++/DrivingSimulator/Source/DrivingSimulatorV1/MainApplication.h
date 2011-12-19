@@ -15,6 +15,7 @@
 #include <OgreEntity.h>
 #include <OgreWindowEventUtilities.h>
 #include <OgreException.h>
+#include <OgreNode.h>
 #include <OISEvents.h>
 #include <OISInputManager.h>
 #include <OISKeyboard.h>

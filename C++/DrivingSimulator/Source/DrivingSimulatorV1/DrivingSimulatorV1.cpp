@@ -20,26 +20,8 @@ DrivingSimulatorV1::~DrivingSimulatorV1()
 
 }
 
-void DrivingSimulatorV1::createScene1() // city
+void DrivingSimulatorV1::createCar()
 {
-	// create world node
-	worldNode = sceneManager->getRootSceneNode()->createChildSceneNode();
-	worldNode->scale(0.05, 0.05, 0.05);
-
-	// create ETH Node
-	Ogre::Entity* eth = sceneManager->createEntity("ETH.mesh");
-	Ogre::SceneNode* ethNode = sceneManager->getRootSceneNode()->createChildSceneNode();
-	ethNode->attachObject(eth);
-	ethNode->scale(1.3, 1.3, 1.3);
-	ethNode->setPosition(428, 0, 235);
-	ethNode->yaw(Ogre::Degree(210));
-
-	// Scene 3
-	Ogre::Entity* plane = sceneManager->createEntity("CityWorld.mesh");
-	plane->setCastShadows(false);
-	worldNode->attachObject(plane);
-	//worldNode->setPosition(0, 20, 0);
-
 	// load car
 	Ogre::Entity* car = sceneManager->createEntity("MiniCooper.mesh");
 	carNode = sceneManager->getRootSceneNode()->createChildSceneNode();
@@ -63,6 +45,26 @@ void DrivingSimulatorV1::createScene1() // city
 	steeringWheelNode->attachObject(steeringWheel);
 	steeringWheelNode->scale(0.03, 0.03, 0.03);
 
+	// setup camera
+	camera->setFOVy(Ogre::Degree(70));
+}
+
+void DrivingSimulatorV1::createScene1() // city
+{
+	// create world node
+	Ogre::SceneNode* worldNode = sceneManager->getRootSceneNode()->createChildSceneNode();
+	Ogre::Entity* cityWorld = sceneManager->createEntity("CityWorld.mesh");
+	worldNode->scale(0.05, 0.05, 0.05);
+	worldNode->attachObject(cityWorld);
+
+	// create ETH Node
+	Ogre::SceneNode* ethNode = sceneManager->getRootSceneNode()->createChildSceneNode();
+	Ogre::Entity* eth = sceneManager->createEntity("ETH.mesh");
+	ethNode->attachObject(eth);
+	ethNode->scale(1.3, 1.3, 1.3);
+	ethNode->setPosition(428, 0, 235);
+	ethNode->yaw(Ogre::Degree(210));
+
 	// create ambient light
 	sceneManager->setAmbientLight(Ogre::ColourValue(0.7, 0.7, 0.7));
 
@@ -72,21 +74,29 @@ void DrivingSimulatorV1::createScene1() // city
 	sunLight->setDirection(Ogre::Vector3(-0.5, -0.5, 0.5));
 	sunLight->setDiffuseColour(Ogre::ColourValue(1, 1, 1));
 	sunLight->setSpecularColour(Ogre::ColourValue(0.7, 0.7, 0.7));
-
-	// setup camera
-	camera->setFOVy(Ogre::Degree(70));
 }
 
 void DrivingSimulatorV1::createScene2() // tunnels
 {
+	// create world node
+	Ogre::SceneNode* worldNode = sceneManager->getRootSceneNode()->createChildSceneNode();
+	Ogre::Entity* map = sceneManager->createEntity("MountainMap.mesh");
+	worldNode->scale(0.05, 0.05, 0.05);
+	worldNode->attachObject(map);
 
+	// create ambient light
+	sceneManager->setAmbientLight(Ogre::ColourValue(0.7, 0.7, 0.7));
+
+	// create sun light
+	Ogre::Light* sunLight = sceneManager->createLight();
+	sunLight->setType(Ogre::Light::LT_DIRECTIONAL);
+	sunLight->setDirection(Ogre::Vector3(-0.5, -0.5, 0.5));
+	sunLight->setDiffuseColour(Ogre::ColourValue(1, 1, 1));
+	sunLight->setSpecularColour(Ogre::ColourValue(0.7, 0.7, 0.7));
 }
 
 bool DrivingSimulatorV1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
-    // display fps
-    //std::cout << 1/evt.timeSinceLastFrame << std::endl;
-
 	// capture input devices
 	if(inputManager)
 	{
@@ -194,47 +204,49 @@ bool DrivingSimulatorV1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	// update camera
 	if(cameraMode == COCKPIT)
 	{
+		// position camera
         Ogre::Vector3 cameraOffset(1.3, 4.0, 0.7);
-        camera->setOrientation(carNode->getOrientation());
+        camera->setOrientation(carNode->getOrientation() * Ogre::Quaternion(Ogre::Degree(180), Ogre::Vector3::UNIT_Y));
         camera->setPosition(carNode->getPosition() + carNode->getOrientation() * cameraOffset);
-        camera->yaw(Ogre::Degree(180));
 
+		// position car cockpit
 		Ogre::Vector3 cockpitOffset(0, 2, 0.7);
-
 		cockpitNode->setPosition(carNode->getPosition() + carNode->getOrientation() * cockpitOffset);
 		cockpitNode->setOrientation(carNode->getOrientation());
 		cockpitNode->yaw(Ogre::Degree(180));
 
+        // fix inaccuracy of carNode's orientation and position by assigning it it's own transformations
+        carNode->setOrientation(carNode->getOrientation());
+        carNode->setPosition(carNode->getPosition());
+
         // position speed pointer
         Ogre::Vector3 pointerOffset(0.0, 2.7, 2.9);
-        pointerNode->setOrientation(carNode->getOrientation());
+		Ogre::Quaternion pointerPitch(Ogre::Degree(15), Ogre::Vector3::UNIT_X);
+        Ogre::Quaternion pointerRoll(Ogre::Degree(45 + Ogre::Math::Abs(UdpListener::speed * 2.25)), Ogre::Vector3::UNIT_Z);
         pointerNode->setPosition(carNode->getPosition() + carNode->getOrientation() * pointerOffset);
-        pointerNode->pitch(Ogre::Degree(15));
-        pointerNode->roll(Ogre::Degree(45 + Ogre::Math::Abs(UdpListener::speed * 2.25)));
+        pointerNode->setOrientation(carNode->getOrientation() * pointerPitch * pointerRoll);
 
         // position steering wheel
         Ogre::Vector3 steeringWheelOffset(1.3, 2.5, 2.5);
-        steeringWheelNode->setOrientation(carNode->getOrientation());
+        Ogre::Quaternion steeringWheelPitch(Ogre::Degree(15), Ogre::Vector3::UNIT_X);
+        Ogre::Quaternion steeringWheelRoll(Ogre::Degree(keyboardSteer * -1.5 + UdpListener::steer * 450), Ogre::Vector3::UNIT_Z);
+        steeringWheelNode->setOrientation(carNode->getOrientation() * steeringWheelPitch * steeringWheelRoll);
         steeringWheelNode->setPosition(carNode->getPosition() + carNode->getOrientation() * steeringWheelOffset);
-        steeringWheelNode->pitch(Ogre::Degree(15));
-        steeringWheelNode->roll(Ogre::Degree(keyboardSteer * -1.5 + UdpListener::steer * 270));
 
 		carNode->setVisible(false);
 		cockpitNode->setVisible(true);
 		pointerNode->setVisible(true);
 		if(SHOW_STEERING_WHEEL)
 			steeringWheelNode->setVisible(true);
+		else
+			steeringWheelNode->setVisible(false);
 	}
 	else if(cameraMode == THIRD_PERSON)
 	{
 		if(speed >= 0)
-		{
 			cameraRotationOffset *= Ogre::Math::Pow(0.1, evt.timeSinceLastFrame);
-		}
 		else
-		{
 			cameraRotationOffset = cameraRotationOffset * Ogre::Math::Pow(0.1, evt.timeSinceLastFrame) + 180 * (1 - Ogre::Math::Pow(0.1, evt.timeSinceLastFrame));
-		}
 
 		Ogre::Radian camAngle = carNode->getOrientation().getYaw() + Ogre::Degree(cameraRotationOffset);
 		Ogre::Real camXOffset = -Ogre::Math::Sin(camAngle) * 25;
@@ -265,7 +277,8 @@ int main(int argc, char** argv)
 	try
 	{
 		// start application
-		app.createScene1();
+		app.createCar();
+		app.createScene2();
 		app.start();
 	}
 	catch(Ogre::Exception e)
