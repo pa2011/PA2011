@@ -27,7 +27,6 @@ void DrivingSimulatorV1::createCar()
 	carNode = sceneManager->getRootSceneNode()->createChildSceneNode();
 	carNode->attachObject(car);
 	carNode->scale(4, 4, 4);
-	carNode->setPosition(-5, 0, 0);
 
 	// load Cockpit
 	Ogre::Entity* cockpit = sceneManager->createEntity("MiniCockpit.mesh");
@@ -74,6 +73,10 @@ void DrivingSimulatorV1::createScene1() // city
 	sunLight->setDirection(Ogre::Vector3(-0.5, -0.5, 0.5));
 	sunLight->setDiffuseColour(Ogre::ColourValue(1, 1, 1));
 	sunLight->setSpecularColour(Ogre::ColourValue(0.7, 0.7, 0.7));
+
+	// set car to initial position and orientation
+	carNode->setPosition(584, 0, 121);
+	carNode->setOrientation(Ogre::Quaternion(Ogre::Degree(-4.5), Ogre::Vector3::UNIT_Y));
 }
 
 void DrivingSimulatorV1::createScene2() // tunnels
@@ -93,6 +96,10 @@ void DrivingSimulatorV1::createScene2() // tunnels
 	sunLight->setDirection(Ogre::Vector3(-0.5, -0.5, 0.5));
 	sunLight->setDiffuseColour(Ogre::ColourValue(1, 1, 1));
 	sunLight->setSpecularColour(Ogre::ColourValue(0.7, 0.7, 0.7));
+
+	// set car to initial position and orientation
+	carNode->setPosition(309, 0, -604);
+	carNode->setOrientation(Ogre::Quaternion(Ogre::Degree(-90), Ogre::Vector3::UNIT_Y));
 }
 
 bool DrivingSimulatorV1::frameRenderingQueued(const Ogre::FrameEvent& evt)
@@ -261,6 +268,9 @@ bool DrivingSimulatorV1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 		pointerNode->setVisible(false);
 		steeringWheelNode->setVisible(false);
 	}
+
+    // debug output
+	//std::cout << "Position: " << carNode->getPosition() << " Rotation: " << carNode->getOrientation().getYaw().valueDegrees() << std::endl;
 
 	// if we reach this position of the code, no error has occurred
 	return true;
