@@ -1,2 +1,11 @@
 @echo off
-%0\..\Build\Windows\Release\VideoPlayer.exe %1 %2 %3 %4 %5 %6
+cd %0\..\
+
+set udp-port=52284
+set vlc-path="D:\VLC\vlc.exe"
+set vlc-port=4212
+set vlc-password="ethz"
+set channel-name="channel1"
+set video-path="D:\Videos\video1.mp4"
+
+Build\Windows\Release\VideoPlayer.exe %udp-port% %vlc-path% %vlc-port% %vlc-password% %channel-name% %video-path%
