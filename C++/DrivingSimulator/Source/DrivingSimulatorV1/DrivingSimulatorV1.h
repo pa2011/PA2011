@@ -8,6 +8,8 @@ class DrivingSimulatorV1 : public MainApplication
 	public:
 	DrivingSimulatorV1();
 	virtual ~DrivingSimulatorV1();
+	void setAllowReverse(Ogre::uint8 allowReverse);
+	void setShowSteeringWheel(Ogre::uint8 showSteeringWheel);
 	void createCar();
 	void createScene1();
 	void createScene2();
@@ -23,6 +25,8 @@ class DrivingSimulatorV1 : public MainApplication
 	Ogre::uint8 cameraMode;
 	Ogre::uint8 keyState[256];
 	Ogre::uint8 gear;
+	Ogre::uint8 allowReverse;
+	Ogre::uint8 showSteeringWheel;
 
 	private:
 	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);

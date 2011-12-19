@@ -10,8 +10,8 @@ material city_street_h
 			
 			texture_unit
 			{
-				texture street_h.png 2d 3
-				filtering trilinear
+				texture street_h.png 2d 6
+				filtering anisotropic
 			}
 		}
 	}
@@ -27,8 +27,8 @@ material city_street_h_double
 			
 			texture_unit
 			{
-				texture street_h_double.png 2d 3
-				filtering trilinear
+				texture street_h_double.png 2d 6
+				filtering anisotropic
 			}
 		}
 	}
@@ -44,8 +44,8 @@ material city_street_v
 			
 			texture_unit
 			{
-				texture street_v.png 2d 3
-				filtering trilinear
+				texture street_v.png 2d 6
+				filtering anisotropic
 			}
 		}
 	}
@@ -61,8 +61,8 @@ material city_onewaystreet_with_parkingslot
 			
 			texture_unit
 			{
-				texture onewaystreet_with_parkingslot.png 2d 3
-				filtering trilinear
+				texture onewaystreet_with_parkingslot.png 2d 6
+				filtering anisotropic
 			}
 		}
 	}
@@ -78,8 +78,8 @@ material city_single_kein_vortritt
 			
 			texture_unit
 			{
-				texture single_kein_vortritt.png 2d 3
-				filtering trilinear
+				texture single_kein_vortritt.png 2d 6
+				filtering anisotropic
 			}
 		}
 	}
@@ -95,8 +95,8 @@ material city_street_only_in
 			
 			texture_unit
 			{
-				texture street_only_in.png 2d 3
-				filtering trilinear
+				texture street_only_in.png 2d 6
+				filtering anisotropic
 			}
 		}
 	}
@@ -112,8 +112,8 @@ material city_oneway_street
 			
 			texture_unit
 			{
-				texture oneway_street.png 2d 3
-				filtering trilinear
+				texture oneway_street.png 2d 6
+				filtering anisotropic
 			}
 		}
 	}
@@ -129,8 +129,8 @@ material city_street_kein_vortritt
 			
 			texture_unit
 			{
-				texture street_kein_vortritt.png 2d 3
-				filtering trilinear
+				texture street_kein_vortritt.png 2d 6
+				filtering anisotropic
 			}
 		}
 	}
@@ -146,8 +146,8 @@ material city_street_stop
 			
 			texture_unit
 			{
-				texture street_stop.png 2d 3
-				filtering trilinear
+				texture street_stop.png 2d 6
+				filtering anisotropic
 			}
 		}
 	}
@@ -176,8 +176,8 @@ material city_skyscraper1
 			
 			texture_unit
 			{
-				texture skyscraper1.png 2d 3
-				filtering trilinear
+				texture skyscraper1.png 2d 6
+				filtering anisotropic
 			}
 		}
 	}
@@ -194,8 +194,8 @@ material city_skyscraper1_base
 			
 			texture_unit
 			{
-				texture skyscraper1_base.png 2d 3
-				filtering trilinear
+				texture skyscraper1_base.png 2d 6
+				filtering anisotropic
 			}
 		}
 	}
@@ -212,8 +212,8 @@ material city_skyscraper2
 			
 			texture_unit
 			{
-				texture skyscraper2.png 2d 3
-				filtering trilinear
+				texture skyscraper2.png 2d 6
+				filtering anisotropic
 			}
 		}
 	}
@@ -230,8 +230,8 @@ material city_skyscraper3
 			
 			texture_unit
 			{
-				texture skyscraper3.png 2d 3
-				filtering trilinear
+				texture skyscraper3.png 2d 6
+				filtering anisotropic
 			}
 		}
 	}
@@ -248,8 +248,8 @@ material city_skyscraper3_base
 			
 			texture_unit
 			{
-				texture skyscraper3_base.png 2d 3
-				filtering trilinear
+				texture skyscraper3_base.png 2d 6
+				filtering anisotropic
 			}
 		}
 	}
@@ -266,8 +266,8 @@ material city_skyline
 			
 			texture_unit
 			{
-				texture skyline.png 2d 3
-				filtering trilinear
+				texture skyline.png 2d 6
+				filtering anisotropic
 			}
 		}
 	}
@@ -284,8 +284,8 @@ material city_tree_leaves
 			
 			texture_unit
 			{
-				texture tree_leaves.png 2d 4
-				filtering trilinear
+				texture tree_leaves.png 2d 6
+				filtering anisotropic
 			}
 		}
 	}
@@ -302,8 +302,8 @@ material city_tree_log
 			
 			texture_unit
 			{
-				texture tree_log.png 2d 4
-				filtering trilinear
+				texture tree_log.png 2d 6
+				filtering anisotropic
 			}
 		}
 	}

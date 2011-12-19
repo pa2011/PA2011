@@ -1,0 +1,11 @@
+@echo off
+
+set UDP_IN_PORT=52284
+set UDP_OUT_PORT=52285
+set REMOTE_ADDRESS=127.0.0.1
+set ALLOW_REVERSE=1
+set SHOW_STEERING_WHEEL=1
+set MAP=2
+
+cd %0\..\Build\Windows\bin\DrivingSimulatorV1\Release
+DrivingSimulatorV1.exe %UDP_IN_PORT% %UDP_OUT_PORT% %REMOTE_ADDRESS% %ALLOW_REVERSE% %SHOW_STEERING_WHEEL% %MAP%

@@ -2,8 +2,6 @@
 
 #define THIRD_PERSON 0
 #define COCKPIT 1
-#define ALLOW_REVERSE true
-#define SHOW_STEERING_WHEEL true
 #define THROTTLE_THRESHOLD 0.05
 #define NEUTRAL 0
 #define DRIVE 1
@@ -18,11 +16,23 @@ DrivingSimulatorV1::DrivingSimulatorV1()
     keyboardSteer = 0;
     gear = NEUTRAL;
     speed = 0;
+    allowReverse = true;
+    showSteeringWheel = true;
 }
 
 DrivingSimulatorV1::~DrivingSimulatorV1()
 {
 
+}
+
+void DrivingSimulatorV1::setAllowReverse(Ogre::uint8 allowReverse)
+{
+    this->allowReverse = allowReverse;
+}
+
+void DrivingSimulatorV1::setShowSteeringWheel(Ogre::uint8 showSteeringWheel)
+{
+    this->showSteeringWheel = showSteeringWheel;
 }
 
 void DrivingSimulatorV1::createCar()
@@ -183,7 +193,7 @@ bool DrivingSimulatorV1::frameRenderingQueued(const Ogre::FrameEvent& evt)
     {
         if(UdpListener::throttle > THROTTLE_THRESHOLD || keyboard->isKeyDown(OIS::KC_UP))
             gear = DRIVE;
-        else if(ALLOW_REVERSE && UdpListener::throttle < -THROTTLE_THRESHOLD || keyboard->isKeyDown(OIS::KC_DOWN))
+        else if(allowReverse && UdpListener::throttle < -THROTTLE_THRESHOLD || keyboard->isKeyDown(OIS::KC_DOWN))
             gear = REVERSE;
     }
 
@@ -289,7 +299,7 @@ bool DrivingSimulatorV1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 		carNode->setVisible(false);
 		cockpitNode->setVisible(true);
 		pointerNode->setVisible(true);
-		if(SHOW_STEERING_WHEEL)
+		if(showSteeringWheel)
 			steeringWheelNode->setVisible(true);
 		else
 			steeringWheelNode->setVisible(false);
@@ -322,19 +332,61 @@ bool DrivingSimulatorV1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	return true;
 }
 
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT)
-#else
 int main(int argc, char** argv)
-#endif
 {
 	// create application object
 	DrivingSimulatorV1 app;
 	try
 	{
+	    int udpInPort;
+	    int udpOutPort;
+	    char remoteAddress[256];
+	    int allowReverse;
+	    int showSteeringWheel;
+	    int map;
+
+        if(argc == 7)
+        {
+            udpInPort = atoi(argv[1]);
+            udpOutPort = atoi(argv[2]);
+            memset(&remoteAddress, 0, sizeof(remoteAddress));
+            sprintf(remoteAddress, "%s", argv[3]);
+            allowReverse = atoi(argv[4]);
+            showSteeringWheel = atoi(argv[5]);
+            map = atoi(argv[6]);
+        }
+        else if(argc == 1)
+        {
+            printf("No ports specified, using default ports: %d, %d and remote address: %s\n", DEFAULT_UDP_PORT_IN, DEFAULT_UDP_PORT_OUT, DEFAULT_REMOTE_ADDRESS);
+            udpInPort = DEFAULT_UDP_PORT_IN;
+            udpOutPort = DEFAULT_UDP_PORT_OUT;
+            memset(&remoteAddress, 0, sizeof(remoteAddress));
+            sprintf(remoteAddress, "%s", DEFAULT_REMOTE_ADDRESS);
+            allowReverse = true;
+            showSteeringWheel = true;
+            map = 1;
+        }
+        else
+	    {
+	        char message[1024];
+	        memset(&message, 0, sizeof(message));
+	        sprintf(message, "Usage: %s [ udp-in-port udp-out-port remote-address allow-reverse show-steering-wheel ]");
+            throw Ogre::Exception(Ogre::Exception::ERR_INVALIDPARAMS, message, "main");
+	    }
+
+        // create udp listener
+        UdpListener::startUdpListener(udpInPort, udpOutPort, remoteAddress);
+
 		// start application
 		app.createCar();
-		app.createScene1();
+
+		if(map == 1)
+            app.createScene1();
+        else
+            app.createScene2();
+
+		app.setAllowReverse(allowReverse);
+		app.setShowSteeringWheel(showSteeringWheel);
 		app.start();
 	}
 	catch(Ogre::Exception e)
