@@ -1,24 +1,17 @@
 \section{Einleitung}
 \subsection{Ausgangslage}
 
-Im Gebiet der Fahrsimulatoren gibt es bereits eine Vielzahl von verschiedenen Lösungen. Einige davon bestehen aus Filmmaterial, das abgespielt wird und der Fahrer muss auf die Bremse drücken sobald ein bestimmtes Ereigniss eintritt. Andere Fahrsimulationen bringen bereits eine virtuelle Welt mit, in der man sich mehr oder weniger frei bewegen bzw. frei fahren kann. Jedoch sind bei den meisten von diesen Fahrsimulatoren bereits feste Szenarien implementiert die  nicht geändert werden können.
-
-Die Grenzen eines Fahrsimulators liegen vor allem in der Leistungsfähigkeit des Rechners auf dem die Simulation installiert werden soll. 
-
-Das Projekt wird in Zusammenarbeit mit der ETH Zürich durchgeführt. Es ist bereits eine LabView Schnittstelle für das Steuerrad vorhanden.
-
+Im Gebiet der Fahrsimulatoren gibt es bereits eine Vielzahl von verschiedenen Lösungen. Einige davon bestehen aus Filmmaterial, dass abgespielt wird und der Fahrer muss auf die Bremse drücken sobald ein bestimmtes Ereigniss eintritt. Andere Fahrsimulationen bringen bereits eine virtuelle Welt mit, in der man sich mehr oder weniger frei bewegen bzw. frei fahren kann. Jedoch sind bei den meisten von diesen Fahrsimulatoren bereits feste Szenarien implementiert die  nicht geändert werden können. Die Grenzen eines Fahrsimulators liegen vor allem in der Leistungsfähigkeit des Rechners auf dem die Simulation installiert werden soll. Zusätzliche Schwierigkeiten für Fahrsimulatoren ist die Simulation von Verkehr auf den Strassen. \\
+Das Projekt wird in Zusammenarbeit mit der ETH Zürich durchgeführt. Im Rahmen verschiedener Forschungen sollen Probanden im Fahrsimulator verschiedene Strassensituationen antreffen. Eine dieser Forschungen bezieht sich auf die einwirkung von Medikamenten im Strassenverkeht. Hierbei soll die Aufmerksamkeit und Reaktionsfähigkeit des Probanden vor und nach der einnahme von Medikamenten getestet werden. Eine weitere Forschung untersucht das einfahren in Tunnels mit einem Fahrzeug. Wenn der Portalbereich eines Tunnels von der Sonne beschienen wird ist dieser sehr hell. Der innenbereich des Tunnels hingegen ist dunkel. Der Autofahrer ist also einem starken Helligkeitunterschied ausgesetzt und die Augen müssen sich auf die neue Situation einstellen. Um herauszufinden wie sich diese Anpassungsphase der Augen auf die Wahrnemungsfähigkeit und Reaktionfähigkeit auswirkt, werden solche Versuche im Simulatior durchgeführt. \\
+Die Hardwarekomponenten des Fahrsimulators bestehen aus einem Rechner, einem Beamer, eine speziell bemahlten Wand die als Projektionsfläche dient und einem Cockpit mit Autositz und Sicherheitsgurt. Im Cockpit befinden sich Gas- und Bremspedas sowie eine Kupplung, ein Steuerrad mit verschiedenen Knöpfen und eine Gangschaltung. Auf dem Rechner befindet sich eine LabVIEW-Umgebung. Es existiert bereits ein LabVIEW-Programm, dass eine Anbindung an das Cockpit hat.
 
 \subsection{Aufgabenstellung}
 \subsubsection{Formulierung}
-
-Das Ziel der Arbeit besteht darin, einen Fahrsimulator für die bestehende Simulatinsumgebung zu erstellen. Diese besteht aus einem Fahrercockpit, einer Leinwand, einem Projektor und einem Computerterminal, von dem aus die Simulation gesteuert werden kann. Das Fahrercockpit enthält ein Steuerrad, drei Pedalen, einen Schaltknüppel und einen Autositz mit Sicherheitsgurt.
-
-Die Fahrsimulation sollte dem Benutzer die Illusion des Autofahren möglichts realistisch vermitteln. Die soll durch einen Einsatz von Karteninfomationen von Google Maps oder Google Street View unterstützt werden. 
-
-Zudem sollen alle Betriebszustände und Benutzereingaben registriert und aufgezeichnet werden um eine genaue Analyse zu ermöglichen. 
+Um die ETH bei ihren Forschungen zu unterstützen wird im Rahmen dieser Projetkarbeit ein Fahrsimulator für die bestehende Simulationsumgebung entwickelt. Durch Manipulationen im Cockpit soll der Proband das Fahrzeug durch die 3D-Umgebung bewegen können. Die Fahrsimulation sollte dem Probanden die Illusion des Autofahren möglichts realistisch vermitteln. Durch den Einsatz von Karteninfomationen von Google Maps oder Google Street View wird diese unterstützt. Zudem sollen alle Betriebszustände und Benutzereingaben registriert und aufgezeichnet werden um eine genaue Auswertung zu ermöglichen. 
 
 
 \subsubsection{Aufteilung der Arbeit}
-Wir teilten die Arbeit im Wesentlichen in zwei Teile auf. Im ersten Teil legten wir den Fokus auf die korrekte Ansteuerung des Cockpits. Um dies zu testen, setzten wir uns das Ziel, ein Video abzuspielen und mit Gas- und Bremspedal die Geschwindigkeit kontrollieren zu können. Im zweiten Teil folgte die Implementation und Installation der Fahrsimulation.
+In einem ersten Schritt wird die Schnittstelle zwischen dem Cockpit und dem zu realisierendem Programm über LabVIEW implementiert. Zu diesem Zweck wird ein Video-Player entwickelt, der bei Betätigung des Gas- und Bremspedals die Abspielgeschwindigkeit des Video manipuliert. Beim Video-Player soll zudem bereits die Verwendung von Log-Files  implementiert werden. Die Danach wird, mit der gleichen Schnittstelle, der Fahrsimulator realisiert. Ist dieser implementiert und getestet werden verschiedene Szenen für verschiedene Szenarien erstellt. 
+
 
 \subsection{Zeitplan und Arbeitsteilung}
