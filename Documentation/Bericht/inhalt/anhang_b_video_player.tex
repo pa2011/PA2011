@@ -1,22 +1,21 @@
 \section{Video Player}
 \subsection{Ziel}
 In einem ersten Schritt, noch vor der Realisierung des Fahrsimulator wird ein Video-Player ralisiert. Das Ziel des Video-Players ist es eine Verbindung zwischen dem Cockpit und unserem Programm herzustellen und diese zu Testen. Bei der Betätigung des Gaspedals im Cockpit soll das aufgenommene Video schneller abgespielt werden. Bei der Betätigung des Bremspedals dementsprechend langsamer. Der Video-Player soll so gegliedert werden, damit Komponenten davon auch im Fahrsimulator wiederverwendet werden können. Zudem ist die Darstellung einer Tunneleinfahrt mit den richtigen Lichtverhältnissen in einer 3D-Umgebung sehr schwierig. Eine gute Alternative bietet ein aufgenommenes Video einer Tunneleinfahrt. Die ETH-Zürich besitzt bereits Videos die sich dafür eigenen. Um Experimente mit diesen Videos durchführen zu können, müssen Manipulationen die der Proband im Cockpit mach mit dem entsprechenden Zeitpunkt im Video abgespeichert werden. Dies dient zur späteren Auswertung der Experimente. 
-
+\\
 \subsection{Systembeschreibung}
 
 % Bild für Systembeschreibung des Video Players
 \begin{figure}[H]
 \centering 
-\includegraphics{src/Systembeschreibung_VideoPlayer.pdf}
+\includegraphics[width=0.8\linewidth]{src/Systembeschreibung_VideoPlayer.pdf}
 \caption{Systembeschreibung Video-Player} % Titel der Grafik
 \label{Systembeschreibung Video-Player} % Labelname
 \end{figure}
 Um einzelne Komponenten des Video-Player wiederverwenden zu können, wird das System möglichst gleich wie das des Fahrsimulators aufgebaut. Dieser Aufbau wird anhand der Abbildung \ref{Systembeschreibung Video-Player} illustriert.  Die blau markierten Komponenten werden im Rahmen des Video-Players entwickelt. Alle überigen sind bereits vorbestehend. \\
-Die LabVIEW-Komponente in der Abbildung \ref{Systembeschreibung Video-Player} liest bereits die Eingaben die der Proband im Cockpit mach ein. Diese wird mit einem UDP-Socket erweitert um die Eingaben des Probanden an den Video-Player weiterzuleiten. Die UPD-Packete sollen vom UDP-Listener gelesen werden und die in ihnen enthaltenen Parameter gespeichert werden. Das Hauptprogramm soll auf die gespeicherten Parameter Zugriff haben. Aufgrund der Parameter soll das Hauptprogramm die Abspielgeschwindigkeit des Videos manipulieren, das mit einem Programm abgespielt wird. Durch mehere Versuche hat sich gezeigt das sich der MPlayer am besten für solch eine Aufgabe eignet. Dies wird in der Ralisierung ausführlich dokumentiert. Der MPlayer soll die Position im Video an das Hauptprogramm übergeben können. Das Hauptprogramm soll diese Information der Video-Position mit den getätigten Eingaben des Probanden ergänzen und dies an den UDP-Listener übergeben. Über den UDP-Sockes sollen die Daten an das LabVIEW-Programm gesendet werden. Dort muss zusätzlich ein Port eingerichtet werden um UDP-Packete zu empfangen. 
-
+Die LabVIEW-Komponente in der Abbildung \ref{Systembeschreibung Video-Player} liest bereits die Eingaben die der Proband im Cockpit mach ein. Diese wird mit einem UDP-Socket erweitert um die Eingaben des Probanden an den Video-Player weiterzuleiten. Die UPD-Packete sollen vom UDP-Listener gelesen werden und die in ihnen enthaltenen Parameter gespeichert werden. Das Hauptprogramm soll auf die gespeicherten Parameter Zugriff haben. Aufgrund der Parameter soll das Hauptprogramm die Abspielgeschwindigkeit des Videos manipulieren, das mit einem Programm abgespielt wird. Durch mehere Versuche hat sich gezeigt das sich der MPlayer am besten für solch eine Aufgabe eignet. Dies wird in der Ralisierung ausführlich dokumentiert. Der MPlayer soll die Position im Video an das Hauptprogramm übergeben können. Das Hauptprogramm soll diese Information der Video-Position mit den getätigten Eingaben des Probanden ergänzen und dies an den UDP-Listener übergeben. Über den UDP-Sockes sollen die Daten an das LabVIEW-Programm gesendet werden. Dort muss zusätzlich ein Port eingerichtet werden um UDP-Packete zu empfangen.
+\\
 Eine wird erweitert wie in Kapitel 3.1 dokumentiert. 
-
-
+\\
 Die LabVIEW-Komponente in der Abbildung \ref{Systembeschreibung Video-Player} liest bereits die Eingaben die der Proband im Cockpit mach ein. Dieses muss nun so erweitert werden, dass diese über einen UDP-Socket an das Programm übertragen werden. Zusätzlich muss im LabVIEW ein UDP-Port eingerichtet werden, der verwendet werden kann, um UDP-Packete zu empfangen. Dieser wird benötigt um Daten die von unserem Programm gesendet werden in ein Log-File zu schreiben.
 Die Parameter werden vom vom UDP-Listener gespeichert und vom Hauptprogramm abgefragt. Aufgrund der Parameter wird dann die Geschwindigkeit des Videos manipuliert. Für das Abspielen des Videos wird der mPlayer verwendet. Die Befehle für den mPlayer können von unserem Programm über die Komandozeile abgesetzt werden. Ausgaben vom mPlayer  werden ebenfalls über die Komandozeile den Standartausgang der Konsole übergeben. 
 
@@ -25,7 +24,7 @@ In einem bestehendem LabVIEW-Programm werden bereits alle Eingaben, die im Cockp
 
 \begin{figure}[H]
 \centering 
-\includegraphics[scale=0.5]{src/koordinatensystem.png}
+\includegraphics[width=0.5\linewidth]{src/koordinatensystem.png}
 \caption{Koordinatensystem} % Titel der Grafik
 \label{Koordinatensystem2} % Labelname
 \end{figure}
