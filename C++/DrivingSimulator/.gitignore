@@ -8,3 +8,4 @@ Build/Windows/*.depend
 Build/Windows/UserResources/*
 !Build/Windows/UserResources/README.txt
 *.skb
+Thumbs.db
