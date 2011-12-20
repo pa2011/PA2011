@@ -4,24 +4,27 @@ In einem ersten Schritt, noch vor der Realisierung des Fahrsimulator wird ein Vi
 \\
 \subsection{Systembeschreibung}
 
+Um einzelne Komponenten des Video-Player wiederverwenden zu können, wird das System möglichst gleich wie das des Fahrsimulators aufgebaut. Dieser Aufbau wird anhand der Abbildung \ref{Systembeschreibung Video-Player} illustriert. Blau markiert sind eingens entwickelte Komponenten des Videoplayers. Die Eingaben im Cockpit werden von einem LabVIEW-Programm über eine USB-Schnittstelle eingelesen. Die eingelesenen Parameter werden, zusammen mit einem Timestamp, von LabVIEW in ein UDP-Packet verpackt und über ein UDP-Socket gesendet. Das UDP-Packet wird von einem UDP-Listener empfangen und gelesen. Dieser speichert die empfangenen Parameter ab und hält sie für das Hauptprogramm bereit. Das Hauptprogramm (Main Application) liest die gespeicherten Parameter aus und interpretiert diese. Das Hauptprogramm steuert die Geschwindigkeit des Videos über Konsolen-Befehle. Der MPlayer, der für das abspielen der Videos verwendet wird, lässt durch die Konsolenbefehle das Video schneller oder langsamer laufen. Über die Konsole gibt der MPlayer die aktuelle Position des Videos aus. Diese Positionsdaten werden vom Hauptprogramm empfangen, mit Benutzereingaben ergänzt und an den UDP-Listener weitergeleitet. Dieser verpackt alle Daten vom Hauptprogramm in ein UDP-Packet und sendet es an das LabVIEW-Programm. Das LabVIEW-Programm benötigt einen zweiten UDP-Socket um Daten zu empfangen. Die empfangenen Daten vom UDP-Listener werden sofort in ein Log-File gespeichert, damit diese für eine Auswertungen zur Verfügung stehen.
+\newpage
+
 % Bild für Systembeschreibung des Video Players
-\begin{figure}[h]
+\begin{figure}[H]
 \centering 
 \includegraphics[width=0.8\linewidth]{src/Systembeschreibung_VideoPlayer.pdf}
 \caption{Systembeschreibung Video-Player} % Titel der Grafik
 \label{Systembeschreibung Video-Player} % Labelname
 \end{figure}
-Um einzelne Komponenten des Video-Player wiederverwenden zu können, wird das System möglichst gleich wie das des Fahrsimulators aufgebaut. Dieser Aufbau wird anhand der Abbildung \ref{Systembeschreibung Video-Player} illustriert. Blau markiert sind eingens entwickelte Komponenten des Videoplayers. Die Eingaben im Cockpit werden von einem LabVIEW-Programm über eine USB-Schnittstelle eingelesen. Die eingelesenen Parameter werden, zusammen mit einem Timestamp, von LabVIEW in ein UDP-Packet verpackt und über ein UDP-Socket gesendet. Das UDP-Packet wird von einem UDP-Listener empfangen und gelesen. Dieser speichert die empfangenen Parameter ab und hält sie für das Hauptprogramm bereit. Das Hauptprogramm (Main Application) liest die gespeicherten Parameter aus und interpretiert diese. Das Hauptprogramm steuert die Geschwindigkeit des Videos über Konsolen-Befehle. Der MPlayer, der für das abspielen der Videos verwendet wird, lässt durch die Konsolenbefehle das Video schneller oder langsamer laufen. Über die Konsole gibt der MPlayer die aktuelle Position des Videos aus. Diese Positionsdaten werden vom Hauptprogramm empfangen, mit Benutzereingaben ergänzt und an den UDP-Listener weitergeleitet. Dieser verpackt alle Daten vom Hauptprogramm in ein UDP-Packet und sendet es an das LabVIEW-Programm. Das LabVIEW-Programm benötigt einen zweiten UDP-Socket um Daten zu empfangen. Die empfangenen Daten vom UDP-Listener werden sofort in ein Log-File gespeichert, damit diese für eine Auswertungen zur Verfügung stehen. 
 
 \subsection{Realisierung}
-Bei der Realisierung des Vidoe-Players wird der Fokus vorallem auf die Entwicklung der LabVIEW Schnittstelle mit unserem Programm gelegt. Darum wird dieser Schritt der Realisierung nachfolgend ausführlich erklährt. Diese Schnittstelle wird auch für den Fahrsimulator selbst verwendet. Die Realisierung des Video-Players wird ebenfalls erläutert. 
+Bei der Realisierung des Vidoe-Players wird der Fokus vorallem auf die Entwicklung der LabVIEW Schnittstelle mit unserem Programm gelegt. Darum wird dieser Schritt der Realisierung nachfolgend ausführlich erklährt. Diese Schnittstelle wird auch für den Fahrsimulator selbst verwendet. Die Realisierung des Video-Players wird ebenfalls erläutert.
+
 \subsubsection{LabVIEW Schnittstelle}
 Die Realisierung der LabVIEW Schnittstelle wird in zwei Teile unterteilt. Der erste Teil dient dazu die Eingaben, die im Cockpit gemacht werden, einzulesen und an den UDP-Listener zu senden. Der zweite Teil befasst sich mit dem Empfangen von Daten, die vom UDP-Listener gesendet werden und dessen speicherung in ein LogFile. 
 
 % LabVIEW Screenshot um Daten zu senden
 \begin{figure}[H]
 \centering 
-\includegraphics[width=0.8\linewidth]{src/labview_screenshot_videoplayer_daten_senden.png}
+\includegraphics[width=1\linewidth]{src/labview_screenshot_videoplayer_daten_senden.png}
 \caption{LabVIEW Screenshot um Daten zu senden} % Titel der Grafik
 \label{labview_screenshot_videoplayer_daten_senden} % Labelname
 \end{figure}
@@ -32,7 +35,7 @@ Aus dem Cockpit werden die Werte der x- und y-Achse ausgelesen. Auf der y-Achse 
 % LabVIEW Screenshot um Daten zu empfangen
 \begin{figure}[H]
 \centering 
-\includegraphics[width=0.8\linewidth]{src/labview_screenshot_videoplayer_daten_empfangen.png}
+\includegraphics[width=1\linewidth]{src/labview_screenshot_videoplayer_daten_empfangen.png}
 \caption{LabVIEW Screenshot um Daten zu empfangen} % Titel der Grafik
 \label{labview_screenshot_videoplayer_daten_empfangen} % Labelname
 \end{figure}
