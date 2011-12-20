@@ -234,10 +234,15 @@ bool DrivingSimulatorV1::frameRenderingQueued(const Ogre::FrameEvent& evt)
     else if(keyboardSteer > 90)
         keyboardSteer = 90;
 
-    if(speed != 0)
+    if(gear == DRIVE)
     {
-        carNode->yaw(Ogre::Degree(steerIntensity * keyboardSteer * evt.timeSinceLastFrame * Ogre::Math::Abs(speed) / speed));
-        cameraRotationOffset -= keyboardSteer * 0.3 * evt.timeSinceLastFrame * steerIntensity * Ogre::Math::Abs(speed) / speed;
+        carNode->yaw(Ogre::Degree(steerIntensity * keyboardSteer * evt.timeSinceLastFrame));
+        cameraRotationOffset -= keyboardSteer * 0.3 * evt.timeSinceLastFrame * steerIntensity;
+    }
+    else if(gear == REVERSE)
+	{
+        carNode->yaw(Ogre::Degree(steerIntensity * keyboardSteer * evt.timeSinceLastFrame * -1));
+        cameraRotationOffset -= keyboardSteer * 0.3 * evt.timeSinceLastFrame * steerIntensity * -1;
     }
 
 	// change camera mode
@@ -306,7 +311,7 @@ bool DrivingSimulatorV1::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	}
 	else if(cameraMode == THIRD_PERSON)
 	{
-		if(speed >= 0)
+		if(gear != REVERSE)
 			cameraRotationOffset *= Ogre::Math::Pow(0.1, evt.timeSinceLastFrame);
 		else
 			cameraRotationOffset = cameraRotationOffset * Ogre::Math::Pow(0.1, evt.timeSinceLastFrame) + 180 * (1 - Ogre::Math::Pow(0.1, evt.timeSinceLastFrame));
