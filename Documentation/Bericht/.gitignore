@@ -6,5 +6,8 @@
 *.maf
 *.mtc*
 *.~*
+*.gls
+*.glo
+*.ist
 *.synctex.gz
 main.pdf

@@ -11,6 +11,7 @@
 \usepackage{listings}
 \usepackage{wrapfig}
 \usepackage{tocloft}
+\usepackage[acronym,footnote,description,nonumberlist]{glossaries}
 
 % Metadaten
 \author{Sandro Ropelato, Christof Würmli}
@@ -73,6 +74,14 @@
 	extendedchars=\true
 }
 
+% ein paar übersetzungen
+\deftranslation[to=ngerman]{Glossary}{Glossar}
+
+% glossar erstellen
+\makeglossaries
+\defglsdisplayfirst[main]{#1#4\protect\footnote{#2}}
+\include{inhalt/glossar_definition}
+
 % seitenzahlen mit arabischen ziffern
 \renewcommand{\thesection}{\arabic{section}}
 
@@ -80,7 +89,7 @@
 \begin{document}
 
 	% titelseite
-	\input{inhalt/titelseite}
+	\include{inhalt/titelseite}
 	
 	% inhaltsverzeichnis
 	\fancyhead[RE]{\leftmark}
