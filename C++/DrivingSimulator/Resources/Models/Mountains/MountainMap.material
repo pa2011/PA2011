@@ -127,3 +127,21 @@ material mountain_sign_pillar
 		}
 	}
 }
+
+material mountain_skybox
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.00 0.00 0.00 0.00
+			ambient 1.00 1.00 1.00 1.00
+			
+			texture_unit
+			{
+				texture mountain_skybox.png 2d 4
+				filtering anisotropic
+			}
+		}
+	}
+}
