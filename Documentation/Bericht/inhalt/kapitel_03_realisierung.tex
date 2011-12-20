@@ -76,7 +76,7 @@ Um die erstellte Stadtszene gut dokumentieren zu können, zeigt Abbildung \ref{C
 \label{examples_street_textures} % Labelname
 \end{figure}
 Die Strassen mit Kurven werden mit \glspl{spline} beschrieben. Eine Linie wird der \gls{spline} entlangeführt um die Breite einer Strasse zu erhalten. Die Textur der Strasse wird auf dieses, so zusammengefügte, Objekt gelegt. Der Abschluss solcher geschwungenen Strassen bilden wiederum rechteckige Ebenen. Diese erhalten die Textur einer Stoplinie mit Beschriftung auf der Strasse oder den vielen Dreieckigen Zeichen für kein Vortritt wie in Abbildung \ref{examples_street_textures} gezeigt. \\
-Zusätzlich zu den Symbolen auf der Strasse, werden noch Verkehrsschilderobjekte in die Szene geladen. Die Abbildung \ref{screenshot_trafficsignal} zeigt ein Beipiel eines solchen Objektes. 
+Zusätzlich zu den Symbolen auf der Strasse, werden noch Verkehrsschilderobjekte in die Szene geladen. Die Abbildung \ref{screenshot_trafficsignal} zeigt ein Beipiel eines solchen Objektes. \\
 \begin{figure}[htbp]
 \centering 
 \includegraphics[scale=0.6]{src/screenshot_trafficsignal.png}
@@ -84,13 +84,22 @@ Zusätzlich zu den Symbolen auf der Strasse, werden noch Verkehrsschilderobjekte
 \label{screenshot_trafficsignal} % Labelname
 \end{figure}
 
-Die Häuser der Stadt sind einfache Blöcke die mit einer Textur von einem Hochhaus oder änlichem versehen werden. Insgesammt sind drei Gebäudetypen, wie in Abbildung \ref{screenshot_buildings} dargestellt,  in der ganzen Szene mehrfach verteilt.
+Die Häuser der Stadt sind einfache Blöcke die mit einer Textur von vielen Fenstern versehen werden. Insgesammt sind drei Gebäudetypen, wie in Abbildung \ref{screenshot_buildings} dargestellt,  in der ganzen Szene mehrfach verteilt.\\
 \begin{figure}[htbp]
 \centering 
 \includegraphics[scale=0.4]{src/screenshot_buildings.png}
 \caption{Drei verschidene Gebäudetypen} % Titel der Grafik
 \label{screenshot_buildings} % Labelname
 \end{figure}
+Um der Szene ein bisschen Farbe zu verleihen sind noch Bäume, wie in Abbildung \ref{screenshot_tree} in der Szene vorhanden. Ein Baum besteht aus einem Stamm mit einer Holztextur und einer Krone. Die Krone ist eine zufällig generierte Landschaft die zu einer Kugel geformt wird. Dadurch entstehen die verschiedenartigen Aus- und Einbuchtungen in der Baumkrone. Um die Illusion vollständig zu machen wird darauf eine Textur mit Blättern gelegt.\\
+
+\begin{figure}[htbp]
+\centering 
+\includegraphics[scale=0.4]{src/screenshot_tree.png}
+\caption{Baum} % Titel der Grafik
+\label{screenshot_tree} % Labelname
+\end{figure}
+
 \subsubsection{Erstellung der Berglandschaft mit Tunnels}
 
 \subsubsection{Eigenes Cockpit}
