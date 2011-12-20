@@ -1,0 +1,50 @@
+<batchrender>
+  <environmentinfo>
+    <machineinfo>
+      <machinename>CHRISTOF-PC</machinename>
+      <username>Christof</username>
+      <processortype>GenuineIntel, stepping 7, model 10, instruction family 6</processortype>
+      <processorname> Intel Core i5-2410M CPU </processorname>
+      <processornumber>4</processornumber>
+      <ostype>WINDOWS 64 BIT</ostype>
+      <osversion>Windows 7, 64 Bit, Professional Edition Service Pack 1 (build 7601)</osversion>
+      <oglvendorname>NVIDIA Corporation</oglvendorname>
+      <oglrendername>GeForce GT 540M/PCI/SSE2</oglrendername>
+      <oglversion>3.1.0</oglversion>
+    </machineinfo>
+    <c4dinfo>
+      <c4dversion>12048</c4dversion>
+      <c4dplugins>addons allplan ArchiCADExchange bitmapfilter bp2lw bp2max bp2maya bp2xsi browser characteranim collada compositing dwg dwgobjects fbx2010 expressiontag graphviewcore VWImport modeling newman objects onlinehelp onlineupdater OpenEXR python relaxuv shader sla spacemouse updatemerge xtensions advancedrender cineman sky walkthrough dynamics2 iges OkinoComClient hair ca2 clothilde mocca motiongraphics settings.cof sketch thinkingparticles tpoperators IOgre </c4dplugins>
+    </c4dinfo>
+  </environmentinfo>
+  <fileinfo>
+    <filename>CityWorld.c4d</filename>
+    <filepath>C:\Users\Christof\zhaw\schule_5_sem\PA2011\C++\DrivingSimulator\Resources\Models\City</filepath>
+    <renderdatainfo>
+      <rendersettings>Render Setting</rendersettings>
+      <camera>Camera</camera>
+      <width>1024</width>
+      <height>1024</height>
+      <filmaspect>1</filmaspect>
+      <pixelaspect>1</pixelaspect>
+      <fps>30</fps>
+      <from>0</from>
+      <to>0</to>
+      <steps>1</steps>
+      <saveinfo>
+        <imagepath>C:\Users\Christof\zhaw\schule_5_sem\PA2011\C++\DrivingSimulator\Resources\Models\City</imagepath>
+        <imagedepth>8</imagedepth>
+        <imageformat>TIFF (PSD Layers)</imageformat>
+      </saveinfo>
+    </renderdatainfo>
+  </fileinfo>
+  <renderinfo>
+    <imageinfo id="-1" time="00:00:00 " name="C:\Users\Christof\zhaw\schule_5_sem\PA2011\C++\DrivingSimulator\Resources\Models\City\CityWorld_automatic.tif" />
+  </renderinfo>
+  <batchinfo>
+    <added>20.12.2011, 22:52:37</added>
+    <started>20.12.2011, 22:57:10</started>
+    <rendertime>00:00:01 </rendertime>
+    <result>Finished</result>
+  </batchinfo>
+</batchrender>

@@ -62,7 +62,35 @@ material city_street_h
 Für die Textur wird in diesem Beispiel kein Ambientes Licht definiert und es wird der Standartwert 0 genommen. Der diffuse Anteil bestimmt wie stark das Material das Licht reflektiert. Da die Textur des Materials gut sichtbar sein soll, fällt dieser Wert relativ hoch aus. Im Block \textit{texture\_unit} wird die Textur angegeben und konfiguriert. Die Graphik die als Textur verwendet wird, wird nach dem Keyword \textit{texture} angegeben. Das erster Argument nach der Graphikdatei, das \textit{2d} konfiguriert die zweidimensionale Graphik als normale zweidimensionale Textur. Die vier als drittes Argument gibt die Anzahl zu generierenden Mipmaps an. Zusätzlich kann ein Filter für die Textur mit dem Keyword \textit{filtering} angegeben werden. Der anisotropische Filter wertet die Qualität der Textur in der Distanz auf. Hierbei wird die Richtung, der die Textur betrachtet wird, berücksichtigt.\\
 Es werden zwei unterschiedliche Szenen für den Fahrsimulator erstellt. Die eine Szene zeigt eine Stadt mit Häusern, Kreuzungen und Verkehrsschildern. Die andere Szene stellt eine Berglandschaft mit mehreren Tunnels dar. Die Szenen werden mit dem Programm Cinema4D erstellt. 
 \subsubsection{Erstellung der Stadtszene}
+\begin{figure}[htbp]
+\centering 
+\includegraphics[scale=0.3]{src/CityWorld_map.png}
+\caption{Karte der Stadtszene} % Titel der Grafik
+\label{CityWorld_map} % Labelname
+\end{figure}
+Um die erstellte Stadtszene gut dokumentieren zu können, zeigt Abbildung \ref{CityWorld_map} eine Übersichtskarte. Die grosse vierspurige Strasse die sich von oben links nach unten rechts durch die gesamte Szene zieht ist eine rechteckige Ebene. Die ebene ist mit einer Textur versehen, die die vier Spuren mit einer Sicherheitelinie in der Mitte darstellt. Die Textur ist jedoch nicht so lange wie die gesammte Strasse. Sie hat nur die Länge von einmal einem Stück mit dem Strich der gestrichelten Sicherheitslinie, die die beiden Spuren die in die gleiche Richtung fahren trennt, und einmal ein Stück ohne dem Strich. Die Textur wird auf der Ebene immer wieder wiederhohlt. Auch bei allen anderen Strassen ist die Textur nur ein kurz und wird wiederholt. Ein Beispiel für eine solche Strassentextur ist in der Abbildung \ref{examples_street_textures} zu finden. \\
+\begin{figure}[htbp]
+\centering 
+\includegraphics[scale=0.6]{src/examples_street_textures.png}
+\caption{Beispiele von Strassentexturen} % Titel der Grafik
+\label{examples_street_textures} % Labelname
+\end{figure}
+Die Strassen mit Kurven werden mit \glspl{spline} beschrieben. Eine Linie wird der \gls{spline} entlangeführt um die Breite einer Strasse zu erhalten. Die Textur der Strasse wird auf dieses, so zusammengefügte, Objekt gelegt. Der Abschluss solcher geschwungenen Strassen bilden wiederum rechteckige Ebenen. Diese erhalten die Textur einer Stoplinie mit Beschriftung auf der Strasse oder den vielen Dreieckigen Zeichen für kein Vortritt wie in Abbildung \ref{examples_street_textures} gezeigt. \\
+Zusätzlich zu den Symbolen auf der Strasse, werden noch Verkehrsschilderobjekte in die Szene geladen. Die Abbildung \ref{screenshot_trafficsignal} zeigt ein Beipiel eines solchen Objektes. 
+\begin{figure}[htbp]
+\centering 
+\includegraphics[scale=0.6]{src/screenshot_trafficsignal.png}
+\caption{Beispiele eines Verkehrssignals} % Titel der Grafik
+\label{screenshot_trafficsignal} % Labelname
+\end{figure}
 
+Die Häuser der Stadt sind einfache Blöcke die mit einer Textur von einem Hochhaus oder änlichem versehen werden. Insgesammt sind drei Gebäudetypen, wie in Abbildung \ref{screenshot_buildings} dargestellt,  in der ganzen Szene mehrfach verteilt.
+\begin{figure}[htbp]
+\centering 
+\includegraphics[scale=0.4]{src/screenshot_buildings.png}
+\caption{Drei verschidene Gebäudetypen} % Titel der Grafik
+\label{screenshot_buildings} % Labelname
+\end{figure}
 \subsubsection{Erstellung der Berglandschaft mit Tunnels}
 
 \subsubsection{Eigenes Cockpit}
