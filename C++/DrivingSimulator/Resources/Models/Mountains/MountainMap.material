@@ -48,3 +48,82 @@ material Tunnel1
 		}
 	}
 }
+
+material mountain_sign_curve_left
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.80 0.80 0.80 1.00
+			
+			texture_unit
+			{
+				texture sign_curve_left.png 2d 4
+				filtering anisotropic
+			}
+		}
+	}
+}
+
+material mountain_sign_double_curve_right
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.80 0.80 0.80 1.00
+			
+			texture_unit
+			{
+				texture sign_double_curve_right.png 2d 4
+				filtering anisotropic
+			}
+		}
+	}
+}
+material mountain_sign_curve_eight
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.80 0.80 0.80 1.00
+			
+			texture_unit
+			{
+				texture sign_curve_right.png 2d 4
+				filtering anisotropic
+			}
+		}
+	}
+}
+
+material mountain_sign_double_curve_left
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.80 0.80 0.80 1.00
+			
+			texture_unit
+			{
+				texture sign_double_curve_left.png 2d 4
+				filtering anisotropic
+			}
+		}
+	}
+}
+
+material mountain_sign_pillar
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.0 0.0 0.0 1.00
+			ambient 0.5 0.5 0.5 1.00	
+		}
+	}
+}
