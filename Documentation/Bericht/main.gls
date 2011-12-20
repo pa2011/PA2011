@@ -1,9 +1,19 @@
 \glossarysection[\glossarytoctitle]{\glossarytitle}\glossarypreamble
 \begin{theglossary}\glossaryheader
 \glsgroupheading{D}\relax \glsresetentrylist %
-\glossaryentryfield{directx}{\glsnamefont{DirectX}}{Microsoft's Grafikbibliothek und Konkurrenz zu OpenGL}{\relax }{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{22}}}\glsgroupskip
+\glossaryentryfield{directx}{\glsnamefont{DirectX}}{Microsofts Grafikbibliothek und Konkurrenz zu OpenGL}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{23\delimN 24}}}\glsgroupskip
+\glsgroupheading{M}\relax \glsresetentrylist %
+\glossaryentryfield{mit-lizenz}{\glsnamefont{MIT-Lizenz}}{Eine vom Massachusetts Institute of Technology entworfene Lizenz zur Benutzung von Software. (Quelle: http://en.wikipedia.org/wiki/MIT\_License, Abruf: 03.12.2011)}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{23}}}\glsgroupskip
 \glsgroupheading{O}\relax \glsresetentrylist %
+\glossaryentryfield{ogre}{\glsnamefont{OGRE}}{Object-Oriented Graphics Rendering Engine}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{24}}}%
 \glossaryentryfield{opengl}{\glsnamefont{OpenGL}}{Opensource Grafikbibliothek}{\relax }{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{22}}}%
+		\setentrycounter[]{page}\glsnumberformat{23\delimN 24}}}\glsgroupskip
+\glsgroupheading{S}\relax \glsresetentrylist %
+\glossaryentryfield{shader}{\glsnamefont{Shader}}{Programm, welches auf der GPU l\IeC {\"a}uft und der Berechnung von Licht-, Schatten- und weiteren Effekten von Materialien dient}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{23}}}%
+\glossaryentryfield{szenengraph}{\glsnamefont{Szenengraph}}{Datenstruktur zur hierarchischen Organisation von von Objekten}{\relax }{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{23}}}%
 \end{theglossary}\glossarypostamble

@@ -8,12 +8,28 @@
 	\label{OGRE Logo} % Labelname
 \end{wrapfigure}
 
-OGRE (Object-Oriented Graphics Rendering Engine) ist eine Grafikengine zur Echtzeitdarstellung von dreidimensionalen Szenen. Sie ist in C++ geschrieben und ihre Verwendung unterliegt der MIT-Lizenz. Durch den modularen Aufbau und die Unterstützung auf verschiedenen Plattformen erweist sich OGRE als sehr flexibel und mächtig. OGRE selbst benutzt die Grafikbibliotheken \gls{opengl} und \gls{directx} zum hardwarebeschleunigten Rendern der Szenen und setzt automatisierte Optimierungsalgorithmen zur Geschwindigkeitsgewinnung ein. Mittlerweile existiert eine grosse und aktive Community, welche das OGRE-Framework ständig weiter entwickelt und verbessert.
+OGRE (Object-Oriented Graphics Rendering Engine) ist eine Grafikengine zur Echtzeitdarstellung von dreidimensionalen Szenen. Sie ist in C++ geschrieben und ihre Verwendung unterliegt der \gls{mit-lizenz}. Durch den modularen Aufbau und die Unterstützung auf verschiedenen Plattformen erweist sich OGRE als sehr flexibel und mächtig. OGRE selbst benutzt die Grafikbibliotheken \gls{opengl} und \gls{directx} zum hardwarebeschleunigten Rendern der Szenen und setzt automatisierte Optimierungsalgorithmen zur Geschwindigkeitsgewinnung ein. Mittlerweile existiert eine grosse und aktive Community, welche das OGRE-Framework ständig weiter entwickelt und verbessert.
 
-\subsection{Weshalb setzen wir OGRE ein?}
+\subsection{Welche Features bring OGRE mit?}
+
+\begin{itemize}
+	\item Anbindung an OpenGL und DirectX.
+	\item Verfügbarkeit von SDKs für Windows, Linux, Mac OS X und iOS\footnote{Betriebssystem für Apples iPhone, iPad und iPod touch}.
+	\item Unterstützung für \gls{shader}.
+	\item Organisation von Objekten basiert auf \gls{szenengraph}.
+	\item Bietet möglichkeit zum Importieren von statischen und animierten 3D-Objekten.
+	\item Sehr gute und detaillierte Dokumentation.
+\end{itemize}
+Quelle: ogre3d.org\footnote{http://www.ogre3d.org/about/features, Abruf: 03.12.2011}
+
+\newpage
+\subsection{Weshalb wird OGRE eingesetzt?}
 
 Im Vergleich zur direkten Verwendung von \gls{opengl} oder \gls{directx} bringt der Einsatz einer Grafikengine wie OGRE eine Vielzahl von Vorteilen mit sich:
 
-\minisec{Abstraktion} \gls{opengl} und \gls{directx} sind zwei komplett verschiedene Bibliotheken. Hat man sich für eine von beiden entschieden, so bedeutet das Umsteigen auf eine andere unter Umständen das Neuschreiben des kompletten Codes. Ogre abstrahiert die Verwendung dieser Grafikbibliotheken und ermöglicht den selben Code entweder mit OpenGL oder DirectX laufen zu lassen.
+\minisec{Abstraktion} \gls{opengl} und \gls{directx} sind zwei komplett verschiedene Bibliotheken. Hat man sich für eine von beiden entschieden, so bedeutet das Umsteigen auf eine andere unter Umständen das Neuschreiben des kompletten Codes. OGRE abstrahiert die Verwendung dieser Grafikbibliotheken und ermöglicht den selben Code entweder mit OpenGL oder DirectX laufen zu lassen.
 
-\minisec{Geschwindigkeit} text
+\minisec{Geschwindigkeit} Ohne Optimierung kann das Darstellen einer 3-dimensionalen Welt sehr langsam werden und den Rechner bzw. die Grafikkarte stark auslasten. Mit ausgefeilten Optimierungsalgorithmen wird die Szene zur Laufzeit so angepasst, dass nur Objekte dargestellt werden, die sich im Sichtbereich befinden.
+
+\minisec{Portierbarkeit} \gls{ogre} kümmert sich um viele Aspekte der grafischen Programmierung und vereinheitlicht z.B. das Erstellen eines Grafikkontexts auf verschiedenen Plattformen. So ist es möglich, das selbe Programm für Windows, Mac OS X oder Linux zu kompilieren. 
+

@@ -77,10 +77,21 @@
 % ein paar übersetzungen
 \deftranslation[to=ngerman]{Glossary}{Glossar}
 
+% umlaute
+\PrerenderUnicode{Ä}
+\PrerenderUnicode{Ö}
+\PrerenderUnicode{Ü}
+\PrerenderUnicode{ä}
+\PrerenderUnicode{ö}
+\PrerenderUnicode{ü}
+
 % glossar erstellen
 \makeglossaries
 \defglsdisplayfirst[main]{#1#4\protect\footnote{#2}}
 \include{inhalt/glossar_definition}
+
+% formatierung für index der fussnote
+\renewcommand{\thefootnote}{(\arabic{footnote})}
 
 % seitenzahlen mit arabischen ziffern
 \renewcommand{\thesection}{\arabic{section}}
