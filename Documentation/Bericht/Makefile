@@ -4,7 +4,7 @@ else
 	findCommand=find
 endif
 
-main.pdf: main.tex $(shell $(findCommand) inhalt)
+main.pdf: main.tex $(shell $(findCommand) inhalt)  $(shell $(findCommand) src)
 	pdflatex main.tex
 	pdflatex main.tex
 	

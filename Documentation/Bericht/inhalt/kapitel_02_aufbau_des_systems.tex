@@ -2,13 +2,12 @@
 \subsection{Systembeschreibung}
 
 % Bild für Systembeschreibung
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering 
 \includegraphics{src/Systembeschreibung.pdf}
 \caption{Systembeschreibung} % Titel der Grafik
 \label{Systembeschreibung} % Labelname
 \end{figure}
-
 
 Der Aufbau des Systems für den Fahrsimulator wird anhand der Abbildung \ref{Systembeschreibung} illustriert. Die blau markierten Komponenten werden im Rahmen dieser Projekt-Arbeit entwickelt. Alle übrigen sind bereits vorbestehend. \\
 Benutzereingaben, die im Cockpit gemacht werden, werden von einem LabView Programm eingelesen. Nun benötigt es einen UDP-Port,  über den verschiedene Eingaben an das Programm weitergeleitet werden. Es handelt sich hierbei um Werte, die das Drehen des Steuerrades und den Druck auf Gas- oder Bremspedal quantifizieren. Zusätzlich wird der UDP-Port auch für das Empfangen diverser Log-Daten, die von unserem Programm gesendet werden, verwendet. Die empfangenen Daten werden vom LabVIEW-Programm  in ein Log-File gespeichert.\\

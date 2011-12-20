@@ -1,4 +1,4 @@
-\section{Vorgehen und Methoden}
+\section{Realisierung}
 Wie bereits in der Systembeschreibung beschrieben, wird der Fahrsimulator in dei Hauptkomponenten unterteilt. Zum Fahrsimulator gehört ein UDP-Listener, ein Szenen-Manager und das Hauptprogramm. Da die Verbindung zwischen dem Cockpit und dem Fahrsimulator mit einer Netzwerkschnittstelle realisiert wird, ist es möglich die Anbindung an das Cockpit und den Fahrsimulator physisch auf zwei Rechnern zu betreiben. Eine Alternative ist die Umsetzung mit dem Ogre Framwork (Siehe Anhang C). Dieses Framework bietet umfassende Lösungen um Steuerradär und Pedalen, wie sie in userem Cockpit vorhanden sind, anzusteuern.\\
 Da die 3D-Umgebung mit fortscheitendem Projekt ausgebaut wird, könnte sich die notwendige Rechenleistung erheblich steigern. Folgen ungenügender Leistung sind unregelmässige Bewegungen (Lags) in der virtuellen Umgebung oder sogar bis zum Absturz des gesamten Programms führen. Dieses Problem hat zur Folge, dass der Fahrsimulator einer hohen Portierbarkeitanforderung genügen muss. \\
 Aus diesem Grund ist die erste Variante mit der Netzwerkschnittstelle für das Fahrsimulatorprojekt besser geeignet. Die andere Variante wird verworfen.
@@ -6,9 +6,9 @@ Aus diesem Grund ist die erste Variante mit der Netzwerkschnittstelle für das F
 Eine LabVIEW-Umgebung existiert bereits auf dem Rechner an dem das Cockpit angeschlossen ist. Dazu existierte ein LabVIEW-Programm, dass bereits die Eingaben im Cockpit einliest. Da dieses Programm jedoch nicht genau den Anforderungen entspricht, wird ein neues LabVIEW-Programm realisiert. Dieses Programm wird so erweitert das diese Eingaben in Form von definierten Parameter als UDP-Packet permanent gesendet werden. Zusätzlich wird ein zweiter UDP-Socket eingerichtet um Packete die vom Fahrsimulator gesendet werden zu empfangen. Die Daten der empfangenen Packete werden von LabVIEW in ein Log-File gespeichert. 
 % ev Bild
 \subsection{UDP-Socket}
-Die Paramter werden vom LabVIEW-Programm permanent gelesen und mindestens 50 mal pro Sekunde wird ein UDP-Packet gesendet. Um die Zeit zwischen der Eingabe des Probanden und derReaktion des Fahrzeuges im Simulator möglichst gering zu halten, müssen ankommende Packete sofort gelesen werden. Angesitchts der hohen Anzahl an Datenpacketen pro Zeitraum, ist es vernachlässigbar, wenn einige Packete verloren gehen oder vertauscht werden. Das UDP-Protokoll gewährleistet genau diese Eigenschaften. \\
+Die Paramter werden vom LabVIEW-Programm permanent gelesen und mindestens 50 mal pro Sekunde wird ein UDP-Packet gesendet. Um die Zeit zwischen der Eingabe des Probanden und derReaktion des Fahrzeuges im Simulator möglichst gering zu halten, müssen ankommende Packete sofort gelesen werden. Angesitchts der hohen Anzahl an Datenpacketen pro Zeitraum, ist es vernachlässigbar, wenn einige Packete verloren gehen oder vertauscht werden. Das UDP-Protokoll gewährleistet genau diese Eigenschaften.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \centering 
 \includegraphics[scale=0.5]{src/koordinatensystem.png}
 \caption{Koordinatensystem} % Titel der Grafik
@@ -58,7 +58,6 @@ material city_street_h
 \end{lstlisting}
 
 \subsection{Hautpprogramm}
-\lstinputlisting{listings/Karte.java}
 
 
 %Sequenzdiagramm
