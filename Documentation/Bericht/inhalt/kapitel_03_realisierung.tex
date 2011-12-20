@@ -19,6 +19,44 @@ Die von LabVIEW empfangenen Daten sind in erster Linie Parameter die den Zustand
 Da das LabVIEW-Programm und der Simulator nicht synchronisiert sind, wird der DP-Listener zur Überbrückung verwendet. Der UDP-Listener speichert alle Parameter in Variabeln ab. Diese Variabeln werden vom Hauptprogramm ausgelesen und interpretiert. Dieses auslesen der Variabeln erfolgt nun synchron, da das Hauptprogramm nur dann Daten vom UDP-Listener liest, wenn dieses dazu bereit ist.
 
 \subsection{Virtual Reality}
+Für den Fahrsimulator wird eine virtuelle dreidimensionale Umgebung benötigt, in der man sich bewegen kann. Diese Umgebung, auch Szene genannt, setzt sich aus verschiedenen Objekten zusammen. Die Struktur eines solchen Objektes wird duch ein Mesh-File beschrieben. In einer Szene kann das gleiche Objekt mehrmals an verschiedenen Positionen vorkommen. Das Objekt kann durch eine skalierung auch einmal gross und einmal klein erscheinen. Oder man kann sie durch eine Rotation unterschiedlich machen. Zusätzlich wird mindestens ein Material-File benötigt in dem sämtliche Texturen und Materialien, die von Objekten der Szene verwendet werden, definiert sind.
+Ein Beispiel von einem Matrial wie es ein einem material-File definiert ist wird im Listing \ref{example_materialfile_material} illustriert.
+\begin{lstlisting}[caption={Beispiel aus dem material-File für ein Material},label={example_materialfile_material}]
+material city_ground
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.0 0.0 0.0 1.00
+			ambient 0.75 0.75 0.75 1.00	
+		}
+	}
+}
+\end{lstlisting}
+Nach dem Keyword material wird der Name des Materials angegeben. Als technique-Block wird hier einer angegeben. Es können mehrere Blöcke angegeben. Diese Blöcke können optional auch Namen gegeben werden um zu identifizieren wofür die einzelnen Blöcke sind. Ausgeführt wird jedoch immer nur einer der Blöcke wobei der erste Block der bevorzugteste ist und der unterste Block die letzte Fallbacklösung wäre. Im pass-Block werden die Reflektionswerte und die Farbe angegeben. Es können mehrer pass-Blöcke angegeben werden die jeweils hintereinander ausgeführt werden und sich überlagern. Die Zahlen repräsentieren die RGB-Werte und können zwischen 0 und 1 liegen. Die vierte Zahl representiert den Alphawert der Farbe. Der Alphawert quantifiziert die Sichtbarkeit des Materials wobei 1.0 voll sichtbar und 0.0 unsichtbar ist. \\
+
+Weiter zeigt das Listing \ref{example_materialfile_texture} die definition einer Textur in einem material-File.
+\begin{lstlisting}[caption={Beispiel aus dem material-File für eine Textur},label={example_materialfile_texture}]
+material city_street_h
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.80 0.80 0.80 1.00
+			
+			texture_unit
+			{
+				texture street_h.png 2d 4
+				filtering anisotropic
+			}
+		}
+	}
+}
+
+\end{lstlisting}
+
 \subsection{Hautpprogramm}
 \lstinputlisting{listings/Karte.java}
 

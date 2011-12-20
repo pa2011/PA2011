@@ -371,7 +371,7 @@ material city_sign_no_turn_right
 			
 			texture_unit
 			{
-				texture sign_turn_right.png 2d 4
+				texture sign_no_turn_right.png 2d 4
 				filtering anisotropic
 			}
 		}
@@ -427,6 +427,64 @@ material city_sign_50
 				texture sign_50.png 2d 4
 				filtering anisotropic
 			}
+		}
+	}
+}
+
+material city_sign_ban
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.80 0.80 0.80 1.00
+			
+			texture_unit
+			{
+				texture sign_ban.png 2d 4
+				filtering anisotropic
+			}
+		}
+	}
+}
+
+material city_sign_redirection
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.80 0.80 0.80 1.00
+			
+			texture_unit
+			{
+				texture sign_redirection.png 2d 4
+				filtering anisotropic
+			}
+		}
+	}
+}
+
+material city_barrier_red
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.0 0.0 0.0 1.00
+			ambient 0.9 0.9 0.9 1.00	
+		}
+	}
+}
+
+material city_barrier_white
+{
+	technique
+	{
+		pass
+		{
+			diffuse 0.0 0.0 0.0 1.00
+			ambient 0.9 0.0 0.0 1.00	
 		}
 	}
 }
