@@ -5,6 +5,7 @@
 *.lot
 *.maf
 *.mtc*
+*.acn
 *.~*
 *.gls
 *.glo
