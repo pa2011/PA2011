@@ -34,7 +34,7 @@ material city_ground
 	}
 }
 \end{lstlisting}
-Nach dem Keyword material wird der Name des Materials angegeben. Als technique-Block wird hier einer angegeben. Es können mehrere Blöcke angegeben. Diese Blöcke können optional auch Namen gegeben werden um zu identifizieren wofür die einzelnen Blöcke sind. Ausgeführt wird jedoch immer nur einer der Blöcke wobei der erste Block der bevorzugteste ist und der unterste Block die letzte Fallbacklösung wäre. Im pass-Block werden die Reflektionswerte und die Farbe angegeben. Es können mehrer pass-Blöcke angegeben werden die jeweils hintereinander ausgeführt werden und sich überlagern. Die Zahlen repräsentieren die RGB-Werte und können zwischen 0 und 1 liegen. Die vierte Zahl representiert den Alphawert der Farbe. Der Alphawert quantifiziert die Sichtbarkeit des Materials wobei 1.0 voll sichtbar und 0.0 unsichtbar ist. \\
+Nach dem Keyword \textit{material} wird der Name des Materials angegeben. Als \textit{technique}-Block wird hier einer angegeben. Es können mehrere Blöcke angegeben. Diese Blöcke können optional auch Namen gegeben werden um zu identifizieren wofür die einzelnen Blöcke sind. Ausgeführt wird jedoch immer nur einer der Blöcke wobei der erste Block der bevorzugteste ist und der unterste Block die letzte Fallbacklösung wäre. Im \textit{pass}-Block werden die Reflektionswerte und die Farbe angegeben. Es können mehrer \textit{pass}-Blöcke angegeben werden die jeweils hintereinander ausgeführt werden und sich überlagern. Das \textit{ambiant} als ambientes Licht bestimmt grundsätzlich die Farbe des Matierials. Die Zahlen repräsentieren die RGB-Werte und können zwischen 0 und 1 liegen. Die Farbe des Materials in diesem Beispiel ist ein helles Grau. Die vierte Zahl representiert den Alphawert der Farbe. Der Alphawert quantifiziert die Sichtbarkeit des Materials wobei 1.0 voll sichtbar und 0.0 unsichtbar ist. \\
 
 Weiter zeigt das Listing \ref{example_materialfile_texture} die definition einer Textur in einem material-File.
 \begin{lstlisting}[caption={Beispiel aus dem material-File für eine Textur},label={example_materialfile_texture}]
@@ -45,7 +45,7 @@ material city_street_h
 		pass
 		{
 			diffuse 0.80 0.80 0.80 1.00
-			
+
 			texture_unit
 			{
 				texture street_h.png 2d 4
@@ -54,8 +54,9 @@ material city_street_h
 		}
 	}
 }
-
 \end{lstlisting}
+Für die Textur wird in diesem Beispiel kein Ambientes Licht definiert und es wird der Standartwert 0 genommen. Der diffuse Anteil bestimmt wie stark das Material das Licht reflektiert. Da die Textur des Materials gut sichtbar sein soll, fällt dieser Wert relativ hoch aus. Im Block \textit{texture\_unit} wird die Textur angegeben und konfiguriert. Die Graphik die als Textur verwendet wird, wird nach dem Keyword \textit{texture} angegeben. Das erster Argument nach der Graphikdatei, das \textit{2d} konfiguriert die zweidimensionale Graphik als normale zweidimensionale Textur. Die vier als drittes Argument gibt die Anzahl zu generierenden Mipmaps an. Zusätzlich kann ein Filter für die Textur mit dem Keyword \textit{filtering} angegeben werden. Der anisotropische Filter wertet die Qualität der Textur in der Distanz auf. Hierbei wird die Richtung, der die Textur betrachtet wird, berücksichtigt.\\
+
 
 \subsection{Hautpprogramm}
 
