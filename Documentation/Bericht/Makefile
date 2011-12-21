@@ -20,6 +20,7 @@ clean:
 	rm -f *.toc
 	rm -f *.acn
 	rm -f *.glo
+	rm -f *.gls
 	rm -f *.ist
 	rm -f *.out
 	rm -f *.synctex.gz
@@ -29,6 +30,7 @@ clean:
 	rm -f inhalt/*.toc
 	rm -f inhalt/*.acn
 	rm -f inhalt/*.glo
+	rm -f inhalt/*.gls
 	rm -f inhalt/*.ist
 	rm -f inhalt/*.out
 	rm -f inhalt/*.synctex.gz
