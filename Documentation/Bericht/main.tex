@@ -33,9 +33,15 @@
 \renewcommand{\sectionmark}[1]{\markboth{\thesection{} #1}{}}
 \fancyhead[RE]{\leftmark}
 \fancyhead[LO]{Projektarbeit Fahrsimulator}
-\fancyfoot[RE]{\thepage}
-\fancyfoot[LO]{\thepage}
-\fancyfoot[RO]{Christof Würmli, Sandro Ropelato}
+
+\newcommand{\activatefooter}{
+	\fancyfoot[RE]{\thepage}
+	\fancyfoot[LO]{\thepage}
+	\fancyfoot[RO]{Christof Würmli, Sandro Ropelato}
+}
+\newcommand{\deactivatefooter}{
+	\fancyfoot[RE]{}
+}
 
 % funktion zum einfügen einer komplett leeren seite
 \newcommand{\emptypage}{
@@ -104,10 +110,13 @@
 	\emptypage
 	
 	% inhaltsverzeichnis
+	\setcounter{page}{1}
 	\include{inhalt/inhaltsverzeichnis}
+	\setcounter{page}{4}
 
 	% hauptteil
 	\fancyhead[RE]{Kapitel \leftmark}
+	\activatefooter
 	\include{inhalt/kapitel_01_einleitung}
 	\include{inhalt/kapitel_02_aufbau_des_systems}
 	\include{inhalt/kapitel_03_realisierung}
