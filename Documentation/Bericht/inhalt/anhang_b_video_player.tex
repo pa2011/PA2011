@@ -45,8 +45,13 @@ Es wird ein UDP-Socket geöffnet um ankommende Pakete zu empfangen. Der "Local p
 \subsubsection{UDP-Listener}
 Der UDP-Listener empfängt die Packete, die vom LabVIEW gesendet werden. Diese werden ausgepackt und die übermittelten Werte abgespeichert. Der UDP-Listener wird im Kapitel \ref{sec:udp-listener} genau dokumentiert. 
 \subsubsection{Hauptprogramm}
-Das Hauptprogramm startet den MPlayer und den UDP-Listener. Der MPlayer wird, um ein Video abzuspielen, in einem eigenen Prozess gestartet. Der MPlayer kann duch einen speziellen Aufruf von der Komandozeile, wie im Listing \ref{start_mplayer} beschrieben, im Slavemodus gestartet werden. Wie der mPlayer im Videoplayer aufgerufen wird, dann dem Listing im Anhang \todo{Referenz einfügen} nachgelesen werden. 
+Das Hauptprogramm startet den MPlayer und den UDP-Listener. Der MPlayer wird, um ein Video abzuspielen, in einem eigenen Prozess gestartet. Der MPlayer kann duch einen speziellen Aufruf von der Komandozeile, wie im Listing \ref{start_mplayer} beschrieben, im Slavemodus gestartet werden. Wie der mPlayer im Videoplayer aufgerufen wird, kann dem Listing im Anhang \todo{Referenz einfügen} entnommen werden werden. 
 \begin{lstlisting}[caption={Starten des MPlayers in einem eigenen Prozess}, label={start_mplayer}]
 mplayer.exe -slave -hardframedrop -osdlevel 0 BeispielVideo.mp4
 \end{lstlisting}
- In diesem Slavemodus 
+Der Parameter \textit{hardframedrop} dient der erhöhung der Framerate. Es wird bei hohen Abspielgeschwindigkeiten nicht jedes Bild angezeigt, sondern beispielsweise nur jedes dritte. Der \textit{osdlevel} Parameter bestimmt wieviel Information auf dem Bildschrim angezeigt wird. Der Level null unterdrückt jegliche Ausgaben.\\
+In diesem Slavemodus nimmt der mPlayer Befehle die über die Kommandozeile abgesetzt werden entgegen. Dazu wird der Standard Ausgabepipe der Komandozeile an den mPlayer umgeleitet. Dann können einfache Befehel wie im Listing \ref{mplayer_befehl} an den mPlayer gesendet werden um das Video schneller oder langsamer Abspielen zu lassen. 
+\begin{lstlisting}[caption={Befehl an den mPlayer über den Stardard Ausgabe Pipe}, label={mplayer_befehl}]
+"speed_set %lf\n", speed
+\end{lstlisting}
+Im Listing \ref{mplayer_befehl} quantifiziert \textit{speed} die Abspielgeschwindigkeit in der das Video abgespielt werden soll. 
