@@ -84,7 +84,7 @@ Zusätzlich zu den Symbolen auf der Strasse, werden noch Verkehrsschilderobjekte
 \label{screenshot_trafficsignal} % Labelname
 \end{figure}
 
-Die Häuser der Stadt sind einfache Blöcke die mit einer Textur von vielen Fenstern versehen werden. Insgesammt sind drei Gebäudetypen, wie in Abbildung \ref{screenshot_buildings} dargestellt,  in der ganzen Szene mehrfach verteilt.\\
+Die Häuser der Stadt sind einfache Blöcke die mit einer Textur von vielen Fenstern versehen werden. Insgesammt sind drei Gebäudetypen, wie in Abbildung \ref{screenshot_buildings} dargestellt,  vorhanden. Diese drei Typen werden einzeln dubliziert eventuell gedreht und in der Szene verteilt. Zusätzlich wird das ETH Zürich Gebäude in der Szene geladen. Dieses Gebäudemodel wurde aus dem Google 3D Warehouse heruntergeladen. Das Objekt wurde in google SketchUp bearbeitet und als eigenes Objekt abgespeichert. Die Bearbeitung heinhaltet vor allem die neuberechnung der Oberflächennormalen und das entfernen der Bodenplatte auf der die ETH Zürich gestanden hat. Die Texturen mussten manuell übernommen werden. Das ETH Objekt wird in die Szene geladen, skaliert und mit x- und y-Koordinaten plaziert. 
 \begin{figure}[htbp]
 \centering 
 \includegraphics[scale=0.4]{src/screenshot_buildings.png}
@@ -109,10 +109,9 @@ Um die Berglandschaft zu generieren gibt es im Cinema4D ein eigens dafür vorges
 \label{texture_concretetiles} % Labelname
 \end{figure}
 
-\subsubsection{Eigenes Cockpit}
-
-
-
+\subsubsection{Eigenes Fahrerkabine und Geschwindigkeit}
+Für die Darstellung eines Autos wurde aus dem Google 3D Warehouse ein Mini Cooper geladen. Wie in Abbildung \ref{screenshot_minicooper} zu sehen, wird dieser aus der Perspektive einer dritten Person betrachtet. Beim Rückwärtsfahren wird die Kamera um das Fahrzeug gedreht, so dass man nach hinten sehen kann. Mit der Taste V auf der Tastatur kann die Ansicht in das innere des Fahrzeugs gewechselt werden. Zu Beginn wirde die Kamera lediglich in das innere des Mini Coopers versetzt, dorthin wo der Kopf des Fahrers in etwa sein sollte. In einem zweiten Schritt wurde jedoch ein eigenes Fahrerkabine designed. Dies war vorallem deshalb notwendig, um eine Geschwindigkeitsanzeige implementieren zu können. Wie die Abbildung \ref{screenshot_cockpit} veranschaulicht, ist die Geschwindigkeitsanzeige die mittlere der drei Anzeigen. Sie besteht aus zwei Objekten. Eines der Objekte ist die gesamte Innenansicht selbst und das zweite Objekt ist der rote Zeiger der Geschwindigkeitsanzeige. Dieser wird an der richtigen Stelle Plaziert und wird je nach Geschwindigkeit gedreht. Somit sind zwei Ansichten möglich. Die Sicht des Fahrers mit der eigens dafür erstellten Fahrerkabine und die Aussenansicht in der der Mini Cooper angezeigt wird.\\
+Um die Geschwindigkeit des Fahrzeuges herauszufinden, wurde im Cinema4D, in dem alle Szenen erstellt wurden, mit reellen Werten gearbeitet. So wurden Strassen wirklich sechs Meter breit modeliert. Somit konnte auch die Länge der Strasse festgelegt werden. Um die Geschwindigkeit zu ermitteln, wurde in Cinema4D eine Distanz abgemessen und diese mit verschiedenen Konstanten Geschwindigkeiten abgefahren und die Zeit gemessen. Die interne Geschwindigkeit im Programm wird mit einem Faktor in die tatsächliche Geschwindigkeit umgerechnet. Diese kann dann auf dem Tachometer angezeigt werden.\\
 
 \subsection{Hautpprogramm}
 
