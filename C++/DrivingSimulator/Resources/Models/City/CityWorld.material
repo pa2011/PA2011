@@ -10,7 +10,7 @@ material city_street_h
 			
 			texture_unit
 			{
-				texture street_h.png 2d 4
+				texture street_h.png 2d 3
 				filtering anisotropic
 			}
 		}
@@ -27,7 +27,7 @@ material city_street_h_double
 			
 			texture_unit
 			{
-				texture street_h_double.png 2d 4
+				texture street_h_double.png 2d 3
 				filtering anisotropic
 			}
 		}
@@ -44,7 +44,7 @@ material city_street_v
 			
 			texture_unit
 			{
-				texture street_v.png 2d 4
+				texture street_v.png 2d 3
 				filtering anisotropic
 			}
 		}
@@ -61,7 +61,7 @@ material city_onewaystreet_with_parkingslot
 			
 			texture_unit
 			{
-				texture onewaystreet_with_parkingslot.png 2d 4
+				texture onewaystreet_with_parkingslot.png 2d 3
 				filtering anisotropic
 			}
 		}
@@ -78,7 +78,7 @@ material city_single_kein_vortritt
 			
 			texture_unit
 			{
-				texture single_kein_vortritt.png 2d 4
+				texture single_kein_vortritt.png 2d 3
 				filtering anisotropic
 			}
 		}
@@ -95,7 +95,7 @@ material city_street_only_in
 			
 			texture_unit
 			{
-				texture street_only_in.png 2d 4
+				texture street_only_in.png 2d 3
 				filtering anisotropic
 			}
 		}
@@ -112,7 +112,7 @@ material city_oneway_street
 			
 			texture_unit
 			{
-				texture oneway_street.png 2d 4
+				texture oneway_street.png 2d 3
 				filtering anisotropic
 			}
 		}
@@ -129,7 +129,7 @@ material city_street_kein_vortritt
 			
 			texture_unit
 			{
-				texture street_kein_vortritt.png 2d 4
+				texture street_kein_vortritt.png 2d 3
 				filtering anisotropic
 			}
 		}
@@ -146,7 +146,7 @@ material city_street_stop
 			
 			texture_unit
 			{
-				texture street_stop.png 2d 4
+				texture street_stop.png 2d 3
 				filtering anisotropic
 			}
 		}
@@ -176,7 +176,7 @@ material city_skyscraper1
 			
 			texture_unit
 			{
-				texture skyscraper1.png 2d 4
+				texture skyscraper1.png 2d 3
 				filtering anisotropic
 			}
 		}
@@ -194,7 +194,7 @@ material city_skyscraper1_base
 			
 			texture_unit
 			{
-				texture skyscraper1_base.png 2d 4
+				texture skyscraper1_base.png 2d 3
 				filtering anisotropic
 			}
 		}
@@ -212,7 +212,7 @@ material city_skyscraper2
 			
 			texture_unit
 			{
-				texture skyscraper2.png 2d 4
+				texture skyscraper2.png 2d 3
 				filtering anisotropic
 			}
 		}
@@ -230,7 +230,7 @@ material city_skyscraper3
 			
 			texture_unit
 			{
-				texture skyscraper3.png 2d 4
+				texture skyscraper3.png 2d 3
 				filtering anisotropic
 			}
 		}
@@ -248,7 +248,7 @@ material city_skyscraper3_base
 			
 			texture_unit
 			{
-				texture skyscraper3_base.png 2d 4
+				texture skyscraper3_base.png 2d 3
 				filtering anisotropic
 			}
 		}
@@ -266,7 +266,7 @@ material city_skyline
 			
 			texture_unit
 			{
-				texture skyline.png 2d 4
+				texture skyline.png 2d 3
 				filtering anisotropic
 			}
 		}
@@ -284,7 +284,7 @@ material city_tree_leaves
 			
 			texture_unit
 			{
-				texture tree_leaves.png 2d 4
+				texture tree_leaves.png 2d 3
 				filtering anisotropic
 			}
 		}
@@ -302,7 +302,7 @@ material city_tree_log
 			
 			texture_unit
 			{
-				texture tree_log.png 2d 4
+				texture tree_log.png 2d 3
 				filtering anisotropic
 			}
 		}
@@ -320,7 +320,7 @@ material city_sign_one_way
 			
 			texture_unit
 			{
-				texture sign_one_way.png 2d 4
+				texture sign_one_way.png 2d 3
 				filtering anisotropic
 			}
 		}
@@ -337,7 +337,7 @@ material city_sign_give_way
 			
 			texture_unit
 			{
-				texture sign_give_way.png 2d 4
+				texture sign_give_way.png 2d 3
 				filtering anisotropic
 			}
 		}
@@ -354,7 +354,7 @@ material city_sign_stop
 			
 			texture_unit
 			{
-				texture sign_stop.png 2d 4
+				texture sign_stop.png 2d 3
 				filtering anisotropic
 			}
 		}
@@ -371,7 +371,7 @@ material city_sign_no_turn_right
 			
 			texture_unit
 			{
-				texture sign_no_turn_right.png 2d 4
+				texture sign_no_turn_right.png 2d 3
 				filtering anisotropic
 			}
 		}
@@ -389,7 +389,7 @@ material city_sign_turn_right
 			
 			texture_unit
 			{
-				texture sign_turn_right.png 2d 4
+				texture sign_turn_right.png 2d 3
 				filtering anisotropic
 			}
 		}
@@ -407,7 +407,7 @@ material city_sign_main_road
 			
 			texture_unit
 			{
-				texture sign_main_road.png 2d 4
+				texture sign_main_road.png 2d 3
 				filtering anisotropic
 			}
 		}
@@ -424,7 +424,7 @@ material city_sign_50
 			
 			texture_unit
 			{
-				texture sign_50.png 2d 4
+				texture sign_50.png 2d 3
 				filtering anisotropic
 			}
 		}
@@ -441,7 +441,7 @@ material city_sign_ban
 			
 			texture_unit
 			{
-				texture sign_ban.png 2d 4
+				texture sign_ban.png 2d 3
 				filtering anisotropic
 			}
 		}
@@ -458,7 +458,7 @@ material city_sign_redirection
 			
 			texture_unit
 			{
-				texture sign_redirection.png 2d 4
+				texture sign_redirection.png 2d 3
 				filtering anisotropic
 			}
 		}
