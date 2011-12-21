@@ -110,14 +110,15 @@
 	\include{inhalt/titelseite}
 	\emptypage
 	
+	\setcounter{page}{1}
 	\include{inhalt/zusammenfassung_und_abstract}
 
 	% inhaltsverzeichnis
-	\setcounter{page}{1}
+	\setcounter{page}{0}
 	\include{inhalt/inhaltsverzeichnis}
-	\setcounter{page}{4}
 
 	% hauptteil
+	\setcounter{page}{4}
 	\fancyhead[RE]{Kapitel \leftmark}
 	\activatefooter
 	\include{inhalt/kapitel_01_einleitung}
