@@ -1,6 +1,7 @@
 \documentclass[a4paper,twoside,liststotocnumbered]{scrartcl}
 
 % packages importieren
+\usepackage[T1]{fontenc}
 \usepackage[utf8x]{inputenc}
 \usepackage[ngerman]{babel}
 \usepackage{float}
@@ -13,7 +14,10 @@
 \usepackage{tocloft}
 \usepackage[acronym,footnote,description,nonumberlist]{glossaries}
 
-% Metadaten
+% sprache auswählen
+\selectlanguage{ngerman} 
+
+% dokumentinformationen
 \author{Sandro Ropelato, Christof Würmli}
 \title{Fahrsimulator}
 
@@ -27,22 +31,18 @@
 
 % header und footer konfigurieren
 \renewcommand{\sectionmark}[1]{\markboth{\thesection{} #1}{}}
+\fancyhead[RE]{\leftmark}
 \fancyhead[LO]{Projektarbeit Fahrsimulator}
+\fancyfoot[RE]{\thepage}
+\fancyfoot[LO]{\thepage}
+\fancyfoot[RO]{Christof Würmli, Sandro Ropelato}
 
-% funktion zum aktivieren des footers
-\newcommand{\enablefooter}{
-	\fancyfoot[RE]{\thepage}
-	\fancyfoot[LO]{\thepage}
-	\fancyfoot[RO]{Christof Würmli, Sandro Ropelato}
+% funktion zum einfügen einer komplett leeren seite
+\newcommand{\emptypage}{
+	\newpage
+	\thispagestyle{empty}
+	\mbox{}
 }
-
-% funktion zum deaktivieren des footers
-\newcommand{\disablefooter}{
-	\fancyfoot{}
-}
-
-% footer aktivieren
-\enablefooter
 
 % selbst definierte farben
 \definecolor{light-gray}{rgb}{0.9, 0.9, 0.9}
@@ -74,7 +74,7 @@
 	extendedchars=\true
 }
 
-% ein paar übersetzungen
+% übersetzung einiger begriffe
 \deftranslation[to=ngerman]{Glossary}{Glossar}
 
 % umlaute
@@ -101,9 +101,9 @@
 
 	% titelseite
 	\include{inhalt/titelseite}
+	\emptypage
 	
 	% inhaltsverzeichnis
-	\fancyhead[RE]{\leftmark}
 	\include{inhalt/inhaltsverzeichnis}
 
 	% hauptteil
@@ -116,8 +116,8 @@
 	\include{inhalt/kapitel_06_nachwort}
 	
 	% anhang
-	\setcounter{section}{0}
 	\renewcommand{\thesection}{\Alph{section}}
+	\setcounter{section}{0}
 	
 	\fancyhead[RE]{Anhang \leftmark}
 	\include{inhalt/anhang_a_aufgabenstellung}
