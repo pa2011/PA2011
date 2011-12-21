@@ -1,9 +1,9 @@
 \section{Realisierung}
-Wie bereits in der Systembeschreibung beschrieben, wird der Fahrsimulator in dei Hauptkomponenten unterteilt. Zum Fahrsimulator gehört ein UDP-Listener, ein Szenen-Manager und das Hauptprogramm. Da die Verbindung zwischen dem Cockpit und dem Fahrsimulator mit einer Netzwerkschnittstelle realisiert wird, ist es möglich die Anbindung an das Cockpit und den Fahrsimulator physisch auf zwei Rechnern zu betreiben. Eine Alternative ist die Umsetzung mit dem Ogre Framwork (Siehe Anhang C). Dieses Framework bietet umfassende Lösungen um Steuerradär und Pedalen, wie sie in userem Cockpit vorhanden sind, anzusteuern.\\
-Da die 3D-Umgebung mit fortscheitendem Projekt ausgebaut wird, könnte sich die notwendige Rechenleistung erheblich steigern. Folgen ungenügender Leistung sind unregelmässige Bewegungen (Lags) in der virtuellen Umgebung oder sogar bis zum Absturz des gesamten Programms führen. Dieses Problem hat zur Folge, dass der Fahrsimulator einer hohen Portierbarkeitanforderung genügen muss. \\
+Wie bereits in der Systembeschreibung beschrieben, wird der Fahrsimulator in drei Hauptkomponenten unterteilt, den UDP-Listener, den Szenen-Manager und das Hauptprogramm. Da die Verbindung zwischen dem Cockpit und dem Fahrsimulator mit einer Netzwerkschnittstelle realisiert wird, ist es möglich die Anbindung an das Cockpit und den Fahrsimulator physisch auf zwei unterschiedlichen Rechnern zu betreiben. Eine Alternative ist die Umsetzung mit dem \gls{ogre}-Framwork (Siehe Anhang C). Dieses Framework bietet umfassende Lösungen um Steuerradär und Pedalen, wie sie in userem Cockpit vorhanden sind, anzusteuern.\\
+Da die 3D-Umgebung mit fortscheitendem Projekt ausgebaut wird, könnte sich die notwendige Rechenleistung erheblich steigern. Folgen ungenügender Leistung sind unregelmässige Bewegungen (Lags) in der virtuellen Umgebung oder sogar bis zum Absturz des gesamten Programms führen.\\
 Aus diesem Grund ist die erste Variante mit der Netzwerkschnittstelle für das Fahrsimulatorprojekt besser geeignet. Die andere Variante wird verworfen.
-\subsection{LabView modifizierung}
-Eine LabVIEW-Umgebung existiert bereits auf dem Rechner an dem das Cockpit angeschlossen ist. Dazu existierte ein LabVIEW-Programm, dass bereits die Eingaben im Cockpit einliest. Da dieses Programm jedoch nicht genau den Anforderungen entspricht, wird ein neues LabVIEW-Programm realisiert. Dieses Programm wird so erweitert das diese Eingaben in Form von definierten Parameter als UDP-Packet permanent gesendet werden. Zusätzlich wird ein zweiter UDP-Socket eingerichtet um Packete die vom Fahrsimulator gesendet werden zu empfangen. Die Daten der empfangenen Packete werden von LabVIEW in ein Log-File gespeichert. 
+\subsection{LabVIEW Programm}
+Eine LabVIEW-Umgebung existiert bereits auf dem Rechner, an den das Cockpit angeschlossen ist. Dazu existierte ein LabVIEW-Programm, welches bereits die Eingaben im Cockpit einliest. Da dieses Programm jedoch nicht genau den Anforderungen entspricht, wird ein neues LabVIEW-Programm realisiert. Dieses Programm wird so erweitert, dass diese Eingaben in Form von definierten Parametern als UDP-Packet in regelmässigen Zeitabständen gesendet werden. Zusätzlich wird ein zweiter UDP-Socket eingerichtet um Packete, die vom Fahrsimulator gesendet werden, zu empfangen. Die Daten der empfangenen Packete werden von LabVIEW in ein Log-File gespeichert.
 % ev Bild
 \subsection{UDP-Socket}
 Die Paramter werden vom LabVIEW-Programm permanent gelesen und mindestens 50 mal pro Sekunde wird ein UDP-Packet gesendet. Um die Zeit zwischen der Eingabe des Probanden und derReaktion des Fahrzeuges im Simulator möglichst gering zu halten, müssen ankommende Packete sofort gelesen werden. Angesitchts der hohen Anzahl an Datenpacketen pro Zeitraum, ist es vernachlässigbar, wenn einige Packete verloren gehen oder vertauscht werden. Das UDP-Protokoll gewährleistet genau diese Eigenschaften.
@@ -113,9 +113,70 @@ Um die Berglandschaft zu generieren gibt es im Cinema4D ein eigens dafür vorges
 Für die Darstellung eines Autos wurde aus dem Google 3D Warehouse ein Mini Cooper geladen. Wie in Abbildung \ref{screenshot_minicooper} zu sehen, wird dieser aus der Perspektive einer dritten Person betrachtet. Beim Rückwärtsfahren wird die Kamera um das Fahrzeug gedreht, so dass man nach hinten sehen kann. Mit der Taste V auf der Tastatur kann die Ansicht in das innere des Fahrzeugs gewechselt werden. Zu Beginn wirde die Kamera lediglich in das innere des Mini Coopers versetzt, dorthin wo der Kopf des Fahrers in etwa sein sollte. In einem zweiten Schritt wurde jedoch ein eigenes Fahrerkabine designed. Dies war vorallem deshalb notwendig, um eine Geschwindigkeitsanzeige implementieren zu können. Wie die Abbildung \ref{screenshot_cockpit} veranschaulicht, ist die Geschwindigkeitsanzeige die mittlere der drei Anzeigen. Sie besteht aus zwei Objekten. Eines der Objekte ist die gesamte Innenansicht selbst und das zweite Objekt ist der rote Zeiger der Geschwindigkeitsanzeige. Dieser wird an der richtigen Stelle Plaziert und wird je nach Geschwindigkeit gedreht. Somit sind zwei Ansichten möglich. Die Sicht des Fahrers mit der eigens dafür erstellten Fahrerkabine und die Aussenansicht in der der Mini Cooper angezeigt wird.\\
 Um die Geschwindigkeit des Fahrzeuges herauszufinden, wurde im Cinema4D, in dem alle Szenen erstellt wurden, mit reellen Werten gearbeitet. So wurden Strassen wirklich sechs Meter breit modeliert. Somit konnte auch die Länge der Strasse festgelegt werden. Um die Geschwindigkeit zu ermitteln, wurde in Cinema4D eine Distanz abgemessen und diese mit verschiedenen Konstanten Geschwindigkeiten abgefahren und die Zeit gemessen. Die interne Geschwindigkeit im Programm wird mit einem Faktor in die tatsächliche Geschwindigkeit umgerechnet. Diese kann dann auf dem Tachometer angezeigt werden.\\
 
+\newpage
 \subsection{Hautpprogramm}
-
 
 %Sequenzdiagramm
 %Blockdiagramm
+
+\subsubsection{Initialisierung}
+
+Beim Start der Applikation werden die Konfigurationsfiles (Siehe Kapitel \ref{sec:konfigurationsfiles}) geladen. Aus den darin enthaltenen Informationen wird das Grundgerüst von OGRE erstellt. Dazu gehören folgende Objekte:
+
+\minisec{rootNode}
+Der RootNode der 3D-Szene. Alle Objekte sind diesem angehängt.
+
+\begin{lstlisting}[caption={Laden der Konfigurationsdateien},label={laden_konfigurationsdateien}]
+// create root node
+#ifdef _DEBUG
+rootNode = new Ogre::Root("Resources/plugins_d.cfg", "Resources/graphics_d.cfg", "log_d.txt");
+#else
+rootNode = new Ogre::Root("Resources/plugins.cfg", "Resources/graphics.cfg", "log.txt");
+#endif
+
+// load config file
+Ogre::ConfigFile configFile;
+#ifdef _DEBUG
+configFile.load("Resources/resources_d.cfg");
+#else
+configFile.load("Resources/resources.cfg");
+#endif
+
+// load resource files
+Ogre::ConfigFile::SectionIterator it = configFile.getSectionIterator();
+while(it.hasMoreElements())
+{
+	Ogre::String sectionName = it.peekNextKey();
+	Ogre::ConfigFile::SettingsMultiMap* settings = it.getNext();
+	Ogre::ConfigFile::SettingsMultiMap::iterator i;
+	for(i = settings->begin(); i != settings->end(); ++i)
+	{
+		Ogre::ResourceGroupManager::getSingleton(). addResourceLocation(i->second, i->first, sectionName);
+	}
+}
+
+// try to initialize window with settings from config file
+if(!(rootNode->restoreConfig()))
+{
+	throw Ogre::Exception(Ogre::Exception::ERR_INVALID_STATE, "Could not read graphics configuration", "MainApplication::go");
+}
+renderWindow = rootNode->initialise(true, "Driving Simulator V1");
+\end{lstlisting}
+
+\subsubsection{Konfigurationsfiles}
+\label{sec:konfigurationsfiles}
+
+Die Applikation verwendet folgende Dateien zur Konfiguration beim Start:
+
+\minisec{plugins.cfg}
+\gls{ogre} lädt einige Komponente, die zur Ausführung des Programms benötigt werden, zur Laufzeit. Welche Komponenten geladen werden, wird im File plugins.cfg definiert. Inhalt siehe Anhang \ref{listing:plugins.cfg}.
+
+\minisec{graphics.cfg}
+In diesem File sind die Grafikeinstellungen definiert. Inhalt siehe Anhang \ref{listing:graphics.cfg}.
+
+\minisec{resources.cfg}
+Hier werden alle Pfade angegeben, in welchen sich benötigte Resourcen (z.B. Mesh-Files, Bilder, etc.) befinden. Inhalt siehe Angang \ref{listing:resources.cfg}.
+
+
+
 

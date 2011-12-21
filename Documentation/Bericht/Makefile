@@ -4,7 +4,7 @@ else
 	findCommand=find
 endif
 
-main.pdf: main.tex $(shell $(findCommand) inhalt)  $(shell $(findCommand) src)
+main.pdf: main.tex $(shell $(findCommand) inhalt)  $(shell $(findCommand) src)  $(shell $(findCommand) listings)
 	pdflatex main.tex
 	makeindex -s main.ist -t main.glg -o main.gls main.glo
 	pdflatex main.tex
@@ -21,6 +21,7 @@ clean:
 	rm -f *.acn
 	rm -f *.glo
 	rm -f *.gls
+	rm -f *.glg
 	rm -f *.ist
 	rm -f *.out
 	rm -f *.synctex.gz
@@ -31,6 +32,7 @@ clean:
 	rm -f inhalt/*.acn
 	rm -f inhalt/*.glo
 	rm -f inhalt/*.gls
+	rm -f inhalt/*.glg
 	rm -f inhalt/*.ist
 	rm -f inhalt/*.out
 	rm -f inhalt/*.synctex.gz
