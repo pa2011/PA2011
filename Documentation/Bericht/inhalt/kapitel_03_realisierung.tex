@@ -9,7 +9,7 @@ Eine LabVIEW-Umgebung existiert bereits auf dem Rechner, an den das Cockpit ange
 \label{sec:udp-listener}
 Die Paramter werden vom LabVIEW-Programm permanent gelesen und ca alle 0.01 Sekunden wird ein UDP-Packet gesendet. Um die Zeit zwischen der Eingabe des Probanden und derReaktion des Fahrzeuges im Simulator möglichst gering zu halten, müssen ankommende Packete sofort gelesen werden. Angesitchts der hohen Anzahl an Datenpacketen pro Zeitraum, ist es vernachlässigbar, wenn einige Packete verloren gehen oder vertauscht werden. Das UDP-Protokoll gewährleistet genau diese Eigenschaften.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering 
 \includegraphics[scale=0.5]{src/koordinatensystem.png}
 \caption{Koordinatensystem} % Titel der Grafik
@@ -62,15 +62,15 @@ material city_street_h
 \end{lstlisting}
 Für die Textur wird in diesem Beispiel kein Ambientes Licht definiert und es wird der Standartwert 0 genommen. Der diffuse Anteil bestimmt wie stark das Material das Licht reflektiert. Da die Textur des Materials gut sichtbar sein soll, fällt dieser Wert relativ hoch aus. Im Block \textit{texture\_unit} wird die Textur angegeben und konfiguriert. Die Graphik die als Textur verwendet wird, wird nach dem Keyword \textit{texture} angegeben. Das erster Argument nach der Graphikdatei, das \textit{2d} konfiguriert die zweidimensionale Graphik als normale zweidimensionale Textur. Die vier als drittes Argument gibt die Anzahl zu generierenden Mipmaps an. Zusätzlich kann ein Filter für die Textur mit dem Keyword \textit{filtering} angegeben werden. Der anisotropische Filter wertet die Qualität der Textur in der Distanz auf. Hierbei wird die Richtung, der die Textur betrachtet wird, berücksichtigt.\\
 Es werden zwei unterschiedliche Szenen für den Fahrsimulator erstellt. Die eine Szene zeigt eine Stadt mit Häusern, Kreuzungen und Verkehrsschildern. Die andere Szene stellt eine Berglandschaft mit mehreren Tunnels dar. Die Szenen werden mit dem Programm Cinema4D erstellt. 
-\subsubsection{Erstellung der Stadtszene}
-\begin{figure}[htbp]
+\subsubsection{Erstellen der Stadtszene}
+\begin{figure}[H]
 \centering 
-\includegraphics[scale=0.3]{src/CityWorld_map.png}
+\includegraphics[width=1\linewidth]{src/CityWorld_map.png}
 \caption{Karte der Stadtszene} % Titel der Grafik
 \label{CityWorld_map} % Labelname
 \end{figure}
 Um die erstellte Stadtszene gut dokumentieren zu können, zeigt Abbildung \ref{CityWorld_map} eine Übersichtskarte. Die grosse vierspurige Strasse die sich von oben links nach unten rechts durch die gesamte Szene zieht ist eine rechteckige Ebene. Die ebene ist mit einer Textur versehen, die die vier Spuren mit einer Sicherheitelinie in der Mitte darstellt. Die Textur ist jedoch nicht so lange wie die gesammte Strasse. Sie hat nur die Länge von einmal einem Stück mit dem Strich der gestrichelten Sicherheitslinie, die die beiden Spuren die in die gleiche Richtung fahren trennt, und einmal ein Stück ohne dem Strich. Die Textur wird auf der Ebene immer wieder wiederhohlt. Auch bei allen anderen Strassen ist die Textur nur ein kurz und wird wiederholt. Ein Beispiel für eine solche Strassentextur ist in der Abbildung \ref{examples_street_textures} zu finden. \\
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering 
 \includegraphics[scale=0.6]{src/examples_street_textures.png}
 \caption{Beispiele von Strassentexturen} % Titel der Grafik
@@ -78,15 +78,15 @@ Um die erstellte Stadtszene gut dokumentieren zu können, zeigt Abbildung \ref{C
 \end{figure}
 Die Strassen mit Kurven werden mit \glspl{spline} beschrieben. Eine Linie wird der \gls{spline} entlangeführt um die Breite einer Strasse zu erhalten. Die Textur der Strasse wird auf dieses, so zusammengefügte, Objekt gelegt. Der Abschluss solcher geschwungenen Strassen bilden wiederum rechteckige Ebenen. Diese erhalten die Textur einer Stoplinie mit Beschriftung auf der Strasse oder den vielen Dreieckigen Zeichen für kein Vortritt wie in Abbildung \ref{examples_street_textures} gezeigt. \\
 Zusätzlich zu den Symbolen auf der Strasse, werden noch Verkehrsschilderobjekte in die Szene geladen. Die Abbildung \ref{screenshot_trafficsignal} zeigt ein Beipiel eines solchen Objektes. \\
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering 
 \includegraphics[scale=0.6]{src/screenshot_trafficsignal.png}
 \caption{Beispiele eines Verkehrssignals} % Titel der Grafik
 \label{screenshot_trafficsignal} % Labelname
 \end{figure}
 
-Die Häuser der Stadt sind einfache Blöcke die mit einer Textur von vielen Fenstern versehen werden. Insgesammt sind drei Gebäudetypen, wie in Abbildung \ref{screenshot_buildings} dargestellt,  vorhanden. Diese drei Typen werden einzeln dubliziert eventuell gedreht und in der Szene verteilt. Zusätzlich wird das ETH Zürich Gebäude in der Szene geladen. Dieses Gebäudemodel wurde aus dem Google 3D Warehouse heruntergeladen. Das Objekt wurde in google SketchUp bearbeitet und als eigenes Objekt abgespeichert. Die Bearbeitung heinhaltet vor allem die neuberechnung der Oberflächennormalen und das entfernen der Bodenplatte auf der die ETH Zürich gestanden hat. Die Texturen mussten manuell übernommen werden. Das ETH Objekt wird in die Szene geladen, skaliert und mit x- und y-Koordinaten plaziert. 
-\begin{figure}[htbp]
+Die Häuser der Stadt sind einfache Blöcke die mit einer Textur von vielen Fenstern versehen werden. Insgesammt sind drei Gebäudetypen, wie in Abbildung \ref{screenshot_buildings} dargestellt,  vorhanden. Diese drei Typen werden einzeln dubliziert eventuell gedreht und in der Szene verteilt. Zusätzlich wird das ETH Zürich Gebäude in der Szene geladen. Dieses Gebäudemodel wurde aus dem Google 3D Warehouse heruntergeladen. Das Objekt wurde in google SketchUp bearbeitet und als eigenes Objekt abgespeichert. Die Bearbeitung heinhaltet vor allem die neuberechnung der Oberflächennormalen und das entfernen der Bodenplatte auf der die ETH Zürich gestanden hat. Die Texturen mussten manuell übernommen werden. Das ETH Objekt wird in die Szene geladen, skaliert und an der richtigen Stelle platziert. 
+\begin{figure}[H]
 \centering 
 \includegraphics[scale=0.4]{src/screenshot_buildings.png}
 \caption{Drei verschidene Gebäudetypen} % Titel der Grafik
@@ -94,7 +94,7 @@ Die Häuser der Stadt sind einfache Blöcke die mit einer Textur von vielen Fens
 \end{figure}
 Um der Szene ein bisschen Farbe zu verleihen sind noch Bäume, wie in Abbildung \ref{screenshot_tree} in der Szene vorhanden. Ein Baum besteht aus einem Stamm mit einer Holztextur und einer Krone. Die Krone ist eine zufällig generierte Landschaft die zu einer Kugel geformt wird. Dadurch entstehen die verschiedenartigen Aus- und Einbuchtungen in der Baumkrone. Um die Illusion vollständig zu machen wird darauf eine Textur mit Blättern gelegt.\\
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering 
 \includegraphics[scale=0.4]{src/screenshot_tree.png}
 \caption{Baum} % Titel der Grafik
@@ -105,27 +105,29 @@ Um der Szene ein bisschen Farbe zu verleihen sind noch Bäume, wie in Abbildung 
 Um die Berglandschaft zu generieren gibt es im Cinema4D ein eigens dafür vorgesehenes Objekt. Durch die Konfiguration des Landschaftsobjekt kann die Höhe und Anzahl der Erhöhungen und Vertiefungen festgelegt werden. Die Strasse in der Berglandschaft wird änlich gemacht wie in der Stadtszene. Zusätzlich wird aber der \gls{spline} ein halber Zilinder mitgegeben der ihr entlangfährt. Der halbe Zilinder wird mit einer Operation versehen damit er, an den Orten an denen die Strasse in der in der Landschaft befindet, diese ausschneidet und ein Tunnel generiert. Die Wand des Tunnels wird mit einer Betonplattenstruktur, wie sie in Abbildung \ref{texture_concretetiles} zeigt, versehen. Die Berglandschaft selbst wird mit einer \gls{seamless} Felsentexture versehen. 
 \begin{figure}[htbp]
 \centering 
-\includegraphics[scale=0.6]{src/texture_concretetiles.png}
+\includegraphics[width=0.4\linewidth]{src/texture_concretetiles.png}
 \caption{Tunnelwandtextur} % Titel der Grafik
 \label{texture_concretetiles} % Labelname
 \end{figure}
 
-\subsubsection{Eigenes Fahrerkabine und Geschwindigkeit}
-Für die Darstellung eines Autos wurde aus dem Google 3D Warehouse ein Mini Cooper geladen. 
-\begin{figure}[htbp]
+\newpage
+\subsubsection{Fahrzeug}
+Zur Darstellung eines Autos wurde aus dem Google 3D Warehouse ein Mini Cooper heruntergeladen und in nach \gls{ogre-xml}konvertiert. Wie in Abbildung \ref{screenshot_minicooper} zu sehen, wird dieser aus der Perspektive einer dritten Person betrachtet. Beim Rückwärtsfahren wird die Kamera um das Fahrzeug gedreht, so dass man nach hinten sehen kann. Mit der Taste V auf der Tastatur kann die Ansicht in das innere des Fahrzeugs gewechselt werden. Zu Beginn wirde die Kamera lediglich in das innere des Mini Coopers versetzt, dorthin wo der Kopf des Fahrers in etwa sein sollte. In einem zweiten Schritt wurde jedoch ein eigenes Fahrerkabine designed. Dies war vorallem deshalb notwendig, um eine Geschwindigkeitsanzeige implementieren zu können. 
+\begin{figure}[H]
 \centering 
-\includegraphics[scale=0.6]{src/screenshot_minicooper.png}
-\caption{Minicooper in der Szene} % Titel der Grafik
+\includegraphics[width=1\linewidth]{src/screenshot_minicooper.png}
+\caption{Der Mini Cooper aus der 3rd-Person-Ansicht} % Titel der Grafik
 \label{screenshot_minicooper} % Labelname
 \end{figure}
-Wie in Abbildung \ref{screenshot_minicooper} zu sehen, wird dieser aus der Perspektive einer dritten Person betrachtet. Beim Rückwärtsfahren wird die Kamera um das Fahrzeug gedreht, so dass man nach hinten sehen kann. Mit der Taste V auf der Tastatur kann die Ansicht in das innere des Fahrzeugs gewechselt werden. Zu Beginn wirde die Kamera lediglich in das innere des Mini Coopers versetzt, dorthin wo der Kopf des Fahrers in etwa sein sollte. In einem zweiten Schritt wurde jedoch ein eigenes Fahrerkabine designed. Dies war vorallem deshalb notwendig, um eine Geschwindigkeitsanzeige implementieren zu können. 
-\begin{figure}[htbp]
+
+\newpage
+Wie die Abbildung \ref{screenshot_cockpit} veranschaulicht, ist die Geschwindigkeitsanzeige die mittlere der drei Anzeigen. Sie besteht aus zwei Objekten. Eines der Objekte ist die gesamte Innenansicht selbst und das zweite Objekt ist der rote Zeiger der Geschwindigkeitsanzeige. Dieser wird an der richtigen Stelle Plaziert und wird je nach Geschwindigkeit gedreht. Somit sind zwei Ansichten möglich. Die Sicht des Fahrers mit der eigens dafür erstellten Fahrerkabine und die Aussenansicht in der der Mini Cooper angezeigt wird.
+\begin{figure}[H]
 \centering 
-\includegraphics[scale=0.6]{src/screenshot_cockpit.png}
-\caption{Selbst designete Fahrerkabine} % Titel der Grafik
+\includegraphics[width=1\linewidth]{src/screenshot_cockpit.png}
+\caption{Innenansicht des Mini} % Titel der Grafik
 \label{screenshot_cockpit} % Labelname
 \end{figure}
-Wie die Abbildung \ref{screenshot_cockpit} veranschaulicht, ist die Geschwindigkeitsanzeige die mittlere der drei Anzeigen. Sie besteht aus zwei Objekten. Eines der Objekte ist die gesamte Innenansicht selbst und das zweite Objekt ist der rote Zeiger der Geschwindigkeitsanzeige. Dieser wird an der richtigen Stelle Plaziert und wird je nach Geschwindigkeit gedreht. Somit sind zwei Ansichten möglich. Die Sicht des Fahrers mit der eigens dafür erstellten Fahrerkabine und die Aussenansicht in der der Mini Cooper angezeigt wird.\\
 Um die Geschwindigkeit des Fahrzeuges herauszufinden, wurde im Cinema4D, in dem alle Szenen erstellt wurden, mit reellen Werten gearbeitet. So wurden Strassen wirklich sechs Meter breit modeliert. Somit konnte auch die Länge der Strasse festgelegt werden. Um die Geschwindigkeit zu ermitteln, wurde in Cinema4D eine Distanz abgemessen und diese mit verschiedenen Konstanten Geschwindigkeiten abgefahren und die Zeit gemessen. Die interne Geschwindigkeit im Programm wird mit einem Faktor in die tatsächliche Geschwindigkeit umgerechnet. Diese kann dann auf dem Tachometer angezeigt werden.\\
 
 
@@ -219,7 +221,6 @@ Hier werden alle Pfade angegeben, in welchen sich benötigte Resourcen (z.B. Mes
 
 \subsubsection{Laden des Autos}
 
-
 \begin{lstlisting}[caption={Laden des Autos},label={laden_auto}]
 void DrivingSimulatorV1::createCar()
 {
@@ -250,6 +251,48 @@ void DrivingSimulatorV1::createCar()
 }
 \end{lstlisting}
 
+Hier werden die drei Modelle \textit{MiniCooper.mesh}, \textit{MiniCockpitPointer.mesh} und \textit{MiniSteeringWheel.mesh} durch den Szenenmanager geladen und jeweils einem eigenen \gls{node} angehängt und entsprechend skaliert, so dass sie in die Szene passen.
+
+\subsubsection{Laden des Szene}
+
+\begin{lstlisting}[caption={Laden der Szene},label={laden_szene}]
+void DrivingSimulatorV1::createScene1() // city
+{
+	// create world node
+	Ogre::SceneNode* worldNode = sceneManager->getRootSceneNode()->createChildSceneNode();
+	Ogre::Entity* cityWorld = sceneManager->createEntity("CityWorld.mesh");
+	worldNode->scale(0.05, 0.05, 0.05);
+	worldNode->attachObject(cityWorld);
+
+	// create ETH Node
+	Ogre::SceneNode* ethNode = sceneManager->getRootSceneNode()->createChildSceneNode();
+	Ogre::Entity* eth = sceneManager->createEntity("ETH.mesh");
+	ethNode->attachObject(eth);
+	ethNode->scale(1.3, 1.3, 1.3);
+	ethNode->setPosition(428, 0, 235);
+	ethNode->yaw(Ogre::Degree(210));
+
+	// create ambient light
+	sceneManager->setAmbientLight(Ogre::ColourValue(0.7, 0.7, 0.7));
+
+	// create sun light
+	Ogre::Light* sunLight = sceneManager->createLight();
+	sunLight->setType(Ogre::Light::LT_DIRECTIONAL);
+	sunLight->setDirection(Ogre::Vector3(-0.5, -0.5, 0.5));
+	sunLight->setDiffuseColour(Ogre::ColourValue(1, 1, 1));
+	sunLight->setSpecularColour(Ogre::ColourValue(0.7, 0.7, 0.7));
+
+	// set car to initial position and orientation
+	carNode->setPosition(584, 0, 121);
+	carNode->setOrientation(Ogre::Quaternion(Ogre::Degree(-4.5), Ogre::Vector3::UNIT_Y));
+}
+\end{lstlisting}
+
+Ähnlich zur Funktion \textit{createCar} (Abschnitt \ref{laden_auto}) werden hier zunächst Objekte geladen. Diesmal die beiden Meshes \textit{CityWorld.mesh} und \textit{ETH.mesh}. Auch sie werden jeweils eigenen Nodes angehängt und entsprechend positioniert, ausgerichtet und skaliert. Weiter wird in dieser Funktion die Belichtung der Szene definiert. Einmal wird mit \textit{setAmbientLight} das Umgebungslicht gesetzt, danach wird eine neue direktionale Lichtquelle erstellt, die in unserem Programm das Sonnenlicht liefert. Zuletzt wird das Auto an die korrekte Startposition in der Szene gesetzt und ausgerichtet.\\Das Laden der Tunnelszene geschieht in der Funktion \textit{createScene2}. Details dazu im Listing \textit{DrivingSimulatorV1.cpp} in Kapitel \ref{listing:DrivingSimulatorV1.cpp}.
+
+\subsubsection{Callback-Methode}
+
+Die so genannte \gls{callback-methode} wird durch einen internen Timer des \gls{ogre}-Frameworks aufgerufen. Dies geschieht je nach \gls{vsync}-Konfiguration entweder mit der Bildwiederholungsrate der Bildschirms z.B. 60 mal pro Sekunde oder so oft wie möglich. Über die Variable timeSinceLastFrame ist genau bestimmt, wie lange der letzte Renderdurchlauf zurück liegt. Die Aufgabe dieser Methode ist alles das zu tun, was vor dem Zeichnen eines neuen Bildes getan werden muss.
 
 
 
