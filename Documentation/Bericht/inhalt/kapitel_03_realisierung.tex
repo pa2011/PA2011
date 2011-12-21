@@ -355,14 +355,55 @@ if(keyboard->isKeyDown(OIS::KC_LEFT))
 if(keyboard->isKeyDown(OIS::KC_RIGHT))
 	keyboardSteer -= 270 * evt.timeSinceLastFrame;
 \end{lstlisting}
-Wenn das Fahrzeug in eine Richtung gelenkt werden soll, findet eine Rotation um die Y-Achse statt. Die Geschwindigkeit, mit der rotiert wird (hier \textit{steerIntensity}), ist von der Geschwindigkeit des Fahrzeugs abhängig und wird hier von einer nicht-linearen Funktion beschrieben.
+Wenn das Fahrzeug in eine Richtung gelenkt werden soll, findet eine Rotation um die Y-Achse statt. Die Geschwindigkeit, mit der rotiert wird (hier \textit{steerIntensity}), ist von der Geschwindigkeit des Fahrzeugs abhängig und wird hier von einer nicht-linearen Funktion beschrieben. Damit soll das \gls{untersteuern} des Fahrzeugs bei hochen Geschwindigkeiten simuliert werden.
 
 \begin{figure}[H]
 \centering 
-\includegraphics[width=0.5\linewidth]{src/steerIntensity.pdf}
+\includegraphics[width=0.7\linewidth]{src/steerIntensity.pdf}
 \caption{Steuerintensität in Abhängigkeit der Geschwindigkeit} % Titel der Grafik
 \label{steer_intensity} % Labelname
 \end{figure}
+
+\subsubsection*{Fahrzeug bewegen}
+\begin{lstlisting}[caption={Fahrzeug bewegen},label={fahrzeug_bewegen}]
+// update car position
+Ogre::Real xMove = Ogre::Math::Sin(carNode->getOrientation().getYaw()) * speed * evt.timeSinceLastFrame;
+Ogre::Real zMove = Ogre::Math::Cos(carNode->getOrientation().getYaw()) * speed * evt.timeSinceLastFrame;
+carNode->translate(xMove, 0, zMove);
+\end{lstlisting}
+
+Die Koordinaten des Autos werden ensprechend seiner Ausrichtung und Geschwindigkeit neu berechnet.
+
+\subsubsection*{Kamera positionieren}
+\begin{lstlisting}[caption={Positionierung der 1st-Person-Kamera},label={positionierung_fp_kamera}]
+// position camera
+Ogre::Vector3 cameraOffset(1.3, 4.0, 0.7);
+camera->setOrientation(carNode->getOrientation() * Ogre::Quaternion(Ogre::Degree(180), Ogre::Vector3::UNIT_Y));
+camera->setPosition(carNode->getPosition() + carNode->getOrientation() * cameraOffset);
+\end{lstlisting}
+In der \gls{1st-person}-Ansicht wird die Kamera an die Stelle, an der sich der Kopf des Fahrers befindet verschoben.
+
+\begin{lstlisting}[caption={Positionierung der 3rd-Person-Kamera},label={positionierung_tp_kamera}]
+if(gear != REVERSE)
+	cameraRotationOffset *= Ogre::Math::Pow(0.1, evt.timeSinceLastFrame);
+else
+	cameraRotationOffset = cameraRotationOffset * Ogre::Math::Pow(0.1, evt.timeSinceLastFrame) + 180 * (1 - Ogre::Math::Pow(0.1, evt.timeSinceLastFrame));
+
+Ogre::Radian camAngle = carNode->getOrientation().getYaw() + Ogre::Degree(cameraRotationOffset);
+Ogre::Real camXOffset = -Ogre::Math::Sin(camAngle) * 25;
+Ogre::Real camYOffset = 8;
+Ogre::Real camZOffset = -Ogre::Math::Cos(camAngle) * 25;
+
+camera->setPosition(carNode->getPosition() + Ogre::Vector3(camXOffset, camYOffset, camZOffset));
+camera->lookAt(carNode->getPosition());
+
+carNode->setVisible(true);
+cockpitNode->setVisible(false);
+pointerNode->setVisible(false);
+steeringWheelNode->setVisible(false);
+\end{lstlisting}
+
+Im \gls{3rd-person}-Modus wird die Kamera um eine bestimmte Distanz nach hinten verschoben und zum Mittelpunkt des Fahrzeugs ausgerichtet.
 
 
 
