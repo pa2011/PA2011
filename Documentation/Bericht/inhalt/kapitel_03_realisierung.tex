@@ -5,7 +5,8 @@ Aus diesem Grund ist die erste Variante mit der Netzwerkschnittstelle für das F
 \subsection{LabVIEW Programm}
 Eine LabVIEW-Umgebung existiert bereits auf dem Rechner, an den das Cockpit angeschlossen ist. Dazu existierte ein LabVIEW-Programm, welches bereits die Eingaben im Cockpit einliest. Da dieses Programm jedoch nicht genau den Anforderungen entspricht, wird ein neues LabVIEW-Programm realisiert. Dieses Programm wird so erweitert, dass diese Eingaben in Form von definierten Parametern als UDP-Packet in regelmässigen Zeitabständen gesendet werden. Zusätzlich wird ein zweiter UDP-Socket eingerichtet um Packete, die vom Fahrsimulator gesendet werden, zu empfangen. Die Daten der empfangenen Packete werden von LabVIEW in ein Log-File gespeichert.
 % ev Bild
-\subsection{UDP-Socket}
+\subsection{UDP-Listener}
+\label{sec:udp-listener}
 Die Paramter werden vom LabVIEW-Programm permanent gelesen und mindestens 50 mal pro Sekunde wird ein UDP-Packet gesendet. Um die Zeit zwischen der Eingabe des Probanden und derReaktion des Fahrzeuges im Simulator möglichst gering zu halten, müssen ankommende Packete sofort gelesen werden. Angesitchts der hohen Anzahl an Datenpacketen pro Zeitraum, ist es vernachlässigbar, wenn einige Packete verloren gehen oder vertauscht werden. Das UDP-Protokoll gewährleistet genau diese Eigenschaften.
 
 \begin{figure}[htbp]
