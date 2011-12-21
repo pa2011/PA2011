@@ -122,10 +122,16 @@ Um die Geschwindigkeit des Fahrzeuges herauszufinden, wurde im Cinema4D, in dem 
 
 \subsubsection{Initialisierung}
 
-Beim Start der Applikation werden die Konfigurationsfiles (Siehe Kapitel \ref{sec:konfigurationsfiles}) geladen. Aus den darin enthaltenen Informationen wird das Grundgerüst von OGRE erstellt. Dazu gehören folgende Objekte:
+Beim Start der Applikation werden die Konfigurationsfiles (siehe Kapitel \ref{sec:konfigurationsfiles}) geladen. Aus den darin enthaltenen Informationen wird das Grundgerüst von OGRE erstellt. Dazu gehören folgende Objekte:
 
 \minisec{rootNode}
 Der RootNode der 3D-Szene. Alle Objekte sind diesem angehängt.
+\minisec{renderWindow}
+Das RenderWindow ist das sichtbare Fenster der Applikation. In ihm wird der gesamte grafische Inhalt dargestellt.
+\minisec{camera}
+Wie der Name vermuten lässt, ist dies die Kamera, durch welche der Benutzer die Szene beobachtet.
+\minisec{viewPort}
+Der ViewPort ist mit dem Kameraobjekt verknüpft und zeigt die Bildprojektion der 3D-Szene an. 
 
 \begin{lstlisting}[caption={Laden der Konfigurationsdateien},label={laden_konfigurationsdateien}]
 // create root node
@@ -161,7 +167,24 @@ if(!(rootNode->restoreConfig()))
 {
 	throw Ogre::Exception(Ogre::Exception::ERR_INVALID_STATE, "Could not read graphics configuration", "MainApplication::go");
 }
+
 renderWindow = rootNode->initialise(true, "Driving Simulator V1");
+
+// initialize resources
+Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(5);
+Ogre::ResourceGroupManager::getSingleton(). initialiseAllResourceGroups();
+
+// create scene manager
+sceneManager = rootNode->createSceneManager("DefaultSceneManager");
+
+// create camera
+camera = sceneManager->createCamera("PlayerCam");
+camera->setAutoAspectRatio(true);
+camera->setNearClipDistance(1);
+
+// add viewport
+Ogre::Viewport* viewPort = renderWindow->addViewport(camera);
+viewPort->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
 \end{lstlisting}
 
 \subsubsection{Konfigurationsfiles}
@@ -177,6 +200,39 @@ In diesem File sind die Grafikeinstellungen definiert. Inhalt siehe Anhang \ref{
 
 \minisec{resources.cfg}
 Hier werden alle Pfade angegeben, in welchen sich benötigte Resourcen (z.B. Mesh-Files, Bilder, etc.) befinden. Inhalt siehe Angang \ref{listing:resources.cfg}.
+
+\subsubsection{Laden des Autos}
+
+
+\begin{lstlisting}[caption={Laden des Autos},label={laden_auto}]
+void DrivingSimulatorV1::createCar()
+{
+	// load car
+	Ogre::Entity* car = sceneManager->createEntity("MiniCooper.mesh");
+	carNode = sceneManager->getRootSceneNode()->createChildSceneNode();
+	carNode->attachObject(car);
+	carNode->scale(4, 4, 4);
+
+	// load Cockpit
+	Ogre::Entity* cockpit = sceneManager->createEntity("MiniCockpit.mesh");
+	cockpitNode = sceneManager->getRootSceneNode()->createChildSceneNode();
+	cockpitNode->attachObject(cockpit);
+	cockpitNode->scale(0.05, 0.05, 0.05);
+
+	Ogre::Entity* pointer = sceneManager->createEntity("MiniCockpitPointer.mesh");
+	pointerNode = sceneManager->getRootSceneNode()->createChildSceneNode();
+	pointerNode->attachObject(pointer);
+	pointerNode->scale(0.02, 0.02, 0.02);
+
+	Ogre::Entity* steeringWheel = sceneManager->createEntity("MiniCockpitSteeringWheel.mesh");
+	steeringWheelNode = sceneManager->getRootSceneNode()->createChildSceneNode();
+	steeringWheelNode->attachObject(steeringWheel);
+	steeringWheelNode->scale(0.03, 0.03, 0.03);
+
+	// setup camera
+	camera->setFOVy(Ogre::Degree(70));
+}
+\end{lstlisting}
 
 
 
