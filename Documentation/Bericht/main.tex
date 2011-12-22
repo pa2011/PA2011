@@ -15,7 +15,7 @@
 \usepackage{tocloft}
 \usepackage[acronym,footnote,description,nonumberlist]{glossaries}
 \usepackage{enumitem}
-\usepackage[bookmarksopen=true,bookmarksnumbered=true,pdfpagelabels=false,colorlinks=false,pdfborder={0,0,0}]{hyperref}
+\usepackage[bookmarks=true,unicode=true,bookmarksopen=true,bookmarksnumbered=true,pdfpagelabels=false,colorlinks=false,pdfborder={0,0,0}]{hyperref}
 \usepackage{bookmark}
 
 % sprache auswählen
@@ -78,7 +78,8 @@ pdfauthor={Diego Santa Cruz}, pdfsubject={From LaTeX to PDF}
 	breakautoindent=true,
 	title=\lstname,
 	inputencoding=utf8x,
-	extendedchars=\true
+	extendedchars=\true,
+	showstringspaces=false
 }
 
 % übersetzung einiger begriffe
@@ -125,6 +126,8 @@ pdfauthor={Diego Santa Cruz}, pdfsubject={From LaTeX to PDF}
 	% inhaltsverzeichnis
 	\setcounter{page}{1}
 	\include{inhalt/inhaltsverzeichnis}
+	
+	\emptypage
 
 	% hauptteil
 	\setcounter{page}{3}
