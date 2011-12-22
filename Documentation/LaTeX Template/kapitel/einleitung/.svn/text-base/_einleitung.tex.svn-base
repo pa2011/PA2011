@@ -1,7 +1,0 @@
-\chapter{Einleitung} 
-
-\input{kapitel/einleitung/ausgangslage}
-
-\input{kapitel/einleitung/zielsetzung}
-
-\input{kapitel/einleitung/moegliche_erweiterungen}
