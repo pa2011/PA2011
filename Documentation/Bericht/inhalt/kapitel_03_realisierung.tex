@@ -3,26 +3,10 @@ Wie bereits in der Systembeschreibung beschrieben, wird der Fahrsimulator in dre
 Da die 3D-Umgebung mit fortscheitendem Projekt ausgebaut wird, könnte sich die notwendige Rechenleistung erheblich steigern. Folgen ungenügender Leistung sind unregelmässige Bewegungen (Lags) in der virtuellen Umgebung oder sogar der Absturz des gesamten Programms.\\
 Aus diesem Grund ist die erste Variante mit der Netzwerkschnittstelle für das Fahrsimulatorprojekt besser geeignet. Die andere Variante wird verworfen.
 
-\newpage
 \subsection{LabVIEW Programm}
-Eine LabVIEW-Umgebung existiert bereits auf dem Rechner, an den das Cockpit angeschlossen ist. Ein LabVIEW-Programm liest bereits die Eingaben im Cockpit ein. Da dieses Programm jedoch nicht genau den Anforderungen entspricht, wird es neu realisiert. Die Eingaben werden über einen UDP-Socket alle 10 ms gesendet. Zusätzlich wird ein zweiter UDP-Socket eingerichtet, um Packete, die vom Fahrsimulator zurück gesendet werden, zu empfangen. Die Daten der empfangenen Packete werden von LabVIEW verarbeitet, dargestellt und in ein Log-File geschrieben.
+Eine LabVIEW-Umgebung existiert bereits auf dem Rechner, an den das Cockpit angeschlossen ist. Ein LabVIEW-Programm liest bereits die Eingaben im Cockpit ein. Da dieses Programm jedoch nicht genau den Anforderungen entspricht, wird es neu realisiert. Die Eingaben werden über einen UDP-Socket alle 10 ms gesendet. Zusätzlich wird ein zweiter UDP-Socket eingerichtet, um Packete, die vom Fahrsimulator zurück gesendet werden, zu empfangen. Die Daten der empfangenen Packete werden von LabVIEW verarbeitet, dargestellt und in ein Log-File geschrieben.\\
+Das detaillierte LabVIEW Programm ist im Anhang \ref{labview_programme} zu finden. Die LabVIEW-Schnittstelle ist im Anhang \ref{labview_schnittstelle} genauer ausgeführt.
 
-\begin{figure}[H]
-\centering 
-\includegraphics[width=1\linewidth]{src/labview_screenshot_drivingsimulator_daten_senden.png}
-\caption{LabVIEW: Daten werden gesendet} % Titel der Grafik
-\label{labview_daten_senden} % Labelname
-\end{figure}
-
-\newpage
-\begin{figure}[H]
-\centering 
-\includegraphics[angle=90,width=0.8\linewidth]{src/labview_screenshot_drivingsimulator_daten_empfangen.png}
-\caption{LabVIEW: Daten werden empfangen} % Titel der Grafik
-\label{labview_daten_empfangen} % Labelname
-\end{figure}
-
-\newpage
 \subsection{UDP-Listener}
 \label{sec:udp-listener}
 In einem eigenen Thread werden UDP-Pakete kontinuierlich gelesen und verarbeitet. Die Informationen werden zwischengespeichert, so dass sie bei jedem Renderdurchlauf zur Verfügung stehen. Dank der Häufigkeit, mit der Pakete versendet werden, stellt das Verlieren eines Pakets kein Problem dar, wodurch UDP sich durch den Geschwindigkeitsvorteil gegenüber TCP besser eignet.
