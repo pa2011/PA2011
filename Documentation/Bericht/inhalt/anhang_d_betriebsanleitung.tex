@@ -1,0 +1,40 @@
+\section{Betriebsanleitung}
+Hier wird in einer kurzen Schritt-für-Schritt-Anleitung erklärt, wie die Applikationen \textit{VideoPlayer} und \textit{DrivingSimulator} zu bedienen sind.
+\subsection{VideoPlayer}
+Der VideoPlayer benötigt eine funktionierende Installation des Programms MPlayer. MPlayer kann auf der Herstellerseite (http://www.mplayerhq.hu) kostenlos heruntergeladen werden.
+
+\begin{enumerate}[label=\arabic*.]
+
+\item \textbf{LabVIEW-Programm starten}\\
+Öffnen Sie die Datei VideoPlayer.vi mit LabVIEW und starten Sie das Programm mit einem Klick auf die Schaltfläche \includegraphics[height=\ht\strutbox]{src/icon_labview_run.png} \textit{Run}. Sie werden nach einem Dateipfad gefragt. Geben Sie hier den Pfad zu einer Datei an, in der Sie den Output vom LabVIEW-Programm gespeichert haben wollen. \textbf{Achtung: Existierende Dateien werden überschrieben!}
+
+\item \textbf{VideoPlayer starten}\\
+Starten Sie \textit{VideoPlayer2.exe} entweder direkt von der Kommandozeile mit folgenden Parametern in der Reihenfolge, wie sie hier aufgelistet sind:
+\begin{itemize}
+	\item Pfad zu mplayer.exe
+	\item Pfad zur Videodatei
+	\item Startzeit der gewünschten Videosequenz (in Sekunden)
+	\item Endzeit der gewünschten Videosequenz (in Sekunden)
+	\item Referenzgeschwindigkeit, d.h. Geschwindigkeit mit der das Video aufgenommen wurde (in km/h)
+	\item UDP Input Port
+	\item UDP Output Port
+	\item Adresse des Remote Computers ("127.0.0.1" wenn das LabVIEW-Programm auf demselben Computer läuft)
+\end{itemize}
+oder benutzen Sie die Datei \textit{VideoPlayer2.bat}, welche bereits mit den Standardwerten konfiguriert ist und ein beigelegtes Beispielvideo abspielt.
+	
+\item \textbf{Los gehts}\\
+Setzen Sie sich nun ans Steuer und kontrollieren Sie die Geschwindigkeit des Fahrzeugs durch drücken des Gas- bzw. Bremspedals. Die aktuelle Geschwindigkeit und Position im Video wird im LabVIEW-Programm angezeigt. Alle Informationen werden solange das Programm läuft in die, in Schritt 1 angegebenen, Datei geschrieben.
+	
+\end{enumerate}
+
+\subsection{Fahrsimulator}
+Der Fahrsimulator benötigt DirectX 9 um zu laufen. Falls Sie dies noch nicht installiert haben, können Sie es von Microsoft herunterladen: http://www.microsoft.com/download/en/details.aspx?id=8109
+
+\begin{enumerate}[label=\arabic*.]
+
+\item \textbf{LabVIEW-Programm starten}\\
+Öffnen Sie die Datei DrivingSimulator.vi mit LabVIEW und starten Sie das Programm mit einem Klick auf die Schaltfläche \includegraphics[height=\ht\strutbox]{src/icon_labview_run.png} \textit{Run}. Sie werden nach einem Dateipfad gefragt. Geben Sie hier den Pfad zu einer Datei an, in der Sie den Output vom LabVIEW-Programm gespeichert haben wollen. \textbf{Achtung: Existierende Dateien werden überschrieben!}
+
+\item Grafikeinstellungen überprüfen
+
+\end{enumerate}
