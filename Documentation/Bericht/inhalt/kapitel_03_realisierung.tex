@@ -1,24 +1,42 @@
 \section{Realisierung}
-Wie bereits in der Systembeschreibung beschrieben, wird der Fahrsimulator in drei Hauptkomponenten unterteilt: den UDP-Listener, den Szenen-Manager und das Hauptprogramm. Da die Verbindung zwischen dem Cockpit und dem Fahrsimulator mit einer Netzwerkschnittstelle realisiert wird, ist es möglich, die Anbindung an das Cockpit und den Fahrsimulator physisch auf zwei unterschiedlichen Rechnern zu betreiben. Eine Alternative ist die Umsetzung mit dem \gls{ogre}-Framwork (Siehe Anhang C). Dieses Framework bietet umfassende Lösungen, um Steuerradär und Pedalen, wie sie in userem Cockpit vorhanden sind, anzusteuern.\\
+Wie bereits in der Systembeschreibung beschrieben, wird der Fahrsimulator in drei Hauptkomponenten unterteilt: den UDP-Listener, den Szenen-Manager und das Hauptprogramm. Da die Verbindung zwischen dem Cockpit und dem Fahrsimulator mit einer Netzwerkschnittstelle realisiert wird, ist es möglich, die Anbindung an das Cockpit und den Fahrsimulator physisch auf zwei unterschiedlichen Rechnern zu betreiben. Eine Alternative ist die Umsetzung mit dem \gls{ogre}-Framwork (siehe Anhang \ref{ogre-framework}). Dieses Framework bietet umfassende Lösungen, um Steuerradär und Pedalen, wie sie in userem Cockpit vorhanden sind, anzusteuern.\\
 Da die 3D-Umgebung mit fortscheitendem Projekt ausgebaut wird, könnte sich die notwendige Rechenleistung erheblich steigern. Folgen ungenügender Leistung sind unregelmässige Bewegungen (Lags) in der virtuellen Umgebung oder sogar der Absturz des gesamten Programms.\\
 Aus diesem Grund ist die erste Variante mit der Netzwerkschnittstelle für das Fahrsimulatorprojekt besser geeignet. Die andere Variante wird verworfen.
-\subsection{LabVIEW Programm}
 
-Eine LabVIEW-Umgebung existiert bereits auf dem Rechner, an den das Cockpit angeschlossen ist. Ein LabVIEW-Programm liest bereits die Eingaben im Cockpit ein. Da dieses Programm jedoch nicht genau den Anforderungen entspricht, wird ein neues LabVIEW-Programm realisiert. Die Eingaben sollen neu in Form von definierten Parametern als UDP-Packet in regelmässigen Zeitabständen gesendet werden. Zusätzlich wird ein zweiter UDP-Socket eingerichtet, um Packete, die vom Fahrsimulator gesendet werden, zu empfangen. Die Daten der empfangenen Packete werden von LabVIEW in ein Log-File gespeichert.
-% ev Bild
-\subsection{UDP-Listener}
-\label{sec:udp-listener}
-Die Paramter werden vom LabVIEW-Programm permanent gelesen und ca alle 0.01 Sekunden wird ein UDP-Packet gesendet. Um die Zeit zwischen der Eingabe des Probanden und der Reaktion des Fahrzeuges im Simulator möglichst gering zu halten, müssen ankommende Packete sofort gelesen werden. Angesichts der hohen Frequenz der Datenpackete, ist es vernachlässigbar, wenn einige Packete verloren gehen oder vertauscht werden. Das UDP-Protokoll gewährleistet genau diese Eigenschaften.
+\newpage
+\subsection{LabVIEW Programm}
+Eine LabVIEW-Umgebung existiert bereits auf dem Rechner, an den das Cockpit angeschlossen ist. Ein LabVIEW-Programm liest bereits die Eingaben im Cockpit ein. Da dieses Programm jedoch nicht genau den Anforderungen entspricht, wird es neu realisiert. Die Eingaben werden über einen UDP-Socket alle 10 ms gesendet. Zusätzlich wird ein zweiter UDP-Socket eingerichtet, um Packete, die vom Fahrsimulator zurück gesendet werden, zu empfangen. Die Daten der empfangenen Packete werden von LabVIEW verarbeitet, dargestellt und in ein Log-File geschrieben.
 
 \begin{figure}[H]
 \centering 
-\includegraphics[scale=0.5]{src/koordinatensystem.png}
-\caption{Koordinatensystem} % Titel der Grafik
+\includegraphics[width=1\linewidth]{src/labview_screenshot_drivingsimulator_daten_senden.png}
+\caption{LabVIEW: Daten werden gesendet} % Titel der Grafik
+\label{labview_daten_senden} % Labelname
+\end{figure}
+\todo{screenshot labview}
+
+\newpage
+\begin{figure}[H]
+\centering 
+\includegraphics[angle=90,width=0.8\linewidth]{src/labview_screenshot_drivingsimulator_daten_empfangen.png}
+\caption{LabVIEW: Daten werden empfangen} % Titel der Grafik
+\label{labview_daten_empfangen} % Labelname
+\end{figure}
+
+\newpage
+\subsection{UDP-Listener}
+\label{sec:udp-listener}
+In einem eigenen Thread werden UDP-Pakete kontinuierlich gelesen und verarbeitet. Die Informationen werden zwischengespeichert, so dass sie bei jedem Renderdurchlauf zur Verfügung stehen. Dank der Häufigkeit, mit der Pakete versendet werden, stellt das Verlieren eines Pakets kein Problem dar, wodurch UDP sich durch den Geschwindigkeitsvorteil gegenüber TCP besser eignet.
+
+\begin{figure}[H]
+\centering 
+\includegraphics[width=0.5\linewidth]{src/koordinatensystem.pdf}
+\caption{Koordinatensystem der Joystickeingabe} % Titel der Grafik
 \label{Koordinatensystem} % Labelname
 \end{figure}
 
-Die von LabVIEW empfangenen Daten sind in erster Linie Parameter die den Zustand der Pedalen und des Steuerrades representieren. Die beiden Pedalen werden in einem Koordinatensystem wie in Abbildung \ref{Koordinatensystem} auf der y-Achse abgebildet. Die positive y-Richtung quantifiziert das Gas und die negative y-Richtung das Bremspedal. Die Intensität beider Pedalen wird durch 32767 bzw. 32768 ganzzahlige Werte identifiziert. Wenn also keines der beiden Pedalen gedrückt ist, wird dies durch den y-Wert null dargestellt. Ein voll gedrücktes Gaspedal entspricht dem y-Wert 32767 und dementsprechend ein voll gedrücktes Bremspedal dem Wert -32768. Der x-Wert im Koordinatensystem quantifiziert den Einschlagswinkel des Steuerrades. Ist das Steuerrad in der neutralen Stellung, entspricht dies dem x-Wert null. Wenn das Steuerrad vollständig nach rechts eingeschlagen ist, wird dies durch den positiven x-Wert 32767 identifiziert. Umgekehrt entspricht ein vollständiger Einschlag nach links dem negativen x-Wert -32768. Es können zusätzlich weitere Parameter wie Tastendrücke am Steuerrad übermittelt werden, wenn dies erforderlich sein sollte. Zusätzlich zu den Parametern des Cockpits wird von LabVIEW auch noch ein Timestamp gesendet. Der Timestamp wird von UDP-Listener empfangen und nach dem Abspeichern der Parameter wieder zurückgeschickt. Somit kann festgestellt werden, wieviel Verzögerung die Netzwerkschnittstelle verursacht. \\
-Da das LabVIEW-Programm und der Simulator nicht synchronisiert sind, wird der UDP-Listener zur Überbrückung verwendet. Der UDP-Listener speichert alle Parameter in Variabeln ab. Diese Variabeln werden vom Hauptprogramm ausgelesen und interpretiert. Dieses Auslesen der Variabeln erfolgt synchron, da das Hauptprogramm nur dann Daten vom UDP-Listener liest, wenn dieses dazu bereit ist.
+Die von LabVIEW empfangenen Daten sind in erster Linie Parameter, die den Ausschlag der Pedalen und den Einschlagwinkel des Steuerrades representieren. Die beiden Pedalen werden in einem Koordinatensystem wie in Abbildung \ref{Koordinatensystem} auf der y-Achse im Bereich von -32768 bis 32767 abgebildet. Dabei heisst ein negativer y-Wert, dass das Gaspedal gedrückt wird, ein positiver Wert steht für das Drücken der Bremse. Der x-Wert im Koordinatensystem quantifiziert den Einschlagswinkel des Steuerrades. Hier steht -32768 einem vollständig nach links eingeschlagenen Steuerrad, 32767 einer Drehung bis zum rechten Anschlag. Sollte es zu einem späteren Zeitpunkt nötig sein, Tastendrücke am Steuerrad zu übermitteln, kann das UDP-Paket einfach erweitert werden.\\
+Nebst den Eingaben durch Steuerrad und Pedalen wird von LabVIEW ein Timestamp gesendet. Der Timestamp wird von UDP-Listener empfangen und nach dem Abspeichern der Parameter wieder zurückgeschickt. Somit kann festgestellt werden, wieviel Verzögerung durch Kommunikation und Verarbeitung der Daten verursacht wird.\\
 
 \subsection{Virtual Reality}
 Eine erste Idee, um eine virtuelle Realität zu erzeugen, war der Einsatz von google Street View oder google Maps. Google Maps bietet die Möglichkeit, da die Satellitenbilder von der ganzen Erde gemacht wurden, überall auf der Welt zu fahren. Jedoch ist die Auflösung der Bilder nicht immer hoch genug, um damit eine Umgebung für der Fahrer generieren zu können. Erschwerend kommt hinzu, dass die Aufnahmen nur von oben gemacht wurden und somit keine Seitenansicht einer steilen Felswand oder eines Hauses zur Verfügung steht. Auch werden, da die Fotos aus der Vogelperspektive gemacht wurden, verschiedene Elemente die sich über der Strasse befinden zweidimensional angezeigt, wie zum Beispiel Bäume, Brücken oder Autos. Dies bedeutet, dass keine klare Strasse sichtbar ist. Somit würde der Einsatz von google maps zu keiner zufriedenstellenden Lösung führen. \\
@@ -69,7 +87,7 @@ Es werden zwei unterschiedliche Szenen für den Fahrsimulator erstellt. Die eine
 \caption{Karte der Stadtszene} % Titel der Grafik
 \label{CityWorld_map} % Labelname
 \end{figure}
-Um die erstellte Stadtszene gut dokumentieren zu können, zeigt Abbildung \ref{CityWorld_map} eine Übersichtskarte. Die grosse vierspurige Strasse, die sich von oben links nach unten rechts durch die gesamte Szene zieht, ist eine rechteckige Ebene. Die Ebene ist mit einer Textur versehen, die die vier Spuren mit einer Sicherheitslinie in der Mitte darstellt. Die Länge der Textur entspricht jedoch nicht der Länge der Strasse. Wie in Abbildung \ref{examples_street_textures} zu sehen, entspricht die Textur nur einem kurzen Stück der Strasse. Die Textur wird auf der Ebene immer wiederhohlt. Auch bei allen anderen Strassen ist die Textur nur kurz und wird wiederholt.\\
+Um die erstellte Stadtszene gut dokumentieren zu können, zeigt Abbildung \ref{CityWorld_map} eine Übersichtskarte. Die grosse vierspurige Strasse, die sich von oben links nach unten rechts durch die gesamte Szene zieht, ist eine rechteckige Ebene. Die Ebene ist mit einer Textur versehen, die die vier Spuren mit einer Sicherheitslinie in der Mitte darstellt. Die Länge der Textur entspricht jedoch nicht der Länge der Strasse. Wie in Abbildung \ref{examples_street_textures} zu sehen, entspricht die Textur nur einem kurzen Stück der Strasse. Die Textur wird auf der Ebene immer wiederholt. Auch bei allen anderen Strassen ist die Textur nur kurz und wird wiederholt.\\
 \begin{figure}[H]
 \centering 
 \includegraphics[scale=0.6]{src/examples_street_textures.png}
@@ -102,7 +120,8 @@ Um der Szene ein bisschen Farbe zu verleihen sind noch Bäume, wie in Abbildung 
 \end{figure}
 
 \subsubsection{Erstellung der Berglandschaft mit Tunnels}
-Um die Berglandschaft zu generieren gibt es im Cinema4D ein eigens dafür vorgesehenes Objekt. Durch die Konfiguration des Landschaftsobjekt kann die Höhe und Anzahl der Erhöhungen und Vertiefungen festgelegt werden. Die Strasse in der Berglandschaft wird änlich gemacht wie in der Stadtszene. Zusätzlich wird aber der \gls{spline} ein halber Zilinder mitgegeben der ihr entlangfährt. Der halbe Zilinder wird mit einer Operation versehen damit er, an den Orten an denen die Strasse in der in der Landschaft befindet, diese ausschneidet und ein Tunnel generiert. Die Wand des Tunnels wird mit einer Betonplattenstruktur, wie sie in Abbildung \ref{texture_concretetiles} zeigt, versehen. Die Berglandschaft selbst wird mit einer \gls{seamless} Felsentexture versehen. 
+Um die Berglandschaft zu generieren gibt es in Cinema4D ein eigens dafür vorgesehenes Objekt. Durch die Konfiguration des Landschaftsobjekt kann die Gesamthöhe sowie die Anzahl der Erhöhungen und Vertiefungen festgelegt werden. Die Strasse in der Berglandschaft wird änlich gemacht wie jene in der Stadtszene. Zusätzlich wird aber der \gls{spline} ein halber Quaderobjekt entlanggezogen, welches mit einer boolschen Operation vom Berg subtrahiert wird (Siehe Anhang \ref{cinema4d}). Die Wand des Tunnels wird mit einer Betonplattenstruktur versehen. Die Berglandschaft selbst wird mit einer wiederholenden Felsentextur versehen.
+
 \begin{figure}[htbp]
 \centering 
 \includegraphics[width=0.4\linewidth]{src/texture_concretetiles.png}
@@ -112,7 +131,7 @@ Um die Berglandschaft zu generieren gibt es im Cinema4D ein eigens dafür vorges
 
 \newpage
 \subsubsection{Fahrzeug}
-Zur Darstellung eines Autos wurde aus dem Google 3D Warehouse ein Mini Cooper heruntergeladen und in nach \gls{ogre-xml}konvertiert. Wie in Abbildung \ref{screenshot_minicooper} zu sehen, wird dieser aus der Perspektive einer dritten Person betrachtet. Beim Rückwärtsfahren wird die Kamera um das Fahrzeug gedreht, so dass man nach hinten sehen kann. Mit der Taste V auf der Tastatur kann die Ansicht in das innere des Fahrzeugs gewechselt werden. Zu Beginn wirde die Kamera lediglich in das innere des Mini Coopers versetzt, dorthin wo der Kopf des Fahrers in etwa sein sollte. In einem zweiten Schritt wurde jedoch ein eigenes Fahrerkabine designed. Dies war vorallem deshalb notwendig, um eine Geschwindigkeitsanzeige implementieren zu können. 
+Zur Darstellung eines Autos wurde aus \gls{google-3d-warehouse} ein Mini Cooper heruntergeladen und in nach \gls{ogre-xml}konvertiert. Wie in Abbildung \ref{screenshot_minicooper} zu sehen, wird dieser aus der Perspektive einer dritten Person betrachtet. Beim Rückwärtsfahren wird die Kamera um das Fahrzeug gedreht, so dass man nach hinten sehen kann. Mit der Taste V auf der Tastatur kann die Ansicht in das innere des Fahrzeugs gewechselt werden. Zu Beginn wirde die Kamera lediglich in das innere des Mini Coopers versetzt, dorthin wo der Kopf des Fahrers in etwa sein sollte. In einem zweiten Schritt wurde jedoch eine eigene Fahrerkabine designed. Dies war vorallem deshalb notwendig, um eine Geschwindigkeitsanzeige implementieren zu können. 
 \begin{figure}[H]
 \centering 
 \includegraphics[width=1\linewidth]{src/screenshot_minicooper.png}
@@ -121,16 +140,27 @@ Zur Darstellung eines Autos wurde aus dem Google 3D Warehouse ein Mini Cooper he
 \end{figure}
 
 \newpage
-Wie die Abbildung \ref{screenshot_cockpit} veranschaulicht, ist die Geschwindigkeitsanzeige die mittlere der drei Anzeigen. Sie besteht aus zwei Objekten. Eines der Objekte ist die gesamte Innenansicht selbst und das zweite Objekt ist der rote Zeiger der Geschwindigkeitsanzeige. Dieser wird an der richtigen Stelle Plaziert und wird je nach Geschwindigkeit gedreht. Somit sind zwei Ansichten möglich. Die Sicht des Fahrers mit der eigens dafür erstellten Fahrerkabine und die Aussenansicht in der der Mini Cooper angezeigt wird.
+\subsubsection{Fahrerkabine}
+In der Innenansicht wird die Kamera so positioniert, dass der Benutzer die Szene aus dem Blickwinkel des Fahrzeugführers wahrnimmt. Dazu wird das Fahrzeug ausgeblendet und ein Modell wird sichtbar. Dieses besteht aus drei getrennten Objekten:
+\begin{itemize}
+	\item dem Cockpit, bestehend aus dem Armaturenbrett, der linken \gls{a-saeule} und dem Dach
+	\item dem Tachozeiger, welcher relativ zum Cockpit positioniert und entsprechend der aktuellen Geschwindigkeit gedreht wird.
+	\item dem Steuerrad, welches auch relativ zum Cockpit positioniert und entsprechend dem Lenkeinschlag rotiert wird.
+\end{itemize}
+
 \begin{figure}[H]
 \centering 
 \includegraphics[width=1\linewidth]{src/screenshot_cockpit.png}
 \caption{Innenansicht des Mini} % Titel der Grafik
 \label{screenshot_cockpit} % Labelname
 \end{figure}
-Um die Geschwindigkeit des Fahrzeuges herauszufinden, wurde im Cinema4D, in dem alle Szenen erstellt wurden, mit reellen Werten gearbeitet. So wurden Strassen wirklich sechs Meter breit modeliert. Somit konnte auch die Länge der Strasse festgelegt werden. Um die Geschwindigkeit zu ermitteln, wurde in Cinema4D eine Distanz abgemessen und diese mit verschiedenen Konstanten Geschwindigkeiten abgefahren und die Zeit gemessen. Die interne Geschwindigkeit im Programm wird mit einem Faktor in die tatsächliche Geschwindigkeit umgerechnet. Diese kann dann auf dem Tachometer angezeigt werden.\\
-
-
+Um die Geschwindigkeit des Fahrzeuges herauszufinden, wird die Skalierung aller Objekte so gewählt, dass im Cinema4D mit reellen Werten gearbeitet werden konnte. So sind die Strassenspuren drei Meter breit modeliert. Um die Geschwindigkeit zu ermitteln, wurde in Cinema4D eine Distanz abgemessen und diese mit verschiedenen Konstanten Geschwindigkeiten abgefahren und die Zeit gemessen. Die interne Geschwindigkeit im Programm wird mit einem Faktor in die tatsächliche Geschwindigkeit umgerechnet. Diese kann dann auf dem Tachometer angezeigt werden.\\
+\begin{figure}[H]
+\centering 
+\includegraphics[width=1\linewidth]{src/geschwindigkeitsberechnung.pdf}
+\caption{Berechnung der tatsächlichen Geschwindigkeit} % Titel der Grafik
+\label{berechnung_geschwindigkeit} % Labelname
+\end{figure}
 
 \newpage
 \subsection{Hautpprogramm}
@@ -297,7 +327,7 @@ void DrivingSimulatorV1::createScene1() // city
 }
 \end{lstlisting}
 
-Ähnlich zur Funktion \textit{createCar} (Abschnitt \ref{laden_auto}) werden hier zunächst Objekte geladen. Diesmal die beiden Meshes \textit{CityWorld.mesh} und \textit{ETH.mesh}. Auch sie werden jeweils eigenen Nodes angehängt und entsprechend positioniert, ausgerichtet und skaliert. Weiter wird in dieser Funktion die Belichtung der Szene definiert. Einmal wird mit \textit{setAmbientLight} das Umgebungslicht gesetzt, danach wird eine neue direktionale Lichtquelle erstellt, die in unserem Programm das Sonnenlicht liefert. Zuletzt wird das Auto an die korrekte Startposition in der Szene gesetzt und ausgerichtet.\\Das Laden der Tunnelszene geschieht in der Funktion \textit{createScene2}. Details dazu im Listing \textit{DrivingSimulatorV1.cpp} in Kapitel \ref{listing:DrivingSimulatorV1.cpp}.
+Ähnlich zur Funktion \textit{createCar} (Abschnitt \ref{laden_auto}) werden hier zunächst Objekte geladen. Diesmal die beiden Meshes \textit{CityWorld.mesh} und \textit{ETH.mesh}. Auch sie werden jeweils eigenen Nodes angehängt und entsprechend positioniert, ausgerichtet und skaliert. Weiter wird in dieser Funktion die Belichtung der Szene definiert. Einmal wird mit \textit{setAmbientLight} das Umgebungslicht gesetzt, danach wird eine neue direktionale Lichtquelle erstellt, die in unserem Programm das Sonnenlicht liefert. Zuletzt wird das Auto an die korrekte Startposition in der Szene gesetzt und ausgerichtet.\\Das Laden der Tunnelszene geschieht in der Funktion \textit{createScene2}. Details dazu im Listing \textit{DrivingSimulatorV1.cpp} auf der beiliegenden CD.
 
 \subsubsection{Callback-Methode}
 
@@ -381,7 +411,7 @@ Ogre::Vector3 cameraOffset(1.3, 4.0, 0.7);
 camera->setOrientation(carNode->getOrientation() * Ogre::Quaternion(Ogre::Degree(180), Ogre::Vector3::UNIT_Y));
 camera->setPosition(carNode->getPosition() + carNode->getOrientation() * cameraOffset);
 \end{lstlisting}
-In der \gls{1st-person}-Ansicht wird die Kamera an die Stelle, an der sich der Kopf des Fahrers befindet verschoben.
+In der \gls{1st-person}-Ansicht wird die Kamera an die Stelle, an der sich der Kopf des Fahrers befindet verschoben.\\
 
 \begin{lstlisting}[caption={Positionierung der 3rd-Person-Kamera},label={positionierung_tp_kamera}]
 if(gear != REVERSE)
