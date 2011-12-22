@@ -15,6 +15,8 @@
 \usepackage{tocloft}
 \usepackage[acronym,footnote,description,nonumberlist]{glossaries}
 \usepackage{enumitem}
+\usepackage[bookmarksopen=true,bookmarksnumbered=true,pdfpagelabels=false,colorlinks=false]{hyperref}
+\usepackage{bookmark}
 
 % sprache auswählen
 \selectlanguage{ngerman} 
@@ -23,15 +25,11 @@
 \author{Sandro Ropelato, Christof Würmli}
 \title{Fahrsimulator}
 
-% fancy einstellungen verwenden
+% empty einstellungen verwenden
 \pagestyle{empty}
-
-% header und footer höhe verändern
 
 % default einstellungen von header und footer löschen
 \fancyhf{}
-
-
 
 \newcommand{\activatefooter}{
 	\fancyfoot[RE]{\thepage}
@@ -54,6 +52,10 @@
 \definecolor{blue-gray}{rgb}{0.87, 0.89, 0.92}
 \definecolor{dark-blue-gray}{rgb}{0.43, 0.44, 0.46}
 \definecolor{dark-blue}{rgb}{0.2, 0.2, 0.7}
+
+\hypersetup{
+pdfauthor={Diego Santa Cruz}, pdfsubject={From LaTeX to PDF}
+}
 
 % für syntax highlighting
 \lstset{
