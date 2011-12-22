@@ -31,7 +31,7 @@ Eine bessere Auflösung und Darstellung der Strassen bietet Google Street View. 
 \label{screenshot_google_street_view_unscharf} % Labelname
 \end{figure}
 Zudem wurden meist nur auf einer Fahrspur Fotos gemacht. Eine Ausnahme bilden die Autobahnen. Auf allen übrigen Strassen hat man sich darauf beschränkt, Fotos nur in eine Richtung zu machen. Wenn man nun in die andere Richtung fahren möchte, sieht es so aus als würde man auf der falschen Seite fahren. Somit kommen einem die anderen Verkehrsteilnehmer, die sich ebenfalls auf den Fotos befinden, entgegen. Auch dieser Lösungsansatz muss deshalb verworfen werden. Eine weiter Möglichkeit besteht darin, dass eine eigene Umgebung entworfen wird.\\
-Für den Fahrsimulator wird also eine virtuelle dreidimensionale Umgebung benötigt, in der man sich bewegen kann. Diese Umgebung, auch Szene genannt, setzt sich aus verschiedenen Objekten zusammen. Die Struktur eines solchen Objektes wird duch ein Mesh-File beschrieben. In einer Szene kann das gleiche Objekt mehrmals an verschiedenen Positionen vorkommen. Das Objekt kann durch eine Skalierung auch einmal gross und einmal klein erscheinen. Oder man variert sie mittels Rotation. Zusätzlich wird mindestens ein Material-File benötigt, in dem sämtliche Texturen und Materialien, die von Objekten der Szene verwendet werden, definiert sind.
+Für den Fahrsimulator wird also eine virtuelle dreidimensionale Umgebung benötigt, in der man sich bewegen kann. Diese Umgebung, auch Szene genannt, setzt sich aus verschiedenen Objekten zusammen. Die Struktur eines solchen Objektes wird duch ein Mesh-File beschrieben. In einer Szene kann das gleiche Objekt mehrmals an verschiedenen Positionen vorkommen. Das Objekt kann durch eine Skalierung auch einmal gross und einmal klein erscheinen. Oder man variert sie mittels Rotation. Zusätzlich wird mindestens ein material-File benötigt, in dem sämtliche Texturen und Materialien, die von Objekten der Szene verwendet werden, definiert sind.
 Ein Beispiel von einem Material, wie es in einem material-File definiert ist, wird im Listing \ref{example_materialfile_material} illustriert.
 \begin{lstlisting}[caption={Beispiel aus dem material-File für ein Material},label={example_materialfile_material}]
 material city_ground
@@ -93,8 +93,8 @@ Zusätzlich zu den Symbolen auf der Strasse, werden noch Verkehrsschilderobjekte
 \label{screenshot_trafficsignal} % Labelname
 \end{figure}
 
-Die Häuser der Stadt sind einfache Blöcke, die mit dem Bild einer Hausfassade texturiert werden. Insgesammt sind drei Gebäudetypen, wie in Abbildung \ref{screenshot_buildings} dargestellt,  vorhanden. Diese drei Typen werden vervielfacht, eventuell gedreht und in der Szene verteilt.\\
-Als nettes Extra wird das Hauptgebäude der ETH Zürich in die Szene eingefügt. Das Gebäudemodell stammt von Google 3D Warehouse und wird mit \gls{google-sketchup} bearbeitet. Dabei werden die Oberflächennormalen neu berechnet und die Bodenplatte, auf der das Gebäude steht, entfernt. Die Texturen werden manuell in das Material-File übernommen. Nun wird das ETH-Modell in die Szene geladen, skaliert und an der richtigen Stelle platziert. 
+Die Häuser der Stadt sind einfache Blöcke, die mit dem Bild einer Hausfassade texturiert werden. Insgesamt sind drei Gebäudetypen, wie in Abbildung \ref{screenshot_buildings} dargestellt,  vorhanden. Diese drei Typen werden vervielfacht, eventuell rotiert und in der Szene verteilt.\\
+Als nettes Extra wird das Hauptgebäude der ETH Zürich in die Szene eingefügt. Das Gebäudemodell stammt von Google 3D Warehouse und wird mit \gls{google-sketchup} bearbeitet. Dabei werden die Oberflächennormalen neu berechnet und die Bodenplatte, auf der das Gebäude steht, entfernt. Die Texturen werden manuell in das material-File übernommen. Nun wird das ETH-Modell in die Szene geladen, skaliert und an der richtigen Stelle platziert. 
 
 \begin{figure}[H]
 \centering 
@@ -109,7 +109,7 @@ Als nettes Extra wird das Hauptgebäude der ETH Zürich in die Szene eingefügt.
 \caption{Drei verschidene Gebäudetypen} % Titel der Grafik
 \label{screenshot_buildings} % Labelname
 \end{figure}
-Um der Szene ein bisschen Farbe zu verleihen sind noch Bäume, wie in Abbildung \ref{screenshot_tree} in der Szene vorhanden. Ein Baum besteht aus einem Stamm mit einer Holztextur und einer Krone. Die Krone ist eine zufällig generierte Landschaft die zu einer Kugel geformt wird. Dadurch entstehen die verschiedenartigen Aus- und Einbuchtungen in der Baumkrone. Um die Illusion vollständig zu machen wird darauf eine Textur mit Blättern gelegt.\\
+Um der Szene ein bisschen Farbe zu verleihen sind noch Bäume, wie in Abbildung \ref{screenshot_tree} in der Szene vorhanden. Ein Baum besteht aus einem Stamm mit einer Holztextur und einer Krone. Die Krone ist eine zufällig generierte Landschaft die zu einer Kugel geformt wird. Dadurch entstehen die verschiedenartigen Aus- und Einbuchtungen in der Baumkrone. Nachdem eine Blättertexut darauf gelegt wurde, ist die Illusion eines Baumes vollständig.\\
 
 \begin{figure}[H]
 \centering 
@@ -119,7 +119,7 @@ Um der Szene ein bisschen Farbe zu verleihen sind noch Bäume, wie in Abbildung 
 \end{figure}
 
 \subsubsection{Erstellung der Berglandschaft mit Tunnels}
-Um die Berglandschaft zu generieren gibt es in Cinema4D ein eigens dafür vorgesehenes Objekt, das so genannte Landscape-Objekt. Durch die Konfiguration dieses Objekts kann die Gesamthöhe, sowie die Anzahl der Erhöhungen und Vertiefungen der Landschaft festgelegt werden. Mit einer Felstextur sieht dieses Objekt aus wie ein Berg.\\
+Zur Generierung der Berglandschaft gibt es in Cinema4D ein eigens dafür vorgesehenes Objekt, das so genannte Landscape-Objekt. Durch die Konfiguration dieses Objekts kann die Gesamthöhe, sowie die Anzahl der Erhöhungen und Vertiefungen der Landschaft festgelegt werden. Mit einer Felstextur sieht dieses Objekt aus wie ein Berg.\\
 Die Strasse in der Berglandschaft wird änlich der Strasse in der Stadtszene gemacht. Zusätzlich wird der \gls{spline} ein Quader entlanggezogen, welcher mit einer boolschen Operation vom Berg subtrahiert wird (Siehe Abbildung \ref{cinema4d_ausschneiden_tunnel}). Dadurch entsteht eine Röhre im Berg, welche aussieht wie ein Tunnel. Die Innenseite wird mit einer Betonplattenstruktur versehen.
 
 \begin{figure}[H]
@@ -151,7 +151,7 @@ In der Innenansicht wird die Kamera so positioniert, dass der Benutzer die Szene
 \begin{figure}[H]
 \centering 
 \includegraphics[width=1\linewidth]{src/screenshot_cockpit.png}
-\caption{Innenansicht des Mini} % Titel der Grafik
+\caption{Innenansicht des Mini mit Geschwindigkeitsanzeige} % Titel der Grafik
 \label{screenshot_cockpit} % Labelname
 \end{figure}
 Um die Geschwindigkeit des Fahrzeuges herauszufinden, wird die Skalierung aller Objekte so gewählt, dass im Cinema4D mit reellen Werten gearbeitet werden konnte. So sind die Strassenspuren drei Meter breit modeliert. Um die Geschwindigkeit zu ermitteln, wurde in Cinema4D eine Distanz abgemessen und diese mit verschiedenen Konstanten Geschwindigkeiten abgefahren und die Zeit gemessen. Die interne Geschwindigkeit im Programm wird mit einem Faktor in die tatsächliche Geschwindigkeit umgerechnet. Diese kann dann auf dem Tachometer angezeigt werden.\\
@@ -163,10 +163,7 @@ Um die Geschwindigkeit des Fahrzeuges herauszufinden, wird die Skalierung aller 
 \end{figure}
 
 \newpage
-\subsection{Hautpprogramm}
-
-%Sequenzdiagramm
-%Blockdiagramm
+\subsection{Hauptprogramm}
 
 \begin{figure}[H]
 \centering 
@@ -250,13 +247,13 @@ viewPort->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
 Die Applikation verwendet folgende Dateien zur Konfiguration beim Start:
 
 \minisec{plugins.cfg}
-\gls{ogre} lädt einige Komponente, die zur Ausführung des Programms benötigt werden, zur Laufzeit. Welche Komponenten geladen werden, wird im File plugins.cfg definiert. Inhalt siehe Anhang \ref{listing:plugins.cfg}.
+\gls{ogre} lädt einige Komponenten zur Laufzeit, die zur Ausführung des Programms benötigt werden. Welche Komponenten geladen werden, wird im File plugins.cfg definiert. Inhalt siehe Anhang \ref{listing:plugins.cfg}.
 
 \minisec{graphics.cfg}
 In diesem File sind die Grafikeinstellungen definiert. Inhalt siehe Anhang \ref{listing:graphics.cfg}.
 
 \minisec{resources.cfg}
-Hier werden alle Pfade angegeben, in welchen sich benötigte Resourcen (z.B. Mesh-Files, Bilder, etc.) befinden. Inhalt siehe Angang \ref{listing:resources.cfg}.
+Hier werden alle Pfade angegeben, in welchen sich benötigte Resourcen (z.B. mesh-Files, Bilder, etc.) befinden. Inhalt siehe Angang \ref{listing:resources.cfg}.
 
 \subsubsection{Laden des Autos}
 
