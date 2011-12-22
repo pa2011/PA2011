@@ -23,17 +23,14 @@
 \title{Fahrsimulator}
 
 % fancy einstellungen verwenden
-\pagestyle{fancy}
+\pagestyle{empty}
 
 % header und footer höhe verändern
 
 % default einstellungen von header und footer löschen
 \fancyhf{}
 
-% header und footer konfigurieren
-\renewcommand{\sectionmark}[1]{\markboth{\thesection{} #1}{}}
-\fancyhead[RE]{\leftmark}
-\fancyhead[LO]{Projektarbeit Fahrsimulator}
+
 
 \newcommand{\activatefooter}{
 	\fancyfoot[RE]{\thepage}
@@ -113,12 +110,21 @@
 	\setcounter{page}{1}
 	\include{inhalt/zusammenfassung_und_abstract}
 
+	% eigenständigkeitserklährung
+	\includepdf{src/erklaerungpa.pdf}
+
+	\pagestyle{fancy}
+	% header und footer konfigurieren
+	\renewcommand{\sectionmark}[1]{\markboth{\thesection{} #1}{}}
+	\fancyhead[RE]{\leftmark}
+	\fancyhead[LO]{Projektarbeit Fahrsimulator}
+
 	% inhaltsverzeichnis
-	\setcounter{page}{0}
+	\setcounter{page}{1}
 	\include{inhalt/inhaltsverzeichnis}
 
 	% hauptteil
-	\setcounter{page}{4}
+	\setcounter{page}{3}
 	\fancyhead[RE]{Kapitel \leftmark}
 	\activatefooter
 	\include{inhalt/kapitel_01_einleitung}
