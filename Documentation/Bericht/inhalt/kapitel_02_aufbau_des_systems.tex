@@ -26,12 +26,12 @@ Benutzereingaben, die im Cockpit gemacht werden, werden von einem LabView Progra
 Weiter  muss in Programmiersprache C++ einen UDP-Socket mit entsprechendem UDP-Listener implementieren werden, um die Benutzereingaben zu empfangen. Der UDP-Listener wird gleichzeitig dazu verwendet, die Geschwindigkeit des Fahrzeugs sowie Timestamps und weitere Daten an das LabVIEW Programm zurück zu schicken. Damit können die Daten gespeichert und später ausgewertet werden.\\
 Diese Aufteilung durch eine Netzwerkschnittstelle ermöglicht es,  das System, wenn notwendig, zu dezentralisieren. Einfachheitshalber wird der UDP-Listener erst in einem Video-Beispiel implementiert und getestet (Siehe Anhang B). Nachfolgend wird er in das Programm des Fahrsimulator transferiert.\\
 Sind die Daten vom UDP-Listener empfangen und aufbereitet, werden sie im Hauptprogramm weiter verwendet. Während die Position des Steuerrades, des Gas und Bremspedales vom UDP-Listener permanent an das Hauptprogramm übertragen werden, wertet dieses die Positionen aus und veranlass die entspechenden Aktionen in der geladenen Szene. 
-Die Szene selbst wird von einem Szenen-Manager geladen. Die berechnete Szene wird schlussendlich in einem Fenster von Hauptprogramm angezeigt und über eine DVI-Schnittstelle an den Beamer übertragen. Der Beamer projeziert das Bild an die Wand, die sich direkt vor dem Cockpit befindet. 
+Die Szene selbst wird von einem Szenen-Manager geladen. Die berechnete Szene wird schlussendlich in einem Fenster vom Hauptprogramm angezeigt und über eine DVI-Schnittstelle an den Beamer übertragen. Der Beamer projeziert das Bild an die Wand, die sich direkt vor dem Cockpit befindet. 
 
 \subsection{Anforderungen}
 \subsubsection{Funktionale Anforderungen}
 \begin{itemize}
-\item Der Fahsimulator ermöglicht es dem Probanden, vom Cockpit aus das Fahrzeug zu steuern. Der Porband blickt durch die Frontscheibe des Fahrzeuges und fährt auf Strassen.
+\item Der Fahrsimulator ermöglicht es dem Probanden, vom Cockpit aus das Fahrzeug zu steuern. Der Porband blickt durch die Frontscheibe des Fahrzeuges und fährt auf Strassen.
 \item Die aktuelle Geschwindigkeit des gesteuerten Fahzeuges soll für den Probanden ersichtlich sein. 
 \item Es sollen dem Fahrsimulator zwei Szenen zur Verfügung stehen. Die eine Szene stellt eine Stadt dar, die andere Szene eine Berglandschaft mit Tunnels.
 \item Die Manipulationen des Benutzers und wichtige Parameter wie z.B. Geschwindigkeit sollen in einer Datei chronologisch und laufend abgespeichert werden um diese auszuwerten.
@@ -44,9 +44,9 @@ Die Szene selbst wird von einem Szenen-Manager geladen. Die berechnete Szene wir
 \begin{itemize}
 \item Das System ist robust. Es muss gegen Fehlereingaben immun sein. 
 \item Das Starten des Fahrsimulator sollte möglichst einfach gehalten werden.
-\item Das Fahrgefühl des Simulators ost möglichst Realitätsnah.  
+\item Das Fahrgefühl des Simulators ist möglichst Realitätsnah.  
 \item Der Fahrsimulator bietet dem Probanden eine möglichst realistische Fahrsimulationinklusive Strassen, Gebäude und Verkehrsschilder. 
-\item Die Reaktionszeit des Systems soll möglichst klein sein. Die Verzögerungen sollen mess-  und kalkulierbar sein.
+\item Die Reaktionszeit des Systems ist möglichst kurz. Die Verzögerungen sind mess-  und kalkulierbar.
 \item Das System ist möglichst modular aufgebaut, um später einfach erweitert werden zu können.
-\item Das System funktioniert auf der existierender Hardware, und zudem auch lauffähig sein, wenn Teile des Fahrsimulators ausgetauscht werden. 
+\item Das System funktioniert auf der existierender Hardware, und muss auch lauffähig sein, wenn Teile des Fahrsimulators ausgetauscht werden. 
 \end{itemize}
