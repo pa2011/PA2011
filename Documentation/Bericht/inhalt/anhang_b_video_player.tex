@@ -46,7 +46,7 @@ Es wird ein UDP-Socket geöffnet um ankommende Pakete zu empfangen. Der "Local p
 \subsubsection{UDP-Listener}
 Der UDP-Listener empfängt die Packete, die vom LabVIEW gesendet werden. Diese werden ausgepackt und die übermittelten Werte abgespeichert. Der UDP-Listener wird im Kapitel \ref{sec:udp-listener} genau dokumentiert. 
 \subsubsection{Hauptprogramm}
-Das Hauptprogramm startet den MPlayer und den UDP-Listener. Der MPlayer wird, um ein Video abzuspielen, in einem eigenen Prozess gestartet. Der MPlayer kann duch einen speziellen Aufruf von der Komandozeile, wie im Listing \ref{start_mplayer} beschrieben, im Slavemodus gestartet werden. Wie der mPlayer im Videoplayer aufgerufen wird, kann dem Listing im Anhang \todo{Referenz einfügen} entnommen werden werden. 
+Das Hauptprogramm startet den MPlayer und den UDP-Listener. Der MPlayer wird, um ein Video abzuspielen, in einem eigenen Prozess gestartet. Der MPlayer kann duch einen speziellen Aufruf von der Komandozeile, wie im Listing \ref{start_mplayer} beschrieben, im Slavemodus gestartet werden. Wie der mPlayer im Videoplayer aufgerufen wird, kann dem Quellcod auf der Beiliegenden CD entnommen werden. 
 \begin{lstlisting}[caption={Starten des MPlayers in einem eigenen Prozess}, label={start_mplayer}]
 mplayer.exe -slave -hardframedrop -osdlevel 0 BeispielVideo.mp4
 \end{lstlisting}
