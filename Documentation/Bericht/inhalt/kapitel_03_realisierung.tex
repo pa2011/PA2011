@@ -93,7 +93,16 @@ Zusätzlich zu den Symbolen auf der Strasse, werden noch Verkehrsschilderobjekte
 \label{screenshot_trafficsignal} % Labelname
 \end{figure}
 
-Die Häuser der Stadt sind einfache Blöcke die mit einer Textur von vielen Fenstern versehen werden. Insgesammt sind drei Gebäudetypen, wie in Abbildung \ref{screenshot_buildings} dargestellt,  vorhanden. Diese drei Typen werden einzeln dubliziert eventuell gedreht und in der Szene verteilt. Zusätzlich wird das ETH Zürich Gebäude in der Szene geladen. Dieses Gebäudemodel wurde aus dem Google 3D Warehouse heruntergeladen. Das Objekt wurde in google SketchUp bearbeitet und als eigenes Objekt abgespeichert. Die Bearbeitung heinhaltet vor allem die neuberechnung der Oberflächennormalen und das entfernen der Bodenplatte auf der die ETH Zürich gestanden hat. Die Texturen mussten manuell übernommen werden. Das ETH Objekt wird in die Szene geladen, skaliert und an der richtigen Stelle platziert. 
+Die Häuser der Stadt sind einfache Blöcke, die mit dem Bild einer Hausfassade texturiert werden. Insgesammt sind drei Gebäudetypen, wie in Abbildung \ref{screenshot_buildings} dargestellt,  vorhanden. Diese drei Typen werden vervielfacht, eventuell gedreht und in der Szene verteilt.\\
+Als nettes Extra wird das Hauptgebäude der ETH Zürich in die Szene eingefügt. Das Gebäudemodell stammt von Google 3D Warehouse und wird mit \gls{google-sketchup} bearbeitet. Dabei werden die Oberflächennormalen neu berechnet und die Bodenplatte, auf der das Gebäude steht, entfernt. Die Texturen werden manuell in das Material-File übernommen. Nun wird das ETH-Modell in die Szene geladen, skaliert und an der richtigen Stelle platziert. 
+
+\begin{figure}[H]
+\centering 
+\includegraphics[width=1\linewidth]{src/screenshot_googlesketchup.png}
+\caption{Das bearbeitete Modell der ETH Zürich} % Titel der Grafik
+\label{googlesketchup_eth} % Labelname
+\end{figure}
+
 \begin{figure}[H]
 \centering 
 \includegraphics[scale=0.4]{src/screenshot_buildings.png}
@@ -110,13 +119,14 @@ Um der Szene ein bisschen Farbe zu verleihen sind noch Bäume, wie in Abbildung 
 \end{figure}
 
 \subsubsection{Erstellung der Berglandschaft mit Tunnels}
-Um die Berglandschaft zu generieren gibt es in Cinema4D ein eigens dafür vorgesehenes Objekt. Durch die Konfiguration des Landschaftsobjekt kann die Gesamthöhe sowie die Anzahl der Erhöhungen und Vertiefungen festgelegt werden. Die Strasse in der Berglandschaft wird änlich gemacht wie jene in der Stadtszene. Zusätzlich wird aber der \gls{spline} ein halber Quaderobjekt entlanggezogen, welches mit einer boolschen Operation vom Berg subtrahiert wird (Siehe Anhang \ref{cinema4d}). Die Wand des Tunnels wird mit einer Betonplattenstruktur versehen. Die Berglandschaft selbst wird mit einer wiederholenden Felsentextur versehen.
+Um die Berglandschaft zu generieren gibt es in Cinema4D ein eigens dafür vorgesehenes Objekt, das so genannte Landscape-Objekt. Durch die Konfiguration dieses Objekts kann die Gesamthöhe, sowie die Anzahl der Erhöhungen und Vertiefungen der Landschaft festgelegt werden. Mit einer Felstextur sieht dieses Objekt aus wie ein Berg.\\
+Die Strasse in der Berglandschaft wird änlich der Strasse in der Stadtszene gemacht. Zusätzlich wird der \gls{spline} ein Quader entlanggezogen, welcher mit einer boolschen Operation vom Berg subtrahiert wird (Siehe Abbildung \ref{cinema4d_ausschneiden_tunnel}). Dadurch entsteht eine Röhre im Berg, welche aussieht wie ein Tunnel. Die Innenseite wird mit einer Betonplattenstruktur versehen.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering 
-\includegraphics[width=0.4\linewidth]{src/texture_concretetiles.png}
-\caption{Tunnelwandtextur} % Titel der Grafik
-\label{texture_concretetiles} % Labelname
+\includegraphics[width=1\linewidth]{src/screenshot_cinema4d.png}
+\caption{Ausschneiden des Tunnels mit Cinema4D} % Titel der Grafik
+\label{cinema4d_ausschneiden_tunnel} % Labelname
 \end{figure}
 
 \newpage
