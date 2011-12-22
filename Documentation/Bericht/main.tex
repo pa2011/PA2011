@@ -138,14 +138,15 @@ pdfauthor={Diego Santa Cruz}, pdfsubject={From LaTeX to PDF}
 	\include{inhalt/kapitel_06_nachwort}
 	
 	% anhang
-	\renewcommand{\thesection}{\Alph{section}}
-	\setcounter{section}{0}
+	%\renewcommand{\thesection}{\Alph{section}}
+	%\setcounter{section}{0}
+	\appendix
 	
 	\fancyhead[RE]{Anhang \leftmark}
 	\include{inhalt/anhang_a_aufgabenstellung}
 	\include{inhalt/anhang_b_video_player}
 	\include{inhalt/anhang_c_ogre_framework}
-	\include{inhalt/anhang_d_anleitung}
+	\include{inhalt/anhang_d_betriebsanleitung}
 	\include{inhalt/anhang_e_setup}
 	\include{inhalt/anhang_f_detailierter_zeitplan}
 	\include{inhalt/anhang_g_listings}
