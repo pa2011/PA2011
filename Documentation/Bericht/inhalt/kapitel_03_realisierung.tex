@@ -1,6 +1,5 @@
 \section{Realisierung}
-Wie bereits in der Systembeschreibung beschrieben, wird der Fahrsimulator in drei Hauptkomponenten unterteilt: den UDP-Listener, den Szenen-Manager und das Hauptprogramm. Da die Verbindung zwischen dem Cockpit und dem Fahrsimulator mit einer Netzwerkschnittstelle realisiert wird, ist es möglich, die Anbindung an das Cockpit und den Fahrsimulator physisch auf zwei unterschiedlichen Rechnern zu betreiben.\\
-Da die 3D-Umgebung mit fortscheitendem Projekt ausgebaut wird, könnte sich die notwendige Rechenleistung erheblich steigern. Folgen ungenügender Leistung sind unregelmässige Bewegungen (Lags) in der virtuellen Umgebung oder sogar der Absturz des gesamten Programms.\\
+Wie bereits in der Systembeschreibung erwähnt, wird der Fahrsimulator in zwei Hauptkomponenten unterteilt: den UDP-Listener und das Hauptprogramm. Da die Verbindung zwischen dem Cockpit und dem Fahrsimulator mit einer Netzwerkschnittstelle realisiert wird, ist es möglich, die Anbindung an das Cockpit und den Fahrsimulator physisch auf zwei unterschiedlichen Rechnern zu betreiben.\\Dies kann notwendig werden, wenn mit fortschreitendem Ausbau der 3D-Umgebung die benötigte Rechenleistung ansteigt. Folgen ungenügender Leistung sind unregelmässige Bewegungen (Lags) in der virtuellen Umgebung oder sogar der Absturz des gesamten Programms.\\
 
 \subsection{LabVIEW-Programm}
 Eine LabVIEW-Umgebung existiert bereits auf dem Rechner, an den das Cockpit angeschlossen ist. Ein LabVIEW-Programm liest bereits die Eingaben im Cockpit ein. Da dieses Programm jedoch nicht genau den Anforderungen entspricht, wird es neu realisiert. Die Eingaben werden über einen UDP-Socket alle 10 ms gesendet. Zusätzlich wird ein zweiter UDP-Socket eingerichtet, um Packete, die vom Fahrsimulator zurück gesendet werden, zu empfangen. Die Daten der empfangenen Pakete werden von LabVIEW verarbeitet, dargestellt und in ein Log-File geschrieben.\\
@@ -32,7 +31,9 @@ Eine bessere Auflösung und Darstellung der Strassen bietet Google Street View. 
 \label{screenshot_google_street_view_unscharf} % Labelname
 \end{figure}
 Zudem wurden meist nur auf einer Fahrspur Fotos gemacht. Wenn man nun in die andere Richtung fahren möchte, sieht es so, aus als würde man auf der falschen Strassenseite fahren. Somit kommen einem die anderen Verkehrsteilnehmer, die sich ebenfalls auf den Fotos befinden, entgegen. Auch dieser Lösungsansatz muss deshalb verworfen werden.
-Für den Fahrsimulator wird also eine eigene virtuelle dreidimensionale Umgebung benötigt, in der man sich bewegen kann. Diese Umgebung, fortan auch Szene genannt, setzt sich aus verschiedenen Objekten zusammen. Die Struktur eines solchen Objektes wird durch ein mesh-File im \gls{ogre-xml}-Format beschrieben. In einer Szene kann das gleiche Objekt mehrmals an verschiedenen Positionen vorkommen. Das Objekt kann durch eine Skalierung auch einmal gross und einmal klein erscheinen. Oder man variert sie durch Rotation. Zusätzlich wird mindestens ein material-File benötigt, in dem sämtliche Texturen und Materialien, die von Objekten der Szene verwendet werden, definiert sind.
+Für den Fahrsimulator wird also eine eigene virtuelle dreidimensionale Umgebung benötigt, in der man sich frei bewegen kann.\\
+Da in unserem Team bereits Kenntnisse über die Grafikengine \gls{ogre} vorhanden sind, entscheiden wir und für ihren Einsatz in dieser Projektarbeit. Genaueres über \gls{ogre} kann im Anhang \ref{ogre-framework} nachgelesen werden.\\
+Die virtuelle Umgebung, fortan auch Szene genannt, setzt sich aus verschiedenen Objekten zusammen. Die Struktur eines solchen Objektes wird durch ein so genanntes mesh-File beschrieben. In einer Szene kann das gleiche Objekt mehrmals an verschiedenen Positionen vorkommen. Das Objekt kann durch eine Skalierung einmal gross und einmal klein erscheinen. Oder man variert sie durch Rotation. Zusätzlich wird mindestens ein material-File benötigt, in dem sämtliche Texturen und Materialien, die von Objekten der Szene verwendet werden, definiert sind.
 
 \begin{lstlisting}[caption={Auszug aus dem material-File},label={example_materialfile_material}]
 material city_ground
@@ -110,8 +111,7 @@ Als nettes Extra wird das Hauptgebäude der ETH Zürich in die Szene eingefügt.
 \label{googlesketchup_eth} % Labelname
 \end{figure}
 
-
-Um der Szene ein bisschen Farbe zu verleihen sind noch Bäume, wie in Abbildung \ref{screenshot_tree}, in der Szene vorhanden. Ein Baum besteht aus einem Stamm mit einer Holztextur und einer Krone. Die Krone ist eine zufällig generierte Landschaft die zu einer Kugel geformt wird. Dadurch entstehen die verschiedenartigen Aus- und Einbuchtungen in der Baumkrone. Nachdem eine Blättertexut darauf gelegt wurde, ist die Illusion eines Baumes vollständig.\\
+Um der Szene ein bisschen Farbe zu verleihen sind noch Bäume, wie in Abbildung \ref{screenshot_tree}, in der Szene vorhanden. Ein Baum besteht aus einem Stamm mit einer Holztextur und einer Krone. Die Krone ist eine Kugel mit zufällig generierten Ausbeulungen. Nachdem eine Blättertextur darauf gelegt wurde, ist die Illusion eines Baumes vollständig.\\
 
 \begin{figure}[H]
 \centering 
