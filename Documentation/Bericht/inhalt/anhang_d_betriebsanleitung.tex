@@ -28,7 +28,7 @@ Setzen Sie sich nun ans Steuer und kontrollieren Sie die Geschwindigkeit des Fah
 \end{enumerate}
 
 \subsection{Fahrsimulator}
-Der Fahrsimulator benötigt DirectX 9 um zu laufen. Falls Sie dies noch nicht installiert haben, können Sie es von Microsoft herunterladen: http://www.microsoft.com/download/en/details.aspx?id=8109
+Der Fahrsimulator benötigt DirectX 9 um zu laufen. Falls Sie dies noch nicht installiert haben, können Sie es von der offiziellen Microsoft-Seite\footnote{http://www.microsoft.com/download/en/details.aspx?id=8109} herunterladen: 
 
 \begin{enumerate}[label=\arabic*.]
 
@@ -36,6 +36,28 @@ Der Fahrsimulator benötigt DirectX 9 um zu laufen. Falls Sie dies noch nicht in
 Öffnen Sie die Datei DrivingSimulator.vi mit LabVIEW und starten Sie das Programm mit einem Klick auf die Schaltfläche \includegraphics[height=\ht\strutbox]{src/icon_labview_run.png} \textit{Run}. Sie werden nach einem Dateipfad gefragt. Geben Sie hier den Pfad zu einer Datei an, in der Sie den Output vom LabVIEW-Programm gespeichert haben wollen. \textbf{Achtung: Existierende Dateien werden überschrieben!}
 
 \item \textbf{Grafikeinstellungen überprüfen}\\
+Öffnen Sie die Datei \textit{Resources/graphics.cfg}. Darin befinden sich einige Attribute für die Grafikkonfiguration. Vergewissern Sie sich, dass Ihre Grafikkarte die dort spezifizierten Grafikmodi unterstützt und ändern Sie diese gegebenenfalls ab. Die wichtigsten Optionen sind hier aufgeführt:
+\begin{itemize}
+	\item Video Mode: Bildschirmauflösung und Farbtiefe in folgendem Format: \textit{<horizontale Auflösung> x <vertikale Auflösung> @ <Farbtiefe>-bit colour}\\Beispiel: \textit{1024 x 768 @ 32-bit colour}
+	\item FSAA: Anzahl Filterdurchgänge für Antialiasing (\textit{0}, \textit{2}, \textit{4}, \textit{8}, etc.)
+	\item Full Screen: \textit{Yes} oder \textit{No}
+	\item VSync: Bildschirmsynchronisation aktivieren (\textit{Yes} oder \textit{No})
+\end{itemize}
+
+\item \textbf{Fahrsimulator starten}\\
+Wechseln Sie zuerst in das Verzeichnis, in dem sich die Date \textit{DrivingSimulatorV1.exe} befindet und starten Sie diese entweder direkt von der Kommandozeile mit folgenden Parametern in der Reihenfolge, wie sie hier aufgelistet sind:
+\begin{itemize}
+	\item UDP Input Port
+	\item UDP Output Port
+	\item Adresse des Remote Computers ("127.0.0.1" wenn das LabVIEW-Programm auf demselben Computer läuft)
+	\item Rückwärtsgang (\textit{1}: aktiviert, \textit{0}: deaktiviert) 
+	\item Steuerrad (\textit{1}: sichtbar, \textit{0}: unsichtbar)
+	\item Level (\textit{1}: Stadtszene, \textit{2}: Berglandschaft)
+\end{itemize}
+oder benutzen Sie die Dateien \textit{DrivingSimulator\_City.bat} oder \textit{DrivingSimulator\_Mountains.bat}, um eine entsprechende Szene mit Standardeinstellungen zu laden.
+
+\item \textbf{Los gehts}\\
+Setzen Sie sich nun ans Steuer und fahren Sie durch die virtuelle Welt. Das Fahrzeug kann über Eingaben im Cockpit oder durch die Pfeiltasten gesteuert werden. Durch Drücken der Taste \textit{V} auf der Tastatur, wird die Kameraansicht zwischen 1st- und 3rd-Person umgestellt.
 
 
 \end{enumerate}
