@@ -33,7 +33,7 @@ Eine bessere Auflösung und Darstellung der Strassen bietet Google Street View. 
 \label{screenshot_google_street_view_unscharf} % Labelname
 \end{figure}
 Zudem wurden meist nur auf einer Fahrspur Fotos gemacht. Eine Ausnahme bilden die Autobahnen. Auf allen übrigen Strassen hat man sich darauf beschränkt, Fotos nur in eine Richtung zu machen. Wenn man nun in die andere Richtung fahren möchte, sieht es so aus als würde man auf der falschen Seite fahren. Somit kommen einem die anderen Verkehrsteilnehmer, die sich ebenfalls auf den Fotos befinden, entgegen. Auch dieser Lösungsansatz muss deshalb verworfen werden. Eine weiter Möglichkeit besteht darin, dass eine eigene Umgebung entworfen wird.\\
-Für den Fahrsimulator wird also eine virtuelle dreidimensionale Umgebung benötigt, in der man sich bewegen kann. Diese Umgebung, auch Szene genannt, setzt sich aus verschiedenen Objekten zusammen. Die Struktur eines solchen Objektes wird duch ein Mesh-File beschrieben. In einer Szene kann das gleiche Objekt mehrmals an verschiedenen Positionen vorkommen. Das Objekt kann durch eine Skalierung auch einmal gross und einmal klein erscheinen. Oder man variert sie mittels Rotation. Zusätzlich wird mindestens ein material-File benötigt, in dem sämtliche Texturen und Materialien, die von Objekten der Szene verwendet werden, definiert sind.
+Für den Fahrsimulator wird also eine virtuelle dreidimensionale Umgebung benötigt, in der man sich bewegen kann. Diese Umgebung, auch Szene genannt, setzt sich aus verschiedenen Objekten zusammen. Die Struktur eines solchen Objektes wird duch ein mesh-File beschrieben. In einer Szene kann das gleiche Objekt mehrmals an verschiedenen Positionen vorkommen. Das Objekt kann durch eine Skalierung auch einmal gross und einmal klein erscheinen. Oder man variert sie mittels Rotation. Zusätzlich wird mindestens ein material-File benötigt, in dem sämtliche Texturen und Materialien, die von Objekten der Szene verwendet werden, definiert sind.
 Ein Beispiel von einem Material, wie es in einem material-File definiert ist, wird im Listing \ref{example_materialfile_material} illustriert.
 \begin{lstlisting}[caption={Beispiel aus dem material-File für ein Material},label={example_materialfile_material}]
 material city_ground
@@ -69,7 +69,7 @@ material city_street_h
 	}
 }
 \end{lstlisting}
-Für die Textur wird in diesem Beispiel kein ambientes Licht definiert und es wird der Standartwert null genommen. Der diffuse Anteil bestimmt, wie stark das Material das Licht reflektiert. Da die Textur des Materials gut sichtbar sein soll, fällt dieser Wert relativ hoch aus. Im Block \textit{texture\_unit} wird die Textur angegeben und konfiguriert. Die Graphik, die als Textur verwendet wird, wird nach dem Keyword \textit{texture} angegeben. Das erste Argument nach der Graphikdatei, das \textit{2d}, konfiguriert die zweidimensionale Graphik als normale zweidimensionale Textur. Die vier als drittes Argument gibt die Anzahl zu generierenden Mipmaps an. Zusätzlich kann ein Filter für die Textur mit dem Keyword \textit{filtering} angegeben werden. Der anisotropische Filter wertet die Qualität der Textur in der Distanz auf. Hierbei wird die Richtung, der die Textur betrachtet wird, berücksichtigt.\\
+Für die Textur wird in diesem Beispiel kein ambientes Licht definiert und es wird der Standartwert null genommen. Der diffuse Anteil bestimmt, wie stark das Material das Licht reflektiert. Da die Textur des Materials gut sichtbar sein soll, fällt dieser Wert relativ hoch aus. Im Block \textit{texture\_unit} wird die Textur angegeben und konfiguriert. Die Graphik, die als Textur verwendet wird, wird nach dem Keyword \textit{texture} angegeben. Das erste Argument nach der Graphikdatei, das \textit{2d}, konfiguriert die zweidimensionale Graphik als normale zweidimensionale Textur. Die vier als drittes Argument gibt die Anzahl zu generierenden \glspl{mipmap} an. Zusätzlich kann ein Filter für die Textur mit dem Keyword \textit{filtering} angegeben werden. Der anisotropische Filter wertet die Qualität der Textur in der Distanz auf. Hierbei wird die Richtung, der die Textur betrachtet wird, berücksichtigt.\\
 Es werden zwei unterschiedliche Szenen für den Fahrsimulator erstellt. Die eine Szene zeigt eine Stadt mit Häusern, Kreuzungen und Verkehrsschildern. Die andere Szene stellt eine Berglandschaft mit mehreren Tunnels dar. Die Szenen werden mit dem Programm Cinema4D erstellt. 
 \newpage
 \subsubsection{Erstellen der Stadtszene}
@@ -79,14 +79,14 @@ Es werden zwei unterschiedliche Szenen für den Fahrsimulator erstellt. Die eine
 \caption{Karte der Stadtszene} % Titel der Grafik
 \label{CityWorld_map} % Labelname
 \end{figure}
-Um die erstellte Stadtszene gut dokumentieren zu können, zeigt Abbildung \ref{CityWorld_map} eine Übersichtskarte. Die grosse vierspurige Strasse, die sich von oben links nach unten rechts durch die gesamte Szene zieht, ist eine rechteckige Ebene. Die Ebene ist mit einer Textur versehen, die die vier Spuren mit einer Sicherheitslinie in der Mitte darstellt. Die Länge der Textur entspricht jedoch nicht der Länge der Strasse. Wie in Abbildung \ref{examples_street_textures} zu sehen, entspricht die Textur nur einem kurzen Stück der Strasse. Die Textur wird auf der Ebene immer wiederholt. Auch bei allen anderen Strassen ist die Textur nur kurz und wird wiederholt.\\
+Um die erstellte Stadtszene gut dokumentieren zu können, zeigt Abbildung \ref{CityWorld_map} eine Übersichtskarte. Die grosse vierspurige Strasse, die sich von oben links nach unten rechts durch die gesamte Szene zieht, ist eine rechteckige Ebene. Die Ebene ist mit einer Textur versehen, die die vier Spuren mit einer Sicherheitslinie in der Mitte darstellt. Die Länge der Textur entspricht jedoch nicht der Länge der Strasse. Wie in Abbildung \ref{examples_street_textures} zu sehen, entspricht die sie nur einem kurzen Stück. Die Textur wird auf der Ebene immer wiederholt. Diese Technik wird bei allen Strassen angewendet.\\
 \begin{figure}[H]
 \centering 
 \includegraphics[scale=0.6]{src/examples_street_textures.png}
 \caption{Beispiele von Strassentexturen} % Titel der Grafik
 \label{examples_street_textures} % Labelname
 \end{figure}
-Die Strassen mit Kurven werden mit \glspl{spline} beschrieben. Eine Linie wird der \gls{spline} entlangeführt um die Breite einer Strasse zu erhalten. Die Textur der Strasse wird auf dieses, so zusammengefügte, Objekt gelegt. Der Abschluss solcher geschwungenen Strassen bilden wiederum rechteckige Ebenen. Diese erhalten die Textur einer Stoplinie mit Beschriftung auf der Strasse oder den vielen Dreieckigen Zeichen für kein Vortritt wie in Abbildung \ref{examples_street_textures} gezeigt. \\
+Die Strassen mit Kurven werden mit \glspl{spline} beschrieben. Eine Linie wird der \gls{spline} entlangeführt um die Breite einer Strasse zu erhalten. Die Textur der Strasse wird auf dieses, so zusammengefügte, Objekt gelegt. Der Abschluss solcher geschwungenen Strassen bilden wiederum rechteckige Ebenen. Diese erhalten Texturen mit Asphaltsymbolen, wie zum Beispiel einem \textit{Stop} oder \textit{kein Vortritt}, wie in Abbildung \ref{examples_street_textures} gezeigt. \\
 Zusätzlich zu den Symbolen auf der Strasse, werden noch Verkehrsschilderobjekte in die Szene geladen. Die Abbildung \ref{screenshot_trafficsignal} zeigt ein Beipiel eines solchen Objektes. \\
 \begin{figure}[H]
 \centering 
@@ -96,7 +96,13 @@ Zusätzlich zu den Symbolen auf der Strasse, werden noch Verkehrsschilderobjekte
 \end{figure}
 
 Die Häuser der Stadt sind einfache Blöcke, die mit dem Bild einer Hausfassade texturiert werden. Insgesamt sind drei Gebäudetypen, wie in Abbildung \ref{screenshot_buildings} dargestellt,  vorhanden. Diese drei Typen werden vervielfacht, eventuell rotiert und in der Szene verteilt.\\
-Als nettes Extra wird das Hauptgebäude der ETH Zürich in die Szene eingefügt. Das Gebäudemodell stammt von Google 3D Warehouse und wird mit \gls{google-sketchup} bearbeitet. Dabei werden die Oberflächennormalen neu berechnet und die Bodenplatte, auf der das Gebäude steht, entfernt. Die Texturen werden manuell in das material-File übernommen. Nun wird das ETH-Modell in die Szene geladen, skaliert und an der richtigen Stelle platziert. 
+\begin{figure}[H]
+\centering 
+\includegraphics[scale=0.4]{src/screenshot_buildings.png}
+\caption{Drei verschidene Gebäudetypen} % Titel der Grafik
+\label{screenshot_buildings} % Labelname
+\end{figure}
+Als nettes Extra wird das Hauptgebäude der ETH Zürich in die Szene eingefügt. Das Gebäudemodell stammt von \gls{google-3d-warehouse} und wird mit \gls{google-sketchup} bearbeitet. Dabei werden die Oberflächennormalen neu berechnet und die Bodenplatte, auf der das Gebäude steht, entfernt. Die Texturen werden manuell in das material-File übernommen. Nun wird das ETH-Modell in die Szene geladen, skaliert und an der richtigen Stelle platziert. 
 
 \begin{figure}[H]
 \centering 
@@ -105,12 +111,7 @@ Als nettes Extra wird das Hauptgebäude der ETH Zürich in die Szene eingefügt.
 \label{googlesketchup_eth} % Labelname
 \end{figure}
 
-\begin{figure}[H]
-\centering 
-\includegraphics[scale=0.4]{src/screenshot_buildings.png}
-\caption{Drei verschidene Gebäudetypen} % Titel der Grafik
-\label{screenshot_buildings} % Labelname
-\end{figure}
+
 Um der Szene ein bisschen Farbe zu verleihen sind noch Bäume, wie in Abbildung \ref{screenshot_tree} in der Szene vorhanden. Ein Baum besteht aus einem Stamm mit einer Holztextur und einer Krone. Die Krone ist eine zufällig generierte Landschaft die zu einer Kugel geformt wird. Dadurch entstehen die verschiedenartigen Aus- und Einbuchtungen in der Baumkrone. Nachdem eine Blättertexut darauf gelegt wurde, ist die Illusion eines Baumes vollständig.\\
 
 \begin{figure}[H]

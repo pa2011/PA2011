@@ -21,12 +21,12 @@ Ein Steuerrad, drei Pedalen, ein Schaltknüppel und diverse Knöpfen dienen als 
 \label{Systembeschreibung} % Labelname
 \end{figure}
 
-Die blau markierten Komponenten in Abbildung \ref{Systembeschreibung} werden im Rahmen dieser Projekt-Arbeit entwickelt. Alle übrigen sind bereits vorbestehend. \\
-Benutzereingaben, die im Cockpit gemacht werden, werden von einem LabView Programm eingelesen. Nun benötigt es einen UDP-Port,  über den verschiedene Eingaben an das Programm weitergeleitet werden. Es handelt sich hierbei um Werte, die das Drehen des Steuerrades und den Druck auf Gas- oder Bremspedal quantifizieren. Zusätzlich wird der UDP-Port auch für das Empfangen diverser Log-Daten, die von unserem Programm gesendet werden, verwendet. Die empfangenen Daten werden vom LabVIEW-Programm  in ein Log-File gespeichert.\\
-Weiter muss in der Programmiersprache C++ ein UDP-Socket mit entsprechendem UDP-Listener implementieren werden, um die Benutzereingaben zu empfangen. Der UDP-Listener wird gleichzeitig dazu verwendet, die Geschwindigkeit des Fahrzeugs sowie Timestamps und weitere Daten an das LabVIEW Programm zurück zu schicken. Damit können die Daten gespeichert und später ausgewertet werden.\\
+Die blau markierten Komponenten in Abbildung \ref{Systembeschreibung} werden im Rahmen dieser Projektarbeit entwickelt. Alle übrigen sind bereits vorbestehend. \\
+Benutzereingaben, die im Cockpit gemacht werden, werden von einem \gls{labview}-Programm eingelesen. Nun benötigt es einen UDP-Port,  über den verschiedene Eingaben an das Programm weitergeleitet werden. Es handelt sich hierbei um Werte, die das Drehen des Steuerrades und den Druck auf Gas- oder Bremspedal quantifizieren. Zusätzlich wird der UDP-Port auch für das Empfangen diverser Log-Daten, die von unserem Programm gesendet werden, verwendet. Die empfangenen Daten werden vom \gls{labview}-Programm  in ein Log-File gespeichert.\\
+Weiter muss in der Programmiersprache C++ ein UDP-Socket mit entsprechendem UDP-Listener implementieren werden, um die Benutzereingaben zu empfangen. Der UDP-Listener wird gleichzeitig dazu verwendet, die Geschwindigkeit des Fahrzeugs sowie Timestamps und weitere Daten an das \gls{labview}-Programm zurück zu schicken. Damit können die Daten gespeichert und später ausgewertet werden.\\
 Diese Aufteilung durch eine Netzwerkschnittstelle ermöglicht es,  das System, wenn notwendig, zu dezentralisieren. Einfachheitshalber wird der UDP-Listener erst in einem Video-Beispiel implementiert und getestet (Siehe Anhang B). Nachfolgend wird er in das Programm des Fahrsimulator transferiert.\\
 Sind die Daten vom UDP-Listener empfangen und aufbereitet, werden sie im Hauptprogramm weiter verwendet. Während die Position des Steuerrades, des Gas- und Bremspedales vom UDP-Listener permanent an das Hauptprogramm übertragen werden, wertet dieses die Positionen aus und veranlasst die entspechenden Aktionen in der geladenen Szene. 
-Die Szene selbst wird von einem Szenen-Manager geladen. Die berechnete Szene wird schlussendlich in einem Fenster vom Hauptprogramm angezeigt und über eine DVI-Schnittstelle an den Beamer übertragen. Der Beamer projeziert das Bild an die Wand, die sich direkt vor dem Cockpit befindet. 
+Die Szene selbst wird von einem Szenen-Manager geladen. Die berechnete Szene wird schlussendlich in einem Fenster des Hauptprogramms angezeigt und über eine DVI-Schnittstelle an den Beamer übertragen. Der Beamer projeziert das Bild an die Wand, die sich direkt vor dem Cockpit befindet. 
 
 \subsection{Anforderungen}
 \subsubsection{Funktionale Anforderungen}
@@ -35,7 +35,7 @@ Die Szene selbst wird von einem Szenen-Manager geladen. Die berechnete Szene wir
 \item Die aktuelle Geschwindigkeit des gesteuerten Fahzeuges soll für den Probanden ersichtlich sein. 
 \item Es sollen dem Fahrsimulator zwei Szenen zur Verfügung stehen. Die eine Szene stellt eine Stadt dar, die andere Szene eine Berglandschaft mit Tunnels.
 \item Die Manipulationen des Benutzers und wichtige Parameter wie z.B. Geschwindigkeit sollen in einer Datei chronologisch und laufend abgespeichert werden, um diese auszuwerten.
-\item Alle ein- und ausgehenden Parameter des System sollen jederzeit im LabVIEW abrufbar sein.
+\item Alle ein- und ausgehenden Parameter des System sollen jederzeit im \gls{labview} abrufbar sein.
 \end{itemize}
 
 \subsubsection {Nicht funktionale Anforderungen}
