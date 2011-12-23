@@ -1,10 +1,9 @@
 \section{Realisierung}
-Wie bereits in der Systembeschreibung beschrieben, wird der Fahrsimulator in drei Hauptkomponenten unterteilt: den UDP-Listener, den Szenen-Manager und das Hauptprogramm. Da die Verbindung zwischen dem Cockpit und dem Fahrsimulator mit einer Netzwerkschnittstelle realisiert wird, ist es möglich, die Anbindung an das Cockpit und den Fahrsimulator physisch auf zwei unterschiedlichen Rechnern zu betreiben. Eine Alternative ist die Umsetzung mit dem \gls{ogre}-Framwork (siehe Anhang \ref{ogre-framework}). Dieses Framework bietet umfassende Lösungen, um Steuerradär und Pedalen, wie sie in userem Cockpit vorhanden sind, anzusteuern.\\
+Wie bereits in der Systembeschreibung beschrieben, wird der Fahrsimulator in drei Hauptkomponenten unterteilt: den UDP-Listener, den Szenen-Manager und das Hauptprogramm. Da die Verbindung zwischen dem Cockpit und dem Fahrsimulator mit einer Netzwerkschnittstelle realisiert wird, ist es möglich, die Anbindung an das Cockpit und den Fahrsimulator physisch auf zwei unterschiedlichen Rechnern zu betreiben.\\
 Da die 3D-Umgebung mit fortscheitendem Projekt ausgebaut wird, könnte sich die notwendige Rechenleistung erheblich steigern. Folgen ungenügender Leistung sind unregelmässige Bewegungen (Lags) in der virtuellen Umgebung oder sogar der Absturz des gesamten Programms.\\
-Aus diesem Grund ist die erste Variante mit der Netzwerkschnittstelle für das Fahrsimulatorprojekt besser geeignet. Die andere Variante wird verworfen.
 
-\subsection{LabVIEW Programm}
-Eine LabVIEW-Umgebung existiert bereits auf dem Rechner, an den das Cockpit angeschlossen ist. Ein LabVIEW-Programm liest bereits die Eingaben im Cockpit ein. Da dieses Programm jedoch nicht genau den Anforderungen entspricht, wird es neu realisiert. Die Eingaben werden über einen UDP-Socket alle 10 ms gesendet. Zusätzlich wird ein zweiter UDP-Socket eingerichtet, um Packete, die vom Fahrsimulator zurück gesendet werden, zu empfangen. Die Daten der empfangenen Packete werden von LabVIEW verarbeitet, dargestellt und in ein Log-File geschrieben.\\
+\subsection{LabVIEW-Programm}
+Eine LabVIEW-Umgebung existiert bereits auf dem Rechner, an den das Cockpit angeschlossen ist. Ein LabVIEW-Programm liest bereits die Eingaben im Cockpit ein. Da dieses Programm jedoch nicht genau den Anforderungen entspricht, wird es neu realisiert. Die Eingaben werden über einen UDP-Socket alle 10 ms gesendet. Zusätzlich wird ein zweiter UDP-Socket eingerichtet, um Packete, die vom Fahrsimulator zurück gesendet werden, zu empfangen. Die Daten der empfangenen Pakete werden von LabVIEW verarbeitet, dargestellt und in ein Log-File geschrieben.\\
 Das detaillierte LabVIEW Programm ist im Anhang \ref{labview_programme} zu finden. Die LabVIEW-Schnittstelle ist im Anhang \ref{labview_schnittstelle} genauer ausgeführt.
 
 \subsection{UDP-Listener}
@@ -20,22 +19,22 @@ In einem eigenen Thread werden UDP-Pakete kontinuierlich gelesen und verarbeitet
 \label{Koordinatensystem} % Labelname
 \end{figure}
 
-Die von LabVIEW empfangenen Daten sind in erster Linie Parameter, die den Ausschlag der Pedalen und den Einschlagwinkel des Steuerrades representieren. Die beiden Pedalen werden in einem Koordinatensystem wie in Abbildung \ref{Koordinatensystem} auf der y-Achse im Bereich von -32768 bis 32767 abgebildet. Dabei heisst ein negativer y-Wert, dass das Gaspedal gedrückt wird, ein positiver Wert steht für das Drücken der Bremse. Der x-Wert im Koordinatensystem quantifiziert den Einschlagswinkel des Steuerrades. Hier steht -32768 einem vollständig nach links eingeschlagenen Steuerrad, 32767 einer Drehung bis zum rechten Anschlag. Sollte es zu einem späteren Zeitpunkt nötig sein, Tastendrücke am Steuerrad zu übermitteln, kann das UDP-Paket einfach erweitert werden.\\
+Die von LabVIEW empfangenen Daten sind in erster Linie Parameter, die den Ausschlag der Pedalen und den Einschlagwinkel des Steuerrades repräsentieren. Die beiden Pedalen werden in einem Koordinatensystem wie in Abbildung \ref{Koordinatensystem} auf der y-Achse im Bereich von -32768 bis 32767 abgebildet. Dabei heisst ein negativer y-Wert, dass das Gaspedal gedrückt wird, ein positiver Wert steht für das Drücken der Bremse. Der x-Wert im Koordinatensystem quantifiziert den Einschlagswinkel des Steuerrades. Hier steht -32768 für das vollständig nach links eingeschlagene Steuerrad, 32767 für eine Drehung bis zum rechten Anschlag. Sollte es zu einem späteren Zeitpunkt nötig sein, Tastendrücke am Steuerrad zu übermitteln, kann das UDP-Paket einfach erweitert werden.\\
 Nebst den Eingaben durch Steuerrad und Pedalen wird von LabVIEW ein Timestamp gesendet. Der Timestamp wird von UDP-Listener empfangen und nach dem Abspeichern der Parameter wieder zurückgeschickt. Somit kann festgestellt werden, wieviel Verzögerung durch Kommunikation und Verarbeitung der Daten verursacht wird.\\
 
 \subsection{Virtual Reality}
-Eine erste Idee, um eine virtuelle Realität zu erzeugen, war der Einsatz von google Street View oder google Maps. Google Maps bietet die Möglichkeit, da die Satellitenbilder von der ganzen Erde gemacht wurden, überall auf der Welt zu fahren. Jedoch ist die Auflösung der Bilder nicht immer hoch genug, um damit eine Umgebung für den Fahrer generieren zu können. Erschwerend kommt hinzu, dass die Aufnahmen nur von oben gemacht wurden und somit keine Seitenansicht einer steilen Felswand oder eines Hauses zur Verfügung steht. Auch werden, da die Fotos aus der Vogelperspektive gemacht wurden, verschiedene Elemente die sich über der Strasse befinden zweidimensional angezeigt, wie zum Beispiel Bäume, Brücken oder Autos. Dies bedeutet, dass keine klare Strasse sichtbar ist. Somit würde der Einsatz von google maps zu keiner zufriedenstellenden Lösung führen. \\
-Eine bessere Auflösung und Darstellung der Strassen bietet Google Street View. Hier wurde mit einem Wagen, der eine 360 Grad Kamera auf dem Dach montiert hatte, den Strassen entlang gefahren und ca. alle 20 Meter ein Foto gemacht. An jedem Punkt an dem ein Foto gemacht wurde, kann der Benutzer nun in alle Richtungen Blicken. Es werden sogar grosse Gegenstände wie Wände oder Hausmauern erkannt und beim Drehen der Ansicht interpoliert. Diese Interpolierung ist jedoch nicht immer korrekt und führt teilweise zu merkwürdigen Anzeigen. Zudem gibt es zwischen zwei Bildern einen zu grossen Unterschied als dass eine fliesende Bewegung simuliert werden könnte. Eine Interpolation zweier Bilder ist denkbar, kostet aber viel Rechenleistung und liefert dennoch ein unbefriedigendes Resultat. Durch die Interpolation wird die Lücke zwischen den beiden Bildern zwar aufgefüllt, der Übergang ist aber derart verschwommen, dass keine Objekte erkannt werden können.
+Eine erste Idee, um eine virtuelle Realität zu erzeugen, war der Einsatz von Google Street View oder Google Maps. Google Maps bietet die Möglichkeit, da die Satellitenbilder von der ganzen Erde gemacht wurden, überall auf der Welt zu fahren. Jedoch ist die Auflösung der Bilder nicht immer hoch genug, um damit eine Umgebung für den Fahrer generieren zu können. Erschwerend kommt hinzu, dass die Aufnahmen nur von oben gemacht wurden und somit keine Seitenansicht einer steilen Felswand oder eines Hauses zur Verfügung steht. Auch werden, da die Fotos aus der Vogelperspektive gemacht wurden, verschiedene Elemente, die sich über der Strasse befinden, zweidimensional angezeigt, wie zum Beispiel Bäume, Brücken oder Autos. Dies bedeutet, dass keine klare Strasse sichtbar ist. Somit würde der Einsatz von Google Maps zu keiner zufriedenstellenden Lösung führen. \\
+Eine bessere Auflösung und Darstellung der Strassen bietet Google Street View. Hier wurde mit einem Wagen, der eine 360 Grad Kamera auf dem Dach trägt, den Strassen entlang gefahren und ca. alle 20 Meter ein Foto gemacht. An jedem Punkt, an dem ein Foto gemacht wurde, kann der Benutzer nun in alle Richtungen blicken. Es werden sogar grosse Gegenstände wie Wände oder Hausmauern erkannt und beim Drehen der Ansicht interpoliert. Diese Interpolierung ist jedoch nicht immer korrekt und führt teilweise zu merkwürdigen Anzeigen. Zudem gibt es zwischen zwei Bildern einen zu grossen Unterschied, als dass eine fliessende Bewegung simuliert werden könnte. Eine Interpolation zweier Bilder ist denkbar, kostet aber viel Rechenleistung und liefert dennoch ein unbefriedigendes Resultat. Durch die Interpolation wird die Lücke zwischen den beiden Bildern zwar aufgefüllt, der Übergang ist aber derart verschwommen, dass keine Objekte erkannt werden können.
 \begin{figure}[H]
 \centering 
 \includegraphics[width=1.0\linewidth]{src/screenshot_google_street_view_unscharf.png}
-\caption{Verschwommene Interpolation von google Street View} % Titel der Grafik
+\caption{Verschwommene Interpolation von Google Street View Bildern} % Titel der Grafik
 \label{screenshot_google_street_view_unscharf} % Labelname
 \end{figure}
-Zudem wurden meist nur auf einer Fahrspur Fotos gemacht. Eine Ausnahme bilden die Autobahnen. Auf allen übrigen Strassen hat man sich darauf beschränkt, Fotos nur in eine Richtung zu machen. Wenn man nun in die andere Richtung fahren möchte, sieht es so aus als würde man auf der falschen Seite fahren. Somit kommen einem die anderen Verkehrsteilnehmer, die sich ebenfalls auf den Fotos befinden, entgegen. Auch dieser Lösungsansatz muss deshalb verworfen werden. Eine weiter Möglichkeit besteht darin, dass eine eigene Umgebung entworfen wird.\\
-Für den Fahrsimulator wird also eine virtuelle dreidimensionale Umgebung benötigt, in der man sich bewegen kann. Diese Umgebung, auch Szene genannt, setzt sich aus verschiedenen Objekten zusammen. Die Struktur eines solchen Objektes wird duch ein mesh-File beschrieben. In einer Szene kann das gleiche Objekt mehrmals an verschiedenen Positionen vorkommen. Das Objekt kann durch eine Skalierung auch einmal gross und einmal klein erscheinen. Oder man variert sie mittels Rotation. Zusätzlich wird mindestens ein material-File benötigt, in dem sämtliche Texturen und Materialien, die von Objekten der Szene verwendet werden, definiert sind.
-Ein Beispiel von einem Material, wie es in einem material-File definiert ist, wird im Listing \ref{example_materialfile_material} illustriert.
-\begin{lstlisting}[caption={Beispiel aus dem material-File für ein Material},label={example_materialfile_material}]
+Zudem wurden meist nur auf einer Fahrspur Fotos gemacht. Wenn man nun in die andere Richtung fahren möchte, sieht es so, aus als würde man auf der falschen Strassenseite fahren. Somit kommen einem die anderen Verkehrsteilnehmer, die sich ebenfalls auf den Fotos befinden, entgegen. Auch dieser Lösungsansatz muss deshalb verworfen werden.
+Für den Fahrsimulator wird also eine eigene virtuelle dreidimensionale Umgebung benötigt, in der man sich bewegen kann. Diese Umgebung, fortan auch Szene genannt, setzt sich aus verschiedenen Objekten zusammen. Die Struktur eines solchen Objektes wird durch ein mesh-File im \gls{ogre-xml}-Format beschrieben. In einer Szene kann das gleiche Objekt mehrmals an verschiedenen Positionen vorkommen. Das Objekt kann durch eine Skalierung auch einmal gross und einmal klein erscheinen. Oder man variert sie durch Rotation. Zusätzlich wird mindestens ein material-File benötigt, in dem sämtliche Texturen und Materialien, die von Objekten der Szene verwendet werden, definiert sind.
+
+\begin{lstlisting}[caption={Auszug aus dem material-File},label={example_materialfile_material}]
 material city_ground
 {
 	technique
@@ -48,7 +47,7 @@ material city_ground
 	}
 }
 \end{lstlisting}
-Nach dem Keyword \textit{material} wird der Name des Materials angegeben. Als \textit{technique}-Block wird hier einer angegeben. Es können mehrere Blöcke angegeben werden. Diesen Blöcken können optional auch Namen gegeben werden, um zu erkennen wofür die einzelnen Blöcke sind. Ausgeführt wird jedoch immer nur einer der Blöcke, wobei der erste Block der Bevorzugteste und der unterste Block die letzte Fallbacklösung ist. Im \textit{pass}-Block werden die Reflektionswerte und die Farbe angegeben. Es können mehrere \textit{pass}-Blöcke angegeben werden, die jeweils hintereinander ausgeführt werden und sich überlagern. Das \textit{ambiant} als ambientes Licht bestimmt grundsätzlich die Farbe des Matierials. Die Zahlen repräsentieren die RGB-Werte und können zwischen 0 und 1 liegen. Die Farbe des Materials in diesem Beispiel ist ein helles Grau. Die vierte Zahl repräsentiert den Alphawert der Farbe. Der Alphawert quantifiziert die Sichtbarkeit des Materials wobei 1.0 voll sichtbar und 0.0 unsichtbar ist.
+Nach dem Keyword \textit{material} wird der Name des Materials angegeben. Als \textit{technique}-Block wird hier nur einer angegeben. Es können mehrere Blöcke angegeben werden, welche optional auch benannt werden können, um zu erkennen wofür die einzelnen Blöcke sind. Ausgeführt wird jedoch immer nur einer der Blöcke, wobei der erste Block der bevorzugte und der unterste Block die letzte Fallbacklösung ist. Im \textit{pass}-Block werden die Reflexionseigenschaften und die Farbe des Materials angegeben. Es können mehrere \textit{pass}-Blöcke angegeben werden, die jeweils hintereinander ausgeführt werden und sich überlagern. Das \textit{ambiant} als ambientes Licht bestimmt grundsätzlich die Farbe des Matierials. Die Zahlen repräsentieren die RGB-Werte und können zwischen 0 und 1 liegen. Die Farbe des Materials in diesem Beispiel ist ein helles Grau. Die vierte Zahl repräsentiert den Alphawert der Farbe (0: unsichtbar, 1: vollständig sichtbar).
 Weiter zeigt das Listing \ref{example_materialfile_texture} die definition einer Textur in einem material-File.\\
 \newpage
 \begin{lstlisting}[caption={Beispiel aus dem material-File zur Beschreibung einer Textur},label={example_materialfile_texture}]
@@ -69,8 +68,8 @@ material city_street_h
 	}
 }
 \end{lstlisting}
-Für die Textur wird in diesem Beispiel kein ambientes Licht definiert und es wird der Standartwert null genommen. Der diffuse Anteil bestimmt, wie stark das Material das Licht reflektiert. Da die Textur des Materials gut sichtbar sein soll, fällt dieser Wert relativ hoch aus. Im Block \textit{texture\_unit} wird die Textur angegeben und konfiguriert. Die Graphik, die als Textur verwendet wird, wird nach dem Keyword \textit{texture} angegeben. Das erste Argument nach der Graphikdatei, das \textit{2d}, konfiguriert die zweidimensionale Graphik als normale zweidimensionale Textur. Die vier als drittes Argument gibt die Anzahl zu generierenden \glspl{mipmap} an. Zusätzlich kann ein Filter für die Textur mit dem Keyword \textit{filtering} angegeben werden. Der anisotropische Filter wertet die Qualität der Textur in der Distanz auf. Hierbei wird die Richtung, der die Textur betrachtet wird, berücksichtigt.\\
-Es werden zwei unterschiedliche Szenen für den Fahrsimulator erstellt. Die eine Szene zeigt eine Stadt mit Häusern, Kreuzungen und Verkehrsschildern. Die andere Szene stellt eine Berglandschaft mit mehreren Tunnels dar. Die Szenen werden mit dem Programm Cinema4D erstellt. 
+Für die Textur wird in diesem Beispiel keine ambiente Farbe definiert Der diffuse Anteil bestimmt, wie stark das Material das Licht reflektiert. Da die Textur des Materials gut sichtbar sein soll, fällt dieser Wert relativ hoch aus. Im Block \textit{texture\_unit} wird die Textur angegeben und konfiguriert. Die Grafik, die als Textur verwendet wird, wird nach dem Keyword \textit{texture} angegeben. Das erste Argument nach der Grafikdatei, das \textit{2d} gibt an, dass es sich hierbei um eine zweidimensionale Textur handelt. Die vier als drittes Argument gibt die Anzahl zu generierenden \glspl{mipmap} an. Zusätzlich kann ein Filter für die Textur mit dem Keyword \textit{filtering} angegeben werden. Der anisotropische Filter wertet die Qualität der Textur in der Distanz unter Berücksichtigung des Betrachtungswinkels auf.\footnote{Quelle: http://en.wikipedia.org/wiki/Anisotropic\_filtering, Abruf: 18.12.2011}\\
+Es werden zwei unterschiedliche Szenen für den Fahrsimulator erstellt. Die eine Szene zeigt eine Stadt mit Häusern, Kreuzungen und Verkehrsschildern, die andere stellt eine Berglandschaft mit mehreren Tunnels dar. Die Szenen werden mit \gls{cinema4d} erstellt. 
 \newpage
 \subsubsection{Erstellen der Stadtszene}
 \begin{figure}[H]
@@ -79,15 +78,15 @@ Es werden zwei unterschiedliche Szenen für den Fahrsimulator erstellt. Die eine
 \caption{Karte der Stadtszene} % Titel der Grafik
 \label{CityWorld_map} % Labelname
 \end{figure}
-Um die erstellte Stadtszene gut dokumentieren zu können, zeigt Abbildung \ref{CityWorld_map} eine Übersichtskarte. Die grosse vierspurige Strasse, die sich von oben links nach unten rechts durch die gesamte Szene zieht, ist eine rechteckige Ebene. Die Ebene ist mit einer Textur versehen, die die vier Spuren mit einer Sicherheitslinie in der Mitte darstellt. Die Länge der Textur entspricht jedoch nicht der Länge der Strasse. Wie in Abbildung \ref{examples_street_textures} zu sehen, entspricht die sie nur einem kurzen Stück. Die Textur wird auf der Ebene immer wiederholt. Diese Technik wird bei allen Strassen angewendet.\\
+Um die erstellte Stadtszene gut dokumentieren zu können, zeigt Abbildung \ref{CityWorld_map} eine Übersichtskarte. Die grosse vierspurige Strasse, die sich von oben links nach unten rechts durch die gesamte Szene erstreckt, ist eine rechteckige Ebene. Die Ebene ist mit einer Textur versehen, die die vier Spuren mit einer Sicherheitslinie in der Mitte darstellt. Die Länge der Textur entspricht jedoch nicht der Länge der Strasse. Wie in Abbildung \ref{examples_street_textures} zu sehen, enthält sie nur ein kurzes Stück der Strasse. Die Textur wird auf der Ebene immer wiederholt. Diese Technik wird bei allen Strassen angewendet.\\
 \begin{figure}[H]
 \centering 
 \includegraphics[scale=0.6]{src/examples_street_textures.png}
 \caption{Beispiele von Strassentexturen} % Titel der Grafik
 \label{examples_street_textures} % Labelname
 \end{figure}
-Die Strassen mit Kurven werden mit \glspl{spline} beschrieben. Eine Linie wird der \gls{spline} entlangeführt um die Breite einer Strasse zu erhalten. Die Textur der Strasse wird auf dieses, so zusammengefügte, Objekt gelegt. Der Abschluss solcher geschwungenen Strassen bilden wiederum rechteckige Ebenen. Diese erhalten Texturen mit Asphaltsymbolen, wie zum Beispiel einem \textit{Stop} oder \textit{kein Vortritt}, wie in Abbildung \ref{examples_street_textures} gezeigt. \\
-Zusätzlich zu den Symbolen auf der Strasse, werden noch Verkehrsschilderobjekte in die Szene geladen. Die Abbildung \ref{screenshot_trafficsignal} zeigt ein Beipiel eines solchen Objektes. \\
+Die Strassen mit Kurven werden mit \glspl{spline} beschrieben. Eine Linie wird der \gls{spline} entlangeführt um die Breite einer Strasse zu definieren. Die Textur der Strasse wird auf dieses, so zusammengefügte, Objekt gelegt. Der Abschluss solcher geschwungenen Strassen bilden wiederum rechteckige Ebenen. Diese erhalten Texturen mit Asphaltsymbolen, wie zum Beispiel einem \textit{Stop} oder \textit{kein Vortritt}, wie in Abbildung \ref{examples_street_textures} gezeigt. \\
+Zusätzlich zu den Symbolen auf der Strasse, werden noch Verkehrsschilderobjekte in die Szene geladen.
 \begin{figure}[H]
 \centering 
 \includegraphics[scale=0.6]{src/screenshot_trafficsignal.png}
@@ -95,7 +94,7 @@ Zusätzlich zu den Symbolen auf der Strasse, werden noch Verkehrsschilderobjekte
 \label{screenshot_trafficsignal} % Labelname
 \end{figure}
 
-Die Häuser der Stadt sind einfache Blöcke, die mit dem Bild einer Hausfassade texturiert werden. Insgesamt sind drei Gebäudetypen, wie in Abbildung \ref{screenshot_buildings} dargestellt,  vorhanden. Diese drei Typen werden vervielfacht, eventuell rotiert und in der Szene verteilt.\\
+Die Häuser der Stadt sind einfache Blöcke, die mit dem Bild einer Hausfassade texturiert werden. Insgesamt sind drei Gebäudetypen, wie in Abbildung \ref{screenshot_buildings} dargestellt,  vorhanden. Diese drei Typen werden vervielfacht und in der Szene verteilt.\\
 \begin{figure}[H]
 \centering 
 \includegraphics[scale=0.4]{src/screenshot_buildings.png}
@@ -112,21 +111,21 @@ Als nettes Extra wird das Hauptgebäude der ETH Zürich in die Szene eingefügt.
 \end{figure}
 
 
-Um der Szene ein bisschen Farbe zu verleihen sind noch Bäume, wie in Abbildung \ref{screenshot_tree} in der Szene vorhanden. Ein Baum besteht aus einem Stamm mit einer Holztextur und einer Krone. Die Krone ist eine zufällig generierte Landschaft die zu einer Kugel geformt wird. Dadurch entstehen die verschiedenartigen Aus- und Einbuchtungen in der Baumkrone. Nachdem eine Blättertexut darauf gelegt wurde, ist die Illusion eines Baumes vollständig.\\
+Um der Szene ein bisschen Farbe zu verleihen sind noch Bäume, wie in Abbildung \ref{screenshot_tree}, in der Szene vorhanden. Ein Baum besteht aus einem Stamm mit einer Holztextur und einer Krone. Die Krone ist eine zufällig generierte Landschaft die zu einer Kugel geformt wird. Dadurch entstehen die verschiedenartigen Aus- und Einbuchtungen in der Baumkrone. Nachdem eine Blättertexut darauf gelegt wurde, ist die Illusion eines Baumes vollständig.\\
 
 \begin{figure}[H]
 \centering 
 \includegraphics[scale=0.4]{src/screenshot_tree.png}
-\caption{Baum} % Titel der Grafik
+\caption{Ein Baum-Modell} % Titel der Grafik
 \label{screenshot_tree} % Labelname
 \end{figure}
 
 \subsubsection{Erstellung der Berglandschaft mit Tunnels}
 Zur Generierung der Berglandschaft gibt es in Cinema4D ein eigens dafür vorgesehenes Objekt, das so genannte Landscape-Objekt. Durch die Konfiguration dieses Objekts kann die Gesamthöhe, sowie die Anzahl der Erhöhungen und Vertiefungen der Landschaft festgelegt werden. Mit einer Felstextur sieht dieses Objekt aus wie ein Berg.\\
-Die Strasse in der Berglandschaft wird änlich der Strasse in der Stadtszene gemacht. Zusätzlich wird der \gls{spline} ein Quader entlanggezogen, welcher mit einer boolschen Operation vom Berg subtrahiert wird (Siehe Abbildung \ref{cinema4d_ausschneiden_tunnel}). Dadurch entsteht eine Röhre im Berg, welche aussieht wie ein Tunnel. Die Innenseite wird mit einer Betonplattenstruktur versehen.
+Die Strasse in der Berglandschaft wird änlich der Strasse, in der Stadtszene gemacht. Zusätzlich wird der \gls{spline} ein Quader entlanggezogen, welcher mit einer boolschen Operation vom Berg subtrahiert wird (Siehe Abbildung \ref{cinema4d_ausschneiden_tunnel}). Dadurch entsteht eine Röhre im Berg, welche aussieht wie ein Tunnel. Die Innenseite wird mit einer Betonplattentextur versehen.
 
 \begin{figure}[H]
-\centering 
+\centering
 \includegraphics[width=1\linewidth]{src/screenshot_cinema4d.png}
 \caption{Ausschneiden des Tunnels mit Cinema4D} % Titel der Grafik
 \label{cinema4d_ausschneiden_tunnel} % Labelname
@@ -134,7 +133,7 @@ Die Strasse in der Berglandschaft wird änlich der Strasse in der Stadtszene gem
 
 \newpage
 \subsubsection{Fahrzeug}
-Zur Darstellung eines Autos wurde aus \gls{google-3d-warehouse} ein Mini Cooper heruntergeladen und in nach \gls{ogre-xml}konvertiert. Wie in Abbildung \ref{screenshot_minicooper} zu sehen, wird dieser aus der Perspektive einer dritten Person betrachtet. Beim Rückwärtsfahren wird die Kamera um das Fahrzeug gedreht, so dass man nach hinten sehen kann. Mit der Taste V auf der Tastatur kann die Ansicht in das innere des Fahrzeugs gewechselt werden. Zu Beginn wirde die Kamera lediglich in das innere des Mini Coopers versetzt, dorthin wo der Kopf des Fahrers in etwa sein sollte. In einem zweiten Schritt wurde jedoch eine eigene Fahrerkabine designed. Dies war vorallem deshalb notwendig, um eine Geschwindigkeitsanzeige implementieren zu können. 
+Zur Darstellung eines Autos wurde aus \gls{google-3d-warehouse} ein Mini Cooper heruntergeladen und in nach \gls{ogre-xml}konvertiert. Wie in Abbildung \ref{screenshot_minicooper} zu sehen, wird dieser aus der Perspektive einer dritten Person betrachtet. Beim Rückwärtsfahren wird die Kamera um das Fahrzeug gedreht, so dass man nach hinten sehen kann. Mit der Taste \textit{V} auf der Tastatur kann die Ansicht in das Innere des Fahrzeugs gewechselt werden. Dort wird die Kamera dort positioniert, wo der Kopf des Fahrers in etwa sein sollte. In einem zweiten Schritt wird eine eigene Fahrerkabine erstellt. Dies war vorallem deshalb notwendig, um eine Geschwindigkeitsanzeige implementieren zu können. 
 \begin{figure}[H]
 \centering 
 \includegraphics[width=1\linewidth]{src/screenshot_minicooper.png}
@@ -157,7 +156,7 @@ In der Innenansicht wird die Kamera so positioniert, dass der Benutzer die Szene
 \caption{Innenansicht des Mini mit Geschwindigkeitsanzeige} % Titel der Grafik
 \label{screenshot_cockpit} % Labelname
 \end{figure}
-Um die Geschwindigkeit des Fahrzeuges herauszufinden, wird die Skalierung aller Objekte so gewählt, dass im Cinema4D mit reellen Werten gearbeitet werden konnte. So sind die Strassenspuren drei Meter breit modeliert. Um die Geschwindigkeit zu ermitteln, wurde in Cinema4D eine Distanz abgemessen und diese mit verschiedenen Konstanten Geschwindigkeiten abgefahren und die Zeit gemessen. Die interne Geschwindigkeit im Programm wird mit einem Faktor in die tatsächliche Geschwindigkeit umgerechnet. Diese kann dann auf dem Tachometer angezeigt werden.\\
+Um die Geschwindigkeit des Fahrzeuges herauszufinden, wird die Skalierung aller Objekte so gewählt, dass in Cinema4D mit Werten gearbeitet werden konnte, die den tatsächlichen Grössen entsprechen. So sind die Strassenspuren drei Meter breit modelliert. Um die Geschwindigkeit zu ermitteln, wurde in Cinema4D eine Distanz abgemessen und diese mit verschiedenen konstanten Geschwindigkeiten abgefahren und die Zeit gemessen. Die interne Geschwindigkeit im Programm wird mit einem Faktor in die tatsächliche Geschwindigkeit umgerechnet. Diese kann dann auf dem Tachometer angezeigt werden.\\
 \begin{figure}[H]
 \centering 
 \includegraphics[width=1\linewidth]{src/geschwindigkeitsberechnung.pdf}
@@ -411,7 +410,7 @@ Ogre::Vector3 cameraOffset(1.3, 4.0, 0.7);
 camera->setOrientation(carNode->getOrientation() * Ogre::Quaternion(Ogre::Degree(180), Ogre::Vector3::UNIT_Y));
 camera->setPosition(carNode->getPosition() + carNode->getOrientation() * cameraOffset);
 \end{lstlisting}
-In der \gls{1st-person}-Ansicht wird die Kamera an die Stelle, an der sich der Kopf des Fahrers befindet verschoben.\\
+In der \gls{1st-person}-Ansicht wird die Kamera an die Stelle, an der sich der Kopf des Fahrers befindet, verschoben.\\
 
 \begin{lstlisting}[caption={Positionierung der 3rd-Person-Kamera},label={positionierung_tp_kamera}]
 if(gear != REVERSE)
